@@ -27,6 +27,7 @@ public class Game {
 
     //Ask and initialize players
     private void initPlayers () {
+        this.players = new ArrayList<Player>();
         for (int i = 0; i < this.num; i++) {
             Player t = new Player("Ciao");
             this.players.add(t);
@@ -51,43 +52,43 @@ public class Game {
     }
 
     private CommonGoalCard typeCommonGoalCard (int id) {
-            if (id == 0) {
-                return new CommonSixGroups();
-            }
-            if (id == 1) {
-                return new CommonFourCorners();
-            }
-            if (id == 2) {
-                return new CommonFourGroups();
-            }
-            if (id == 3) {
-                return new CommonTwoSquares();
-            }
-            if (id == 4) {
-                return new CommonMaxThreeColumns();
-            }
-            if (id == 5) {
-                return new CommonEightSameType();
-            }
-            if (id == 6) {
-                return new CommonMaxThreeRows();
-            }
-            if (id == 7) {
-                return new CommonDifferentColumns();
-            }
-            if (id == 8) {
-                return new CommonDifferentRows();
-            }
-            if (id == 9) {
-                return new CommonXSameType();
-            }
-            if (id == 10) {
-                return new CommonSameDiagonal();
-            }
-            if (id == 11) {
-                return new CommonIncreasingHeight();
-            }
-
+        if (id == 0) {
+            return new CommonSixGroups();
+        }
+        if (id == 1) {
+            return new CommonFourCorners();
+        }
+        if (id == 2) {
+            return new CommonFourGroups();
+        }
+        if (id == 3) {
+            return new CommonTwoSquares();
+        }
+        if (id == 4) {
+            return new CommonMaxThreeColumns();
+        }
+        if (id == 5) {
+            return new CommonEightSameType();
+        }
+        if (id == 6) {
+            return new CommonMaxThreeRows();
+        }
+        if (id == 7) {
+            return new CommonDifferentColumns();
+        }
+        if (id == 8) {
+            return new CommonDifferentRows();
+        }
+        if (id == 9) {
+            return new CommonXSameType();
+        }
+        if (id == 10) {
+            return new CommonSameDiagonal();
+        }
+        if (id == 11) {
+            return new CommonIncreasingHeight();
+        }
+        return null;
     }
 
     public static void main (String[] args) {
@@ -95,12 +96,14 @@ public class Game {
         game.howManyPlayers();
         //System.out.println(game.num);
         game.initPlayers();
+        /*
+        for (int i = 0; i < game.num; i++) {
+            System.out.println(game.players.get(i).getNickname());
+
+        }
+        */
         game.initCommonGoalCard();
         //System.out.println(game.commongoalcard[0].getId());
         //System.out.println(game.commongoalcard[1].getId());
-        for (int i = 0; i < game.num; i++) {
-            System.out.println(game.players.get(i));
-
-        }
     }
 }
