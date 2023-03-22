@@ -15,7 +15,7 @@ public class Game {
     private ArrayList<CommonGoalCard> commongoalcards;
 
     //Ask and initialize num
-    private void howManyPlayers () {
+    public void howManyPlayers () {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many players?");
         this.num = scanner.nextInt();
@@ -26,7 +26,7 @@ public class Game {
     }
 
     //Ask and initialize players
-    private void initPlayers () {
+    public void initPlayers () {
         this.players = new ArrayList<Player>();
         for (int i = 0; i < this.num; i++) {
             Player t = new Player("Ciao");
@@ -35,7 +35,7 @@ public class Game {
     }
 
     //Initialize commongoalcard with 2 random cards
-    private void initCommonGoalCard () {
+    public void initCommonGoalCard () {
         this.commongoalcards = new ArrayList<CommonGoalCard>();
         Random rand = new Random();
 
@@ -89,21 +89,5 @@ public class Game {
             return new CommonIncreasingHeight();
         }
         return null;
-    }
-
-    public static void main (String[] args) {
-        Game game = new Game();
-        game.howManyPlayers();
-        //System.out.println(game.num);
-        game.initPlayers();
-        /*
-        for (int i = 0; i < game.num; i++) {
-            System.out.println(game.players.get(i).getNickname());
-
-        }
-        */
-        game.initCommonGoalCard();
-        //System.out.println(game.commongoalcard[0].getId());
-        //System.out.println(game.commongoalcard[1].getId());
     }
 }
