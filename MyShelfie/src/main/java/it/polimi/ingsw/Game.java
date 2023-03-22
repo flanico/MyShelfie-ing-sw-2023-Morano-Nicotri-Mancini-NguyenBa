@@ -14,12 +14,14 @@ public class Game {
     //Array of CommonGoalCard
     private ArrayList<CommonGoalCard> commongoalcards;
 
+    private Board board;
+
     //Ask and initialize num
     public void howManyPlayers () {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many players?");
         this.num = scanner.nextInt();
-        if (this.num > 4 || this.num < 2) {
+        while (this.num > 4 || this.num < 2) {
             System.out.println("How many players?");
             this.num = scanner.nextInt();
         }
