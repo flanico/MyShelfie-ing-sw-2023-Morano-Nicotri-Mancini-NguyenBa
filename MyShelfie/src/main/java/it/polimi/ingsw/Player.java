@@ -7,9 +7,14 @@ public class Player {
 
     public Player (String nickname) {
         this.nickname = nickname;
+        this.bookshelf = new Bookshelf();
     }
 
     public String getNickname() {
         return this.nickname;
+    }
+
+    public Bookshelf getBookshelf() {
+        return bookshelf;
     }
 }

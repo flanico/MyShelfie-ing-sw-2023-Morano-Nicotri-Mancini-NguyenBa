@@ -4,19 +4,23 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Game {
-
-    //Number of players
     private int num;
 
-    //Array of Player
     private ArrayList<Player> players;
 
-    //Array of CommonGoalCard
     private ArrayList<CommonGoalCard> commongoalcards;
 
     private Board board;
 
-    //Ask and initialize num
+    public int getNum() {
+        return num;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    //Ask how many players plays
     public void howManyPlayers () {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many players?");
@@ -27,13 +31,18 @@ public class Game {
         }
     }
 
-    //Ask and initialize players
+    //Initialize players asking nickname
     public void initPlayers () {
         this.players = new ArrayList<Player>();
+        Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < this.num; i++) {
-            Player t = new Player("Ciao");
+            Player t = new Player(scanner.next());
             this.players.add(t);
         }
+    }
+
+    public ArrayList<CommonGoalCard> getCommongoalcards() {
+        return commongoalcards;
     }
 
     //Initialize commongoalcard with 2 random cards
@@ -91,5 +100,9 @@ public class Game {
             return new CommonIncreasingHeight();
         }
         return null;
+    }
+
+    public Board getBoard() {
+        return board;
     }
 }
