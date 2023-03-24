@@ -13,4 +13,8 @@ public class Bookshelf {
             }
         }
     }
+
+    public Cell[][] getBookshelf() {
+        return bookshelf;
+    }
 }
