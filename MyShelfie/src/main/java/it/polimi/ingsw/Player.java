@@ -4,6 +4,7 @@ public class Player {
     private String nickname;
 
     private Bookshelf bookshelf;
+    private PersonalGoalCard personalGoalCard;
 
     public Player (String nickname) {
         this.nickname = nickname;

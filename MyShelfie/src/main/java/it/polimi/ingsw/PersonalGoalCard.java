@@ -6,7 +6,7 @@ public class PersonalGoalCard {
     private final TileType[][] personalbookshelf;
     private final int column;
     private final int row;
-    private final Random rand = new Random();
+    //private final Random rand = new Random();
     private final Map<Integer, Integer> personalscore;
 
     public PersonalGoalCard() {
@@ -43,7 +43,9 @@ public class PersonalGoalCard {
         }
     }
 
+    //Generate a random personal card
     public void generateTargets(){
+        Random rand = new Random();
         for (int i = 0; i < 6; i++){
             int randRow, randCol;
             do {
@@ -54,6 +56,7 @@ public class PersonalGoalCard {
         }
     }
 
+    //Check if the targets are matched
     public int check(Bookshelf bookshelf, PersonalGoalCard personalGoalCard) {
         int numCorrect = 0;
         for (int i = 0; i < row; i++) {
@@ -68,6 +71,7 @@ public class PersonalGoalCard {
         return numCorrect;
     }
 
+    //Calculate the score of personal goal card
     public int calculatePersonalScore(int numCorrect){
         return personalscore.get(numCorrect);
     }
