@@ -1,7 +1,5 @@
 package it.polimi.ingsw;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Game {
     private int num;
@@ -11,6 +9,8 @@ public class Game {
     private ArrayList<CommonGoalCard> commongoalcards;
 
     private Board board;
+
+    private Stack<Tile> bag;
 
     public int getNum() {
         return num;
@@ -104,5 +104,38 @@ public class Game {
 
     public Board getBoard() {
         return board;
+    }
+
+    public Stack<Tile> getBag() {
+        return bag;
+    }
+
+    public void initBag() {
+        this.bag = new Stack<Tile>();
+        for (int i = 0; i < 22; i++) {
+            Tile t = new Tile(TileType.CAT);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 22; i++) {
+            Tile t = new Tile(TileType.GAME);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 22; i++) {
+            Tile t = new Tile(TileType.BOOK);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 22; i++) {
+            Tile t = new Tile(TileType.PLANT);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 22; i++) {
+            Tile t = new Tile(TileType.TROPHY);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 22; i++) {
+            Tile t = new Tile(TileType.FRAME);
+            this.bag.add(t);
+        }
+        Collections.shuffle(this.bag);
     }
 }

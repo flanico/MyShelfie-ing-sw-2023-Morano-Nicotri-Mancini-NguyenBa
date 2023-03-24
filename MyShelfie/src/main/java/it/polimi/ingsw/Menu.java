@@ -10,6 +10,11 @@ public class Menu {
         //    System.out.println(game.getPlayers().get(i).getNickname());
         //}
         game.initCommonGoalCard();
+        game.initBag();
+        //for (Tile t : game.getBag()) {
+        //    System.out.println(t.getType());
+        //}
+        //System.out.println(game.getBag().size());
     }
 
     public static void main (String[] args) {
