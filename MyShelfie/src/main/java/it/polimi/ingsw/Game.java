@@ -31,6 +31,8 @@ public class Game {
         }
     }
 
+
+
     //Initialize players asking nickname
     public void initPlayers () {
         this.players = new ArrayList<Player>();
