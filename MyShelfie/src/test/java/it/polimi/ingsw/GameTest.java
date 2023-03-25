@@ -64,7 +64,7 @@ public class GameTest {
         game2.fillBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game2.getBoard().getBoard()[i][j].getTile().getType() + " ");
+                System.out.print(game2.getBoard().getBoard()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -78,7 +78,7 @@ public class GameTest {
         game3.fillBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game3.getBoard().getBoard()[i][j].getTile().getType() + " ");
+                System.out.print(game3.getBoard().getBoard()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -92,7 +92,7 @@ public class GameTest {
         game4.fillBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game4.getBoard().getBoard()[i][j].getTile().getType() + " ");
+                System.out.print(game4.getBoard().getBoard()[i][j].getType() + " ");
             }
             System.out.println();
         }

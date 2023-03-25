@@ -1,54 +1,42 @@
 package it.polimi.ingsw;
 
 public class Board {
-    private Cell[][] board;
-    //private final int numPlayers;
-    //private Game game = new Game();
+    private Tile[][] board;
+    //Private final int numPlayers;
+    //Private Game game = new Game();
 
-    public Board (int numPlayers) {
-        this.board = new Cell[9][9];
-        //initialization board
+    public Board (int num) {
+        this.board = new Tile[9][9];
+        //Initialization board
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                this.board[i][j] = new Cell(new Tile(TileType.NULL));
-                this.board[i][j].setFull(false);
-                this.board[i][j].setBlocked(false);
+                this.board[i][j] = new Tile(TileType.NULL);
             }
         }
-
-        //block unavailable cells
+        //Block unavailable Tiles
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 4-j; i++) {
-                this.board[i][j] = new Cell(new Tile(TileType.NULL));
                 this.board[i][j].setBlocked(true);
             }
         }
-
         for (int i = 0; i < 3; i++) {
             for (int j = 9-1; j > 9+i-5; j--) {
-                this.board[i][j] = new Cell(new Tile(TileType.NULL));
                 this.board[i][j].setBlocked(true);
             }
         }
-
         for (int j = 6; j < 9; j++) {
             for (int i = 9-1; i >9-j+3; i--) {
-                this.board[i][j] = new Cell(new Tile(TileType.NULL));
                 this.board[i][j].setBlocked(true);
             }
         }
-
         for (int i = 6; i < 9; i++) {
             for (int j = 0; j < i-4; j++) {
-                this.board[i][j] = new Cell(new Tile(TileType.NULL));
                 this.board[i][j].setBlocked(true);
             }
         }
-
-        //block cells unavailable for 2-3 players
+        //Block Tiles unavailable for 2-3 players
         //this.numPlayers = game.getNum();
-        if (numPlayers < 4)
-        {
+        if (num < 4) {
             this.board[0][4].setBlocked(true);
             this.board[1][5].setBlocked(true);
             this.board[3][1].setBlocked(true);
@@ -57,10 +45,8 @@ public class Board {
             this.board[4][8].setBlocked(true);
             this.board[7][3].setBlocked(true);
             this.board[8][4].setBlocked(true);
-
-            //block cells unavailable for 2 players
-            if (numPlayers == 2)
-            {
+            //Block Tiles unavailable for 2 players
+            if (num == 2) {
                 this.board[0][3].setBlocked(true);
                 this.board[2][6].setBlocked(true);
                 this.board[3][8].setBlocked(true);
@@ -73,11 +59,9 @@ public class Board {
         }
     }
 
-    public Cell[][] getBoard() {
+    public Tile[][] getBoard() {
         return board;
     }
 
-    public void placeTile (int row, int column, Tile tile){
-        this.board[row][column].setTile(tile);
-    }
+    //isRemovable
 }

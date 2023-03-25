@@ -4,6 +4,7 @@ public class Player {
     private String nickname;
 
     private Bookshelf bookshelf;
+
     private PersonalGoalCard personalGoalCard;
 
     public Player (String nickname) {
@@ -18,4 +19,8 @@ public class Player {
     public Bookshelf getBookshelf() {
         return bookshelf;
     }
+
+    //selectTile
+
+    //insertTile
 }

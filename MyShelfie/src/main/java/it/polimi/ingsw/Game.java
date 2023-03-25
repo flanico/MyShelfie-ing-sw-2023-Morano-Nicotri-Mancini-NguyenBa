@@ -106,6 +106,8 @@ public class Game {
         return null;
     }
 
+    //initPersonalGoalCard
+
     public Board getBoard() {
         return board;
     }
@@ -144,12 +146,14 @@ public class Game {
         Collections.shuffle(this.bag);
     }
 
-    //Fill the board with tiles picked from the stack (bag)
-    public void fillBoard(){
+    //Fill the board with tiles picked from the bag
+    public void fillBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if(!this.getBoard().getBoard()[i][j].isBlocked()){
-                    this.getBoard().placeTile(i, j, this.getBag().pop());
+                if (!this.board.getBoard()[i][j].isBlocked() && this.board.getBoard()[i][j].getType() == TileType.NULL) {
+                    this.board.getBoard()[i][j] = this.bag.pop();
+                    this.board.getBoard()[i][j].setX(i);
+                    this.board.getBoard()[i][j].setY(j);
                 }
             }
         }

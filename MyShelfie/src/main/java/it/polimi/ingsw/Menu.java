@@ -15,7 +15,12 @@ public class Menu {
         //    System.out.println(t.getType());
         //}
         //System.out.println(game.getBag().size());
+        game.fillBoard();
     }
+
+    //turnGame (check common, select da board del player, inserire nella bookshelf, 1 punto a chi finisce prima)
+
+    //checkGame (personal, adiacenze, vincitore)
 
     public static void main (String[] args) {
         Game game = new Game(new Board(4));
