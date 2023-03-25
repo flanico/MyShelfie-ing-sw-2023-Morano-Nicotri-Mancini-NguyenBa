@@ -7,7 +7,7 @@ public class Bookshelf {
         this.bookshelf = new Cell[5][6];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                this.bookshelf[i][j] = new Cell();
+                this.bookshelf[i][j] = new Cell(new Tile(TileType.NULL));
                 this.bookshelf[i][j].setFull(false);
                 this.bookshelf[i][j].setBlocked(false);
             }

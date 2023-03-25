@@ -7,6 +7,19 @@ public class Cell {
 
     private Tile tile;
 
+    public Cell(Tile tile) {
+        tile = new Tile(TileType.NULL);
+        this.tile = tile;
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
+
+    public Tile getTile() {
+        return tile;
+    }
+
     public boolean isFull() {
         return full;
     }

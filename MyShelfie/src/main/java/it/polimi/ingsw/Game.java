@@ -20,6 +20,10 @@ public class Game {
         return players;
     }
 
+    public Game(Board board) {
+        this.board = board;
+    }
+
     //Ask how many players plays
     public void howManyPlayers () {
         Scanner scanner = new Scanner(System.in);
@@ -30,8 +34,6 @@ public class Game {
             this.num = scanner.nextInt();
         }
     }
-
-
 
     //Initialize players asking nickname
     public void initPlayers () {
@@ -112,6 +114,7 @@ public class Game {
         return bag;
     }
 
+    //Create a stack (bag) that contains the tiles
     public void initBag() {
         this.bag = new Stack<Tile>();
         for (int i = 0; i < 22; i++) {
@@ -139,5 +142,16 @@ public class Game {
             this.bag.add(t);
         }
         Collections.shuffle(this.bag);
+    }
+
+    //Fill the board with tiles picked from the stack (bag)
+    public void fillBoard(){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if(!this.getBoard().getBoard()[i][j].isBlocked()){
+                    this.getBoard().placeTile(i, j, this.getBag().pop());
+                }
+            }
+        }
     }
 }

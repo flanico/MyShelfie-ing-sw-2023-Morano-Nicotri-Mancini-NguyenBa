@@ -18,7 +18,7 @@ public class Menu {
     }
 
     public static void main (String[] args) {
-        Game game = new Game();
+        Game game = new Game(new Board(4));
         newGame(game);
     }
 }

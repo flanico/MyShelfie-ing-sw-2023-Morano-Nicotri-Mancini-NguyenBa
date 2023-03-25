@@ -7,4 +7,5 @@ public enum TileType {
     FRAME,
     GAME,
     TROPHY,
+    NULL
 }

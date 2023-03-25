@@ -2,52 +2,52 @@ package it.polimi.ingsw;
 
 public class Board {
     private Cell[][] board;
-    private final int numPlayers;
-    private Game game;
+    //private final int numPlayers;
+    //private Game game = new Game();
 
     public Board (int numPlayers) {
         this.board = new Cell[9][9];
-        //inizialization board
+        //initialization board
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                this.board[i][j] = new Cell();
+                this.board[i][j] = new Cell(new Tile(TileType.NULL));
                 this.board[i][j].setFull(false);
                 this.board[i][j].setBlocked(false);
             }
         }
 
-        //block unavaliable cells
+        //block unavailable cells
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 4-j; i++) {
-                this.board[i][j] = new Cell();
+                this.board[i][j] = new Cell(new Tile(TileType.NULL));
                 this.board[i][j].setBlocked(true);
             }
         }
 
         for (int i = 0; i < 3; i++) {
             for (int j = 9-1; j > 9+i-5; j--) {
-                this.board[i][j] = new Cell();
+                this.board[i][j] = new Cell(new Tile(TileType.NULL));
                 this.board[i][j].setBlocked(true);
             }
         }
 
         for (int j = 6; j < 9; j++) {
             for (int i = 9-1; i >9-j+3; i--) {
-                this.board[i][j] = new Cell();
+                this.board[i][j] = new Cell(new Tile(TileType.NULL));
                 this.board[i][j].setBlocked(true);
             }
         }
 
         for (int i = 6; i < 9; i++) {
             for (int j = 0; j < i-4; j++) {
-                this.board[i][j] = new Cell();
+                this.board[i][j] = new Cell(new Tile(TileType.NULL));
                 this.board[i][j].setBlocked(true);
             }
         }
 
-        //block cells unavaible for 2-3 players
-        this.numPlayers = game.getNum();
-        if (numPlayers <4 )
+        //block cells unavailable for 2-3 players
+        //this.numPlayers = game.getNum();
+        if (numPlayers < 4)
         {
             this.board[0][4].setBlocked(true);
             this.board[1][5].setBlocked(true);
@@ -58,7 +58,7 @@ public class Board {
             this.board[7][3].setBlocked(true);
             this.board[8][4].setBlocked(true);
 
-            //block cells unavaible for 2 players
+            //block cells unavailable for 2 players
             if (numPlayers == 2)
             {
                 this.board[0][3].setBlocked(true);
@@ -71,5 +71,13 @@ public class Board {
                 this.board[8][5].setBlocked(true);
             }
         }
+    }
+
+    public Cell[][] getBoard() {
+        return board;
+    }
+
+    public void placeTile (int row, int column, Tile tile){
+        this.board[row][column].setTile(tile);
     }
 }
