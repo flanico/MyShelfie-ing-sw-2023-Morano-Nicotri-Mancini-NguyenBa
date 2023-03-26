@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 public class Bookshelf {
     private Tile[][] bookshelf;
@@ -19,4 +19,15 @@ public class Bookshelf {
     //addTile
 
     //isFull
+    public boolean isFull (){
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 6; j++) {
+                if (this.bookshelf[i][j].getType().equals(TileType.NULL))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
