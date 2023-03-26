@@ -1,8 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 import java.util.HashSet;
 
-public class CommonDifferentColumns extends CommonGoalCard {
+public class CommonMaxThreeColumns extends CommonGoalCard {
     public boolean check() {
         HashSet<TileType> cards = new HashSet<>();
         int counter = 0;
@@ -12,11 +12,11 @@ public class CommonDifferentColumns extends CommonGoalCard {
                     cards.add(GetCard(x,y).type);
                 else return false;
             }
-            if (cards.size() == 6)     //se la quantità di type nell'HashSet è 6, aumento il contatore di colonne che soddisfano il requisito
+            if (cards.size() <= 3 && cards.size() >= 1)     //se la quantità di type nell'HashSet è compreso tra 1 e 3 aumento il contatore di colonne che soddisfano il requisito
                 counter++;
             cards.clear();
         }
-        if (counter >= 2)                                   //se il numero di colonne che soddisfano il requisito è maggiore o uguale a 2, la funzione ritorna true
+        if (counter >= 3)                                   //se il numero di colonne che soddisfano il requisito è maggiore o uguale a 3, la funzione ritorna true
             return true;
         else return false;
     }

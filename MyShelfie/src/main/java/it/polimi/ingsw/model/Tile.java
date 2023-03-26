@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 public class Tile {
     private final TileType type;
@@ -8,12 +8,15 @@ public class Tile {
     private int y;
 
     private boolean blocked;
+    private boolean counted;
+
 
     public Tile (TileType type) {
         this.type = type;
         this.x = -1;
         this.y = -1;
         this.blocked = false;
+        this.counted = false;
     }
 
     public TileType getType() {
@@ -26,6 +29,14 @@ public class Tile {
 
     public boolean isBlocked() {
         return blocked;
+    }
+
+    public boolean isCounted() {
+        return counted;
+    }
+
+    public void setCounted(boolean counted) {
+        this.counted = counted;
     }
 
     public void setX(int x) {

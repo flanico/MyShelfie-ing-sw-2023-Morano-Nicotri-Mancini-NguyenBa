@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 public class CommonEightSameType extends CommonGoalCard {
     public boolean check()int cards[] = {0, 0, 0, 0, 0, 0};

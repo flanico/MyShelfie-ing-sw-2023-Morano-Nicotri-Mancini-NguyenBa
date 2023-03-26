@@ -1,9 +1,9 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 import java.util.HashSet;
 
-public class CommonDifferentRows extends CommonGoalCard {
-    public boolean check()public boolean check() {
+public class CommonMaxThreeRows extends CommonGoalCard {
+    public boolean check() {
         HashSet<TileType> cards = new HashSet<>();
         int counter = 0;
         for (int x=0; x<6; x++){                            //controllo una riga alla volta
@@ -12,11 +12,11 @@ public class CommonDifferentRows extends CommonGoalCard {
                     cards.add(GetCard(x,y).type);
                 else return false;
             }
-            if (cards.size() == 5)     //se la quantità di type nell'HashSet è 5, aumento il contatore di righe che soddisfano il requisito
+            if (cards.size() <= 3 && cards.size() >= 1)     //se la quantità di type nell'HashSet è compreso tra 1 e 3 aumento il contatore di righe che soddisfano il requisito
                 counter++;
             cards.clear();
         }
-        if (counter >= 2)                                   //se il numero di righe che soddisfano il requisito è maggiore o uguale a 2, la funzione ritorna true
+        if (counter >= 4)                                   //se il numero di righe che soddisfano il requisito è maggiore o uguale a 4, la funzione ritorna true
             return true;
         else return false;
     }
