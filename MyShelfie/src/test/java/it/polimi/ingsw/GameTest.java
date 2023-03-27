@@ -4,13 +4,12 @@ import org.junit.Test;
 
 import java.util.Iterator;
 
-import static org.junit.Assert.*;
-
 public class GameTest {
 
     @Test
     public void initBagTest() {
-        Game game = new Game(new Board(4));
+        Game game = new Game();
+        //Check correct number of tiles in the bag and if the tiles are shuffled
         for (int i = 0; i < 2; i++) {
             int countGame = 0;
             int countCat = 0;
@@ -44,13 +43,13 @@ public class GameTest {
                 }
             }
 
-            System.out.println("Il sacchetto contiene " + game.getBag().size() + " tessere");
-            System.out.println(countGame + " tessere Game");
-            System.out.println(countCat + " tessere Gatto");
-            System.out.println(countTrophy + " tessere Trofeo");
-            System.out.println(countPlant + " tessere Pianta");
-            System.out.println(countFrame + " tessere Cornice");
-            System.out.println(countBook + " tessere Libro");
+            System.out.println("The bag contains " + game.getBag().size() + " tiles");
+            System.out.println(countGame + " Game tiles");
+            System.out.println(countCat + " Cat tiles");
+            System.out.println(countTrophy + " Trophy tiles");
+            System.out.println(countPlant + " Plants tiles");
+            System.out.println(countFrame + " Frame tiles");
+            System.out.println(countBook + " Book tiles");
             System.out.println();
         }
     }
@@ -58,8 +57,8 @@ public class GameTest {
     @Test
     public void fillBoardTest() {
         //Board for 2 players
-        Board board2 = new Board(2);
-        Game game2 = new Game(board2);
+        System.out.println("Board for 2 players");
+        Game game2 = new Game();
         game2.initBag();
         game2.fillBoard();
         for (int i = 0; i < 9; i++) {
@@ -72,8 +71,8 @@ public class GameTest {
         System.out.println();
 
         //Board for 3 players
-        Board board3 = new Board(3);
-        Game game3 = new Game(board3);
+        System.out.println("Board for 3 players");
+        Game game3 = new Game();
         game3.initBag();
         game3.fillBoard();
         for (int i = 0; i < 9; i++) {
@@ -86,13 +85,75 @@ public class GameTest {
         System.out.println();
 
         //Board for 4 players
-        Board board4 = new Board(4);
-        Game game4 = new Game(board4);
+        System.out.println("Board for 4 players");
+        Game game4 = new Game();
         game4.initBag();
         game4.fillBoard();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 System.out.print(game4.getBoard().getBoard()[i][j].getType() + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void isNeedRefill() {
+        Game game = new Game();
+        //Board is constructed and all tiles are NULL
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+            }
+            System.out.println();
+        }
+        game.refillBoard();
+        //Case all tiles are NULL: Board is refilled
+        System.out.println();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+        //Add NULL tiles in the board
+        game.getBoard().getBoard()[1][4].setType(TileType.NULL);
+        game.getBoard().getBoard()[2][3].setType(TileType.NULL);
+        game.getBoard().getBoard()[2][4].setType(TileType.NULL);
+        game.getBoard().getBoard()[2][5].setType(TileType.NULL);
+        game.getBoard().getBoard()[3][2].setType(TileType.NULL);
+        game.getBoard().getBoard()[3][4].setType(TileType.NULL);
+        game.getBoard().getBoard()[3][5].setType(TileType.NULL);
+        game.getBoard().getBoard()[3][6].setType(TileType.NULL);
+        game.getBoard().getBoard()[4][2].setType(TileType.NULL);
+        game.getBoard().getBoard()[4][3].setType(TileType.NULL);
+        //game.getBoard().getBoard()[4][5].setType(TileType.NULL);
+        game.getBoard().getBoard()[4][6].setType(TileType.NULL);
+        game.getBoard().getBoard()[4][7].setType(TileType.NULL);
+        game.getBoard().getBoard()[5][1].setType(TileType.NULL);
+        game.getBoard().getBoard()[5][2].setType(TileType.NULL);
+        game.getBoard().getBoard()[5][3].setType(TileType.NULL);
+        game.getBoard().getBoard()[5][4].setType(TileType.NULL);
+        game.getBoard().getBoard()[5][5].setType(TileType.NULL);
+        game.getBoard().getBoard()[5][6].setType(TileType.NULL);
+        game.getBoard().getBoard()[6][4].setType(TileType.NULL);
+        game.getBoard().getBoard()[7][4].setType(TileType.NULL);
+        game.getBoard().getBoard()[7][5].setType(TileType.NULL);
+        //Print initial Board
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+            }
+            System.out.println();
+        }
+        //Test if the board's refill is needed
+        game.refillBoard();
+        //Print resulted Board
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
             }
             System.out.println();
         }

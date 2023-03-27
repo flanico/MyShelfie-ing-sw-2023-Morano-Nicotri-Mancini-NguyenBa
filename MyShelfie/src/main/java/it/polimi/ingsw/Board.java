@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Board {
     private final Tile[][] board;
@@ -127,7 +128,7 @@ public class Board {
             for (Tile tile : tiles) {
 //                System.out.println("Tile " + tiles.indexOf(tile) + " removed of type " + tiles.get(tiles.indexOf(tile)).getType()
 //                        + " in position x: " + tiles.get(tiles.indexOf(tile)).getX() + " y: " + tiles.get(tiles.indexOf(tile)).getY());
-                this.getBoard()[tile.getX()][tile.getY()] = new Tile(TileType.NULL, tile.getX(), tile.getY());
+                this.getBoard()[tile.getX()][tile.getY()].setType(TileType.NULL);
             }
         }
     }

@@ -132,7 +132,7 @@ public class Game {
     }
 
     //Fill the board with tiles picked from the bag
-    private void fillBoard() {
+    public void fillBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (!this.board.getBoard()[i][j].isBlocked() && this.board.getBoard()[i][j].getType() == TileType.NULL) {
@@ -144,6 +144,37 @@ public class Game {
         }
     }
 
+    //Check if the board is empty or has only isolated tiles, if true board is refilled
+    public void refillBoard() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if(this.board.getBoard()[i][j].getType() != TileType.NULL && !isTileIsolated(i, j)){
+                    //System.out.println("Board is not need to refill");
+                    return;
+                }
+            }
+        }
+        //System.out.println("Board needs to refill");
+        this.fillBoard();
+    }
+
+    //Check if a tile is isolated in the board
+    public boolean isTileIsolated(int row, int column) {
+        if(row > 0 && this.board.getBoard()[row - 1][column].getType() != TileType.NULL){
+            return false;
+        }
+        if(row < 9 && this.board.getBoard()[row + 1][column].getType() != TileType.NULL){
+            return false;
+        }
+        if(column > 0 && this.board.getBoard()[row][column - 1].getType() != TileType.NULL){
+            return false;
+        }
+        if(column < 9 && this.board.getBoard()[row][column + 1].getType() != TileType.NULL){
+            return false;
+        }
+            return true;
+    }
+
     public Board getBoard() {
         return board;
     }
@@ -151,7 +182,7 @@ public class Game {
 
 
     //Create a stack (bag) that contains the tiles
-    private void initBag() {
+    public void initBag() {
         this.bag = new Stack<Tile>();
         for (int i = 0; i < 22; i++) {
             Tile t = new Tile(TileType.CAT);
