@@ -27,7 +27,7 @@ public class Menu {
             Scanner scanner = new Scanner(System.in);
             System.out.println("In which column of your bookshelf?");
             int x = scanner.nextInt();
-            while (x < 0 || x > 4); {
+            while (x < 0 || x > 4 || game.getPlayers().get(i).getBookshelf().isFull(x)); {
                 x = scanner.nextInt();
             }
             game.getPlayers().get(i).getBookshelf().insertTile(t, x);

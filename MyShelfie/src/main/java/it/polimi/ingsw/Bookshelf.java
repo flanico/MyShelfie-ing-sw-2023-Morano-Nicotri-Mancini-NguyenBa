@@ -8,7 +8,7 @@ public class Bookshelf {
         this.bookshelf = new Tile[5][6];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 6; j++) {
-                this.bookshelf[i][j] = new Tile(TileType.NULL);
+                this.bookshelf[i][j] = new Tile(TileType.NULL, i, j);
             }
         }
     }
@@ -23,9 +23,15 @@ public class Bookshelf {
             y--;
         }
         for (int k = 0; k < t.size(); k++) {
-            this.bookshelf[x][y+1-k] = t.get(k);
+            this.bookshelf[x][y+1-k].setType(t.get(k).getType());
+
         }
     }
 
-    //isFull
+    public boolean isFull(int x) {
+        if (this.bookshelf[x][5].getType() != TileType.NULL)
+            return true;
+        else
+            return false;
+    }
 }
