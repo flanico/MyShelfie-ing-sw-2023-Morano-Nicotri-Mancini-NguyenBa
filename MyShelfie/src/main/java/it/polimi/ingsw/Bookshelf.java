@@ -1,4 +1,5 @@
 package it.polimi.ingsw;
+import java.util.*;
 
 public class Bookshelf {
     private Tile[][] bookshelf;
@@ -16,7 +17,15 @@ public class Bookshelf {
         return bookshelf;
     }
 
-    //addTile
+    public void insertTile (ArrayList<Tile> t, int x)  {
+        int y = 5;
+        while (this.bookshelf[x][y].getType() == TileType.NULL && y > -1) {
+            y--;
+        }
+        for (int k = 0; k < t.size(); k++) {
+            this.bookshelf[x][y+1-k] = t.get(k);
+        }
+    }
 
     //isFull
 }

@@ -1,11 +1,10 @@
 package it.polimi.ingsw;
+import java.util.ArrayList;
 
 public class Player {
-    private String nickname;
+    private final String nickname;
 
-    private Bookshelf bookshelf;
-
-    private PersonalGoalCard personalGoalCard;
+    private final Bookshelf bookshelf;
 
     public Player (String nickname) {
         this.nickname = nickname;
@@ -22,5 +21,4 @@ public class Player {
 
     //selectTile
 
-    //insertTile
 }

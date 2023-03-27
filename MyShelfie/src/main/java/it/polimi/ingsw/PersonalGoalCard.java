@@ -5,7 +5,7 @@ import java.util.Random;
 public class PersonalGoalCard {
     private final int[][] personalcard;
 
-    private Player player;
+    private final Player player;
 
     public PersonalGoalCard (Player t) {
         this.personalcard = new int[6][2];

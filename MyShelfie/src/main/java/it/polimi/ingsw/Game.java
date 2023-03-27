@@ -8,6 +8,8 @@ public class Game {
 
     private ArrayList<CommonGoalCard> commongoalcards;
 
+    private ArrayList<PersonalGoalCard> personalgoalcards;
+
     private Board board;
 
     private Stack<Tile> bag;
@@ -49,8 +51,8 @@ public class Game {
         return commongoalcards;
     }
 
-    //Initialize commongoalcard with 2 random cards
-    public void initCommonGoalCard () {
+    //Initialize commongoalcards with 2 random cards
+    public void initCommonGoalCard() {
         this.commongoalcards = new ArrayList<CommonGoalCard>();
         Random rand = new Random();
 
@@ -106,7 +108,12 @@ public class Game {
         return null;
     }
 
-    //initPersonalGoalCard
+    //Initialize personalgoalcards
+    public void initPersonalGoalCard() {
+        for (int i = 0; i < this.num; i++) {
+            this.personalgoalcards.add(new PersonalGoalCard(players.get(i)));
+        }
+    }
 
     public Board getBoard() {
         return board;
