@@ -1,5 +1,4 @@
-package it.polimi.ingsw.model;
-import java.util.ArrayList;
+package it.polimi.ingsw;
 
 public class Player {
     private String nickname;
@@ -8,15 +7,9 @@ public class Player {
 
     private PersonalGoalCard personalGoalCard;
 
-    private ArrayList<Tile> selectedTile;
-
     public Player (String nickname) {
         this.nickname = nickname;
         this.bookshelf = new Bookshelf();
-    }
-
-    public PersonalGoalCard getPersonalGoalCard() {
-        return personalGoalCard;
     }
 
     public String getNickname() {
@@ -27,6 +20,7 @@ public class Player {
         return bookshelf;
     }
 
+    //selectTile
 
     //insertTile
 }

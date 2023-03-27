@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 
 public class Tile {
-    private final TileType type;
+    private TileType type;
 
     private int x;
 
@@ -11,7 +11,7 @@ public class Tile {
     private boolean counted;
 
 
-    public Tile (TileType type) {
+    public Tile(TileType type) {
         this.type = type;
         this.x = -1;
         this.y = -1;
@@ -19,16 +19,23 @@ public class Tile {
         this.counted = false;
     }
 
+    public Tile(TileType type, int x, int y) {
+        this.type = type;
+        this.x = x;
+        this.y = y;
+        this.blocked = false;
+    }
+
     public TileType getType() {
         return type;
     }
 
-    public void setBlocked(boolean blocked) {
-        this.blocked = blocked;
+    public void setType(TileType type) {
+        this.type = type;
     }
 
-    public boolean isBlocked() {
-        return blocked;
+    public int getX() {
+        return x;
     }
 
     public boolean isCounted() {
@@ -43,7 +50,19 @@ public class Tile {
         this.x = x;
     }
 
+    public int getY() {
+        return y;
+    }
+
     public void setY(int y) {
         this.y = y;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }

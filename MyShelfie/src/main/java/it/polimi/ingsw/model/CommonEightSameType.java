@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model;
 
 public class CommonEightSameType extends CommonGoalCard {
-    public boolean check()int cards[] = {0, 0, 0, 0, 0, 0};
+    public boolean check();
+    int cards[] = {0, 0, 0, 0, 0, 0};
     int cont = 0;
         for (int x = 0; x < 5; x++) {                //scansione completa della matrice bookshelf
         for (int y = 0; y < 6; y++) {

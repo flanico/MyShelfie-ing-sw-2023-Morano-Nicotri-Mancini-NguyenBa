@@ -1,6 +1,4 @@
-package it.polimi.ingsw.model;
-
-import java.util.ArrayList;
+package it.polimi.ingsw;
 
 public class Board {
     private Tile[][] board;
@@ -64,16 +62,6 @@ public class Board {
     public Tile[][] getBoard() {
         return board;
     }
-
-    //selectTile
-    public void selectTile(ArrayList<Tile> selectedControlTile ) {
-        this.selectedTile.addAll(selectedControlTile);
-    }
-
-    public ArrayList<Tile> getSelectedTile() {
-        return selectedTile;
-    }
-
 
     //isRemovable
 }
