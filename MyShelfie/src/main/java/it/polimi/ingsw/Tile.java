@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
 public class Tile {
-    private final TileType type;
+    private TileType type;
 
     private int x;
 
