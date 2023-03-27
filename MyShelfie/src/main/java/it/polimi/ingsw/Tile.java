@@ -9,14 +9,14 @@ public class Tile {
 
     private boolean blocked;
 
-    public Tile (TileType type) {
+    public Tile(TileType type) {
         this.type = type;
         this.x = -1;
         this.y = -1;
         this.blocked = false;
     }
 
-    public Tile (TileType type, int x, int y) {
+    public Tile(TileType type, int x, int y) {
         this.type = type;
         this.x = x;
         this.y = y;

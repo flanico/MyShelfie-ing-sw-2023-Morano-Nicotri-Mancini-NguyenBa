@@ -1,19 +1,19 @@
 package it.polimi.ingsw;
 
 public class Board {
-    private Tile[][] board;
+    private final Tile[][] board;
     //Private final int numPlayers;
     //Private Game game = new Game();
 
-    public Board (int num) {
+    public Board(int num) {
         this.board = new Tile[9][9];
         //Initialization board
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                this.board[i][j] = new Tile(TileType.NULL);
+                this.board[i][j] = new Tile(TileType.NULL, i, j);
             }
         }
-        //Block unavailable Tiles
+        //Block unavailable tiles
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 4-j; i++) {
                 this.board[i][j].setBlocked(true);
@@ -34,8 +34,7 @@ public class Board {
                 this.board[i][j].setBlocked(true);
             }
         }
-        //Block Tiles unavailable for 2-3 players
-        //this.numPlayers = game.getNum();
+        //Block tiles unavailable for 2/3 players
         if (num < 4) {
             this.board[0][4].setBlocked(true);
             this.board[1][5].setBlocked(true);
@@ -45,7 +44,7 @@ public class Board {
             this.board[4][8].setBlocked(true);
             this.board[7][3].setBlocked(true);
             this.board[8][4].setBlocked(true);
-            //Block Tiles unavailable for 2 players
+            //Block tiles unavailable for 2 players
             if (num == 2) {
                 this.board[0][3].setBlocked(true);
                 this.board[2][6].setBlocked(true);

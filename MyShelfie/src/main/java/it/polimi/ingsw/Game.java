@@ -3,31 +3,30 @@ import java.util.*;
 
 public class Game {
     private int num;
-
     private ArrayList<Player> players;
-
     private ArrayList<CommonGoalCard> commongoalcards;
-
     private ArrayList<PersonalGoalCard> personalgoalcards;
-
     private Board board;
-
     private Stack<Tile> bag;
+
+
+    public Game() {
+        this.setNum();
+        this.initPlayers();
+        this.initCommonGoalCard();
+        this.initPersonalGoalCard();
+        this.initBoard();
+        this.initBag();
+        this.fillBoard();
+    }
+
 
     public int getNum() {
         return num;
     }
 
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
-
-    public Game(Board board) {
-        this.board = board;
-    }
-
     //Ask how many players plays
-    public void howManyPlayers () {
+    private void setNum() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many players?");
         this.num = scanner.nextInt();
@@ -37,8 +36,10 @@ public class Game {
         }
     }
 
+
+
     //Initialize players asking nickname
-    public void initPlayers () {
+    private void initPlayers() {
         this.players = new ArrayList<Player>();
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < this.num; i++) {
@@ -47,12 +48,14 @@ public class Game {
         }
     }
 
-    public ArrayList<CommonGoalCard> getCommongoalcards() {
-        return commongoalcards;
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 
+
+
     //Initialize commongoalcards with 2 random cards
-    public void initCommonGoalCard() {
+    private void initCommonGoalCard() {
         this.commongoalcards = new ArrayList<CommonGoalCard>();
         Random rand = new Random();
 
@@ -68,7 +71,8 @@ public class Game {
         this.commongoalcards.add(c2);
     }
 
-    private CommonGoalCard typeCommonGoalCard (int id) {
+    //Defining the dynamic type of the CommmonGoalCard
+    private CommonGoalCard typeCommonGoalCard(int id) {
         if (id == 0) {
             return new CommonSixGroups();
         }
@@ -108,10 +112,35 @@ public class Game {
         return null;
     }
 
+    public ArrayList<CommonGoalCard> getCommongoalcards() {
+        return commongoalcards;
+    }
+
+
+
     //Initialize personalgoalcards
-    public void initPersonalGoalCard() {
+    private void initPersonalGoalCard() {
         for (int i = 0; i < this.num; i++) {
             this.personalgoalcards.add(new PersonalGoalCard(players.get(i)));
+        }
+    }
+
+
+
+    private void initBoard() {
+        this.board = new Board(this.num);
+    }
+
+    //Fill the board with tiles picked from the bag
+    private void fillBoard() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (!this.board.getBoard()[i][j].isBlocked() && this.board.getBoard()[i][j].getType() == TileType.NULL) {
+                    this.board.getBoard()[i][j] = this.bag.pop();
+                    this.board.getBoard()[i][j].setX(i);
+                    this.board.getBoard()[i][j].setY(j);
+                }
+            }
         }
     }
 
@@ -119,12 +148,10 @@ public class Game {
         return board;
     }
 
-    public Stack<Tile> getBag() {
-        return bag;
-    }
+
 
     //Create a stack (bag) that contains the tiles
-    public void initBag() {
+    private void initBag() {
         this.bag = new Stack<Tile>();
         for (int i = 0; i < 22; i++) {
             Tile t = new Tile(TileType.CAT);
@@ -153,16 +180,7 @@ public class Game {
         Collections.shuffle(this.bag);
     }
 
-    //Fill the board with tiles picked from the bag
-    public void fillBoard() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (!this.board.getBoard()[i][j].isBlocked() && this.board.getBoard()[i][j].getType() == TileType.NULL) {
-                    this.board.getBoard()[i][j] = this.bag.pop();
-                    this.board.getBoard()[i][j].setX(i);
-                    this.board.getBoard()[i][j].setY(j);
-                }
-            }
-        }
+    public Stack<Tile> getBag() {
+        return bag;
     }
 }
