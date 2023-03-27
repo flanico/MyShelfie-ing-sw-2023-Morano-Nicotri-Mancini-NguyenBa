@@ -40,7 +40,7 @@ public class Bookshelf {
             for (int j = 0; j < 6; j++) {
                 if (!this.bookshelf[i][j].isCounted()){
                     this.bookshelf[i][j].setCounted(true);
-                    counter= SameGroup(bookshelf, i, j, 1);
+                    counter= sameGroup(bookshelf, i, j, 1);
 
                     if(counter ==3){
                         adjacentscore=adjacentscore+2;
@@ -57,7 +57,7 @@ public class Bookshelf {
         }
         return adjacentscore;
     }
-    private int SameGroup (Bookshelf bookshelf, int i, int j, int counter){
+    private int sameGroup (Bookshelf bookshelf, int i, int j, int counter){
         if(i==4 && j==5 || (! (this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType()))) && !(this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())))
         {
             return counter;
@@ -66,16 +66,16 @@ public class Bookshelf {
         {
             this.bookshelf[i][j+1].setCounted(true);
             this.bookshelf[i+1][j].setCounted(true);
-            SameGroup(bookshelf, i+1, j, counter);
-            SameGroup(bookshelf, i, j+1, counter);
+            sameGroup(bookshelf, i+1, j, counter);
+            sameGroup(bookshelf, i, j+1, counter);
             counter= counter+2;
         } else if (j!= 5 && this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType())) {
             this.bookshelf[i][j+1].setCounted(true);
-            SameGroup(bookshelf, i, j+1, counter);
+            sameGroup(bookshelf, i, j+1, counter);
             counter++;
         } else if (i!=4 && this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())) {
             this.bookshelf[i+1][j].setCounted(true);
-            SameGroup(bookshelf, i+1, j, counter);
+            sameGroup(bookshelf, i+1, j, counter);
             counter++;
         }
         return counter;
