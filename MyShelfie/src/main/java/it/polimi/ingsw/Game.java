@@ -3,6 +3,7 @@ import java.util.*;
 
 public class Game {
     private int num;
+    private ArrayList<Integer> scores;
     private ArrayList<Player> players;
     private ArrayList<CommonGoalCard> commongoalcards;
     private ArrayList<PersonalGoalCard> personalgoalcards;
@@ -34,6 +35,12 @@ public class Game {
             System.out.println("How many players?");
             this.num = scanner.nextInt();
         }
+    }
+
+
+
+    public ArrayList<Integer> getScores() {
+        return scores;
     }
 
 
@@ -123,6 +130,10 @@ public class Game {
         for (int i = 0; i < this.num; i++) {
             this.personalgoalcards.add(new PersonalGoalCard(players.get(i)));
         }
+    }
+
+    public ArrayList<PersonalGoalCard> getPersonalgoalcards() {
+        return personalgoalcards;
     }
 
 

@@ -21,13 +21,18 @@ public class Menu {
         }
     }
 
-    //checkGame (personal, adiacenze, vincitore)
+    public static void checkGame (Game game) {
+        int partialscore;
+        for (int i = 0; i < game.getNum(); i++) {
+            partialscore = game.getPersonalgoalcards().get(i).check();
+            partialscore += game.getPlayers().get(i).getBookshelf().adjacentCells();
+            game.getScores().add(i, partialscore);
+        }
+    }
 
     public static void main (String[] args) {
         Game game = new Game();
         turnGame(game);
         checkGame(game);
-
-
     }
 }

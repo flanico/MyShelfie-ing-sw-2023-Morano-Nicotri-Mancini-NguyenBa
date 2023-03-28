@@ -2,12 +2,10 @@ package it.polimi.ingsw;
 
 public class Tile {
     private TileType type;
-
     private int x;
-
     private int y;
-
     private boolean blocked;
+    private boolean counted;
 
     public Tile(TileType type) {
         this.type = type;
@@ -53,5 +51,13 @@ public class Tile {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public boolean isCounted() {
+        return counted;
+    }
+
+    public void setCounted(boolean counted) {
+        this.counted = counted;
     }
 }

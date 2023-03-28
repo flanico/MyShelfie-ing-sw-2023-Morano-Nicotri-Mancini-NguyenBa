@@ -20,7 +20,7 @@ public class PersonalGoalCard {
     }
 
     //Check if the targets are matched
-    public int check(PersonalGoalCard personalGoalCard) {
+    public int check() {
         int counter = 0;
         for (int i = 0; i < 6; i++) {
             if (this.player.getBookshelf().getBookshelf()[this.personalcard[i][0]][this.personalcard[i][1]].getType().equals(TileType.values()[i])) {
