@@ -1,4 +1,5 @@
 package it.polimi.ingsw;
+import java.util.ArrayList;
 
 public class Board {
     private final Tile[][] board;
@@ -60,7 +61,72 @@ public class Board {
         return board;
     }
 
-    //selectTile
+    //Check if the tiles are removable from the board
+    public boolean isRemovable(ArrayList<Tile> tiles) {
+        //Check if the tiles are in the same row/column
+        boolean samerow = true;
+        boolean samecolumn = true;
+        int row = tiles.get(0).getX();
+        for (int i = 1; i < tiles.size(); i++) {
+            if (tiles.get(i).getX() != row) {
+                //System.out.println("Tiles are not in the same row");
+                samerow = false;
+                break;
+            }
+        }
 
-    //isRemovable
+        int column = tiles.get(0).getY();
+        for (int i = 1; i < tiles.size(); i++) {
+            if (tiles.get(i).getY() != column) {
+                //System.out.println("Tiles are not in the same column");
+                samecolumn = false;
+                break;
+            }
+        }
+
+        if (!samecolumn && !samerow) {
+            //System.out.println("Tiles are not aligned");
+            return false;
+        }
+
+        //Check if the tiles have a free side
+        for (Tile tile : tiles) {
+            int rowtile = tile.getX();
+            int columntile = tile.getY();
+            if ((rowtile >= 1 && board[rowtile - 1][columntile].getType() != TileType.NULL) &&
+                    (rowtile <= 7 && board[rowtile + 1][columntile].getType() != TileType.NULL) &&
+                    (columntile >= 1 && board[rowtile][columntile - 1].getType() != TileType.NULL) &&
+                    (columntile <= 7 && board[rowtile][columntile + 1].getType() != TileType.NULL)) {
+                //System.out.println("Tiles haven't a free side");
+                return false;
+            }
+        }
+
+        //Check if the tiles are near
+        if (tiles.size() >= 2) {
+            if ((Math.abs(tiles.get(0).getY() - tiles.get(1).getY()) != 1)
+                    && (Math.abs(tiles.get(0).getX() - tiles.get(1).getX()) != 1)) {
+                //System.out.println("The two tiles are not near");
+                return false;
+            }
+            if (tiles.size() == 3) {
+                if ((Math.abs(tiles.get(1).getY() - tiles.get(2).getY()) != 1)
+                        && (Math.abs(tiles.get(1).getX() - tiles.get(2).getX()) != 1)) {
+                    //System.out.println("The three tiles are not near");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    //Tiles removable are removed and these tiles position on the board are set NULL
+    public void removeTiles(ArrayList<Tile> tiles) {
+        if (isRemovable(tiles)) {
+            for (Tile t : tiles) {
+                //System.out.println("Tile " + tiles.indexOf(tile) + " removed of type " + tiles.get(tiles.indexOf(tile)).getType() + " in position x: " + tiles.get(tiles.indexOf(tile)).getX() + " y: " + tiles.get(tiles.indexOf(tile)).getY());
+                this.getBoard()[t.getX()][t.getY()].setType(TileType.NULL);
+            }
+        }
+    }
 }

@@ -10,7 +10,7 @@ public class GameTest {
 
     @Test
     public void initBagTest() {
-        Game game = new Game(new Board(4));
+        Game game = new Game();
         for (int i = 0; i < 2; i++) {
             int countGame = 0;
             int countCat = 0;
@@ -19,7 +19,6 @@ public class GameTest {
             int countFrame = 0;
             int countBook = 0;
 
-            game.initBag();
             Iterator<Tile> iterator = game.getBag().iterator();
             while (iterator.hasNext()) {
                 TileType temp = iterator.next().getType();
@@ -59,9 +58,7 @@ public class GameTest {
     public void fillBoardTest() {
         //Board for 2 players
         Board board2 = new Board(2);
-        Game game2 = new Game(board2);
-        game2.initBag();
-        game2.fillBoard();
+        Game game2 = new Game();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 System.out.print(game2.getBoard().getBoard()[i][j].getType() + " ");
@@ -73,9 +70,7 @@ public class GameTest {
 
         //Board for 3 players
         Board board3 = new Board(3);
-        Game game3 = new Game(board3);
-        game3.initBag();
-        game3.fillBoard();
+        Game game3 = new Game();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 System.out.print(game3.getBoard().getBoard()[i][j].getType() + " ");
@@ -87,9 +82,7 @@ public class GameTest {
 
         //Board for 4 players
         Board board4 = new Board(4);
-        Game game4 = new Game(board4);
-        game4.initBag();
-        game4.fillBoard();
+        Game game4 = new Game();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 System.out.print(game4.getBoard().getBoard()[i][j].getType() + " ");

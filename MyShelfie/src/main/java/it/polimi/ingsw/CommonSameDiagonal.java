@@ -1,34 +1,58 @@
 package it.polimi.ingsw;
 
 public class CommonSameDiagonal extends CommonGoalCard {
-    public boolean check() {
+    public boolean check(Player pl) {
         TileType ref;
-        boolean flag = true;                                        //creo un flag per la verifica e una ref per il tipo unico presente nella diagonale
-
-        if (getCard(0,0).empty){                                    //controllo che la cella 0,0 non sia vuota e impongo che la ref sia il tipo della carta presente
-            return false
-        } else ref = getCard.type(0,0);
-
-        for (int x=0; x<5; x++){                                    //controllo che le tessere nella prima diagonale abbiano lo stesso tipo della ref
-            if (getCard(x,x).type != ref || getCard(x,x).empty)
-                flag = false;
+        boolean flag=false;
+        int x;
+        if (!pl.getBookshelf().getBookshelf()[0][0].getType().equals(TileType.NULL)){
+            ref = pl.getBookshelf().getBookshelf()[0][0].getType();
+            x=1;
+            while (x<5){
+                if (!pl.getBookshelf().getBookshelf()[x][x].getType().equals(ref))
+                    x=5;
+                if (x==4)
+                    flag=true;
+                x++;
+            }
         }
 
-        if (flag)                                                   //se il check va a buon fine, ritorna true
-            return true;
-
-        ref = true;
-        if (getCard(1,1).empty){                                    //secondo check, controllo che la cella 1,1 non sia vuota e modifico la ref
-            return false
-        } else ref = getCard.type(1,1);
-
-        for (int x=1; x<6; x++){                                        //controllo se la seconda diagonale abbia lo stesso tipo del nuovo ref
-            if (getCard(x,x-1).type != ref || getCard(x,x-1).empty)
-                flag = false;
+        if (!pl.getBookshelf().getBookshelf()[0][4].getType().equals(TileType.NULL) && !flag){
+            ref = pl.getBookshelf().getBookshelf()[0][4].getType();
+            x=4;
+            while(x>0){
+                if (!pl.getBookshelf().getBookshelf()[x][4-x].getType().equals(ref))
+                    x=0;
+                if (x==1)
+                    flag=true;
+                x--;
+            }
         }
 
-        if (flag)
-            return true;
-        else return false;
+        if (!pl.getBookshelf().getBookshelf()[1][0].getType().equals(TileType.NULL) && !flag){
+            ref = pl.getBookshelf().getBookshelf()[1][0].getType();
+            x=2;
+            while(x<6){
+                if (!pl.getBookshelf().getBookshelf()[x][x-1].getType().equals(ref))
+                    x=6;
+                if (x==5)
+                    flag=true;
+                x++;
+            }
+        }
+
+        if (!pl.getBookshelf().getBookshelf()[1][4].getType().equals(TileType.NULL) && !flag){
+            ref = pl.getBookshelf().getBookshelf()[1][4].getType();
+            x=2;
+            while(x<6){
+                if (!pl.getBookshelf().getBookshelf()[x][5-x].getType().equals(ref))
+                    x=6;
+                if (x==5)
+                    flag=true;
+                x++;
+            }
+        }
+
+        return flag;
     }
 }
