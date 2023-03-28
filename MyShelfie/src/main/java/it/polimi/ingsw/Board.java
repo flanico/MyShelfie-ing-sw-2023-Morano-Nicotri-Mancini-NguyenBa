@@ -2,8 +2,6 @@ package it.polimi.ingsw;
 
 public class Board {
     private final Tile[][] board;
-    //Private final int numPlayers;
-    //Private Game game = new Game();
 
     public Board(int num) {
         this.board = new Tile[9][9];
