@@ -8,9 +8,9 @@ public class Bookshelf {
     private int adjacentscore;
 
     public Bookshelf() {
-        this.bookshelf = new Tile[5][ROW];
-        for (int i = 0; i < COL; i++) {
-            for (int j = 0; j < ROW; j++) {
+        this.bookshelf = new Tile[ROW][COL];
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
                 this.bookshelf[i][j] = new Tile(TileType.NULL, i, j);
             }
         }
@@ -34,8 +34,8 @@ public class Bookshelf {
     //Check the score relative to adjacent cells
     public int adjacentCells() {
         int counter;
-        for (int i = 0; i < COL; i++) {
-            for (int j = 0; j < ROW; j++) {
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
                 if (!this.bookshelf[i][j].isCounted()){
                     this.bookshelf[i][j].setCounted(true);
                     counter = sameGroup(i, j, 1);
@@ -56,21 +56,21 @@ public class Bookshelf {
     }
 
     private int sameGroup(int i, int j, int counter) {
-        if (i == 4 && j == 5 || (!(this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType())))
+        if (i == 5 && j == 4 || (!(this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType())))
                 && !(this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())))  {
             return counter;
         }
-        if (this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType()) && this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())) {
+        if (i != 5 && j != 4 && this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType()) && this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())) {
             this.bookshelf[i][j+1].setCounted(true);
             this.bookshelf[i+1][j].setCounted(true);
             sameGroup(i+1, j, counter);
             sameGroup(i, j+1, counter);
             counter= counter+2;
-        } else if (j != 5 && this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType())) {
+        } else if (j != 4 && this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType())) {
             this.bookshelf[i][j+1].setCounted(true);
             sameGroup(i, j+1, counter);
             counter++;
-        } else if (i != 4 && this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())) {
+        } else if (i != 5 && this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())) {
             this.bookshelf[i+1][j].setCounted(true);
             sameGroup(i+1, j, counter);
             counter++;
@@ -79,13 +79,13 @@ public class Bookshelf {
     }
 
 
-    public boolean isColFull(int x) {
-        return (this.bookshelf[x][COL].getType() != TileType.NULL);
+    public boolean isColFull(int y) {
+        return (this.bookshelf[ROW][y].getType() != TileType.NULL);
     }
 
     public boolean isFull() {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < ROW; j++) {
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
                 if (this.bookshelf[i][j].getType() == TileType.NULL)
                     return false;
             }
