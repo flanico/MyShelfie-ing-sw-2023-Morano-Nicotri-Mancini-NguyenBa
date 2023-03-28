@@ -18,5 +18,7 @@ public class Player {
         return bookshelf;
     }
 
-    //selectTile
+    public ArrayList<Tile> selectTile() {
+        return null;
+    }
 }

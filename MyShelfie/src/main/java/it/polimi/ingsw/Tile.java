@@ -1,4 +1,5 @@
 package it.polimi.ingsw;
+import java.util.*;
 
 public class Tile {
     private TileType type;

@@ -1,10 +1,10 @@
 package it.polimi.ingsw;
+import java.util.*;
 
 import java.util.Random;
 
 public class PersonalGoalCard {
     private final int[][] personalcard;
-
     private final Player player;
 
     public PersonalGoalCard(Player t) {

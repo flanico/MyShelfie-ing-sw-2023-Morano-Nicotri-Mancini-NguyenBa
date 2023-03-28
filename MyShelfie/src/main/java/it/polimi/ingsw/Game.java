@@ -6,6 +6,8 @@ public class Game {
     private ArrayList<Integer> scores;  //Same order of players
     private ArrayList<Player> players;
     private ArrayList<CommonGoalCard> commongoalcards;
+    private Stack<Integer> commonscores0;
+    private Stack<Integer> commonscores1;
     private ArrayList<PersonalGoalCard> personalgoalcards;
     private Board board;
     private Stack<Tile> bag;
@@ -14,8 +16,9 @@ public class Game {
     public Game() {
         this.setNum();
         this.initPlayers();
-        this.initCommonGoalCard();
-        this.initPersonalGoalCard();
+        this.initCommongoalcards();
+        this.initCommonscores();
+        this.initPersonalgoalcards();
         this.initBoard();
         this.initBag();
         this.fillBoard();
@@ -62,24 +65,24 @@ public class Game {
 
 
     //Initialize commongoalcards with 2 random cards
-    private void initCommonGoalCard() {
+    private void initCommongoalcards() {
         this.commongoalcards = new ArrayList<CommonGoalCard>();
         Random rand = new Random();
 
         int id1 = rand.nextInt(12);
-        CommonGoalCard c1 = typeCommonGoalCard(id1);
+        CommonGoalCard c1 = typeCommongoalcards(id1);
         this.commongoalcards.add(c1);
 
         int id2 = rand.nextInt(12);
         while (id1 == id2) {
             id2 = rand.nextInt(12);
         }
-        CommonGoalCard c2 = typeCommonGoalCard(id2);
+        CommonGoalCard c2 = typeCommongoalcards(id2);
         this.commongoalcards.add(c2);
     }
 
     //Defining the dynamic type of the CommmonGoalCard
-    private CommonGoalCard typeCommonGoalCard(int id) {
+    private CommonGoalCard typeCommongoalcards(int id) {
         if (id == 0) {
             return new CommonSixGroups();
         }
@@ -123,10 +126,47 @@ public class Game {
         return commongoalcards;
     }
 
+    private void initCommonscores() {
+        this.commonscores0 = new Stack<Integer>();
+        this.commonscores1 = new Stack<Integer>();
+        if (this.num == 4) {
+            this.commonscores0.push(8);
+            this.commonscores0.push(6);
+            this.commonscores0.push(4);
+            this.commonscores0.push(2);
+            this.commonscores1.push(8);
+            this.commonscores1.push(6);
+            this.commonscores1.push(4);
+            this.commonscores1.push(2);
+        }
+        if (this.num == 3) {
+            this.commonscores0.push(8);
+            this.commonscores0.push(6);
+            this.commonscores0.push(4);
+            this.commonscores1.push(8);
+            this.commonscores1.push(6);
+            this.commonscores1.push(4);
+        }
+        if (this.num == 2) {
+            this.commonscores0.push(8);
+            this.commonscores0.push(4);
+            this.commonscores1.push(8);
+            this.commonscores1.push(4);
+        }
+    }
 
+    public Stack<Integer> getCommonscores0() {
+        return commonscores0;
+    }
+
+    public Stack<Integer> getCommonscores1() {
+        return commonscores1;
+    }
+
+    
 
     //Initialize personalgoalcards
-    private void initPersonalGoalCard() {
+    private void initPersonalgoalcards() {
         for (int i = 0; i < this.num; i++) {
             this.personalgoalcards.add(new PersonalGoalCard(players.get(i)));
         }

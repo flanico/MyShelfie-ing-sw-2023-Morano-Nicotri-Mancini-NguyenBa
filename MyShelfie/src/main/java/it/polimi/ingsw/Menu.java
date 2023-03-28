@@ -14,6 +14,12 @@ public class Menu {
                     x = scanner.nextInt();
                 }
                 game.getPlayers().get(i).getBookshelf().insertTile(t, x);
+                if (game.getCommongoalcards().get(0).check(game.getPlayers().get(i))) {
+                    game.getScores().add(i, game.getScores().get(i) + game.getCommonscores0().pop());
+                }
+                if (game.getCommongoalcards().get(1).check(game.getPlayers().get(i))) {
+                    game.getScores().add(i, game.getScores().get(i) + game.getCommonscores1().pop());
+                }
                 if (game.getPlayers().get(i).getBookshelf().isFull()) {
                     last = 1;
                 }
@@ -28,6 +34,10 @@ public class Menu {
             partialscore += game.getPlayers().get(i).getBookshelf().adjacentCells();
             game.getScores().add(i, partialscore);
         }
+    }
+
+    public static void checkCommongoalcards(Game game) {
+
     }
 
     public static void main (String[] args) {

@@ -1,5 +1,5 @@
 package it.polimi.ingsw;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Board {
     private final Tile[][] board;
