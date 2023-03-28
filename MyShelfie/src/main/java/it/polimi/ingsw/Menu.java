@@ -36,10 +36,6 @@ public class Menu {
         }
     }
 
-    public static void checkCommongoalcards(Game game) {
-
-    }
-
     public static void main (String[] args) {
         Game game = new Game();
         turnGame(game);

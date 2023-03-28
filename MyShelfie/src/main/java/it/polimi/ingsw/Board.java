@@ -3,12 +3,14 @@ import java.util.*;
 
 public class Board {
     private final Tile[][] board;
+    private final int ROW = 9;
+    private final int COL = 9;
 
     public Board(int num) {
-        this.board = new Tile[9][9];
+        this.board = new Tile[ROW][COL];
         //Initialization board
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
                 this.board[i][j] = new Tile(TileType.NULL, i, j);
             }
         }

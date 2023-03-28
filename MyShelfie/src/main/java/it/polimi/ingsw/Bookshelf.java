@@ -3,12 +3,14 @@ import java.util.*;
 
 public class Bookshelf {
     private final Tile[][] bookshelf;
+    private final int ROW = 6;
+    private final int COL = 5;
     private int adjacentscore;
 
     public Bookshelf() {
-        this.bookshelf = new Tile[5][6];
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 6; j++) {
+        this.bookshelf = new Tile[5][ROW];
+        for (int i = 0; i < COL; i++) {
+            for (int j = 0; j < ROW; j++) {
                 this.bookshelf[i][j] = new Tile(TileType.NULL, i, j);
             }
         }
@@ -19,7 +21,7 @@ public class Bookshelf {
     }
 
     public void insertTile(ArrayList<Tile> t, int x)  {
-        int y = 5;
+        int y = COL;
         while (this.bookshelf[x][y].getType() == TileType.NULL && y > -1) {
             y--;
         }
@@ -32,8 +34,8 @@ public class Bookshelf {
     //Check the score relative to adjacent cells
     public int adjacentCells() {
         int counter;
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 6; j++) {
+        for (int i = 0; i < COL; i++) {
+            for (int j = 0; j < ROW; j++) {
                 if (!this.bookshelf[i][j].isCounted()){
                     this.bookshelf[i][j].setCounted(true);
                     counter = sameGroup(i, j, 1);
@@ -78,12 +80,12 @@ public class Bookshelf {
 
 
     public boolean isColFull(int x) {
-        return (this.bookshelf[x][5].getType() != TileType.NULL);
+        return (this.bookshelf[x][COL].getType() != TileType.NULL);
     }
 
     public boolean isFull() {
         for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < ROW; j++) {
                 if (this.bookshelf[i][j].getType() == TileType.NULL)
                     return false;
             }
