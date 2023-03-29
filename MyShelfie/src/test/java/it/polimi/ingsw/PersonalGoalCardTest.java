@@ -171,7 +171,7 @@ public class PersonalGoalCardTest {
         }
         System.out.println();
 
-        int correct = player.getPersonalgoalcard().numberOfMatch(personal1, player.getBookshelf());
+        int correct = player.getPersonalgoalcard().numberOfMatch(player.getBookshelf());
         System.out.println("Number of matches: " + correct);
         System.out.println();
 
@@ -186,7 +186,7 @@ public class PersonalGoalCardTest {
         }
         System.out.println();
 
-        int correct2 = player.getPersonalgoalcard().numberOfMatch(personal2, player.getBookshelf());
+        int correct2 = player.getPersonalgoalcard().numberOfMatch(player.getBookshelf());
         System.out.println("Number of matches: " + correct2);
         System.out.println();
 
@@ -201,7 +201,7 @@ public class PersonalGoalCardTest {
         }
         System.out.println();
 
-        int correct11 = player.getPersonalgoalcard().numberOfMatch(personal11, player.getBookshelf());
+        int correct11 = player.getPersonalgoalcard().numberOfMatch(player.getBookshelf());
         System.out.println("Number of matches: " + correct11);
         System.out.println();
     }
@@ -231,7 +231,7 @@ public class PersonalGoalCardTest {
                 }
             }
         }
-        System.out.println(player.getNickname() + " made " + personal.scorePersonalCard(personal.numberOfMatch(personal, player.getBookshelf()))
+        System.out.println(player.getNickname() + " made " + personal.scorePersonalCard(personal.numberOfMatch(player.getBookshelf()))
                 + " points with PersonalGoalCard");
     }
 }

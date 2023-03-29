@@ -30,7 +30,7 @@ public class PersonalGoalCard {
     }
 
     public void assignType(PersonalGoalCardType type) {
-        if(type == PersonalGoalCardType.GOAL1){
+        if (type == PersonalGoalCardType.GOAL1) {
             this.matrix[0][0].setType(TileType.PLANT);
             this.matrix[3][1].setType(TileType.GAME);
             this.matrix[0][2].setType(TileType.FRAME);
@@ -38,7 +38,7 @@ public class PersonalGoalCard {
             this.matrix[2][3].setType(TileType.BOOK);
             this.matrix[1][4].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL2){
+        if (type == PersonalGoalCardType.GOAL2) {
             this.matrix[1][1].setType(TileType.PLANT);
             this.matrix[2][2].setType(TileType.GAME);
             this.matrix[5][4].setType(TileType.FRAME);
@@ -46,7 +46,7 @@ public class PersonalGoalCard {
             this.matrix[3][4].setType(TileType.BOOK);
             this.matrix[2][0].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL3){
+        if (type == PersonalGoalCardType.GOAL3) {
             this.matrix[2][2].setType(TileType.PLANT);
             this.matrix[1][3].setType(TileType.GAME);
             this.matrix[1][0].setType(TileType.FRAME);
@@ -54,7 +54,7 @@ public class PersonalGoalCard {
             this.matrix[5][0].setType(TileType.BOOK);
             this.matrix[3][1].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL4){
+        if (type == PersonalGoalCardType.GOAL4) {
             this.matrix[3][3].setType(TileType.PLANT);
             this.matrix[0][4].setType(TileType.GAME);
             this.matrix[2][2].setType(TileType.FRAME);
@@ -62,7 +62,7 @@ public class PersonalGoalCard {
             this.matrix[4][1].setType(TileType.BOOK);
             this.matrix[4][2].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL5){
+        if (type == PersonalGoalCardType.GOAL5) {
             this.matrix[4][4].setType(TileType.PLANT);
             this.matrix[5][0].setType(TileType.GAME);
             this.matrix[3][1].setType(TileType.FRAME);
@@ -70,7 +70,7 @@ public class PersonalGoalCard {
             this.matrix[3][2].setType(TileType.BOOK);
             this.matrix[5][3].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL6){
+        if (type == PersonalGoalCardType.GOAL6) {
             this.matrix[5][0].setType(TileType.PLANT);
             this.matrix[4][1].setType(TileType.GAME);
             this.matrix[4][3].setType(TileType.FRAME);
@@ -78,7 +78,7 @@ public class PersonalGoalCard {
             this.matrix[2][3].setType(TileType.BOOK);
             this.matrix[0][4].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL7){
+        if (type == PersonalGoalCardType.GOAL7) {
             this.matrix[2][1].setType(TileType.PLANT);
             this.matrix[4][4].setType(TileType.GAME);
             this.matrix[1][3].setType(TileType.FRAME);
@@ -86,7 +86,7 @@ public class PersonalGoalCard {
             this.matrix[5][2].setType(TileType.BOOK);
             this.matrix[0][0].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL8){
+        if (type == PersonalGoalCardType.GOAL8) {
             this.matrix[3][0].setType(TileType.PLANT);
             this.matrix[5][3].setType(TileType.GAME);
             this.matrix[0][4].setType(TileType.FRAME);
@@ -94,7 +94,7 @@ public class PersonalGoalCard {
             this.matrix[4][3].setType(TileType.BOOK);
             this.matrix[1][1].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL9){
+        if (type == PersonalGoalCardType.GOAL9) {
             this.matrix[4][4].setType(TileType.PLANT);
             this.matrix[0][2].setType(TileType.GAME);
             this.matrix[5][0].setType(TileType.FRAME);
@@ -102,7 +102,7 @@ public class PersonalGoalCard {
             this.matrix[3][4].setType(TileType.BOOK);
             this.matrix[2][2].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL10){
+        if (type == PersonalGoalCardType.GOAL10) {
             this.matrix[5][3].setType(TileType.PLANT);
             this.matrix[1][1].setType(TileType.GAME);
             this.matrix[4][1].setType(TileType.FRAME);
@@ -110,7 +110,7 @@ public class PersonalGoalCard {
             this.matrix[2][0].setType(TileType.BOOK);
             this.matrix[3][3].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL11){
+        if (type == PersonalGoalCardType.GOAL11) {
             this.matrix[0][2].setType(TileType.PLANT);
             this.matrix[2][0].setType(TileType.GAME);
             this.matrix[3][2].setType(TileType.FRAME);
@@ -118,7 +118,7 @@ public class PersonalGoalCard {
             this.matrix[1][1].setType(TileType.BOOK);
             this.matrix[4][4].setType(TileType.CAT);
         }
-        if(type == PersonalGoalCardType.GOAL12){
+        if (type == PersonalGoalCardType.GOAL12) {
             this.matrix[1][1].setType(TileType.PLANT);
             this.matrix[4][4].setType(TileType.GAME);
             this.matrix[2][2].setType(TileType.FRAME);
@@ -128,13 +128,12 @@ public class PersonalGoalCard {
         }
     }
 
-    //Count the number of matches made in the PersonalGoalCard
-    public int numberOfMatch(PersonalGoalCard personal, Bookshelf bookshelf){
+    public int numberOfMatch(Bookshelf bookshelf) {
         int correct = 0;
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                if(personal.getMatrix()[i][j].getType() != TileType.NULL &&
-                        personal.getMatrix()[i][j].getType() == bookshelf.getMatrix()[i][j].getType()){
+                if (this.getMatrix()[i][j].getType() != TileType.NULL &&
+                        this.getMatrix()[i][j].getType() == bookshelf.getMatrix()[i][j].getType()){
                     System.out.println("Match in position x: " + i + " y: " + j + " found " + bookshelf.getMatrix()[i][j].getType());
                     correct++;
                 }
