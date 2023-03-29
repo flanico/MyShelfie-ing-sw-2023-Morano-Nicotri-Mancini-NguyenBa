@@ -4,6 +4,7 @@ import java.util.*;
 public class Player {
     private final String nickname;
     private final Bookshelf bookshelf;
+    private PersonalGoalCard personalgoalcard;
 
     public Player(String nickname) {
         this.nickname = nickname;
@@ -16,6 +17,14 @@ public class Player {
 
     public Bookshelf getBookshelf() {
         return bookshelf;
+    }
+
+    public PersonalGoalCard getPersonalgoalcard() {
+        return personalgoalcard;
+    }
+
+    public void setPersonalgoalcard(PersonalGoalCard personalgoalcard) {
+        this.personalgoalcard = personalgoalcard;
     }
 
     public ArrayList<Tile> selectTile() {

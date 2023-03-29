@@ -2,9 +2,8 @@ package it.polimi.ingsw;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-
-import static org.junit.Assert.*;
 
 public class GameTest {
 
@@ -92,7 +91,7 @@ public class GameTest {
     }
 
     @Test
-    public void isNeedRefill() {
+    public void isNeedRefillTest() {
         Game game = new Game();
         //Board is constructed and all tiles are NULL
         for (int i = 0; i < 9; i++) {
@@ -148,6 +147,33 @@ public class GameTest {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void initPersonalgoalcardsTest() {
+        Game game = new Game();
+        ArrayList<Player> players = new ArrayList<>();
+        Player p1 = new Player("Pippo");
+        Player p2 = new Player("Gino");
+        Player p3 = new Player("Mina");
+        Player p4 = new Player("Bubu");
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+        players.add(p4);
+        game.setPlayers(players);
+        for (int i = 0; i < 2; i++) {
+            game.initPersonalgoalcards();
+            for (Player player : players) {
+                System.out.println("Player " + player.getNickname() + " has the personal card " + player.getPersonalgoalcard().getType());
+            }
+            for (PersonalGoalCardType type : PersonalGoalCardType.values()) {
+                System.out.print(type.toString());
+                if (type.isTaken()) System.out.println(" is taken!");
+                else System.out.println(" is NOT taken");
             }
             System.out.println();
         }

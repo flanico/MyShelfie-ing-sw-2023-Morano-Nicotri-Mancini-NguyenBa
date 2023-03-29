@@ -8,7 +8,6 @@ public class Game {
     private ArrayList<CommonGoalCard> commongoalcards;
     private Stack<Integer> commonscores0;
     private Stack<Integer> commonscores1;
-    private ArrayList<PersonalGoalCard> personalgoalcards;
     private Board board;
     private Stack<Tile> bag;
 
@@ -62,7 +61,9 @@ public class Game {
         return players;
     }
 
-
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
 
     //Initialize commongoalcards with 2 random cards
     private void initCommongoalcards() {
@@ -166,14 +167,20 @@ public class Game {
     
 
     //Initialize personalgoalcards
-    private void initPersonalgoalcards() {
-        for (int i = 0; i < this.num; i++) {
-            this.personalgoalcards.add(new PersonalGoalCard(players.get(i)));
+    public void initPersonalgoalcards() {
+        Random rand = new Random();
+        for (PersonalGoalCardType type : PersonalGoalCardType.values()){
+            type.setTaken(false);
         }
-    }
-
-    public ArrayList<PersonalGoalCard> getPersonalgoalcards() {
-        return personalgoalcards;
+        for(Player p : players){
+            PersonalGoalCardType type = PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)];
+            while(type.isTaken()){
+                type = PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)];
+            }
+            PersonalGoalCard personal = new PersonalGoalCard(type);
+            type.setTaken(true);
+            p.setPersonalgoalcard(personal);
+        }
     }
 
 
