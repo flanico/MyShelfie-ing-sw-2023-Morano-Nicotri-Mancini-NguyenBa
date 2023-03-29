@@ -6,22 +6,22 @@ import java.util.*;
  * @author Alessandro Mancini
  */
 public class Bookshelf {
-    private final Tile[][] bookshelf;
+    private final Tile[][] matrix;
     private final int ROW = 6;
     private final int COL = 5;
     private int adjacentscore;
 
     public Bookshelf() {
-        this.bookshelf = new Tile[ROW][COL];
+        this.matrix = new Tile[ROW][COL];
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                this.bookshelf[i][j] = new Tile(TileType.NULL, i, j);
+                this.matrix[i][j] = new Tile(TileType.NULL, i, j);
             }
         }
     }
 
-    public Tile[][] getBookshelf() {
-        return bookshelf;
+    public Tile[][] getMatrix() {
+        return matrix;
     }
 
     /**
@@ -32,11 +32,11 @@ public class Bookshelf {
      */
     public void insertTile(ArrayList<Tile> t, int x)  {
         int y = COL;
-        while (this.bookshelf[x][y].getType() == TileType.NULL && y > -1) {
+        while (this.matrix[x][y].getType() == TileType.NULL && y > -1) {
             y--;
         }
         for (int k = 0; k < t.size(); k++) {
-            this.bookshelf[x][y+1-k].setType(t.get(k).getType());
+            this.matrix[x][y+1-k].setType(t.get(k).getType());
 
         }
     }
@@ -50,8 +50,8 @@ public class Bookshelf {
         int counter;
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                if (!this.bookshelf[i][j].isCounted()){
-                    this.bookshelf[i][j].setCounted(true);
+                if (!this.matrix[i][j].isCounted()){
+                    this.matrix[i][j].setCounted(true);
                     counter = sameGroup(i, j, 1);
                     if (counter == 3) {
                         this.adjacentscore = this.adjacentscore + 2;
@@ -78,22 +78,22 @@ public class Bookshelf {
      * @author Flavia Nicotri
      */
     private int sameGroup(int i, int j, int counter) {
-        if (i == 5 && j == 4 || (!(this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType())))
-                && !(this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())))  {
+        if (i == 5 && j == 4 || (!(this.matrix[i][j+1].getType().equals(this.matrix[i][j].getType())))
+                && !(this.matrix[i+1][j].getType().equals(this.matrix[i][j].getType())))  {
             return counter;
         }
-        if (i != 5 && j != 4 && this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType()) && this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())) {
-            this.bookshelf[i][j+1].setCounted(true);
-            this.bookshelf[i+1][j].setCounted(true);
+        if (i != 5 && j != 4 && this.matrix[i][j+1].getType().equals(this.matrix[i][j].getType()) && this.matrix[i+1][j].getType().equals(this.matrix[i][j].getType())) {
+            this.matrix[i][j+1].setCounted(true);
+            this.matrix[i+1][j].setCounted(true);
             sameGroup(i+1, j, counter);
             sameGroup(i, j+1, counter);
             counter= counter+2;
-        } else if (j != 4 && this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType())) {
-            this.bookshelf[i][j+1].setCounted(true);
+        } else if (j != 4 && this.matrix[i][j+1].getType().equals(this.matrix[i][j].getType())) {
+            this.matrix[i][j+1].setCounted(true);
             sameGroup(i, j+1, counter);
             counter++;
-        } else if (i != 5 && this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())) {
-            this.bookshelf[i+1][j].setCounted(true);
+        } else if (i != 5 && this.matrix[i+1][j].getType().equals(this.matrix[i][j].getType())) {
+            this.matrix[i+1][j].setCounted(true);
             sameGroup(i+1, j, counter);
             counter++;
         }
@@ -108,7 +108,7 @@ public class Bookshelf {
     public boolean isFull() {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                if (this.bookshelf[i][j].getType() == TileType.NULL)
+                if (this.matrix[i][j].getType() == TileType.NULL)
                     return false;
             }
         }

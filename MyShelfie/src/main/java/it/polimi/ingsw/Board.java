@@ -6,65 +6,65 @@ import java.util.*;
  * @author Flavia Nicotri
  */
 public class Board {
-    private final Tile[][] board;
+    private final Tile[][] matrix;
     private final int ROW = 9;
     private final int COL = 9;
 
     public Board(int num) {
-        this.board = new Tile[ROW][COL];
+        this.matrix = new Tile[ROW][COL];
         //Initialization board
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                this.board[i][j] = new Tile(TileType.NULL, i, j);
+                this.matrix[i][j] = new Tile(TileType.NULL, i, j);
             }
         }
         //Block unavailable tiles
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 4-j; i++) {
-                this.board[i][j].setBlocked(true);
+                this.matrix[i][j].setBlocked(true);
             }
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 9-1; j > 9+i-5; j--) {
-                this.board[i][j].setBlocked(true);
+                this.matrix[i][j].setBlocked(true);
             }
         }
         for (int j = 6; j < 9; j++) {
             for (int i = 9-1; i >9-j+3; i--) {
-                this.board[i][j].setBlocked(true);
+                this.matrix[i][j].setBlocked(true);
             }
         }
         for (int i = 6; i < 9; i++) {
             for (int j = 0; j < i-4; j++) {
-                this.board[i][j].setBlocked(true);
+                this.matrix[i][j].setBlocked(true);
             }
         }
         //Block tiles unavailable for 2/3 players
         if (num < 4) {
-            this.board[0][4].setBlocked(true);
-            this.board[1][5].setBlocked(true);
-            this.board[3][1].setBlocked(true);
-            this.board[4][0].setBlocked(true);
-            this.board[5][7].setBlocked(true);
-            this.board[4][8].setBlocked(true);
-            this.board[7][3].setBlocked(true);
-            this.board[8][4].setBlocked(true);
+            this.matrix[0][4].setBlocked(true);
+            this.matrix[1][5].setBlocked(true);
+            this.matrix[3][1].setBlocked(true);
+            this.matrix[4][0].setBlocked(true);
+            this.matrix[5][7].setBlocked(true);
+            this.matrix[4][8].setBlocked(true);
+            this.matrix[7][3].setBlocked(true);
+            this.matrix[8][4].setBlocked(true);
             //Block tiles unavailable for 2 players
             if (num == 2) {
-                this.board[0][3].setBlocked(true);
-                this.board[2][6].setBlocked(true);
-                this.board[3][8].setBlocked(true);
-                this.board[2][2].setBlocked(true);
-                this.board[5][0].setBlocked(true);
-                this.board[6][2].setBlocked(true);
-                this.board[6][6].setBlocked(true);
-                this.board[8][5].setBlocked(true);
+                this.matrix[0][3].setBlocked(true);
+                this.matrix[2][6].setBlocked(true);
+                this.matrix[3][8].setBlocked(true);
+                this.matrix[2][2].setBlocked(true);
+                this.matrix[5][0].setBlocked(true);
+                this.matrix[6][2].setBlocked(true);
+                this.matrix[6][6].setBlocked(true);
+                this.matrix[8][5].setBlocked(true);
             }
         }
     }
 
-    public Tile[][] getBoard() {
-        return board;
+    public Tile[][] getMatrix() {
+        return matrix;
     }
 
     /**
@@ -73,7 +73,6 @@ public class Board {
      * @return true if the selection is allowed
      * @author Chiara Nguyen Ba
      */
-
     public boolean isRemovable(ArrayList<Tile> tiles) {
         //Check if the tiles are in the same row/column
         boolean samerow = true;
@@ -105,10 +104,10 @@ public class Board {
         for (Tile tile : tiles) {
             int rowtile = tile.getX();
             int columntile = tile.getY();
-            if ((rowtile >= 1 && board[rowtile - 1][columntile].getType() != TileType.NULL) &&
-                    (rowtile <= 7 && board[rowtile + 1][columntile].getType() != TileType.NULL) &&
-                    (columntile >= 1 && board[rowtile][columntile - 1].getType() != TileType.NULL) &&
-                    (columntile <= 7 && board[rowtile][columntile + 1].getType() != TileType.NULL)) {
+            if ((rowtile >= 1 && matrix[rowtile - 1][columntile].getType() != TileType.NULL) &&
+                    (rowtile <= 7 && matrix[rowtile + 1][columntile].getType() != TileType.NULL) &&
+                    (columntile >= 1 && matrix[rowtile][columntile - 1].getType() != TileType.NULL) &&
+                    (columntile <= 7 && matrix[rowtile][columntile + 1].getType() != TileType.NULL)) {
                 //System.out.println("Tiles haven't a free side");
                 return false;
             }
@@ -142,7 +141,7 @@ public class Board {
         if (isRemovable(tiles)) {
             for (Tile t : tiles) {
                 //System.out.println("Tile " + tiles.indexOf(tile) + " removed of type " + tiles.get(tiles.indexOf(tile)).getType() + " in position x: " + tiles.get(tiles.indexOf(tile)).getX() + " y: " + tiles.get(tiles.indexOf(tile)).getY());
-                this.getBoard()[t.getX()][t.getY()].setType(TileType.NULL);
+                this.getMatrix()[t.getX()][t.getY()].setType(TileType.NULL);
             }
         }
     }
