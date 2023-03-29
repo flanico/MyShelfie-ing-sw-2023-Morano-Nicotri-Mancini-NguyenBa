@@ -1,7 +1,9 @@
 package it.polimi.ingsw;
 
-
-
+/**
+ * class that define a personal goal card
+ * @author Chiara Nguyen Ba
+ */
 public class PersonalGoalCard {
     private final Tile[][] personalcard;
     private final PersonalGoalCardType type;

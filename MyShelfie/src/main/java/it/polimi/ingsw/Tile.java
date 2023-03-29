@@ -1,6 +1,10 @@
 package it.polimi.ingsw;
 import java.util.*;
 
+/**
+ * class that define a tile
+ * @author Alessandro Mancini
+ */
 public class Tile {
     private TileType type;
     private int x;

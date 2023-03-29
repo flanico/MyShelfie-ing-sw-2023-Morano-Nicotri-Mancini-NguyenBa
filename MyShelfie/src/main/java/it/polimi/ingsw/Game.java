@@ -1,6 +1,10 @@
 package it.polimi.ingsw;
 import java.util.*;
 
+/**
+ * class that define a game
+ * @author Alessandro Mancini
+ */
 public class Game {
     private int num;
     private ArrayList<Integer> scores;  //Same order of players
@@ -11,7 +15,10 @@ public class Game {
     private Board board;
     private Stack<Tile> bag;
 
-
+    /**
+     * constructor of Game
+     * @author Alessandro Mancini
+     */
     public Game() {
         this.setNum();
         this.initPlayers();
@@ -23,11 +30,18 @@ public class Game {
         this.fillBoard();
     }
 
-
+    /**
+     * getter of num
+     * @author Alessandro Mancini
+     */
     public int getNum() {
         return num;
     }
 
+    /**
+     * setter of num
+     * @author Alessandro Mancini
+     */
     //Ask how many players plays
     private void setNum() {
         Scanner scanner = new Scanner(System.in);
@@ -40,13 +54,19 @@ public class Game {
     }
 
 
-
+    /**
+     * getter of scores
+     * @author Alessandro Mancini
+     */
     public ArrayList<Integer> getScores() {
         return scores;
     }
 
 
-
+    /**
+     * initializer of players
+     * @author Alessandro Mancini
+     */
     //Initialize players asking nickname
     private void initPlayers() {
         this.players = new ArrayList<Player>();
@@ -57,15 +77,27 @@ public class Game {
         }
     }
 
+    /**
+     * getter of players
+     * @author Alessandro Mancini
+     */
     public ArrayList<Player> getPlayers() {
         return players;
     }
 
+    /**
+     * setter of players
+     * @param players
+     * @author Chiara Nguyen Ba
+     */
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
 
-    //Initialize commongoalcards with 2 random cards
+    /**
+     * initializer of commongoalcards with 2 random cards
+     * @author Alessandro Mancini
+     */
     private void initCommongoalcards() {
         this.commongoalcards = new ArrayList<CommonGoalCard>();
         Random rand = new Random();
@@ -82,7 +114,11 @@ public class Game {
         this.commongoalcards.add(c2);
     }
 
-    //Defining the dynamic type of the CommmonGoalCard
+    /**
+     * help the initializer of commongoalcards, returning the correct type associated to the id
+     * @param id random int for the switch
+     * @author Alessandro Mancini
+     */
     private CommonGoalCard typeCommongoalcards(int id) {
         if (id == 0) {
             return new CommonSixGroups();
@@ -123,10 +159,18 @@ public class Game {
         return null;
     }
 
+    /**
+     * getter of commongoalcards
+     * @author Alessandro Mancini
+     */
     public ArrayList<CommonGoalCard> getCommongoalcards() {
         return commongoalcards;
     }
 
+    /**
+     * initializer of commonscores0 and commonscores1
+     * @author Alessandro Mancini
+     */
     private void initCommonscores() {
         this.commonscores0 = new Stack<Integer>();
         this.commonscores1 = new Stack<Integer>();
@@ -156,17 +200,28 @@ public class Game {
         }
     }
 
+    /**
+     * initializer of commonscores0
+     * @author Alessandro Mancini
+     */
     public Stack<Integer> getCommonscores0() {
         return commonscores0;
     }
 
+    /**
+     * getter of commonscores1
+     * @author Alessandro Mancini
+     */
     public Stack<Integer> getCommonscores1() {
         return commonscores1;
     }
 
-    
 
-    //Initialize personalgoalcards
+
+    /**
+     * initializer of personalgoalcards
+     * @author Chiara Nguyen Ba
+     */
     public void initPersonalgoalcards() {
         Random rand = new Random();
         for (PersonalGoalCardType type : PersonalGoalCardType.values()){
@@ -185,11 +240,18 @@ public class Game {
 
 
 
+    /**
+     * initializer of board
+     * @author Alessandro Mancini
+     */
     private void initBoard() {
         this.board = new Board(this.num);
     }
 
-    //Fill the board with tiles picked from the bag
+    /**
+     * fill the board with tiles from the bag
+     * @author Alessandro Mancini
+     */
     private void fillBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -202,7 +264,6 @@ public class Game {
         }
     }
 
-    //Check if the board is empty or has only isolated tiles, if true board is refilled
     public void refillBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -233,13 +294,20 @@ public class Game {
         return true;
     }
 
+    /**
+     * getter of board
+     * @author Alessandro Mancini
+     */
     public Board getBoard() {
         return board;
     }
 
 
 
-    //Create a stack (bag) that contains the tiles
+    /**
+     * initializer of bag
+     * @author Alessandro Mancini
+     */
     private void initBag() {
         this.bag = new Stack<Tile>();
         for (int i = 0; i < 22; i++) {
@@ -269,6 +337,10 @@ public class Game {
         Collections.shuffle(this.bag);
     }
 
+    /**
+     * getter of bag
+     * @author Alessandro Mancini
+     */
     public Stack<Tile> getBag() {
         return bag;
     }

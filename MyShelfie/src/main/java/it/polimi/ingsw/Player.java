@@ -1,6 +1,10 @@
 package it.polimi.ingsw;
 import java.util.*;
 
+/**
+ * class that define a player
+ * @author Alessandro Mancini
+ */
 public class Player {
     private final String nickname;
     private final Bookshelf bookshelf;
