@@ -15,20 +15,20 @@ public class BoardTest {
 //        game.initBag();
 //        game.fillBoard();
         //Test for remove three tiles
-        game.getBoard().getBoard()[1][3] = new Tile(TileType.NULL);
-        game.getBoard().getBoard()[1][4] = new Tile(TileType.NULL);
+        game.getBoard().getMatrix()[1][3] = new Tile(TileType.NULL);
+        game.getBoard().getMatrix()[1][4] = new Tile(TileType.NULL);
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+                System.out.print(game.getBoard().getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
 
         ArrayList<Tile> tiles = new ArrayList<>();
-        tiles.add(new Tile(game.getBoard().getBoard()[2][3].getType()));
-        tiles.add(new Tile(game.getBoard().getBoard()[2][4].getType()));
-        tiles.add(new Tile(game.getBoard().getBoard()[2][5].getType()));
+        tiles.add(new Tile(game.getBoard().getMatrix()[2][3].getType()));
+        tiles.add(new Tile(game.getBoard().getMatrix()[2][4].getType()));
+        tiles.add(new Tile(game.getBoard().getMatrix()[2][5].getType()));
         tiles.get(0).setX(2);
         tiles.get(0).setY(3);
         tiles.get(1).setX(2);
@@ -61,8 +61,8 @@ public class BoardTest {
 //        game.initBag();
 //        game.fillBoard();
         ArrayList<Tile> tiles = new ArrayList<>();
-        tiles.add(new Tile(game.getBoard().getBoard()[4][1].getType()));
-        tiles.add(new Tile(game.getBoard().getBoard()[5][1].getType()));
+        tiles.add(new Tile(game.getBoard().getMatrix()[4][1].getType()));
+        tiles.add(new Tile(game.getBoard().getMatrix()[5][1].getType()));
         //tiles.add(new Tile(game.getBoard().getBoard()[2][5].getType()));
         tiles.get(0).setX(4);
         tiles.get(0).setY(1);
@@ -73,7 +73,7 @@ public class BoardTest {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+                System.out.print(game.getBoard().getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -82,7 +82,7 @@ public class BoardTest {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+                System.out.print(game.getBoard().getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }

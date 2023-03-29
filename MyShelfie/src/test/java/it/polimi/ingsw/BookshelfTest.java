@@ -20,7 +20,7 @@ public class BookshelfTest extends TestCase {
     public static void printBookshelf (Bookshelf t) {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 6; j++) {
-                System.out.println(t.getBookshelf()[i][j].getType().toString());
+                System.out.println(t.getMatrix()[i][j].getType().toString());
             }
         }
     }

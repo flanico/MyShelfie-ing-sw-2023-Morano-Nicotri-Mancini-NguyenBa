@@ -60,7 +60,7 @@ public class GameTest {
         Game game2 = new Game();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game2.getBoard().getBoard()[i][j].getType() + " ");
+                System.out.print(game2.getBoard().getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -72,7 +72,7 @@ public class GameTest {
         Game game3 = new Game();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game3.getBoard().getBoard()[i][j].getType() + " ");
+                System.out.print(game3.getBoard().getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -84,7 +84,7 @@ public class GameTest {
         Game game4 = new Game();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game4.getBoard().getBoard()[i][j].getType() + " ");
+                System.out.print(game4.getBoard().getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -96,7 +96,7 @@ public class GameTest {
         //Board is constructed and all tiles are NULL
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+                System.out.print(game.getBoard().getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -105,39 +105,39 @@ public class GameTest {
         System.out.println();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+                System.out.print(game.getBoard().getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
 
         System.out.println();
         //Add NULL tiles in the board
-        game.getBoard().getBoard()[1][4].setType(TileType.NULL);
-        game.getBoard().getBoard()[2][3].setType(TileType.NULL);
-        game.getBoard().getBoard()[2][4].setType(TileType.NULL);
-        game.getBoard().getBoard()[2][5].setType(TileType.NULL);
-        game.getBoard().getBoard()[3][2].setType(TileType.NULL);
-        game.getBoard().getBoard()[3][4].setType(TileType.NULL);
-        game.getBoard().getBoard()[3][5].setType(TileType.NULL);
-        game.getBoard().getBoard()[3][6].setType(TileType.NULL);
-        game.getBoard().getBoard()[4][2].setType(TileType.NULL);
-        game.getBoard().getBoard()[4][3].setType(TileType.NULL);
+        game.getBoard().getMatrix()[1][4].setType(TileType.NULL);
+        game.getBoard().getMatrix()[2][3].setType(TileType.NULL);
+        game.getBoard().getMatrix()[2][4].setType(TileType.NULL);
+        game.getBoard().getMatrix()[2][5].setType(TileType.NULL);
+        game.getBoard().getMatrix()[3][2].setType(TileType.NULL);
+        game.getBoard().getMatrix()[3][4].setType(TileType.NULL);
+        game.getBoard().getMatrix()[3][5].setType(TileType.NULL);
+        game.getBoard().getMatrix()[3][6].setType(TileType.NULL);
+        game.getBoard().getMatrix()[4][2].setType(TileType.NULL);
+        game.getBoard().getMatrix()[4][3].setType(TileType.NULL);
         //game.getBoard().getBoard()[4][5].setType(TileType.NULL);
-        game.getBoard().getBoard()[4][6].setType(TileType.NULL);
-        game.getBoard().getBoard()[4][7].setType(TileType.NULL);
-        game.getBoard().getBoard()[5][1].setType(TileType.NULL);
-        game.getBoard().getBoard()[5][2].setType(TileType.NULL);
-        game.getBoard().getBoard()[5][3].setType(TileType.NULL);
-        game.getBoard().getBoard()[5][4].setType(TileType.NULL);
-        game.getBoard().getBoard()[5][5].setType(TileType.NULL);
-        game.getBoard().getBoard()[5][6].setType(TileType.NULL);
-        game.getBoard().getBoard()[6][4].setType(TileType.NULL);
-        game.getBoard().getBoard()[7][4].setType(TileType.NULL);
-        game.getBoard().getBoard()[7][5].setType(TileType.NULL);
+        game.getBoard().getMatrix()[4][6].setType(TileType.NULL);
+        game.getBoard().getMatrix()[4][7].setType(TileType.NULL);
+        game.getBoard().getMatrix()[5][1].setType(TileType.NULL);
+        game.getBoard().getMatrix()[5][2].setType(TileType.NULL);
+        game.getBoard().getMatrix()[5][3].setType(TileType.NULL);
+        game.getBoard().getMatrix()[5][4].setType(TileType.NULL);
+        game.getBoard().getMatrix()[5][5].setType(TileType.NULL);
+        game.getBoard().getMatrix()[5][6].setType(TileType.NULL);
+        game.getBoard().getMatrix()[6][4].setType(TileType.NULL);
+        game.getBoard().getMatrix()[7][4].setType(TileType.NULL);
+        game.getBoard().getMatrix()[7][5].setType(TileType.NULL);
         //Print initial Board
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+                System.out.print(game.getBoard().getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -146,7 +146,7 @@ public class GameTest {
         //Print resulted Board
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(game.getBoard().getBoard()[i][j].getType() + " ");
+                System.out.print(game.getBoard().getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
