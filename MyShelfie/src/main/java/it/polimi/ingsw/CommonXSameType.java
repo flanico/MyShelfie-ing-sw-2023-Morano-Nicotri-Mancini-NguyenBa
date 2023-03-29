@@ -1,6 +1,16 @@
 package it.polimi.ingsw;
 
+/**
+ * override of the method check of the abstract class CommonGoalCard
+ * @author Stefano Morano
+ */
 public class CommonXSameType extends CommonGoalCard {   //the algorithm works, the method of the matrix must be modified
+    /**
+     * five tiles of the same type forming an X
+     *@param pl RoundPlayer
+     *@return true if the Player has to take the topmost available scoring token from that card
+     * @author Stefano Morano
+     */
     public boolean check(Player pl) {
         for (int y=0; y<3; y++){        //scanning from the first to the third column
             for (int x=0; x<4; x++){    //scanning from the first to the fourth row

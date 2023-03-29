@@ -1,6 +1,16 @@
 package it.polimi.ingsw;
 
+/**
+ * override of the method check of the abstract class CommonGoalCard
+ * @author Stefano Morano
+ */
 public class CommonSameDiagonal extends CommonGoalCard {
+    /**
+     * five tiles of the same type forming a diagonal
+     *@param pl RoundPlayer
+     *@return true if the Player has to take the topmost available scoring token from that card
+     * @author Stefano Morano
+     */
     public boolean check(Player pl) {
         TileType ref;
         boolean flag=false;

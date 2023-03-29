@@ -1,6 +1,10 @@
 package it.polimi.ingsw;
 import java.util.*;
 
+/**
+ * class that define the bookshelf as a matrix of Tile
+ * @author Alessandro Mancini
+ */
 public class Bookshelf {
     private final Tile[][] bookshelf;
     private final int ROW = 6;
@@ -20,6 +24,12 @@ public class Bookshelf {
         return bookshelf;
     }
 
+    /**
+     * insert the selected tile into the bookshelf
+     * @param t list of Tile selected by the player
+     * @param x column chosen by the player
+     * @author Alessandro Mancini
+     */
     public void insertTile(ArrayList<Tile> t, int x)  {
         int y = COL;
         while (this.bookshelf[x][y].getType() == TileType.NULL && y > -1) {
@@ -31,7 +41,11 @@ public class Bookshelf {
         }
     }
 
-    //Check the score relative to adjacent cells
+    /**
+     * check the score relative to adjacent cells
+     * @return the total score gained by the player from adjacent cells
+     * @author Flavia Nicotri
+     */
     public int adjacentCells() {
         int counter;
         for (int i = 0; i < ROW; i++) {
@@ -55,6 +69,14 @@ public class Bookshelf {
         return adjacentscore;
     }
 
+    /**
+     * recursive function that find group of same adjacent cells
+     * @param i index of row
+     * @param j index of column
+     * @param counter variable to count the number of cells in the same group
+     * @return the number of cells in the same group
+     * @author Flavia Nicotri
+     */
     private int sameGroup(int i, int j, int counter) {
         if (i == 5 && j == 4 || (!(this.bookshelf[i][j+1].getType().equals(this.bookshelf[i][j].getType())))
                 && !(this.bookshelf[i+1][j].getType().equals(this.bookshelf[i][j].getType())))  {
@@ -78,11 +100,11 @@ public class Bookshelf {
         return counter;
     }
 
-
-    public boolean isColFull(int y) {
-        return (this.bookshelf[ROW][y].getType() != TileType.NULL);
-    }
-
+    /**
+     * check if the bookshelf is full
+     * @return true if there isn't any NULL cell
+     * @author Flavia Nicotri
+     */
     public boolean isFull() {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {

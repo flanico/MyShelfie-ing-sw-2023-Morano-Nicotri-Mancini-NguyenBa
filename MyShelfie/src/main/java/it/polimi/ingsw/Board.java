@@ -1,6 +1,10 @@
 package it.polimi.ingsw;
 import java.util.*;
 
+/**
+ * class that define the living room
+ * @author Flavia Nicotri
+ */
 public class Board {
     private final Tile[][] board;
     private final int ROW = 9;
@@ -63,7 +67,13 @@ public class Board {
         return board;
     }
 
-    //Check if the tiles are removable from the board
+    /**
+     * Check if the tiles are removable from the board
+     * @param tiles item selected by the RoundPlayer
+     * @return true if the selection is allowed
+     * @author Chiara Nguyen Ba
+     */
+
     public boolean isRemovable(ArrayList<Tile> tiles) {
         //Check if the tiles are in the same row/column
         boolean samerow = true;
@@ -122,7 +132,12 @@ public class Board {
         return true;
     }
 
-    //Tiles removable are removed and these tiles position on the board are set NULL
+    /**
+     * Tiles removable are removed and these tiles position on the board are set NULL
+     * @param tiles item to remove from the board
+     * @author Chiara Nguyen Ba
+     */
+
     public void removeTiles(ArrayList<Tile> tiles) {
         if (isRemovable(tiles)) {
             for (Tile t : tiles) {

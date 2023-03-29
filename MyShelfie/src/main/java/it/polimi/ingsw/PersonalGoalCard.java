@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+
+
 public class PersonalGoalCard {
     private final Tile[][] personalcard;
     private final PersonalGoalCardType type;
@@ -25,7 +27,6 @@ public class PersonalGoalCard {
         return personalcard;
     }
 
-    //Assign and set the specific PersonalGoalCard
     public void assignPersonalCard(PersonalGoalCardType type) {
         if(type == PersonalGoalCardType.GOAL1){
             this.personalcard[0][0].setType(TileType.PLANT);
