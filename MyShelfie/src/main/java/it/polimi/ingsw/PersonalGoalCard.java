@@ -134,8 +134,8 @@ public class PersonalGoalCard {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 if(personal.getPersonalcard()[i][j].getType() != TileType.NULL &&
-                        personal.getPersonalcard()[i][j].getType() == bookshelf.getBookshelf()[i][j].getType()){
-                    System.out.println("Match in position x: " + i + " y: " + j + " found " + bookshelf.getBookshelf()[i][j].getType());
+                        personal.getPersonalcard()[i][j].getType() == bookshelf.getMatrix()[i][j].getType()){
+                    System.out.println("Match in position x: " + i + " y: " + j + " found " + bookshelf.getMatrix()[i][j].getType());
                     correct++;
                 }
             }

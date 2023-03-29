@@ -255,10 +255,10 @@ public class Game {
     private void fillBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (!this.board.getBoard()[i][j].isBlocked() && this.board.getBoard()[i][j].getType() == TileType.NULL) {
-                    this.board.getBoard()[i][j] = this.bag.pop();
-                    this.board.getBoard()[i][j].setX(i);
-                    this.board.getBoard()[i][j].setY(j);
+                if (!this.board.getMatrix()[i][j].isBlocked() && this.board.getMatrix()[i][j].getType() == TileType.NULL) {
+                    this.board.getMatrix()[i][j] = this.bag.pop();
+                    this.board.getMatrix()[i][j].setX(i);
+                    this.board.getMatrix()[i][j].setY(j);
                 }
             }
         }
@@ -267,7 +267,7 @@ public class Game {
     public void refillBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if(this.board.getBoard()[i][j].getType() != TileType.NULL && !isTileIsolated(i, j)){
+                if(this.board.getMatrix()[i][j].getType() != TileType.NULL && !isTileIsolated(i, j)){
                     //System.out.println("Board is not need to refill");
                     return;
                 }
@@ -279,16 +279,16 @@ public class Game {
 
     //Check if a tile is isolated in the board
     public boolean isTileIsolated(int row, int column) {
-        if(row > 0 && this.board.getBoard()[row - 1][column].getType() != TileType.NULL){
+        if(row > 0 && this.board.getMatrix()[row - 1][column].getType() != TileType.NULL){
             return false;
         }
-        if(row < 9 && this.board.getBoard()[row + 1][column].getType() != TileType.NULL){
+        if(row < 9 && this.board.getMatrix()[row + 1][column].getType() != TileType.NULL){
             return false;
         }
-        if(column > 0 && this.board.getBoard()[row][column - 1].getType() != TileType.NULL){
+        if(column > 0 && this.board.getMatrix()[row][column - 1].getType() != TileType.NULL){
             return false;
         }
-        if(column < 9 && this.board.getBoard()[row][column + 1].getType() != TileType.NULL){
+        if(column < 9 && this.board.getMatrix()[row][column + 1].getType() != TileType.NULL){
             return false;
         }
         return true;
