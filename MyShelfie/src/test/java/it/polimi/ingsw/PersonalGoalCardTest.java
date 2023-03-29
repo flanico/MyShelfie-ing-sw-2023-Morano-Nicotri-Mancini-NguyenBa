@@ -10,7 +10,7 @@ public class PersonalGoalCardTest {
         personal1.assignType(personal1.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal1.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal1.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -20,7 +20,7 @@ public class PersonalGoalCardTest {
         personal2.assignType(personal2.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal2.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal2.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -30,7 +30,7 @@ public class PersonalGoalCardTest {
         personal3.assignType(personal3.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal3.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal3.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -40,7 +40,7 @@ public class PersonalGoalCardTest {
         personal4.assignType(personal4.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal4.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal4.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -50,7 +50,7 @@ public class PersonalGoalCardTest {
         personal5.assignType(personal5.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal5.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal5.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -60,7 +60,7 @@ public class PersonalGoalCardTest {
         personal6.assignType(personal6.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal6.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal6.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -70,7 +70,7 @@ public class PersonalGoalCardTest {
         personal7.assignType(personal7.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal7.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal7.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -80,7 +80,7 @@ public class PersonalGoalCardTest {
         personal8.assignType(personal8.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal8.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal8.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -90,7 +90,7 @@ public class PersonalGoalCardTest {
         personal9.assignType(personal9.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal9.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal9.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -100,7 +100,7 @@ public class PersonalGoalCardTest {
         personal10.assignType(personal10.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal10.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal10.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -110,7 +110,7 @@ public class PersonalGoalCardTest {
         personal11.assignType(personal11.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal11.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal11.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -120,7 +120,7 @@ public class PersonalGoalCardTest {
         personal12.assignType(personal12.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal12.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal12.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -165,7 +165,7 @@ public class PersonalGoalCardTest {
         System.out.println("Personal goal card " + personal1.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal1.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal1.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -180,7 +180,7 @@ public class PersonalGoalCardTest {
         System.out.println("Personal goal card " + personal2.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal2.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal2.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
@@ -195,7 +195,7 @@ public class PersonalGoalCardTest {
         System.out.println("Personal goal card " + personal11.getType());
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(personal11.getPersonalcard()[i][j].getType() + " ");
+                System.out.print(personal11.getMatrix()[i][j].getType() + " ");
             }
             System.out.println();
         }
