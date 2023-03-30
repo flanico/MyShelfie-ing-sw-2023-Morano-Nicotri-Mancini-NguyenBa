@@ -7,19 +7,19 @@ package it.polimi.ingsw;
 public class CommonSameDiagonal extends CommonGoalCard {
     /**
      * five tiles of the same type forming a diagonal
-     *@param pl RoundPlayer
+     *@param bookshelf RoundPlayer
      *@return true if the Player has to take the topmost available scoring token from that card
      * @author Stefano Morano
      */
-    public boolean check(Player pl) {
+    public boolean check(Bookshelf bookshelf) {
         TileType ref;
         boolean flag=false;
         int x;
-        if (!pl.getBookshelf().getBookshelf()[0][0].getType().equals(TileType.NULL)){
-            ref = pl.getBookshelf().getBookshelf()[0][0].getType();
+        if (!bookshelf.getMatrix()[0][0].getType().equals(TileType.NULL)){
+            ref = bookshelf.getMatrix()[0][0].getType();
             x=1;
             while (x<5){
-                if (!pl.getBookshelf().getBookshelf()[x][x].getType().equals(ref))
+                if (!bookshelf.getMatrix()[x][x].getType().equals(ref))
                     x=5;
                 if (x==4)
                     flag=true;
@@ -27,11 +27,11 @@ public class CommonSameDiagonal extends CommonGoalCard {
             }
         }
 
-        if (!pl.getBookshelf().getBookshelf()[0][4].getType().equals(TileType.NULL) && !flag){
-            ref = pl.getBookshelf().getBookshelf()[0][4].getType();
+        if (!bookshelf.getMatrix()[0][4].getType().equals(TileType.NULL) && !flag){
+            ref = bookshelf.getMatrix()[0][4].getType();
             x=4;
             while(x>0){
-                if (!pl.getBookshelf().getBookshelf()[x][4-x].getType().equals(ref))
+                if (!bookshelf.getMatrix()[x][4-x].getType().equals(ref))
                     x=0;
                 if (x==1)
                     flag=true;
@@ -39,11 +39,11 @@ public class CommonSameDiagonal extends CommonGoalCard {
             }
         }
 
-        if (!pl.getBookshelf().getBookshelf()[1][0].getType().equals(TileType.NULL) && !flag){
-            ref = pl.getBookshelf().getBookshelf()[1][0].getType();
+        if (!bookshelf.getMatrix()[1][0].getType().equals(TileType.NULL) && !flag){
+            ref = bookshelf.getMatrix()[1][0].getType();
             x=2;
             while(x<6){
-                if (!pl.getBookshelf().getBookshelf()[x][x-1].getType().equals(ref))
+                if (!bookshelf.getMatrix()[x][x-1].getType().equals(ref))
                     x=6;
                 if (x==5)
                     flag=true;
@@ -51,11 +51,11 @@ public class CommonSameDiagonal extends CommonGoalCard {
             }
         }
 
-        if (!pl.getBookshelf().getBookshelf()[1][4].getType().equals(TileType.NULL) && !flag){
-            ref = pl.getBookshelf().getBookshelf()[1][4].getType();
+        if (!bookshelf.getMatrix()[1][4].getType().equals(TileType.NULL) && !flag){
+            ref = bookshelf.getMatrix()[1][4].getType();
             x=2;
             while(x<6){
-                if (!pl.getBookshelf().getBookshelf()[x][5-x].getType().equals(ref))
+                if (!bookshelf.getMatrix()[x][5-x].getType().equals(ref))
                     x=6;
                 if (x==5)
                     flag=true;

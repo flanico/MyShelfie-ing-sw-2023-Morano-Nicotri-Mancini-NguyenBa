@@ -6,5 +6,5 @@ import java.util.*;
  * @author Alessandro Mancini
  */
 public abstract class CommonGoalCard {
-    public abstract boolean check(Bookshelf t);
+    public abstract boolean check(Bookshelf bookshelf);
 }

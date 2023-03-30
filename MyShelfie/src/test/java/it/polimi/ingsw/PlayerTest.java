@@ -28,6 +28,4 @@ public class PlayerTest extends TestCase {
     @Test
     public void testSelectTile() {
     }
-
-    mario.get
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import java.awt.print.Book;
+
 /**
  * override of the method check of the abstract class CommonGoalCard
  * @author Stefano Morano
@@ -10,11 +12,11 @@ public class CommonEightSameType extends CommonGoalCard {
      *@return true if the Player has to take the topmost available scoring token from that card
      * @author Stefano Morano
      */
-    public boolean check(Player pl){
+    public boolean check(Bookshelf bookshelf){
         int[] cards = {0, 0, 0, 0, 0, 0};
         for (int x = 0; x < 5; x++) {                //the algorithm scans the whole bookshelf matrix
             for (int y = 0; y < 6; y++) {
-                switch (pl.getBookshelf().getBookshelf()[x][y].getType()) {       //the array get increased by one and the position depends on the typeCard found in the scan
+                switch (bookshelf.getMatrix()[x][y].getType()) {       //the array get increased by one and the position depends on the typeCard found in the scan
                     case CAT:
                         cards[0] += 1;
                     case PLANT:
