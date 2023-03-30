@@ -7,11 +7,10 @@ import java.util.*;
  */
 public class Game {
     private int num;
-    private ArrayList<Integer> scores;  //Same order of players
     private ArrayList<Player> players;
+    private ArrayList<Integer> scores;
     private ArrayList<CommonGoalCard> commongoalcards;
-    private Stack<Integer> commonscores0;
-    private Stack<Integer> commonscores1;
+    private ArrayList<CommonScores> commonscores;
     private Board board;
     private Stack<Tile> bag;
 
@@ -172,48 +171,17 @@ public class Game {
      * @author Alessandro Mancini
      */
     private void initCommonscores() {
-        this.commonscores0 = new Stack<Integer>();
-        this.commonscores1 = new Stack<Integer>();
-        if (this.num == 4) {
-            this.commonscores0.push(8);
-            this.commonscores0.push(6);
-            this.commonscores0.push(4);
-            this.commonscores0.push(2);
-            this.commonscores1.push(8);
-            this.commonscores1.push(6);
-            this.commonscores1.push(4);
-            this.commonscores1.push(2);
-        }
-        if (this.num == 3) {
-            this.commonscores0.push(8);
-            this.commonscores0.push(6);
-            this.commonscores0.push(4);
-            this.commonscores1.push(8);
-            this.commonscores1.push(6);
-            this.commonscores1.push(4);
-        }
-        if (this.num == 2) {
-            this.commonscores0.push(8);
-            this.commonscores0.push(4);
-            this.commonscores1.push(8);
-            this.commonscores1.push(4);
-        }
+        this.commonscores = new ArrayList<CommonScores>();
+        this.commonscores.add(new CommonScores(this.num));
+        this.commonscores.add(new CommonScores(this.num));
     }
 
     /**
      * initializer of commonscores0
      * @author Alessandro Mancini
      */
-    public Stack<Integer> getCommonscores0() {
-        return commonscores0;
-    }
-
-    /**
-     * getter of commonscores1
-     * @author Alessandro Mancini
-     */
-    public Stack<Integer> getCommonscores1() {
-        return commonscores1;
+    public ArrayList<CommonScores> getCommonscores() {
+        return commonscores;
     }
 
 

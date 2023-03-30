@@ -17,21 +17,26 @@ public class Menu {
         int last = 0;
         while (last == 0) {
             for (int i = 0; i < game.getNum(); i++) {
+                //choose a tile
                 ArrayList<Tile> t = game.getPlayers().get(i).selectTile();
 
+                //insert the tile
                 System.out.println("In which column of your bookshelf?");
                 int column = scanner.nextInt();
                 while (column < 0 || column > 4 || game.getPlayers().get(i).getBookshelf().isColFull(column)); {
                     column = scanner.nextInt();
                 }
-
                 game.getPlayers().get(i).getBookshelf().insertTile(t, column);
+
+                //check if commmon goals are reached
                 if (game.getCommongoalcards().get(0).check(game.getPlayers().get(i).getBookshelf())) {
-                    game.getScores().add(i, game.getScores().get(i) + game.getCommonscores0().pop());
+                    game.getScores().add(i, game.getScores().get(i) + game.getCommonscores().get(0).getStack().pop());
                 }
                 if (game.getCommongoalcards().get(1).check(game.getPlayers().get(i).getBookshelf())) {
-                    game.getScores().add(i, game.getScores().get(i) + game.getCommonscores1().pop());
+                    game.getScores().add(i, game.getScores().get(i) + game.getCommonscores().get(1).getStack().pop());
                 }
+
+                //check if the player ends to play
                 if (game.getPlayers().get(i).getBookshelf().isFull()) {
                     last = 1;
                 }
