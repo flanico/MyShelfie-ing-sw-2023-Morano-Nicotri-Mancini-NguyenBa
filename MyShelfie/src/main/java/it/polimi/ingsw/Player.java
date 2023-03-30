@@ -44,10 +44,6 @@ public class Player {
         return personalgoalcard;
     }
 
-    public void setPersonalgoalcard(PersonalGoalCard personalgoalcard) {
-        this.personalgoalcard = personalgoalcard;
-    }
-
     public ArrayList<Tile> selectTile() {
         return null;
     }
