@@ -8,7 +8,7 @@ import java.util.*;
 public class Player {
     private final String nickname;
     private final Bookshelf bookshelf;
-    private PersonalGoalCard personalgoalcard;
+    private final PersonalGoalCard personalgoalcard;
 
     /**
      * constructor of Player
@@ -18,6 +18,10 @@ public class Player {
     public Player(String nickname) {
         this.nickname = nickname;
         this.bookshelf = new Bookshelf();
+
+        Random rand = new Random();
+
+        this.personalgoalcard = new PersonalGoalCard(PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)]);
     }
 
     /**
