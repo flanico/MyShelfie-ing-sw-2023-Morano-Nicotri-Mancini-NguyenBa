@@ -9,8 +9,5 @@
         <module name="PSP23" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="PSP23" target="19" />
-    </bytecodeTargetLevel>
   </component>
 </project>

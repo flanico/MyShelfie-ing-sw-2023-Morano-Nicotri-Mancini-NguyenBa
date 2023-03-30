@@ -133,7 +133,7 @@ public class PersonalGoalCard {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 if (this.getMatrix()[i][j].getType() != TileType.NULL &&
-                        this.getMatrix()[i][j].getType() == bookshelf.getMatrix()[i][j].getType()){
+                        this.getMatrix()[i][j].getType() == bookshelf.getMatrix()[i][j].getType()) {
                     System.out.println("Match in position x: " + i + " y: " + j + " found " + bookshelf.getMatrix()[i][j].getType());
                     correct++;
                 }

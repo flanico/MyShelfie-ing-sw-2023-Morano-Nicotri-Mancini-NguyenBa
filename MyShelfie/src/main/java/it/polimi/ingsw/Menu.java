@@ -13,17 +13,19 @@ public class Menu {
      * @author Alessandro Mancini
      */
     private static void turnGame (Game game) {
+        Scanner scanner = new Scanner(System.in);
         int last = 0;
         while (last == 0) {
             for (int i = 0; i < game.getNum(); i++) {
                 ArrayList<Tile> t = game.getPlayers().get(i).selectTile();
-                Scanner scanner = new Scanner(System.in);
+
                 System.out.println("In which column of your bookshelf?");
-                int x = scanner.nextInt();
-                while (x < 0 || x > 4 || game.getPlayers().get(i).getBookshelf().isColFull(x)); {
-                    x = scanner.nextInt();
+                int column = scanner.nextInt();
+                while (column < 0 || column > 4 || game.getPlayers().get(i).getBookshelf().isColFull(column)); {
+                    column = scanner.nextInt();
                 }
-                game.getPlayers().get(i).getBookshelf().insertTile(t, x);
+
+                game.getPlayers().get(i).getBookshelf().insertTile(t, column);
                 if (game.getCommongoalcards().get(0).check(game.getPlayers().get(i).getBookshelf())) {
                     game.getScores().add(i, game.getScores().get(i) + game.getCommonscores0().pop());
                 }

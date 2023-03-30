@@ -114,4 +114,13 @@ public class Bookshelf {
         }
         return true;
     }
+
+    /**
+     * check if the column of the bookshelf is full
+     * @param column where to insert the tile
+     * @author Alessandro mancini
+     */
+    public boolean isColFull (int column) {
+        return (this.getMatrix()[6][column].getType() != TileType.NULL);
+    }
 }
