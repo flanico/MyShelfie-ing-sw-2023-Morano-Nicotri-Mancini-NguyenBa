@@ -52,7 +52,7 @@ public class Menu {
     public static void checkGame (Game game) {
         int partialscore;
         for (int i = 0; i < game.getNum(); i++) {
-            partialscore = game.getPlayers().get(i).getPersonalgoalcard().check();
+            //partialscore = game.getPlayers().get(i).getPersonalgoalcard();
             partialscore += game.getPlayers().get(i).getBookshelf().adjacentCells();
             game.getScores().add(i, partialscore);
         }

@@ -20,8 +20,11 @@ public class Player {
         this.bookshelf = new Bookshelf();
 
         Random rand = new Random();
-
-        this.personalgoalcard = new PersonalGoalCard(PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)]);
+        PersonalGoalCardType type;
+        do {
+            type = PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)];
+        } while (type.isTaken());
+        this.personalgoalcard = new PersonalGoalCard(type);
     }
 
     /**

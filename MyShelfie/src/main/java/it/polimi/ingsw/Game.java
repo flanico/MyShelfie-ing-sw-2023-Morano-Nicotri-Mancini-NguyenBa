@@ -53,6 +53,7 @@ public class Game {
     }
 
 
+
     /**
      * getter of scores
      * @author Alessandro Mancini
@@ -62,12 +63,17 @@ public class Game {
     }
 
 
+
     /**
      * initializer of players
      * @author Alessandro Mancini
      */
     //Initialize players asking nickname
     private void initPlayers() {
+        for (PersonalGoalCardType type : PersonalGoalCardType.values()){    //reset of types taken of last game
+            type.setTaken(false);
+        }
+
         this.players = new ArrayList<Player>();
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < this.num; i++) {
@@ -183,30 +189,6 @@ public class Game {
     public ArrayList<CommonScores> getCommonscores() {
         return commonscores;
     }
-
-
-
-    /**
-     * initializer of personalgoalcards
-     * @author Chiara Nguyen Ba
-     */
-    public void initPersonalgoalcards() {
-        Random rand = new Random();
-        for (PersonalGoalCardType type : PersonalGoalCardType.values()){
-            type.setTaken(false);
-        }
-        for(Player p : players){
-            PersonalGoalCardType type = PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)];
-            while(type.isTaken()){
-                type = PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)];
-            }
-            PersonalGoalCard personal = new PersonalGoalCard(type);
-            type.setTaken(true);
-            p.setPersonalgoalcard(personal);
-        }
-    }
-
-
 
     /**
      * initializer of board
