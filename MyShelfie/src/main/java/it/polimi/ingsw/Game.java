@@ -18,13 +18,15 @@ public class Game {
      * constructor of Game
      * @author Alessandro Mancini
      */
-    public Game() {
-        this.setNum();
+    public Game(int num) {
+        this.setNum(num);
         this.initPlayers();
+        this.initPersonalgoalcards();
         this.initCommongoalcards();
         this.initCommongoalcardscores();
         this.initBoard();
         this.initBag();
+
         this.fillBoard();
     }
 
@@ -41,14 +43,8 @@ public class Game {
      * @author Alessandro Mancini
      */
     //Ask how many players plays
-    private void setNum() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("How many players?");
-        this.num = scanner.nextInt();
-        while (this.num > 4 || this.num < 2) {
-            System.out.println("How many players?");
-            this.num = scanner.nextInt();
-        }
+    private void setNum(int num) {
+        this.num = num;
     }
 
     /**
@@ -58,11 +54,8 @@ public class Game {
     //Initialize players asking nickname
     private void initPlayers() {
         this.players = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-
         for (int i = 0; i < this.num; i++) {
-            System.out.println("Name of the player?");
-            this.players.add(new Player(scanner.next()));
+            this.players.add(new Player());
         }
     }
 
@@ -127,43 +120,21 @@ public class Game {
      * @author Alessandro Mancini
      */
     private CommonGoalCard typeCommongoalcards(int id) {
-        if (id == 0) {
-            return new CommonSixGroups();
-        }
-        if (id == 1) {
-            return new CommonFourCorners();
-        }
-        if (id == 2) {
-            return new CommonFourGroups();
-        }
-        if (id == 3) {
-            return new CommonTwoSquares();
-        }
-        if (id == 4) {
-            return new CommonMaxThreeColumns();
-        }
-        if (id == 5) {
-            return new CommonEightSameType();
-        }
-        if (id == 6) {
-            return new CommonMaxThreeRows();
-        }
-        if (id == 7) {
-            return new CommonDifferentColumns();
-        }
-        if (id == 8) {
-            return new CommonDifferentRows();
-        }
-        if (id == 9) {
-            return new CommonXSameType();
-        }
-        if (id == 10) {
-            return new CommonSameDiagonal();
-        }
-        if (id == 11) {
-            return new CommonIncreasingHeight();
-        }
-        return null;
+        return switch (id) {
+            case 0 -> new CommonSixGroups();
+            case 1 -> new CommonFourCorners();
+            case 2 -> new CommonFourGroups();
+            case 3 -> new CommonTwoSquares();
+            case 4 -> new CommonMaxThreeColumns();
+            case 5 -> new CommonEightSameType();
+            case 6 -> new CommonMaxThreeRows();
+            case 7 -> new CommonDifferentColumns();
+            case 8 -> new CommonDifferentRows();
+            case 9 -> new CommonXSameType();
+            case 10 -> new CommonSameDiagonal();
+            case 11 -> new CommonIncreasingHeight();
+            default -> null;
+        };
     }
 
     /**
@@ -175,7 +146,7 @@ public class Game {
     }
 
     /**
-     * initializer of commonscores0 and commonscores1
+     * initializer of commongoalcardscores
      * @author Alessandro Mancini
      */
     private void initCommongoalcardscores() {
@@ -205,31 +176,26 @@ public class Game {
      * @author Alessandro Mancini
      */
     private void fillBoard() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < this.board.getROW(); i++) {
+            for (int j = 0; j < this.board.getCOL(); j++) {
                 if (!this.board.getMatrix()[i][j].isBlocked() && this.board.getMatrix()[i][j].getType() == TileType.NULL) {
-                    this.board.getMatrix()[i][j] = this.bag.pop();
-                    this.board.getMatrix()[i][j].setX(i);
-                    this.board.getMatrix()[i][j].setY(j);
+                    this.board.getMatrix()[i][j].setType(this.bag.pop().getType());
                 }
             }
         }
     }
 
-    public void refillBoard() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if(this.board.getMatrix()[i][j].getType() != TileType.NULL && !isTileIsolated(i, j)){
-                    //System.out.println("Board is not need to refill");
+    public void isBoardRefillable() {
+        for (int i = 0; i < this.board.getROW(); i++) {
+            for (int j = 0; j < this.board.getCOL(); j++) {
+                if (this.board.getMatrix()[i][j].getType() != TileType.NULL && !isTileIsolated(i, j)) {
                     return;
                 }
             }
         }
-        //System.out.println("Board needs to refill");
         this.fillBoard();
     }
 
-    //Check if a tile is isolated in the board
     public boolean isTileIsolated(int row, int column) {
         if(row > 0 && this.board.getMatrix()[row - 1][column].getType() != TileType.NULL){
             return false;

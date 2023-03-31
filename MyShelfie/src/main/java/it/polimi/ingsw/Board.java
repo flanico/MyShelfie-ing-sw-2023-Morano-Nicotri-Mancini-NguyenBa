@@ -63,8 +63,28 @@ public class Board {
         }
     }
 
+    /**
+     * getter of matrix
+     * @author Alessandro Mancini
+     */
     public Tile[][] getMatrix() {
         return matrix;
+    }
+
+    /**
+     * getter of ROW
+     * @author Alessandro Mancini
+     */
+    public int getROW() {
+        return ROW;
+    }
+
+    /**
+     * getter of COL
+     * @author Alessandro Mancini
+     */
+    public int getCOL() {
+        return COL;
     }
 
     /**

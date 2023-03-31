@@ -24,12 +24,7 @@ public class Menu {
                 ArrayList<Tile> t = game.getPlayers().get(i).selectTile(game.getBoard());
 
                 //insert the tile
-                System.out.println("In which column of your bookshelf?");
-                int column = scanner.nextInt();
-                while (column < 0 || column > 4 || game.getPlayers().get(i).getBookshelf().isColFull(column)); {
-                    column = scanner.nextInt();
-                }
-                game.getPlayers().get(i).getBookshelf().insertTile(t, column);
+                game.getPlayers().get(i).getBookshelf().insertTile(t, 3);
 
                 //check if commmon goals are reached
                 if (game.getCommongoalcards().get(0).check(game.getPlayers().get(i).getBookshelf())) {
@@ -64,7 +59,8 @@ public class Menu {
      * @author Alessandro Mancini
      */
     public static void main (String[] args) {
-        Game game = new Game();
+        int num = 3;
+        Game game = new Game(num);
         turnGame(game);
         checkGame(game);
     }

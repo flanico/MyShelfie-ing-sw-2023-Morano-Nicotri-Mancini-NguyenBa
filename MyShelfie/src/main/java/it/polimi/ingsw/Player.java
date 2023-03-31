@@ -6,26 +6,15 @@ import java.util.*;
  * @author Alessandro Mancini
  */
 public class Player {
-    private final String nickname;
     private final Bookshelf bookshelf;
     private int score;
 
     /**
      * constructor of Player
-     * @param nickname of the player
      * @author Alessandro Mancini
      */
-    public Player(String nickname) {
-        this.nickname = nickname;
+    public Player() {
         this.bookshelf = new Bookshelf();
-    }
-
-    /**
-     * getter of nickname
-     * @author Alessandro Mancini
-     */
-    public String getNickname() {
-        return this.nickname;
     }
 
     /**

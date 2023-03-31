@@ -6,7 +6,7 @@ public class GameTest {
 
     @Test
     public void initBagTest() {
-        Game game = new Game();
+        Game game = new Game(3);
         for (int i = 0; i < 2; i++) {
             int countGame = 0;
             int countCat = 0;
@@ -52,19 +52,9 @@ public class GameTest {
 
     @Test
     public void fillBoardTest() {
-        //Board for 2 players
-        Board board2 = new Board(2);
-        Game game2 = new Game();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(game2.getBoard().getMatrix()[i][j].getType() + " ");
-            }
-            System.out.println();
-        }
+        Game game = new Game(2);
+        game.getBoard().printMatrix();
 
-        System.out.println();
-
-        //Board for 3 players
         Board board3 = new Board(3);
         Game game3 = new Game();
         for (int i = 0; i < 9; i++) {
