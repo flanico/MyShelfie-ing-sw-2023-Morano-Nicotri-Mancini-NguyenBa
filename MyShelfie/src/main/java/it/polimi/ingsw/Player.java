@@ -53,11 +53,27 @@ public class Player {
     }
 
     /**
-     * layer takes tiles from the board
+     * takes tiles from the board
      * @param board of the game
      * @author Alessandro Mancini
      */
     public ArrayList<Tile> selectTile(Board board) {
-        return null;
+        ArrayList<Tile> selected = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            System.out.println("How many tiles do you want to get?");
+            int n = scanner.nextInt();
+            for (int i = 0; i < n; i++) {
+                System.out.println("x?");
+                int x = scanner.nextInt();
+                System.out.println("y?");
+                int y = scanner.nextInt();
+                selected.add(board.getMatrix()[x][y]);
+            }
+        } while (!board.isRemovable(selected));
+
+        board.removeTiles(selected);
+        return selected;
     }
 }

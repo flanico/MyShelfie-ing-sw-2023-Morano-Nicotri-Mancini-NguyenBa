@@ -17,6 +17,9 @@ public class Menu {
         int last = 0;
         while (last == 0) {
             for (int i = 0; i < game.getNum(); i++) {
+                //show the board
+                game.getBoard().printMatrix();
+
                 //choose a tile
                 ArrayList<Tile> t = game.getPlayers().get(i).selectTile(game.getBoard());
 

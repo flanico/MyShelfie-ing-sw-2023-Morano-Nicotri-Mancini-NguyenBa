@@ -131,7 +131,7 @@ public class Board {
     }
 
     /**
-     * Tiles removable are removed and these tiles position on the board are set NULL
+     * tiles removable are removed and these tiles position on the board are set NULL
      * @param tiles item to remove from the board
      * @author Chiara Nguyen Ba
      */
@@ -141,6 +141,20 @@ public class Board {
                 //System.out.println("Tile " + tiles.indexOf(tile) + " removed of type " + tiles.get(tiles.indexOf(tile)).getType() + " in position x: " + tiles.get(tiles.indexOf(tile)).getX() + " y: " + tiles.get(tiles.indexOf(tile)).getY());
                 this.getMatrix()[t.getX()][t.getY()].setType(TileType.NULL);
             }
+        }
+    }
+
+    /**
+     * print the matrix
+     * @author Alessandro Mancini
+     */
+    public void printMatrix() {
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                if (!this.matrix[i][j].isBlocked())
+                    System.out.println(this.matrix[i][j].getType().toString() + " ");
+            }
+            System.out.println();
         }
     }
 }

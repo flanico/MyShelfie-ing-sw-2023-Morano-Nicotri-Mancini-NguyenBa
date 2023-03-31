@@ -61,6 +61,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
 
         for (int i = 0; i < this.num; i++) {
+            System.out.println("Name of the player?");
             this.players.add(new Player(scanner.next()));
         }
     }
