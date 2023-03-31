@@ -11,7 +11,7 @@ public class BoardTest {
     @Test
     public void isRemovableTest() {
         boolean removable;
-        Game game = new Game();
+        Game game = new Game(3);
 //        game.initBag();
 //        game.fillBoard();
         //Test for remove three tiles
@@ -57,9 +57,7 @@ public class BoardTest {
 
     @Test
     public void removeTilesTest() {
-        Game game = new Game();
-//        game.initBag();
-//        game.fillBoard();
+        Game game = new Game(3);
         ArrayList<Tile> tiles = new ArrayList<>();
         tiles.add(new Tile(game.getBoard().getMatrix()[4][1].getType()));
         tiles.add(new Tile(game.getBoard().getMatrix()[5][1].getType()));
