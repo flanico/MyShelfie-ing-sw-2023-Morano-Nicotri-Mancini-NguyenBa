@@ -7,8 +7,8 @@ import java.util.*;
  */
 public class Board {
     private final Tile[][] matrix;
-    private final int ROW = 9;
-    private final int COL = 9;
+    private static final int ROW = 9;
+    private static final int COL = 9;
 
     /**
      * constructor of board
@@ -92,6 +92,55 @@ public class Board {
     }
 
     /**
+     * fill the board with tiles from the bag
+     * @author Alessandro Mancini
+     */
+    public void fillBoard(Stack<Tile> bag) {
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                if (!this.matrix[i][j].isBlocked() && this.matrix[i][j].getType() == TileType.NULL) {
+                    this.matrix[i][j].setType(bag.pop().getType());
+                }
+            }
+        }
+    }
+
+    /**
+     * looks if board is refillable or not
+     * @author Chiara Nguyen Ba
+     */
+    public boolean isRefillable() {
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                if (!this.matrix[i][j].isBlocked() && this.matrix[i][j].getType() != TileType.NULL && !isTileIsolated(i, j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * looks if tiles are isolated in the board
+     * @author Chiara Nguyen Ba
+     */
+    private boolean isTileIsolated(int row, int column) {
+        if(row > 0 && this.matrix[row - 1][column].getType() != TileType.NULL) {
+            return false;
+        }
+        if(row < ROW && this.matrix[row + 1][column].getType() != TileType.NULL) {
+            return false;
+        }
+        if(column > 0 && this.matrix[row][column - 1].getType() != TileType.NULL) {
+            return false;
+        }
+        if(column < COL && this.matrix[row][column + 1].getType() != TileType.NULL) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * takes tiles from the board
      * @param number of tiles to remove
      * @param coordinates of the tiles
@@ -119,7 +168,7 @@ public class Board {
      * @return true if the selection is allowed
      * @author Chiara Nguyen Ba
      */
-    public boolean isRemovable(ArrayList<Tile> tiles) {
+    private boolean isRemovable(ArrayList<Tile> tiles) {
         boolean samerow = true;
         boolean samecolumn = true;
         int row = tiles.get(0).getX();

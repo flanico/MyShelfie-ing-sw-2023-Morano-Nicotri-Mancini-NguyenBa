@@ -10,7 +10,7 @@ public class Tile {
     private int x;
     private int y;
     private boolean blocked;
-    private boolean counted;    //for adjacentCells method in Bookshelf
+    private boolean counted;
 
     /**
      * constructor of Tile

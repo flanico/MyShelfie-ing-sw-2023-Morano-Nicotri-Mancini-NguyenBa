@@ -7,8 +7,8 @@ import java.util.*;
  */
 public class Bookshelf {
     private final Tile[][] matrix;
-    private final int ROW = 6;
-    private final int COL = 5;
+    private static final int ROW = 6;
+    private static final int COL = 5;
 
     /**
      * constructor of bookshelf

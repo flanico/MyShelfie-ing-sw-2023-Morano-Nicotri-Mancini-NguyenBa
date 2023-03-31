@@ -8,8 +8,8 @@ public class PersonalGoalCard {
     private final Tile[][] matrix;
     private final PersonalGoalCardType type;
     private final Player player;
-    private final int ROW = 6;
-    private final int COL = 5;
+    private static final int ROW = 6;
+    private static final int COL = 5;
 
     public PersonalGoalCard(PersonalGoalCardType type, Player player) {
         this.matrix = new Tile[ROW][COL];

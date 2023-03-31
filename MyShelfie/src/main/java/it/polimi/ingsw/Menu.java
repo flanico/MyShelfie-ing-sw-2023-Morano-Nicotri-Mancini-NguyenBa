@@ -13,7 +13,6 @@ public class Menu {
      * @author Alessandro Mancini
      */
     private static void turnGame (Game game) {
-        Scanner scanner = new Scanner(System.in);
         int last = 0;
         while (last == 0) {
             for (int i = 0; i < game.getNum(); i++) {
@@ -42,8 +41,8 @@ public class Menu {
                 }
 
                 //check if the board has to refill
-                if (game.isBoardRefillable()) {
-                    game.fillBoard();
+                if (game.getBoard().isRefillable()) {
+                    game.getBoard().fillBoard(game.getBag());
                 }
             }
         }
