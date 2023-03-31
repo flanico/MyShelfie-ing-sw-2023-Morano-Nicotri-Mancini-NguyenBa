@@ -175,7 +175,7 @@ public class Game {
      * fill the board with tiles from the bag
      * @author Alessandro Mancini
      */
-    private void fillBoard() {
+    public void fillBoard() {
         for (int i = 0; i < this.board.getROW(); i++) {
             for (int j = 0; j < this.board.getCOL(); j++) {
                 if (!this.board.getMatrix()[i][j].isBlocked() && this.board.getMatrix()[i][j].getType() == TileType.NULL) {
@@ -185,18 +185,18 @@ public class Game {
         }
     }
 
-    public void isBoardRefillable() {
+    public boolean isBoardRefillable() {
         for (int i = 0; i < this.board.getROW(); i++) {
             for (int j = 0; j < this.board.getCOL(); j++) {
-                if (this.board.getMatrix()[i][j].getType() != TileType.NULL && !isTileIsolated(i, j)) {
-                    return;
+                if (!this.board.getMatrix()[i][j].isBlocked() && this.board.getMatrix()[i][j].getType() != TileType.NULL && !isTileIsolated(i, j)) {
+                    return false;
                 }
             }
         }
-        this.fillBoard();
+        return true;
     }
 
-    public boolean isTileIsolated(int row, int column) {
+    private boolean isTileIsolated(int row, int column) {
         if(row > 0 && this.board.getMatrix()[row - 1][column].getType() != TileType.NULL){
             return false;
         }

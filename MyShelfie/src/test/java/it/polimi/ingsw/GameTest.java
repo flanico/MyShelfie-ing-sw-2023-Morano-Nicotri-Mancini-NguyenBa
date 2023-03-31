@@ -8,44 +8,44 @@ public class GameTest {
     public void initBagTest() {
         Game game = new Game(3);
         for (int i = 0; i < 2; i++) {
-            int countGame = 0;
-            int countCat = 0;
-            int countTrophy = 0;
-            int countPlant = 0;
-            int countFrame = 0;
-            int countBook = 0;
+            int count_game = 0;
+            int count_cat = 0;
+            int count_trophy = 0;
+            int count_plant = 0;
+            int count_frame = 0;
+            int count_book = 0;
 
             Iterator<Tile> iterator = game.getBag().iterator();
             while (iterator.hasNext()) {
                 TileType temp = iterator.next().getType();
                 System.out.println(temp);
                 if(temp == TileType.GAME){
-                    countGame++;
+                    count_game++;
                 }
                 if(temp == TileType.CAT){
-                    countCat++;
+                    count_cat++;
                 }
                 if(temp == TileType.TROPHY){
-                    countTrophy++;
+                    count_trophy++;
                 }
                 if(temp == TileType.PLANT){
-                    countPlant++;
+                    count_plant++;
                 }
                 if(temp == TileType.FRAME){
-                    countFrame++;
+                    count_frame++;
                 }
                 if(temp == TileType.BOOK){
-                    countBook++;
+                    count_book++;
                 }
             }
 
             System.out.println("Il sacchetto contiene " + game.getBag().size() + " tessere");
-            System.out.println(countGame + " tessere Game");
-            System.out.println(countCat + " tessere Gatto");
-            System.out.println(countTrophy + " tessere Trofeo");
-            System.out.println(countPlant + " tessere Pianta");
-            System.out.println(countFrame + " tessere Cornice");
-            System.out.println(countBook + " tessere Libro");
+            System.out.println(count_game + " tessere Game");
+            System.out.println(count_cat + " tessere Gatto");
+            System.out.println(count_trophy + " tessere Trofeo");
+            System.out.println(count_plant + " tessere Pianta");
+            System.out.println(count_frame + " tessere Cornice");
+            System.out.println(count_book + " tessere Libro");
             System.out.println();
         }
     }

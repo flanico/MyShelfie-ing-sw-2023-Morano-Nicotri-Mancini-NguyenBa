@@ -38,6 +38,11 @@ public class Menu {
                 if (game.getPlayers().get(i).getBookshelf().isFull()) {
                     last = 1;
                 }
+
+                //check if the board has to refill
+                if (game.isBoardRefillable()) {
+                    game.fillBoard();
+                }
             }
         }
     }
