@@ -185,6 +185,10 @@ public class Game {
         }
     }
 
+    /**
+     * looks if board is refillable or not
+     * @author Chiara Nguyen Ba
+     */
     public boolean isBoardRefillable() {
         for (int i = 0; i < this.board.getROW(); i++) {
             for (int j = 0; j < this.board.getCOL(); j++) {
@@ -196,17 +200,21 @@ public class Game {
         return true;
     }
 
+    /**
+     * looks if tiles are isolated in the board
+     * @author Chiara Nguyen Ba
+     */
     private boolean isTileIsolated(int row, int column) {
-        if(row > 0 && this.board.getMatrix()[row - 1][column].getType() != TileType.NULL){
+        if(row > 0 && this.board.getMatrix()[row - 1][column].getType() != TileType.NULL) {
             return false;
         }
-        if(row < 9 && this.board.getMatrix()[row + 1][column].getType() != TileType.NULL){
+        if(row < this.board.getROW() && this.board.getMatrix()[row + 1][column].getType() != TileType.NULL) {
             return false;
         }
-        if(column > 0 && this.board.getMatrix()[row][column - 1].getType() != TileType.NULL){
+        if(column > 0 && this.board.getMatrix()[row][column - 1].getType() != TileType.NULL) {
             return false;
         }
-        if(column < 9 && this.board.getMatrix()[row][column + 1].getType() != TileType.NULL){
+        if(column < this.board.getCOL() && this.board.getMatrix()[row][column + 1].getType() != TileType.NULL) {
             return false;
         }
         return true;
@@ -225,7 +233,7 @@ public class Game {
      * @author Alessandro Mancini
      */
     private void initBag() {
-        this.bag = new Stack<Tile>();
+        this.bag = new Stack<>();
         for (int i = 0; i < 22; i++) {
             Tile t = new Tile(TileType.CAT);
             this.bag.add(t);

@@ -21,7 +21,9 @@ public class Menu {
                 game.getBoard().printMatrix();
 
                 //choose a tile
-                ArrayList<Tile> t = game.getPlayers().get(i).selectTile(game.getBoard());
+                int number = 3;
+                Integer[][] coordinates = new Integer[number][2];
+                ArrayList<Tile> t = game.getBoard().selectTile(number, coordinates);
 
                 //insert the tile
                 game.getPlayers().get(i).getBookshelf().insertTile(t, 3);

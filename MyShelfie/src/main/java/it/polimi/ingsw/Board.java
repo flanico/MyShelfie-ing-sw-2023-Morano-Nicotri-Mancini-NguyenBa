@@ -10,6 +10,10 @@ public class Board {
     private final int ROW = 9;
     private final int COL = 9;
 
+    /**
+     * constructor of board
+     * @author Flavia Nicotri
+     */
     public Board(int num) {
         this.matrix = new Tile[ROW][COL];
         //initialization board
@@ -88,7 +92,29 @@ public class Board {
     }
 
     /**
-     * Check if the tiles are removable from the board
+     * takes tiles from the board
+     * @param number of tiles to remove
+     * @param coordinates of the tiles
+     * @author Alessandro Mancini
+     */
+    public ArrayList<Tile> selectTile(int number, Integer[][] coordinates) {
+        ArrayList<Tile> selected = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            for (int i = 0; i < number; i ++) {
+                int x = coordinates[i][0];
+                int y = coordinates[i][1];
+                selected.add(this.getMatrix()[x][y]);
+            }
+        } while (!this.isRemovable(selected));
+
+        this.removeTiles(selected);
+        return selected;
+    }
+
+    /**
+     * check if the tiles are removable from the board
      * @param tiles item selected by the RoundPlayer
      * @return true if the selection is allowed
      * @author Chiara Nguyen Ba

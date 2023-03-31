@@ -10,6 +10,10 @@ public class Bookshelf {
     private final int ROW = 6;
     private final int COL = 5;
 
+    /**
+     * constructor of bookshelf
+     * @author Alessandro Mancini
+     */
     public Bookshelf() {
         this.matrix = new Tile[ROW][COL];
         for (int i = 0; i < ROW; i++) {
@@ -19,6 +23,10 @@ public class Bookshelf {
         }
     }
 
+    /**
+     * getter of matrix
+     * @author Alessandro Mancini
+     */
     public Tile[][] getMatrix() {
         return matrix;
     }
