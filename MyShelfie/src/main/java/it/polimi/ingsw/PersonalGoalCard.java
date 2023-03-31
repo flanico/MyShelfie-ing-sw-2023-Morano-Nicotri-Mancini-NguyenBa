@@ -23,12 +23,12 @@ public class PersonalGoalCard {
         this.player = player;
     }
 
-    public PersonalGoalCardType getType() {
-        return type;
-    }
-
     public Tile[][] getMatrix() {
         return matrix;
+    }
+
+    public PersonalGoalCardType getType() {
+        return type;
     }
 
     public void assignType() {

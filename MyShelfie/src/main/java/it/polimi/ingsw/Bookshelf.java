@@ -9,7 +9,6 @@ public class Bookshelf {
     private final Tile[][] matrix;
     private final int ROW = 6;
     private final int COL = 5;
-    private int adjacentscore;
 
     public Bookshelf() {
         this.matrix = new Tile[ROW][COL];
@@ -26,17 +25,17 @@ public class Bookshelf {
 
     /**
      * insert the selected tile into the bookshelf
-     * @param t list of Tile selected by the player
-     * @param x column chosen by the player
+     * @param tiles list of Tile selected by the player
+     * @param column chosen by the player
      * @author Alessandro Mancini
      */
-    public void insertTile(ArrayList<Tile> t, int x)  {
-        int y = COL;
-        while (this.matrix[x][y].getType() == TileType.NULL && y > -1) {
-            y--;
+    public void insertTile(ArrayList<Tile> tiles, int column)  {
+        int x = ROW;
+        while (this.matrix[x][column].getType() == TileType.NULL && x > -1) {
+            x--;
         }
-        for (int k = 0; k < t.size(); k++) {
-            this.matrix[x][y+1-k].setType(t.get(k).getType());
+        for (int i = 0; i < tiles.size(); i++) {
+            this.matrix[x+1-i][column].setType(tiles.get(i).getType());
 
         }
     }
@@ -47,20 +46,21 @@ public class Bookshelf {
      * @author Flavia Nicotri
      */
     public int adjacentCells() {
-        int counter;
+        int counter, adjacentscore = 0;
+
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                if (!this.matrix[i][j].isCounted()){
+                if (!this.matrix[i][j].isCounted()) {
                     this.matrix[i][j].setCounted(true);
                     counter = sameGroup(i, j, 1);
                     if (counter == 3) {
-                        this.adjacentscore = this.adjacentscore + 2;
+                        adjacentscore = adjacentscore + 2;
                     } else if (counter == 4) {
-                        this.adjacentscore = this.adjacentscore + 3;
+                        adjacentscore = adjacentscore + 3;
                     } else if (counter == 5) {
-                        this.adjacentscore = this.adjacentscore + 5;
+                        adjacentscore = adjacentscore + 5;
                     } else if (counter > 5) {
-                        this.adjacentscore = this.adjacentscore + 8;
+                        adjacentscore = adjacentscore + 8;
                     }
                 }
 
@@ -120,7 +120,7 @@ public class Bookshelf {
      * @param column where to insert the tile
      * @author Alessandro mancini
      */
-    public boolean isColFull (int column) {
+    public boolean isColFull(int column) {
         return (this.getMatrix()[6][column].getType() != TileType.NULL);
     }
 }

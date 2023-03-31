@@ -12,13 +12,13 @@ public class Board {
 
     public Board(int num) {
         this.matrix = new Tile[ROW][COL];
-        //Initialization board
+        //initialization board
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 this.matrix[i][j] = new Tile(TileType.NULL, i, j);
             }
         }
-        //Block unavailable tiles
+        //block unavailable tiles
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 4-j; i++) {
                 this.matrix[i][j].setBlocked(true);
@@ -39,7 +39,7 @@ public class Board {
                 this.matrix[i][j].setBlocked(true);
             }
         }
-        //Block tiles unavailable for 2/3 players
+        //block tiles unavailable for 2/3 players
         if (num < 4) {
             this.matrix[0][4].setBlocked(true);
             this.matrix[1][5].setBlocked(true);
@@ -49,7 +49,7 @@ public class Board {
             this.matrix[4][8].setBlocked(true);
             this.matrix[7][3].setBlocked(true);
             this.matrix[8][4].setBlocked(true);
-            //Block tiles unavailable for 2 players
+            //block tiles unavailable for 2 players
             if (num == 2) {
                 this.matrix[0][3].setBlocked(true);
                 this.matrix[2][6].setBlocked(true);
@@ -74,7 +74,6 @@ public class Board {
      * @author Chiara Nguyen Ba
      */
     public boolean isRemovable(ArrayList<Tile> tiles) {
-        //Check if the tiles are in the same row/column
         boolean samerow = true;
         boolean samecolumn = true;
         int row = tiles.get(0).getX();
@@ -100,7 +99,7 @@ public class Board {
             return false;
         }
 
-        //Check if the tiles have a free side
+        //check if the tiles have a free side
         for (Tile tile : tiles) {
             int rowtile = tile.getX();
             int columntile = tile.getY();
@@ -113,7 +112,7 @@ public class Board {
             }
         }
 
-        //Check if the tiles are near
+        //check if the tiles are near
         if (tiles.size() >= 2) {
             if ((Math.abs(tiles.get(0).getY() - tiles.get(1).getY()) != 1)
                     && (Math.abs(tiles.get(0).getX() - tiles.get(1).getX()) != 1)) {
@@ -136,7 +135,6 @@ public class Board {
      * @param tiles item to remove from the board
      * @author Chiara Nguyen Ba
      */
-
     public void removeTiles(ArrayList<Tile> tiles) {
         if (isRemovable(tiles)) {
             for (Tile t : tiles) {

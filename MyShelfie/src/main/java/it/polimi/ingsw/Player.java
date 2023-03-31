@@ -1,5 +1,4 @@
 package it.polimi.ingsw;
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -46,19 +45,19 @@ public class Player {
     }
 
     /**
+     * setter of score
+     * @author Alessandro Mancini
+     */
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    /**
      * layer takes tiles from the board
      * @param board of the game
      * @author Alessandro Mancini
      */
     public ArrayList<Tile> selectTile(Board board) {
         return null;
-    }
-
-    /**
-     * setter of score
-     * @author Alessandro Mancini
-     */
-    public void setScore(int score) {
-        this.score = score;
     }
 }
