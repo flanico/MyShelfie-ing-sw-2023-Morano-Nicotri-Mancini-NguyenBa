@@ -8,9 +8,9 @@ import java.util.*;
 public class Game {
     private int num;
     private ArrayList<Player> players;
-    private ArrayList<Integer> scores;
+    private ArrayList<PersonalGoalCard> personalgoalcards;
     private ArrayList<CommonGoalCard> commongoalcards;
-    private ArrayList<CommonScores> commonscores;
+    private ArrayList<CommonGoalCardScore> commongoalcardscores;
     private Board board;
     private Stack<Tile> bag;
 
@@ -22,8 +22,7 @@ public class Game {
         this.setNum();
         this.initPlayers();
         this.initCommongoalcards();
-        this.initCommonscores();
-        this.initPersonalgoalcards();
+        this.initCommongoalcardscores();
         this.initBoard();
         this.initBag();
         this.fillBoard();
@@ -52,33 +51,17 @@ public class Game {
         }
     }
 
-
-
-    /**
-     * getter of scores
-     * @author Alessandro Mancini
-     */
-    public ArrayList<Integer> getScores() {
-        return scores;
-    }
-
-
-
     /**
      * initializer of players
      * @author Alessandro Mancini
      */
     //Initialize players asking nickname
     private void initPlayers() {
-        for (PersonalGoalCardType type : PersonalGoalCardType.values()){    //reset of types taken of last game
-            type.setTaken(false);
-        }
-
-        this.players = new ArrayList<Player>();
+        this.players = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+
         for (int i = 0; i < this.num; i++) {
-            Player t = new Player(scanner.next());
-            this.players.add(t);
+            this.players.add(new Player(scanner.next()));
         }
     }
 
@@ -91,12 +74,30 @@ public class Game {
     }
 
     /**
-     * setter of players
-     * @param players
-     * @author Chiara Nguyen Ba
+     * initializer of personalgoalcards with 2 random cards
+     * @author Alessandro Mancini
      */
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
+    private void initPersonalgoalcards() {
+        this.personalgoalcards = new ArrayList<>();
+        ArrayList<PersonalGoalCardType> used = new ArrayList<>();
+        PersonalGoalCardType type;
+        Random rand = new Random();
+
+        for (int i = 0; i < this.num; i++) {
+            do {
+                type = PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)];
+            } while (used.contains(type));
+            used.add(type);
+            this.personalgoalcards.add(new PersonalGoalCard(type, this.players.get(i)));
+        }
+    }
+
+    /**
+     * getter of personalgoalcards
+     * @author Alessandro Mancini
+     */
+    public ArrayList<PersonalGoalCard> getPersonalgoalcards() {
+        return personalgoalcards;
     }
 
     /**
@@ -104,7 +105,7 @@ public class Game {
      * @author Alessandro Mancini
      */
     private void initCommongoalcards() {
-        this.commongoalcards = new ArrayList<CommonGoalCard>();
+        this.commongoalcards = new ArrayList<>();
         Random rand = new Random();
 
         int id1 = rand.nextInt(12);
@@ -176,18 +177,18 @@ public class Game {
      * initializer of commonscores0 and commonscores1
      * @author Alessandro Mancini
      */
-    private void initCommonscores() {
-        this.commonscores = new ArrayList<CommonScores>();
-        this.commonscores.add(new CommonScores(this.num));
-        this.commonscores.add(new CommonScores(this.num));
+    private void initCommongoalcardscores() {
+        this.commongoalcardscores = new ArrayList<CommonGoalCardScore>();
+        this.commongoalcardscores.add(new CommonGoalCardScore(this.num));
+        this.commongoalcardscores.add(new CommonGoalCardScore(this.num));
     }
 
     /**
      * initializer of commonscores0
      * @author Alessandro Mancini
      */
-    public ArrayList<CommonScores> getCommonscores() {
-        return commonscores;
+    public ArrayList<CommonGoalCardScore> getCommongoalcardscores() {
+        return commongoalcardscores;
     }
 
     /**
@@ -251,8 +252,6 @@ public class Game {
     public Board getBoard() {
         return board;
     }
-
-
 
     /**
      * initializer of bag

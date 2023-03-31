@@ -5,7 +5,7 @@ import java.util.*;
  * class to manage the scores of the 2 common goal cards
  * @author Alessandro Mancini
  */
-public class CommonScores {
+public class CommonGoalCardScore {
     private Stack<Integer> stack;
 
     /**
@@ -13,7 +13,7 @@ public class CommonScores {
      * @param num of players of the game
      * @author Alessandro Mancini
      */
-    public CommonScores(int num) {
+    public CommonGoalCardScore(int num) {
         this.stack = new Stack<Integer>();
         if (num == 4) {
             this.stack.push(8);

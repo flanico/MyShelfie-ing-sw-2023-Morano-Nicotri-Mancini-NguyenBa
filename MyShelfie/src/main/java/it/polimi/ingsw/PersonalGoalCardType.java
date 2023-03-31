@@ -12,15 +12,5 @@ public enum PersonalGoalCardType {
     GOAL9,
     GOAL10,
     GOAL11,
-    GOAL12;
-
-    private boolean isTaken;
-
-    public boolean isTaken() {
-        return isTaken;
-    }
-
-    public void setTaken(boolean taken) {
-        isTaken = taken;
-    }
+    GOAL12
 }

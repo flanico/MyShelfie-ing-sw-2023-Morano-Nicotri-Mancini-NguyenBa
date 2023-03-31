@@ -1,4 +1,5 @@
 package it.polimi.ingsw;
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -8,7 +9,7 @@ import java.util.*;
 public class Player {
     private final String nickname;
     private final Bookshelf bookshelf;
-    private final PersonalGoalCard personalgoalcard;
+    private int score;
 
     /**
      * constructor of Player
@@ -18,13 +19,6 @@ public class Player {
     public Player(String nickname) {
         this.nickname = nickname;
         this.bookshelf = new Bookshelf();
-
-        Random rand = new Random();
-        PersonalGoalCardType type;
-        do {
-            type = PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)];
-        } while (type.isTaken());
-        this.personalgoalcard = new PersonalGoalCard(type);
     }
 
     /**
@@ -43,11 +37,28 @@ public class Player {
         return bookshelf;
     }
 
-    public PersonalGoalCard getPersonalgoalcard() {
-        return personalgoalcard;
+    /**
+     * getter of score
+     * @author Alessandro Mancini
+     */
+    public int getScore() {
+        return score;
     }
 
-    public ArrayList<Tile> selectTile() {
+    /**
+     * layer takes tiles from the board
+     * @param board of the game
+     * @author Alessandro Mancini
+     */
+    public ArrayList<Tile> selectTile(Board board) {
         return null;
+    }
+
+    /**
+     * setter of score
+     * @author Alessandro Mancini
+     */
+    public void setScore(int score) {
+        this.score = score;
     }
 }
