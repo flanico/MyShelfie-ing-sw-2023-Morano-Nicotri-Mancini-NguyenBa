@@ -1,5 +1,7 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Tile;
+import it.polimi.ingsw.TileType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,12 +9,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * This class tests the Tile methods.
+ * this class tests the Tile methods
  * @author Chiara Nguyen Ba
  */
 class TileTest {
     private Tile tile;
     private Tile tile2;
+
     @BeforeEach
     void setUp() {
         tile = new Tile(TileType.BOOK);

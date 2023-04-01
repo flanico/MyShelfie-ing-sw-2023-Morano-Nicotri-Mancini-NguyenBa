@@ -1,5 +1,7 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Bookshelf;
+import it.polimi.ingsw.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,11 +9,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * This class tests the Tile methods.
+ * this class tests the Player methods
  * @author Chiara Nguyen Ba
  */
 class PlayerTest {
     private Player player;
+
     @BeforeEach
     void setUp() {
         player = new Player();
@@ -23,7 +26,7 @@ class PlayerTest {
     }
 
     @Test
-    void getBookshelf() {
+    void getBookshelfTest() {
         Bookshelf bookshelf = player.getBookshelf();
         Bookshelf bookshelf1 = new Bookshelf();
         assertEquals(bookshelf, player.getBookshelf());
@@ -31,13 +34,13 @@ class PlayerTest {
     }
 
     @Test
-    void getScore() {
+    void getScoreTest() {
         player.setScore(3);
         assertEquals(3, player.getScore());
     }
 
     @Test
-    void setScore() {
+    void setScoreTest() {
         player.setScore(8);
         assertEquals(8, player.getScore());
     }
