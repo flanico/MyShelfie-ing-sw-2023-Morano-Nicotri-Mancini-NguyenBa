@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class tests the Tile methods.
+ * @author Chiara Nguyen Ba
  */
 class TileTest {
     private Tile tile;
@@ -20,6 +21,8 @@ class TileTest {
 
     @AfterEach
     void tearDown() {
+        tile = null;
+        tile2 = null;
     }
 
     @Test
