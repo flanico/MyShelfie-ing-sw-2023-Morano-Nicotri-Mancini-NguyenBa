@@ -38,13 +38,14 @@ public class Bookshelf {
      * @author Alessandro Mancini
      */
     public void insertTile(ArrayList<Tile> tiles, int column)  {
-        int x = ROW;
-        while (this.matrix[x][column].getType() == TileType.NULL && x > -1) {
+        int x = ROW-1;
+        if(isColFull(column)) return;
+        else while (this.matrix[x][column].getType() != TileType.NULL && x > 0) {
             x--;
         }
-        for (int i = 0; i < tiles.size(); i++) {
-            this.matrix[x+1-i][column].setType(tiles.get(i).getType());
-
+        for (Tile tile : tiles) {
+            this.matrix[x][column].setType(tile.getType());
+            x--;
         }
     }
 
@@ -126,9 +127,9 @@ public class Bookshelf {
     /**
      * check if the column of the bookshelf is full
      * @param column where to insert the tile
-     * @author Alessandro mancini
+     * @author Alessandro Mancini
      */
     public boolean isColFull(int column) {
-        return (this.getMatrix()[6][column].getType() != TileType.NULL);
+        return (this.getMatrix()[0][column].getType() != TileType.NULL);
     }
 }
