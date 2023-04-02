@@ -14,21 +14,27 @@ public class CommonEightSameType extends CommonGoalCard {
      */
     public boolean check(Bookshelf bookshelf){
         int[] cards = {0, 0, 0, 0, 0, 0};
-        for (int x = 0; x < 5; x++) {                //the algorithm scans the whole bookshelf matrix
-            for (int y = 0; y < 6; y++) {
+        for (int x = 0; x < 6; x++) {                //the algorithm scans the whole bookshelf matrix
+            for (int y = 0; y < 5; y++) {
                 switch (bookshelf.getMatrix()[x][y].getType()) {       //the array get increased by one and the position depends on the typeCard found in the scan
                     case CAT:
                         cards[0] += 1;
+                        break;
                     case PLANT:
                         cards[1] += 1;
+                        break;
                     case BOOK:
                         cards[2] += 1;
+                        break;
                     case FRAME:
                         cards[3] += 1;
+                        break;
                     case GAME:
                         cards[4] += 1;
+                        break;
                     case TROPHY:
                         cards[5] += 1;
+                        break;
                 }
             }
         }
