@@ -247,7 +247,7 @@ public class Board {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 if (!this.matrix[i][j].isBlocked())
-                    System.out.println(this.matrix[i][j].getType().toString() + " ");
+                    System.out.print(this.matrix[i][j].getType() + " ");
             }
             System.out.println();
         }
