@@ -1,25 +1,25 @@
 package it.polimi.ingsw;
 
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CommonFourGroupsTest {/*
+class CommonDifferentColumnsTest {
     private Bookshelf bookshelf = new Bookshelf();
-
-    int shelf[][] = {
-            {0,0,0,0,0},
-            {1,0,0,0,0},
-            {1,1,2,2,0},
-            {1,1,2,2,0},
-            {1,3,3,3,0},
-            {1,1,3,3,1},
+    public CommonGoalCard card = new CommonDifferentColumns();
+    public int[][] shelf = {
+            {1,5,0,0,0},
+            {2,1,0,0,0},
+            {3,2,2,2,0},
+            {4,3,2,2,0},
+            {5,4,3,3,0},
+            {6,6,3,3,1},
     };
 
-    @BeforeEach
     void setUp() {
-        for (int y = 0; y < 5; y++) {
-            for (int x = 0; x < 6; x++) {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 5; y++) {
                 switch (shelf[x][y]) {
                     case 0:
                         bookshelf.getMatrix()[x][y].setType(TileType.NULL);
@@ -46,21 +46,21 @@ class CommonFourGroupsTest {/*
             }
         }
     }
-
     void print(){
-        for (int y = 0; y < 5; y++) {
-            for (int x = 0; x < 6; x++) {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 5; y++) {
                 System.out.print(bookshelf.getMatrix()[x][y].getType() + " ");
             }
             System.out.println();
         }
     }
-
     @Test
-    void CheckTest(){
-
+    void check() {
+        setUp();
+        print();
+        System.out.println();
+        if (card.check(bookshelf))
+            System.out.println("Correct");
+        else System.out.println("Not correct");
     }
-
-*/
-
 }

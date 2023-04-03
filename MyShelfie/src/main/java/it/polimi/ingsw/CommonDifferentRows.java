@@ -10,23 +10,23 @@ public class CommonDifferentRows extends CommonGoalCard {
     /**
      * Two lines each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.
      *@param bookshelf RoundPlayer
-     *@return true if the Player has to take the topmost available scoring token from that card
+     *@return true if the Player has satisfied every parameter of the Different Rows Common Card
      * @author Stefano Morano
      */
     public boolean check(Bookshelf bookshelf) {
         HashSet<TileType> cards = new HashSet<>();
         int counter = 0;
-        for (int x=0; x<6; x++){                            //controllo una riga alla volta
-            for (int y=0; y<5; y++){                        //per ogni colonna aggiungo il tipo della carta (se presente) nell'hashSet
+        for (int x=0; x<6; x++){                            //controlling one rows every cycle
+            for (int y=0; y<5; y++){                        //For each column, the algorithm adds the TileType of the card in the HashSet
                 if (!bookshelf.getMatrix()[x][y].getType().equals(TileType.NULL))
                     cards.add(bookshelf.getMatrix()[x][y].getType());
                 else break;
             }
-            if (cards.size() == 5)     //se la quantità di type nell'HashSet è 5, aumento il contatore di righe che soddisfano il requisito
+            if (cards.size() == 5)     //If the quantity of the TileTypes in the HashSet is 5, the counter will be increased
                 counter++;
             cards.clear();
         }
 
-        return counter >= 2;    //se il numero di righe che soddisfano il requisito è maggiore o uguale a 2, la funzione ritorna true
+        return counter >= 2;    //the boolean function returns true if the counter is 2 or more
     }
 }

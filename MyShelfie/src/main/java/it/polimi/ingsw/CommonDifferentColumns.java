@@ -10,7 +10,7 @@ public class CommonDifferentColumns extends CommonGoalCard {
     /**
      * check in the player's bookshelf there are 2 columns full of different types of tiles
      * @param bookshelf RoundPlayer
-     * @return true if the Player has to take the topmost available scoring token from that card
+     * @return true if the Player has satisfied every parameter of the Different Column Common Card
      * @author Stefano Morano
      */
     public boolean check(Bookshelf bookshelf) {
