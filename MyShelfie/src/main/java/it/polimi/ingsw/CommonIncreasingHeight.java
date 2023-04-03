@@ -3,7 +3,6 @@ package it.polimi.ingsw;
 public class CommonIncreasingHeight extends CommonGoalCard {        //the algorithm works, the method of the matrix must be modified
     public boolean check(Bookshelf bookshelf) {                               //it can be optimized
         boolean direction = true;
-
         if (bookshelf.getMatrix()[0][0].getType().equals(TileType.NULL) && bookshelf.getMatrix()[0][4].getType().equals(TileType.NULL)){
 
             for (int x=1; x<6; x++)
