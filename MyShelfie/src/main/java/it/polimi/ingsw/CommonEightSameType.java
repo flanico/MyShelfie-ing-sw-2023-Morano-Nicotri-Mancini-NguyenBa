@@ -8,8 +8,9 @@ import java.awt.print.Book;
  */
 public class CommonEightSameType extends CommonGoalCard {
     /**
-     *Eight tiles of the same type. There’s no restriction about the position of these tiles.     *@param pl RoundPlayer
-     *@return true if the Player has to take the topmost available scoring token from that card
+     *Eight tiles of the same type. There’s no restriction about the position of these tiles.
+     * @param bookshelf RoundPlayer
+     *@return true if the Player has satisfied every parameter of the Eight Same Type Common Card
      * @author Stefano Morano
      */
     public boolean check(Bookshelf bookshelf){
