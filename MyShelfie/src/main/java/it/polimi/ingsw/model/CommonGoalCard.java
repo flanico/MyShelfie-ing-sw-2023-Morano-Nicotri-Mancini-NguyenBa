@@ -1,5 +1,4 @@
-package it.polimi.ingsw;
-import java.util.*;
+package it.polimi.ingsw.model;
 
 /**
  * abstract class that define a common goal card

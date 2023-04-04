@@ -1,5 +1,4 @@
-package it.polimi.ingsw;
-import java.util.*;
+package it.polimi.ingsw.model;
 
 /**
  * class that define a tile
@@ -48,7 +47,7 @@ public class Tile {
 
     /**
      * setter of type
-     * @param type
+     * @param type of the tile
      * @author Alessandro Mancini
      */
     public void setType(TileType type) {
@@ -65,7 +64,7 @@ public class Tile {
 
     /**
      * setter of x
-     * @param x
+     * @param x coordinate of the tile
      * @author Alessandro Mancini
      */
     public void setX(int x) {
@@ -82,7 +81,7 @@ public class Tile {
 
     /**
      * setter of y
-     * @param y
+     * @param y coordinate of the tile
      * @author Alessandro Mancini
      */
     public void setY(int y) {
@@ -99,7 +98,7 @@ public class Tile {
 
     /**
      * setter of blocked
-     * @param blocked
+     * @param blocked of the tile
      * @author Alessandro Mancini
      */
     public void setBlocked(boolean blocked) {
@@ -116,7 +115,7 @@ public class Tile {
 
     /**
      * setter of counted
-     * @param counted
+     * @param counted of the tile
      * @author Alessandro Mancini
      */
     public void setCounted(boolean counted) {

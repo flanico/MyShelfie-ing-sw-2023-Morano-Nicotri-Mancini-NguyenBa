@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 public class CommonIncreasingHeight extends CommonGoalCard {        //the algorithm works, the method of the matrix must be modified
     public boolean check(Bookshelf bookshelf) {                               //it can be optimized

@@ -1,12 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Bookshelf;
-import it.polimi.ingsw.CommonGoalCard;
-import it.polimi.ingsw.CommonMaxThreeColumns;
-import it.polimi.ingsw.TileType;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CommonMaxThreeColumnsTest {
 

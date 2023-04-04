@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 /**
  * class that define a personal goal card
@@ -11,6 +11,10 @@ public class PersonalGoalCard {
     private static final int ROW = 6;
     private static final int COL = 5;
 
+    /**
+     * constructor of personal goal card
+     * @author Chiara Nguyen Ba
+     */
     public PersonalGoalCard(PersonalGoalCardType type, Player player) {
         this.matrix = new Tile[ROW][COL];
         for (int i = 0; i < ROW; i++) {
@@ -23,15 +27,27 @@ public class PersonalGoalCard {
         this.player = player;
     }
 
+    /**
+     * getter of matrix
+     * @author Chiara Nguyen Ba
+     */
     public Tile[][] getMatrix() {
         return matrix;
     }
 
+    /**
+     * getter of type
+     * @author Chiara Nguyen Ba
+     */
     public PersonalGoalCardType getType() {
         return type;
     }
 
-    public void assignType() {
+    /**
+     * assign the type of personal goal card
+     * @author Chiara Nguyen Ba
+     */
+    private void assignType() {
         if (this.type == PersonalGoalCardType.GOAL1) {
             this.matrix[0][0].setType(TileType.PLANT);
             this.matrix[3][1].setType(TileType.GAME);
@@ -130,6 +146,10 @@ public class PersonalGoalCard {
         }
     }
 
+    /**
+     * check the score of personal goal card
+     * @author Chiara Nguyen Ba
+     */
     public int check() {
         int correct = 0;
         for (int i = 0; i < ROW; i++) {

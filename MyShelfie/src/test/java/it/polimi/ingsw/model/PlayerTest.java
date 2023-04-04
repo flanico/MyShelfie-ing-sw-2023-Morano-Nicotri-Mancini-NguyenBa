@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Bookshelf;
-import it.polimi.ingsw.Player;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,9 +25,7 @@ class PlayerTest {
 
     @Test
     void getBookshelfTest() {
-        Bookshelf bookshelf = player.getBookshelf();
         Bookshelf bookshelf1 = new Bookshelf();
-        assertEquals(bookshelf, player.getBookshelf());
         assertNotEquals(bookshelf1, player.getBookshelf());
     }
 

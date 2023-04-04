@@ -1,13 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Bookshelf;
-import it.polimi.ingsw.CommonDifferentColumns;
-import it.polimi.ingsw.CommonGoalCard;
-import it.polimi.ingsw.TileType;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CommonDifferentColumnsTest {
     private Bookshelf bookshelf = new Bookshelf();
