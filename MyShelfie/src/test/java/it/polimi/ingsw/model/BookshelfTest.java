@@ -30,6 +30,7 @@ class BookshelfTest {
 
     @Test
     void getMatrixTest() {
+        assertNotEquals(null, bookshelf.getMatrix());
     }
 
     @Test

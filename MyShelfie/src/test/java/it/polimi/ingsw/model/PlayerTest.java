@@ -25,8 +25,7 @@ class PlayerTest {
 
     @Test
     void getBookshelfTest() {
-        Bookshelf bookshelf1 = new Bookshelf();
-        assertNotEquals(bookshelf1, player.getBookshelf());
+        assertNotEquals(null, player.getBookshelf());
     }
 
     @Test

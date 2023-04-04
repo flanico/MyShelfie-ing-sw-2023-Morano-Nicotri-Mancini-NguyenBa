@@ -60,6 +60,7 @@ class GameTest{
 
     @Test
     void getBoardTest() {
+        assertNotEquals(null, game.getBoard());
         assertEquals(9, game.getBoard().getCOL());
         assertEquals(9, game.getBoard().getROW());
     }

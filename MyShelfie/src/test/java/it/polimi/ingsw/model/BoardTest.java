@@ -35,6 +35,7 @@ class BoardTest {
     @Test
     void getMatrixTest() {
         Tile[][] matrix = board.getMatrix();
+        assertNotEquals(null, board.getMatrix());
         assertTrue(Arrays.stream(matrix).flatMap(Arrays::stream).allMatch(tile -> tile.getType().equals(TileType.NULL)));
     }
 
