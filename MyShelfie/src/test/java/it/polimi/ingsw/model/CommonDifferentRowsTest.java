@@ -1,19 +1,23 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Bookshelf;
+import it.polimi.ingsw.CommonDifferentRows;
+import it.polimi.ingsw.CommonGoalCard;
+import it.polimi.ingsw.TileType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CommonFourCornersTest {
+class CommonDifferentRowsTest {
     private Bookshelf bookshelf = new Bookshelf();
-    public CommonGoalCard card = new CommonFourCorners();
+    public CommonGoalCard card = new CommonDifferentRows();
     public int[][] shelf = {
-            {1,5,0,0,1},
-            {2,1,0,4,2},
-            {1,2,2,2,4},
-            {4,3,5,2,1},
-            {1,4,3,2,1},
-            {1,5,4,3,1},
+            {1,5,0,0,0},
+            {2,1,0,0,0},
+            {3,2,2,2,0},
+            {4,3,2,2,0},
+            {5,4,3,2,6},
+            {6,5,4,3,1},
     };
 
     void setUp() {

@@ -148,7 +148,6 @@ public class Board {
      */
     public ArrayList<Tile> selectTile(int number, Integer[][] coordinates) {
         ArrayList<Tile> selected = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
 
         do {
             for (int i = 0; i < number; i ++) {

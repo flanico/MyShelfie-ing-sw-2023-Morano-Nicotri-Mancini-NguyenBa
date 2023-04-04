@@ -16,19 +16,19 @@ public class CommonGoalCardScore {
     public CommonGoalCardScore(int num) {
         this.stack = new Stack<Integer>();
         if (num == 4) {
-            this.stack.push(8);
-            this.stack.push(6);
-            this.stack.push(4);
             this.stack.push(2);
+            this.stack.push(4);
+            this.stack.push(6);
+            this.stack.push(8);
         }
         if (num == 3) {
-            this.stack.push(8);
-            this.stack.push(6);
             this.stack.push(4);
+            this.stack.push(6);
+            this.stack.push(8);
         }
         if (num == 2) {
-            this.stack.push(8);
             this.stack.push(4);
+            this.stack.push(8);
         }
     }
 

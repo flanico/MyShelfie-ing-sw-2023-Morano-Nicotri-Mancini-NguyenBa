@@ -50,7 +50,6 @@ public class Game {
      * initializer of players
      * @author Alessandro Mancini
      */
-    //Initialize players asking nickname
     private void initPlayers() {
         this.players = new ArrayList<>();
         for (int i = 0; i < this.num; i++) {
@@ -149,13 +148,13 @@ public class Game {
      * @author Alessandro Mancini
      */
     private void initCommongoalcardscores() {
-        this.commongoalcardscores = new ArrayList<CommonGoalCardScore>();
+        this.commongoalcardscores = new ArrayList<>();
         this.commongoalcardscores.add(new CommonGoalCardScore(this.num));
         this.commongoalcardscores.add(new CommonGoalCardScore(this.num));
     }
 
     /**
-     * initializer of commonscores0
+     * getter of commongoalcardscores
      * @author Alessandro Mancini
      */
     public ArrayList<CommonGoalCardScore> getCommongoalcardscores() {

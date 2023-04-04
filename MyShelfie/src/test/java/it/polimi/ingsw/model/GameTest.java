@@ -39,22 +39,32 @@ class GameTest{
 
     @Test
     void getPlayersTest() {
+        assertEquals(3, game.getPlayers().size());
     }
 
     @Test
     void getPersonalgoalcardsTest() {
+        assertEquals(3, game.getPersonalgoalcards().size());
+        assertNotEquals(game.getPersonalgoalcards().get(0).getType(), game.getPersonalgoalcards().get(1).getType());
+        assertNotEquals(game.getPersonalgoalcards().get(0).getType(), game.getPersonalgoalcards().get(2).getType());
+        assertNotEquals(game.getPersonalgoalcards().get(2).getType(), game.getPersonalgoalcards().get(1).getType());
     }
 
     @Test
     void getCommongoalcardsTest() {
+        assertEquals(2, game.getCommongoalcards().size());
+        assertNotEquals(game.getCommongoalcards().get(0), game.getCommongoalcards().get(1));
     }
 
     @Test
     void getCommongoalcardscoresTest() {
+        assertEquals(2, game.getCommongoalcardscores().size());
     }
 
     @Test
     void getBoardTest() {
+        assertEquals(9, game.getBoard().getCOL());
+        assertEquals(9, game.getBoard().getROW());
     }
 
     @Test
