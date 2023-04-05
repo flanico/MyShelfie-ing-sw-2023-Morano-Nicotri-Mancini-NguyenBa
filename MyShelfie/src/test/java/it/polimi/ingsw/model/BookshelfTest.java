@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,13 +11,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * this class tests the Bookshelf methods
- * @author Chiara Nguyen Ba
+ * @author Chiara Nguyen Ba, Flavia Nicotri
  */
 class BookshelfTest {
 
     private Bookshelf bookshelf;
     private static final int ROW = 6;
     private static final int COL = 5;
+
+    private int[][] shelf = {
+            {1,5,4,5,1},
+            {2,1,0,4,2},
+            {1,2,2,2,4},
+            {4,3,5,2,1},
+            {1,4,3,2,1},
+            {1,5,4,3,1},
+    };
 
     @BeforeEach
     void setUp() {
@@ -66,10 +76,80 @@ class BookshelfTest {
     void adjacentCellsTest() {
     }
 
+    /**
+     * Test a matrix that has only a Tile equals to null --> is not Full
+     * @autor Flavia Nicotri
+     */
     @Test
-    void isFullTest() {
-
+    void isFull_falseTest() {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 5; y++) {
+                switch (shelf[x][y]) {
+                    case 0:
+                        bookshelf.getMatrix()[x][y].setType(TileType.NULL);
+                        break;
+                    case 1:
+                        bookshelf.getMatrix()[x][y].setType(TileType.CAT);
+                        break;
+                    case 2:
+                        bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
+                        break;
+                    case 3:
+                        bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
+                        break;
+                    case 4:
+                        bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
+                        break;
+                    case 5:
+                        bookshelf.getMatrix()[x][y].setType(TileType.GAME);
+                        break;
+                    case 6:
+                        bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
+                        break;
+                }
+            }
+        }
+        assertFalse(bookshelf.isFull());
     }
+
+
+    /**
+     * Test a matrix that hasn't any Tile equals to null --> is Full
+     * @autor Flavia Nicotri
+     */
+    @Test
+    void isFull_trueTest() {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 5; y++) {
+                switch (shelf[x][y]) {
+                    case 0:
+                        bookshelf.getMatrix()[x][y].setType(TileType.NULL);
+                        break;
+                    case 1:
+                        bookshelf.getMatrix()[x][y].setType(TileType.CAT);
+                        break;
+                    case 2:
+                        bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
+                        break;
+                    case 3:
+                        bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
+                        break;
+                    case 4:
+                        bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
+                        break;
+                    case 5:
+                        bookshelf.getMatrix()[x][y].setType(TileType.GAME);
+                        break;
+                    case 6:
+                        bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
+                        break;
+                }
+            }
+        }
+        bookshelf.getMatrix()[1][2].setType(TileType.GAME);
+        assertTrue(bookshelf.isFull());
+    }
+
 
     @Test
     void isColFull_trueTest() {

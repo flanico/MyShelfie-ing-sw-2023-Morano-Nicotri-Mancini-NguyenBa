@@ -117,7 +117,7 @@ public class Bookshelf {
     public boolean isFull() {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                if (this.matrix[i][j].getType() == TileType.NULL)
+                if (this.getMatrix()[i][j].getType()==TileType.NULL)
                     return false;
             }
         }
