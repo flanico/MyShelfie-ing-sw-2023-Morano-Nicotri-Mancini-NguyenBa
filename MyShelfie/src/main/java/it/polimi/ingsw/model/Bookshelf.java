@@ -60,8 +60,10 @@ public class Bookshelf {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 if (!this.matrix[i][j].isCounted()) {
+                    //System.out.print( i + "" + j );
                     this.matrix[i][j].setCounted(true);
                     counter = sameGroup(i, j, 1);
+                    //System.out.print(counter+" ");
                     if (counter == 3) {
                         adjacentscore = adjacentscore + 2;
                     } else if (counter == 4) {
@@ -87,25 +89,58 @@ public class Bookshelf {
      * @author Flavia Nicotri
      */
     private int sameGroup(int i, int j, int counter) {
-        if (i == 5 && j == 4 || (!(this.matrix[i][j+1].getType().equals(this.matrix[i][j].getType())))
-                && !(this.matrix[i+1][j].getType().equals(this.matrix[i][j].getType())))  {
+        if ((i == 5 && j == 4 )|| this.matrix[i][j].getType().equals(TileType.NULL))  {
+            //System.out.println("Escape condition 1 " + counter);
             return counter;
         }
-        if (i != 5 && j != 4 && this.matrix[i][j+1].getType().equals(this.matrix[i][j].getType()) && this.matrix[i+1][j].getType().equals(this.matrix[i][j].getType())) {
-            this.matrix[i][j+1].setCounted(true);
-            this.matrix[i+1][j].setCounted(true);
-            sameGroup(i+1, j, counter);
-            sameGroup(i, j+1, counter);
-            counter= counter+2;
-        } else if (j != 4 && this.matrix[i][j+1].getType().equals(this.matrix[i][j].getType())) {
-            this.matrix[i][j+1].setCounted(true);
-            sameGroup(i, j+1, counter);
-            counter++;
-        } else if (i != 5 && this.matrix[i+1][j].getType().equals(this.matrix[i][j].getType())) {
-            this.matrix[i+1][j].setCounted(true);
-            sameGroup(i+1, j, counter);
-            counter++;
+        if (j != 4){
+            //System.out.println("Caso 1");
+            if(!this.matrix[i][j+1].isCounted() && this.matrix[i][j+1].getType().equals(this.matrix[i][j].getType())) {
+                //System.out.println("same group " + i + j);
+                this.matrix[i][j+1].setCounted(true);
+                counter++;
+                counter= sameGroup(i, j+1, counter);
+            }
         }
+        if(i!=5)
+        {
+            if(!this.matrix[i+1][j].isCounted() && this.matrix[i+1][j].getType().equals(this.matrix[i][j].getType())) {
+                //System.out.println("Caso 2");
+                {
+                    //System.out.println("same group "+ i + j);
+                    this.matrix[i+1][j].setCounted(true);
+                    counter++;
+                    counter= sameGroup(i+1, j, counter);
+                }
+            }
+        }
+        if (i!=0)
+        {
+            if(!this.matrix[i-1][j].isCounted() && this.matrix[i-1][j].getType().equals(this.matrix[i][j].getType())) {
+                //System.out.println("Caso 3");
+                {
+                    //System.out.println("same group "+ i + j);
+                    this.matrix[i-1][j].setCounted(true);
+                    counter++;
+                    counter= sameGroup(i-1, j, counter);
+                }
+            }
+        }
+        if (j!=0)
+        {
+            if(!this.matrix[i][j-1].isCounted() && this.matrix[i][j-1].getType().equals(this.matrix[i][j].getType())) {
+                //System.out.println("Caso 4");
+                {
+                    //System.out.println("same group "+ i + j);
+                    this.matrix[i][j-1].setCounted(true);
+                    counter++;
+                    counter= sameGroup(i, j-1, counter);
+                }
+            }
+        }
+
+
+        //System.out.println("Escape condition 2 " + counter);
         return counter;
     }
 

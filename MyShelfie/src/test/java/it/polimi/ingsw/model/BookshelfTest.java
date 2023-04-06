@@ -20,10 +20,10 @@ class BookshelfTest {
     private static final int COL = 5;
 
     private int[][] shelf = {
-            {1,5,4,5,1},
-            {2,1,0,4,2},
+            {1,1,1,5,1},
+            {2,4,0,2,4},
             {1,2,2,2,4},
-            {4,3,5,2,1},
+            {4,4,4,2,1},
             {1,4,3,2,1},
             {1,5,4,3,1},
     };
@@ -72,8 +72,48 @@ class BookshelfTest {
         }
     }
 
+    /**
+     * Test the method adjacentCells
+     * @autor Flavia Nicotri
+     */
     @Test
     void adjacentCellsTest() {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 5; y++) {
+                switch (shelf[x][y]) {
+                    case 0:
+                        bookshelf.getMatrix()[x][y].setType(TileType.NULL);
+                        break;
+                    case 1:
+                        bookshelf.getMatrix()[x][y].setType(TileType.CAT);
+                        break;
+                    case 2:
+                        bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
+                        break;
+                    case 3:
+                        bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
+                        break;
+                    case 4:
+                        bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
+                        break;
+                    case 5:
+                        bookshelf.getMatrix()[x][y].setType(TileType.GAME);
+                        break;
+                    case 6:
+                        bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
+                        break;
+                }
+            }
+        }
+        /*
+            for (int x = 0; x < 6; x++) {
+                for (int y = 0; y < 5; y++) {
+                    System.out.print(bookshelf.getMatrix()[x][y].getType() + " ");
+                }
+                System.out.println();
+            }
+        */
+        assertEquals(15, bookshelf.adjacentCells());
     }
 
     /**
@@ -149,7 +189,6 @@ class BookshelfTest {
         bookshelf.getMatrix()[1][2].setType(TileType.GAME);
         assertTrue(bookshelf.isFull());
     }
-
 
     @Test
     void isColFull_trueTest() {

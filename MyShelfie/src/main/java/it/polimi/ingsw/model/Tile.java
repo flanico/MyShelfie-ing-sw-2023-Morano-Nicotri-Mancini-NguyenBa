@@ -21,6 +21,7 @@ public class Tile {
         this.x = -1;
         this.y = -1;
         this.blocked = false;
+        this.counted = false;
     }
 
     /**
@@ -35,6 +36,7 @@ public class Tile {
         this.x = x;
         this.y = y;
         this.blocked = false;
+        this.counted = false;
     }
 
     /**
@@ -107,7 +109,7 @@ public class Tile {
 
     /**
      * getter of counted
-     * @author Alessandro Mancini
+     * @author Flavia Nicotri
      */
     public boolean isCounted() {
         return counted;
@@ -116,7 +118,7 @@ public class Tile {
     /**
      * setter of counted
      * @param counted of the tile
-     * @author Alessandro Mancini
+     * @author Flavia Nicotri
      */
     public void setCounted(boolean counted) {
         this.counted = counted;
