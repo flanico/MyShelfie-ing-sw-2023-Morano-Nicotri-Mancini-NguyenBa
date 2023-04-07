@@ -24,14 +24,21 @@ public class CommonFourGroups extends CommonGoalCard {
 
         for (int i = 0; i<6; i++) {
             for (int j=0; j<5; j++){
-                counter = bookshelf.sameGroup(i, j, 1);
-                if(counter >= 4)
-                {
-                    num++;
-                }
-                if (num == 4)
-                {
-                    return true;
+                if (!bookshelf.getMatrix()[i][j].isCounted()) {
+                    bookshelf.getMatrix()[i][j].setCounted(true);
+                    //System.out.print( i + "" + j );
+                    counter = bookshelf.sameGroup(i, j, 1);
+                    //System.out.print(counter+" ");
+                    if(counter >= 4)
+                    {
+                        num++;
+                        //System.out.println( num + "group");
+                    }
+                    if (num == 4)
+                    {
+                        //System.out.print("win the card ");
+                        return true;
+                    }
                 }
             }
         }
