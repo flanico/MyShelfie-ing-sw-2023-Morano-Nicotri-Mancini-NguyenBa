@@ -57,6 +57,13 @@ public class Bookshelf {
     public int adjacentCells() {
         int counter, adjacentscore = 0;
 
+        //inizializzo counted = 0
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                this.matrix[i][j].setCounted(false);
+            }
+        }
+
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 if (!this.matrix[i][j].isCounted()) {
@@ -88,7 +95,7 @@ public class Bookshelf {
      * @return the number of cells in the same group
      * @author Flavia Nicotri
      */
-    private int sameGroup(int i, int j, int counter) {
+    public int sameGroup(int i, int j, int counter) {
         if ((i == 5 && j == 4 )|| this.matrix[i][j].getType().equals(TileType.NULL))  {
             //System.out.println("Escape condition 1 " + counter);
             return counter;
