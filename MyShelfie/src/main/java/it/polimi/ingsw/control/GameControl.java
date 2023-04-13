@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.control;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Tile;
 
@@ -8,7 +8,7 @@ import java.util.*;
  * class that controls more game flows
  * @author Alessandro Mancini
  */
-public class Menu {
+public class GameControl {
 
     /**
      * manages the sequencing of the turns of the players
@@ -64,7 +64,7 @@ public class Menu {
 
     /**
      * main to run
-     * @param args
+     * @param args of main
      * @author Alessandro Mancini
      */
     public static void main (String[] args) {
