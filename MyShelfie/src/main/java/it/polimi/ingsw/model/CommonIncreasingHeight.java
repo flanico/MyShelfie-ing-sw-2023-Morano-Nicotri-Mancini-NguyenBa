@@ -31,7 +31,7 @@ public class CommonIncreasingHeight extends CommonGoalCard {        //the algori
         } else {
 
             for (int x=1; x<5; x++)
-                if (!bookshelf.getMatrix()[x][x].getType().equals(TileType.NULL)){
+                if (bookshelf.getMatrix()[x][x].getType().equals(TileType.NULL)){
                     direction=false;
                     break;
                 }

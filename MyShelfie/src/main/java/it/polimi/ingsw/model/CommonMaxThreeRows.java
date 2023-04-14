@@ -1,8 +1,17 @@
 package it.polimi.ingsw.model;
 
 import java.util.HashSet;
-
+/**
+ * override of the method check of the abstract class CommonGoalCard
+ * @author Stefano Morano
+ */
 public class CommonMaxThreeRows extends CommonGoalCard {
+    /**
+     *Four tiles of the same type in the four corners of the bookshelf.
+     *@param bookshelf RoundPlayer
+     *@return true if the Player has satisfied every parameter of the Max Three Columns Common Card
+     * @author Stefano Morano
+     */
     public boolean check(Bookshelf bookshelf) {
         HashSet<TileType> cards = new HashSet<>();
         int counter = 0;

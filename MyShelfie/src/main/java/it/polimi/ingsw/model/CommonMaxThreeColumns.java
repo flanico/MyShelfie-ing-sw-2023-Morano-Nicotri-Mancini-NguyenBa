@@ -7,7 +7,7 @@ import java.util.HashSet;
  */
 public class CommonMaxThreeColumns extends CommonGoalCard {
     /**
-     *Four tiles of the same type in the four corners of the bookshelf.
+     *Three columns full-filled with 3 maximum type of tiles.
      *@param bookshelf RoundPlayer
      *@return true if the Player has satisfied every parameter of the Max Three Columns Common Card
      * @author Stefano Morano
