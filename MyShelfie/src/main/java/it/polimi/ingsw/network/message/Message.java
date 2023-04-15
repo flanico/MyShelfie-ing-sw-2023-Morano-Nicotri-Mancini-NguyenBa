@@ -18,7 +18,7 @@ public abstract class Message implements Serializable {
      * @param messageType the type of the message
      * @param nickname the nickname of the message sender
      */
-    Message(String nickname, MessageType messageType) {
+    public Message(String nickname, MessageType messageType) {
         this.nickname = nickname;
         this.messageType = messageType;
     }
