@@ -19,7 +19,11 @@ public class CommonMaxThreeRows extends CommonGoalCard {
             for (int y=0; y<5; y++){                        //for each column the algorithm insert the TypeCard in the HashSet
                 if (!bookshelf.getMatrix()[x][y].getType().equals(TileType.NULL))
                     cards.add(bookshelf.getMatrix()[x][y].getType());
-                else break;
+                else{
+                    y = 5;
+                    cards.clear();
+                }
+
             }
             if (cards.size() <= 3 && cards.size() >= 1)     //if the quantity of type in the HashSet is between 1 and 3, the counter increases by 1
                 counter++;

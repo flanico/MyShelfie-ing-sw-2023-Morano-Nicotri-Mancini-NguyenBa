@@ -55,7 +55,10 @@ class CommonSameDiagonalTest {
     };
 
 
-
+    /**
+     * Create the matrix of the bookshelf using the matrix of integer "shelf"
+     * @author Stefano Morano
+     */
     void setUp(Bookshelf b_shelf, int[][] shelf) {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 5; y++) {
@@ -93,6 +96,10 @@ class CommonSameDiagonalTest {
             System.out.println();
         }
     }
+    /**
+     * Test the check of the Common Goal Card "Same Type Diagonal"
+     * @author Stefano Morano
+     */
     @Test
     void check() {
         setUp(bookshelf_1, shelf_1);

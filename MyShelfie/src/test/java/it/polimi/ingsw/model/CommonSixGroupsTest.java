@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +18,11 @@ class CommonSixGroupsTest {
             {4,2,3,4,1},
             {1,2,1,6,5},
     };
-
+    /**
+     * Create the matrix of the bookshelf using the matrix of integer "shelf"
+     * @author Stefano Morano
+     */
+    @BeforeEach
     void setUp() {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 5; y++) {
@@ -47,19 +52,13 @@ class CommonSixGroupsTest {
             }
         }
     }
-    void print(){
-        for (int x = 0; x < 6; x++) {
-            for (int y = 0; y < 5; y++) {
-                System.out.print(bookshelf.getMatrix()[x][y].getType() + " ");
-            }
-            System.out.println();
-        }
-    }
+
+    /**
+     * Test the check of the Common Goal Card "Six Groups"
+     * @author Stefano Morano
+     */
     @Test
     void check() {
-        setUp();
-        print();
-        System.out.println();
         assertFalse(card.check(bookshelf));
     }
 }

@@ -8,7 +8,7 @@ public class CommonTwoSquares extends CommonGoalCard {
     /**
      * two groups of four tiles in a square shape, that can contains two different type of tiles
      *@param bookshelf RoundPlayer
-     *@return true if the Player has to take the topmost available scoring token from that card
+     *@return true if the Player has satisfied every parameter of the Two Squares Common Card
      * @author Stefano Morano
      */
     public boolean check(Bookshelf bookshelf) {

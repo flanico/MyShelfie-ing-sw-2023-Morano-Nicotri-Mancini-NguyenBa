@@ -74,7 +74,7 @@ class BookshelfTest {
 
     /**
      * Test the method adjacentCells
-     * @autor Flavia Nicotri
+     * @author Flavia Nicotri
      */
     @Test
     void adjacentCellsTest() {
@@ -118,7 +118,7 @@ class BookshelfTest {
 
     /**
      * Test a matrix that has only a Tile equals to null --> is not Full
-     * @autor Flavia Nicotri
+     * @author Flavia Nicotri
      */
     @Test
     void isFull_falseTest() {
@@ -155,7 +155,7 @@ class BookshelfTest {
 
     /**
      * Test a matrix that hasn't any Tile equals to null --> is Full
-     * @autor Flavia Nicotri
+     * @author Flavia Nicotri
      */
     @Test
     void isFull_trueTest() {

@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.*;
 class CommonDifferentRowsTest {
     private Bookshelf bookshelf = new Bookshelf();
     public CommonGoalCard card = new CommonDifferentRows();
@@ -13,7 +14,11 @@ class CommonDifferentRowsTest {
             {5,4,3,2,6},
             {6,5,4,3,1},
     };
-
+    /**
+     * Create the matrix of the bookshelf using the matrix of integer "shelf"
+     * @author Stefano Morano
+     */
+    @BeforeEach
     void setUp() {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 5; y++) {
@@ -43,21 +48,12 @@ class CommonDifferentRowsTest {
             }
         }
     }
-    void print(){
-        for (int x = 0; x < 6; x++) {
-            for (int y = 0; y < 5; y++) {
-                System.out.print(bookshelf.getMatrix()[x][y].getType() + " ");
-            }
-            System.out.println();
-        }
-    }
+    /**
+     * Test the check of the Common Goal Card "Different Rows"
+     * @author Stefano Morano
+     */
     @Test
-    void check() {
-        setUp();
-        print();
-        System.out.println();
-        if (card.check(bookshelf))
-            System.out.println("Correct");
-        else System.out.println("Not correct");
+    void check() {                                  //testing the check of the common goal card
+        assertTrue(card.check(bookshelf));
     }
 }

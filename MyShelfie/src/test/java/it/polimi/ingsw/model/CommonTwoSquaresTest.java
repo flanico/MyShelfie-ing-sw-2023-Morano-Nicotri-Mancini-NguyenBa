@@ -24,7 +24,10 @@ class CommonTwoSquaresTest {
             {1,1,4,2,1},
             {2,2,2,1,1},
     };
-
+    /**
+     * Create the matrix of the bookshelf using the matrix of integer "shelf"
+     * @author Stefano Morano
+     */
     void setUp(Bookshelf b_shelf, int[][] shelf) {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 5; y++) {
@@ -54,14 +57,10 @@ class CommonTwoSquaresTest {
             }
         }
     }
-    void print(Bookshelf b_shelf){
-        for (int x = 0; x < 6; x++) {
-            for (int y = 0; y < 5; y++) {
-                System.out.print(b_shelf.getMatrix()[x][y].getType() + " ");
-            }
-            System.out.println();
-        }
-    }
+    /**
+     * Test the check of the Common Goal Card "Two Squares"
+     * @author Stefano Morano
+     */
     @Test
     void check() {
         setUp(bookshelf, shelf_1);

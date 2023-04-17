@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.*;
 class CommonMaxThreeColumnsTest {
 
     private Bookshelf bookshelf = new Bookshelf();
@@ -14,7 +15,11 @@ class CommonMaxThreeColumnsTest {
             {1,1,1,1,1},
             {2,2,1,1,1},
     };
-
+    /**
+     * Create the matrix of the bookshelf using the matrix of integer "shelf"
+     * @author Stefano Morano
+     */
+    @BeforeEach
     void setUp() {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 5; y++) {
@@ -44,21 +49,12 @@ class CommonMaxThreeColumnsTest {
             }
         }
     }
-    void print(){
-        for (int x = 0; x < 6; x++) {
-            for (int y = 0; y < 5; y++) {
-                System.out.print(bookshelf.getMatrix()[x][y].getType() + " ");
-            }
-            System.out.println();
-        }
-    }
+    /**
+     * Test the check of the Common Goal Card "Max Three Columns"
+     * @author Stefano Morano
+     */
     @Test
     void check() {
-        setUp();
-        print();
-        System.out.println();
-        if (card.check(bookshelf))
-            System.out.println("Correct");
-        else System.out.println("Not correct");
+        assertTrue(card.check(bookshelf));
     }
 }

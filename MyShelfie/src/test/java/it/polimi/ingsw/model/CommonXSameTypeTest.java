@@ -24,7 +24,10 @@ class CommonXSameTypeTest {
             {1,1,4,2,1},
             {2,2,2,1,1},
     };
-
+    /**
+     * Create the matrix of the bookshelf using the matrix of integer "shelf"
+     * @author Stefano Morano
+     */
     void setUp(Bookshelf b_shelf, int[][] shelf) {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 5; y++) {
@@ -54,22 +57,14 @@ class CommonXSameTypeTest {
             }
         }
     }
-    void print(Bookshelf b_shelf){
-        for (int x = 0; x < 6; x++) {
-            for (int y = 0; y < 5; y++) {
-                System.out.print(b_shelf.getMatrix()[x][y].getType() + " ");
-            }
-            System.out.println();
-        }
-    }
+    /**
+     * Test the check of the Common Goal Card "X Shape Same Type"
+     * @author Stefano Morano
+     */
     @Test
     void check() {
         setUp(bookshelf, shelf_1);
-        print(bookshelf);
-        System.out.println();
         setUp(bookshelf_2, shelf_2);
-        print(bookshelf_2);
-        System.out.println();
 
         assertTrue(card.check(bookshelf));
         assertFalse(card.check(bookshelf_2));

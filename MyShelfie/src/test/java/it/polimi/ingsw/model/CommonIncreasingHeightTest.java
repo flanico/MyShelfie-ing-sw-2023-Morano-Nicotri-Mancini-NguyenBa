@@ -56,7 +56,10 @@ class CommonIncreasingHeightTest {
     };
 
 
-
+    /**
+     * Create the matrix of the bookshelf using the matrix of integer "shelf"
+     * @author Stefano Morano
+     */
     void setUp(Bookshelf b_shelf, int[][] shelf) {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 5; y++) {
@@ -86,14 +89,10 @@ class CommonIncreasingHeightTest {
             }
         }
     }
-    void print(Bookshelf b_shelf){
-        for (int x = 0; x < 6; x++) {
-            for (int y = 0; y < 5; y++) {
-                System.out.print(b_shelf.getMatrix()[x][y].getType() + " ");
-            }
-            System.out.println();
-        }
-    }
+    /**
+     * Test the check of the Common Goal Card "Increasing Eight"
+     * @author Stefano Morano
+     */
     @Test
     void check() {
         setUp(bookshelf_1, shelf_1);

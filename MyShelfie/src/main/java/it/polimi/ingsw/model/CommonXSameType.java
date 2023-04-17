@@ -8,7 +8,7 @@ public class CommonXSameType extends CommonGoalCard {   //the algorithm works, t
     /**
      * five tiles of the same type forming an X
      *@param bookshelf RoundPlayer
-     *@return true if the Player has to take the topmost available scoring token from that card
+     *@return true if the Player has satisfied every parameter of the X Shape Same Type Common Card
      * @author Stefano Morano
      */
     public boolean check(Bookshelf bookshelf) {
