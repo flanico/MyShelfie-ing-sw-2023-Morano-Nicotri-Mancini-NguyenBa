@@ -23,7 +23,7 @@ class BoardTest {
     @BeforeEach
     void setUp() {
         board = new Board(3);
-        game = new Game(2);
+        //game = new Game(2);
     }
 
     @AfterEach

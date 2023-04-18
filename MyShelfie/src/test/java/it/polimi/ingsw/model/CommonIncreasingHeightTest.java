@@ -12,7 +12,7 @@ class CommonIncreasingHeightTest {
     private Bookshelf bookshelf_4 = new Bookshelf();
     private Bookshelf bookshelf_5 = new Bookshelf();
     public CommonGoalCard card = new CommonIncreasingHeight();
-    public int[][] shelf_2 = {
+    public int[][] shelf_1 = {
             {2,0,0,0,0},
             {2,4,0,0,0},
             {1,1,2,0,0},
@@ -20,7 +20,7 @@ class CommonIncreasingHeightTest {
             {1,5,2,1,2},
             {2,2,2,1,1},
     };
-    public int[][] shelf_1 = {
+    public int[][] shelf_2 = {
             {0,0,0,0,0},
             {2,0,0,0,0},
             {1,2,0,0,0},

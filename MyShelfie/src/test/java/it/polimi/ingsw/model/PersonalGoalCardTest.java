@@ -17,7 +17,7 @@ class PersonalGoalCardTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player();
+        //player = new Player();
         personalgoalcard = new PersonalGoalCard(PersonalGoalCardType.GOAL1, player);
     }
 
