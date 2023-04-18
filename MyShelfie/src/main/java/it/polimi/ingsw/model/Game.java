@@ -1,16 +1,19 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.observer.Observable;
+
 import java.util.*;
 
 /**
- * class that define a game
+ * class that defines a game
  * @author Alessandro Mancini
  */
-public class Game {
+public class Game extends Observable {
     private int num;
-    private ArrayList<Player> players;
-    private ArrayList<PersonalGoalCard> personalgoalcards;
-    private ArrayList<CommonGoalCard> commongoalcards;
-    private ArrayList<CommonGoalCardScore> commongoalcardscores;
+    private static final int MAX_PLAYERS = 4;
+    private List<Player> players;
+    private List<PersonalGoalCard> personalgoalcards;
+    private List<CommonGoalCard> commongoalcards;
+    private List<CommonGoalCardScore> commongoalcardscores;
     private Board board;
     private Stack<Tile> bag;
 
@@ -18,20 +21,38 @@ public class Game {
      * constructor of Game
      * @author Alessandro Mancini
      */
-    public Game(int num) {
-        this.setNum(num);
-        this.initPlayers();
-        this.initPersonalgoalcards();
+    public Game() {
+        this.players = new ArrayList<>();
+        this.commongoalcards = new ArrayList<>();
+        this.commongoalcardscores = new ArrayList<>();
+        this.personalgoalcards = new ArrayList<>();
         this.initCommongoalcards();
-        this.initCommongoalcardscores();
-        this.initBoard();
         this.initBag();
-
-        this.board.fillBoard(this.bag);
     }
 
     /**
-     * getter of num
+     * initialization of the game
+     * @param numMax number of players chosen by the first player joined in the game
+     */
+    public void initGame(int numMax) {
+        if(numMax >= 2 && numMax <= MAX_PLAYERS) {
+            this.num = numMax;
+        }
+        this.initBoard();
+        this.board.fillBoard(this.bag);
+        this.initCommongoalcardscores();
+    }
+
+    /**
+     * number of current players added in the game
+     * @return number of players
+     */
+    public int getCurrentNum() {
+        return players.size();
+    }
+
+    /**
+     * getter of number of players chosen by the first player
      * @author Alessandro Mancini
      */
     public int getNum() {
@@ -39,34 +60,48 @@ public class Game {
     }
 
     /**
-     * setter of num
-     * @author Alessandro Mancini
+     * check if a nickname is already use or not in the game
+     * @param nickname selected by the client
+     * @return true if the nickname is already used, false otherwise
      */
-    private void setNum(int num) {
-        this.num = num;
+    public boolean isNicknameTaken(String nickname) {
+        return players.stream()
+                .anyMatch(p -> nickname.equals(p.getNickname()));
     }
 
     /**
-     * initializer of players
+     * adds a new player to the game
+     * @param nickname of the player to add to the game
      * @author Alessandro Mancini
      */
-    private void initPlayers() {
-        this.players = new ArrayList<>();
-        for (int i = 0; i < this.num; i++) {
-            this.players.add(new Player());
+    public void addPlayer(String nickname) {
+        Player player = new Player(nickname);
+        players.add(player);
+        //notify
+    }
+
+    /**
+     * return a list of player nicknames that are already in the game
+     * @return a list with all nicknames in the game
+     */
+    public List<String> getAllPlayers() {
+        List<String> playersNicknames = new ArrayList<>();
+        for (Player p : players) {
+            playersNicknames.add(p.getNickname());
         }
+        return playersNicknames;
     }
 
     /**
      * getter of players
      * @author Alessandro Mancini
      */
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
     /**
-     * initializer of personalgoalcards with 2 random cards
+     * initializer of personalgoalcards
      * @author Alessandro Mancini
      */
     private void initPersonalgoalcards() {
@@ -88,7 +123,7 @@ public class Game {
      * getter of personalgoalcards
      * @author Alessandro Mancini
      */
-    public ArrayList<PersonalGoalCard> getPersonalgoalcards() {
+    public List<PersonalGoalCard> getPersonalgoalcards() {
         return personalgoalcards;
     }
 
@@ -97,7 +132,6 @@ public class Game {
      * @author Alessandro Mancini
      */
     private void initCommongoalcards() {
-        this.commongoalcards = new ArrayList<>();
         Random rand = new Random();
 
         int id1 = rand.nextInt(12);
@@ -139,7 +173,7 @@ public class Game {
      * getter of commongoalcards
      * @author Alessandro Mancini
      */
-    public ArrayList<CommonGoalCard> getCommongoalcards() {
+    public List<CommonGoalCard> getCommongoalcards() {
         return commongoalcards;
     }
 
@@ -148,7 +182,6 @@ public class Game {
      * @author Alessandro Mancini
      */
     private void initCommongoalcardscores() {
-        this.commongoalcardscores = new ArrayList<>();
         this.commongoalcardscores.add(new CommonGoalCardScore(this.num));
         this.commongoalcardscores.add(new CommonGoalCardScore(this.num));
     }
@@ -157,7 +190,7 @@ public class Game {
      * getter of commongoalcardscores
      * @author Alessandro Mancini
      */
-    public ArrayList<CommonGoalCardScore> getCommongoalcardscores() {
+    public List<CommonGoalCardScore> getCommongoalcardscores() {
         return commongoalcardscores;
     }
 

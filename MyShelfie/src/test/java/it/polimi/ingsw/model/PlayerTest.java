@@ -15,7 +15,7 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player = new Player();
+        player = new Player("Gino");
     }
 
     @AfterEach
@@ -38,5 +38,10 @@ class PlayerTest {
     void setScoreTest() {
         player.setScore(8);
         assertEquals(8, player.getScore());
+    }
+
+    @Test
+    void getNicknameTest() {
+        assertEquals("Gino", player.getNickname());
     }
 }

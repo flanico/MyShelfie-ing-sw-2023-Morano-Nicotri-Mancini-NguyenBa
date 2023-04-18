@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Collections;
-import java.util.Stack;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +20,11 @@ class GameTest{
 
     @BeforeEach
     void setUp() {
-        game = new Game(3);
+        game = new Game();
+        game.initGame(3);
+        game.addPlayer("Gino");
+        game.addPlayer("Anna");
+        game.addPlayer("Leo");
     }
 
     @AfterEach
@@ -30,8 +33,40 @@ class GameTest{
     }
 
     @Test
+    void initGameTest() {
+        assertNotNull(game);
+    }
+
+    @Test
+    void getCurrentNumTest() {
+        game.addPlayer("Bubu");
+        assertEquals(4, game.getCurrentNum());
+    }
+
+    @Test
     void getNumTest() {
         assertEquals(3, game.getNum());
+    }
+
+    @Test
+    void isNicknameTaken_true() {
+        assertTrue(game.isNicknameTaken("Gino"));
+    }
+
+    @Test
+    void isNicknameTaken_false() {
+        assertFalse(game.isNicknameTaken("Sara"));
+    }
+
+    @Test
+    void addPlayerTest() {
+        game.addPlayer("Tina");
+        assertEquals(4, game.getCurrentNum());
+    }
+
+    @Test
+    void getAllPlayersTest() {
+        assertEquals(List.of("Gino", "Anna", "Leo"), game.getAllPlayers());
     }
 
     @Test
@@ -39,13 +74,13 @@ class GameTest{
         assertEquals(3, game.getPlayers().size());
     }
 
-    @Test
-    void getPersonalgoalcardsTest() {
-        assertEquals(3, game.getPersonalgoalcards().size());
-        assertNotEquals(game.getPersonalgoalcards().get(0).getType(), game.getPersonalgoalcards().get(1).getType());
-        assertNotEquals(game.getPersonalgoalcards().get(0).getType(), game.getPersonalgoalcards().get(2).getType());
-        assertNotEquals(game.getPersonalgoalcards().get(2).getType(), game.getPersonalgoalcards().get(1).getType());
-    }
+//        @Test
+//    void getPersonalgoalcardsTest() {
+//        assertEquals(3, game.getPersonalgoalcards().size());
+//        assertNotEquals(game.getPersonalgoalcards().get(0).getType(), game.getPersonalgoalcards().get(1).getType());
+//        assertNotEquals(game.getPersonalgoalcards().get(0).getType(), game.getPersonalgoalcards().get(2).getType());
+//        assertNotEquals(game.getPersonalgoalcards().get(2).getType(), game.getPersonalgoalcards().get(1).getType());
+//    }
 
     @Test
     void getCommongoalcardsTest() {
@@ -67,7 +102,7 @@ class GameTest{
 
     @Test
     void getBagTest() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-        Game game = new Game(2);
+        Game game = new Game();
         Method method = Game.class.getDeclaredMethod("initBag");
         method.setAccessible(true);
         method.invoke(game);

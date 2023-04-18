@@ -1,23 +1,27 @@
 package it.polimi.ingsw.model;
 
 /**
- * class that define a player
+ * class that defines a player
  * @author Alessandro Mancini
  */
 public class Player {
     private final Bookshelf bookshelf;
     private int score;
+    private String nickname;
 
     /**
      * constructor of Player
+     * @param nickname of the player
      * @author Alessandro Mancini
      */
-    public Player() {
+    public Player(String nickname) {
         this.bookshelf = new Bookshelf();
+        this.nickname = nickname;
     }
 
     /**
      * getter of bookshelf
+     * @return bookshelf
      * @author Alessandro Mancini
      */
     public Bookshelf getBookshelf() {
@@ -26,6 +30,7 @@ public class Player {
 
     /**
      * getter of score
+     * @return score
      * @author Alessandro Mancini
      */
     public int getScore() {
@@ -38,5 +43,13 @@ public class Player {
      */
     public void setScore(int score) {
         this.score = score;
+    }
+
+    /**
+     * getter of the nickname
+     * @return nickname
+     */
+    public String getNickname() {
+        return nickname;
     }
 }

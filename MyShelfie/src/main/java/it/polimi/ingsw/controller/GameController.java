@@ -1,14 +1,29 @@
-package it.polimi.ingsw.control;
+package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Tile;
+import it.polimi.ingsw.network.message.Message;
+import it.polimi.ingsw.observer.Observer;
 
 import java.util.*;
 
 /**
- * class that controls more game flows
+ * class that represents the evolution of the game
  * @author Alessandro Mancini
  */
-public class GameControl {
+public class GameController implements Observer {
+
+    private Game game;
+
+    /**
+     * constructor of the game controller
+     */
+    public GameController() {
+        this.game = new Game();
+    }
+
+    public Game getGame() {
+        return game;
+    }
 
     /**
      * manages the sequencing of the turns of the players
@@ -62,15 +77,8 @@ public class GameControl {
         }
     }
 
-    /**
-     * main to run
-     * @param args of main
-     * @author Alessandro Mancini
-     */
-    public static void main (String[] args) {
-        int num = 3;
-        Game game = new Game(num);
-        turnGame(game);
-        checkGame(game);
+    @Override
+    public void update(Message message) {
+
     }
 }
