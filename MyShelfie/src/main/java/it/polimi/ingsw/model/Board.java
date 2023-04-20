@@ -144,7 +144,7 @@ public class Board extends Observable {
     }
 
     /**
-     * takes tiles from the board
+     * selects tiles from the board
      * @param number of tiles to remove
      * @param coordinates of the tiles
      * @author Alessandro Mancini

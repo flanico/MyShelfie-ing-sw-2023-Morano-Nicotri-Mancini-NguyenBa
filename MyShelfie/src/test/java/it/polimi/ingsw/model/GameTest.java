@@ -49,6 +49,12 @@ class GameTest{
     }
 
     @Test
+    void setNumTest() {
+        game.setNum(2);
+        assertEquals(2, game.getNum());
+    }
+
+    @Test
     void isNicknameTaken_true() {
         assertTrue(game.isNicknameTaken("Gino"));
     }
@@ -65,13 +71,19 @@ class GameTest{
     }
 
     @Test
+    void getPlayerByNicknameTest() {
+        assertNotNull(game.getPlayerByNickname("Gino"));
+        assertNull(game.getPlayerByNickname("Sara"));
+    }
+
+    @Test
     void getAllPlayersTest() {
         assertEquals(List.of("Gino", "Anna", "Leo"), game.getAllPlayers());
     }
 
     @Test
     void getPlayersTest() {
-        assertEquals(3, game.getPlayers().size());
+        assertNotNull(game.getPlayers());
     }
 
 //        @Test

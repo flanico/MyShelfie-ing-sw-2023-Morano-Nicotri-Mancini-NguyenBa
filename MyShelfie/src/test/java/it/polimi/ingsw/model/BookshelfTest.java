@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -81,27 +80,13 @@ class BookshelfTest {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 5; y++) {
                 switch (shelf[x][y]) {
-                    case 0:
-                        bookshelf.getMatrix()[x][y].setType(TileType.NULL);
-                        break;
-                    case 1:
-                        bookshelf.getMatrix()[x][y].setType(TileType.CAT);
-                        break;
-                    case 2:
-                        bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
-                        break;
-                    case 3:
-                        bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
-                        break;
-                    case 4:
-                        bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
-                        break;
-                    case 5:
-                        bookshelf.getMatrix()[x][y].setType(TileType.GAME);
-                        break;
-                    case 6:
-                        bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
-                        break;
+                    case 0 -> bookshelf.getMatrix()[x][y].setType(TileType.NULL);
+                    case 1 -> bookshelf.getMatrix()[x][y].setType(TileType.CAT);
+                    case 2 -> bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
+                    case 3 -> bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
+                    case 4 -> bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
+                    case 5 -> bookshelf.getMatrix()[x][y].setType(TileType.GAME);
+                    case 6 -> bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
                 }
             }
         }
@@ -125,27 +110,13 @@ class BookshelfTest {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 5; y++) {
                 switch (shelf[x][y]) {
-                    case 0:
-                        bookshelf.getMatrix()[x][y].setType(TileType.NULL);
-                        break;
-                    case 1:
-                        bookshelf.getMatrix()[x][y].setType(TileType.CAT);
-                        break;
-                    case 2:
-                        bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
-                        break;
-                    case 3:
-                        bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
-                        break;
-                    case 4:
-                        bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
-                        break;
-                    case 5:
-                        bookshelf.getMatrix()[x][y].setType(TileType.GAME);
-                        break;
-                    case 6:
-                        bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
-                        break;
+                    case 0 -> bookshelf.getMatrix()[x][y].setType(TileType.NULL);
+                    case 1 -> bookshelf.getMatrix()[x][y].setType(TileType.CAT);
+                    case 2 -> bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
+                    case 3 -> bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
+                    case 4 -> bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
+                    case 5 -> bookshelf.getMatrix()[x][y].setType(TileType.GAME);
+                    case 6 -> bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
                 }
             }
         }
@@ -162,53 +133,17 @@ class BookshelfTest {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 5; y++) {
                 switch (shelf[x][y]) {
-                    case 0:
-                        bookshelf.getMatrix()[x][y].setType(TileType.NULL);
-                        break;
-                    case 1:
-                        bookshelf.getMatrix()[x][y].setType(TileType.CAT);
-                        break;
-                    case 2:
-                        bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
-                        break;
-                    case 3:
-                        bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
-                        break;
-                    case 4:
-                        bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
-                        break;
-                    case 5:
-                        bookshelf.getMatrix()[x][y].setType(TileType.GAME);
-                        break;
-                    case 6:
-                        bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
-                        break;
+                    case 0 -> bookshelf.getMatrix()[x][y].setType(TileType.NULL);
+                    case 1 -> bookshelf.getMatrix()[x][y].setType(TileType.CAT);
+                    case 2 -> bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
+                    case 3 -> bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
+                    case 4 -> bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
+                    case 5 -> bookshelf.getMatrix()[x][y].setType(TileType.GAME);
+                    case 6 -> bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
                 }
             }
         }
         bookshelf.getMatrix()[1][2].setType(TileType.GAME);
         assertTrue(bookshelf.isFull());
-    }
-
-    @Test
-    void isColFull_trueTest() {
-        bookshelf.getMatrix()[5][0].setType(TileType.FRAME);
-        bookshelf.getMatrix()[4][0].setType(TileType.GAME);
-        bookshelf.getMatrix()[3][0].setType(TileType.GAME);
-        bookshelf.getMatrix()[2][0].setType(TileType.BOOK);
-        bookshelf.getMatrix()[1][0].setType(TileType.PLANT);
-        bookshelf.getMatrix()[0][0].setType(TileType.BOOK);
-
-        assertTrue(bookshelf.isColFull(0));
-    }
-
-    @Test
-    void isColFull_falseTest() {
-        bookshelf.getMatrix()[5][2].setType(TileType.FRAME);
-        bookshelf.getMatrix()[4][2].setType(TileType.GAME);
-        bookshelf.getMatrix()[3][2].setType(TileType.GAME);
-        bookshelf.getMatrix()[2][2].setType(TileType.BOOK);
-
-        assertFalse(bookshelf.isColFull(2));
     }
 }

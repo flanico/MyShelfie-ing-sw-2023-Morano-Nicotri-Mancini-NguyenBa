@@ -35,17 +35,18 @@ public class Bookshelf {
      * insert the selected tile into the bookshelf
      * @param tiles list of Tile selected by the player
      * @param column chosen by the player
-     * @author Alessandro Mancini
+     * @author Alessandro Mancini, Chiara Nguyen Ba
      */
-    public void insertTile(ArrayList<Tile> tiles, int column)  {
+    public void insertTile(List<Tile> tiles, int column)  {
         int x = ROW-1;
-        if(isColFull(column)) return;
-        else while (this.matrix[x][column].getType() != TileType.NULL && x > 0) {
-            x--;
-        }
-        for (Tile tile : tiles) {
-            this.matrix[x][column].setType(tile.getType());
-            x--;
+        if(isInsertableTile(tiles, column)) {
+            while (this.matrix[x][column].getType() != TileType.NULL && x > 0) {
+                x--;
+            }
+            for (Tile tile : tiles) {
+                this.matrix[x][column].setType(tile.getType());
+                x--;
+            }
         }
     }
 
@@ -167,11 +168,23 @@ public class Bookshelf {
     }
 
     /**
-     * check if the column of the bookshelf is full
-     * @param column where to insert the tile
-     * @author Alessandro Mancini
+     * check if the selected tiles are insertable in the selected column
+     * @param tiles to be inserted
+     * @param column where to insert the selected tiles
+     * @return true if the tiles are insertable in the desired column, false otherwise
+     * @author Alessandro Mancini, Chiara Nguyen Ba
      */
-    public boolean isColFull(int column) {
-        return (this.getMatrix()[0][column].getType() != TileType.NULL);
+    private boolean isInsertableTile(List<Tile> tiles, int column) {
+        int num = tiles.size();
+        int x = ROW-1;
+        //If the column is completely full return false
+        if (this.getMatrix()[0][column].getType() != TileType.NULL) {
+            return false;
+        }
+        //If the number of free spaces is not enough for the number of the tiles return false
+        while (this.matrix[x][column].getType() != TileType.NULL && x > 0) {
+            x--;
+        }
+        return num <= x + 1;
     }
 }
