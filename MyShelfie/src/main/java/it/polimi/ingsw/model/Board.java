@@ -1,11 +1,13 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.observer.Observable;
+
 import java.util.*;
 
 /**
  * class that define the living room
  * @author Flavia Nicotri
  */
-public class Board {
+public class Board extends Observable {
     private final Tile[][] matrix;
     private static final int ROW = 9;
     private static final int COL = 9;
@@ -103,6 +105,7 @@ public class Board {
                 }
             }
         }
+        //Notify
     }
 
     /**
@@ -146,8 +149,8 @@ public class Board {
      * @param coordinates of the tiles
      * @author Alessandro Mancini
      */
-    public ArrayList<Tile> selectTile(int number, Integer[][] coordinates) {
-        ArrayList<Tile> selected = new ArrayList<>();
+    public List<Tile> selectTile(int number, Integer[][] coordinates) {
+        List<Tile> selected = new ArrayList<>();
 
         do {
             for (int i = 0; i < number; i ++) {
@@ -167,7 +170,7 @@ public class Board {
      * @return true if the selection is allowed
      * @author Chiara Nguyen Ba
      */
-    private boolean isRemovable(ArrayList<Tile> tiles) {
+    public boolean isRemovable(List<Tile> tiles) {
         boolean samerow = true;
         boolean samecolumn = true;
         int row = tiles.get(0).getX();
@@ -229,13 +232,14 @@ public class Board {
      * @param tiles item to remove from the board
      * @author Chiara Nguyen Ba
      */
-    public void removeTiles(ArrayList<Tile> tiles) {
+    public void removeTiles(List<Tile> tiles) {
         if (isRemovable(tiles)) {
             for (Tile t : tiles) {
                 //System.out.println("Tile " + tiles.indexOf(tile) + " removed of type " + tiles.get(tiles.indexOf(tile)).getType() + " in position x: " + tiles.get(tiles.indexOf(tile)).getX() + " y: " + tiles.get(tiles.indexOf(tile)).getY());
                 this.getMatrix()[t.getX()][t.getY()].setType(TileType.NULL);
             }
         }
+        //Notify
     }
 
     /**

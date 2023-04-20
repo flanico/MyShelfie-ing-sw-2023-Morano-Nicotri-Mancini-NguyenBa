@@ -44,19 +44,27 @@ public class Game extends Observable {
     }
 
     /**
-     * number of current players added in the game
-     * @return number of players
+     * number of current players added in the game in a generic time
+     * @return number of current players
      */
     public int getCurrentNum() {
         return players.size();
     }
 
     /**
-     * getter of number of players chosen by the first player
+     * getter of the max number of players chosen by the first player
      * @author Alessandro Mancini
      */
     public int getNum() {
         return num;
+    }
+
+    /**
+     * setter of the max number of players chosen by the first player
+     * @param num max number of players
+     */
+    public void setNum(int num) {
+        this.num = num;
     }
 
     /**
@@ -78,6 +86,18 @@ public class Game extends Observable {
         Player player = new Player(nickname);
         players.add(player);
         //notify
+    }
+
+    /**
+     * returns a player given his nickname
+     * @param nickname of player to be found
+     * @return the player of given nickname, null otherwise
+     */
+    public Player getPlayerByNickname(String nickname) {
+        return players.stream()
+                .filter(player -> nickname.equals(player.getNickname()))
+                .findFirst()
+                .orElse(null);
     }
 
     /**

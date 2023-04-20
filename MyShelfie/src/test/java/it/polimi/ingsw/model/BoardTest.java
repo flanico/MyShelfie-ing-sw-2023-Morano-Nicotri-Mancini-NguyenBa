@@ -24,6 +24,7 @@ class BoardTest {
     void setUp() {
         board = new Board(3);
         game = new Game();
+        game.initGame(3);
     }
 
     @AfterEach
