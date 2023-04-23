@@ -20,6 +20,7 @@ public enum MessageType {
     LOGIN_REPLY,
     WINNER,
     SCORES,
+    DISCONNECTION,
     GENERIC,
     PING,
     SHOW_COMMON,

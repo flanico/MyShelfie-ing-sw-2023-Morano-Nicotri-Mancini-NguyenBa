@@ -13,7 +13,7 @@ public class ScoresMessage extends Message {
     private  Player player;
 
     public ScoresMessage(Player winner, Player player) {
-        super("SERVER", MessageType.WINNER);
+        super("SERVER", MessageType.SCORES);
         this.winner = winner;
         this.player = player;
     }
