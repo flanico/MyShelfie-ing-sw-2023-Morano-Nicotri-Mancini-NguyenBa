@@ -1,13 +1,19 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * class that defines a player
  * @author Alessandro Mancini
  */
-public class Player {
+public class Player implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -7872881646495796556L;
     private final Bookshelf bookshelf;
     private int score;
-    private String nickname;
+    private final String nickname;
+    private PersonalGoalCard personalGoalCard;
 
     /**
      * constructor of Player
@@ -51,5 +57,13 @@ public class Player {
      */
     public String getNickname() {
         return nickname;
+    }
+
+    public PersonalGoalCard getPersonalGoalCard() {
+        return personalGoalCard;
+    }
+
+    protected void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
+        this.personalGoalCard = personalGoalCard;
     }
 }

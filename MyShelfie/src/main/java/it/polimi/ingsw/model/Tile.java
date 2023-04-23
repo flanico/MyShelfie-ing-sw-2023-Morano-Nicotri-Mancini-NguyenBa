@@ -1,10 +1,15 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * class that define a tile
  * @author Alessandro Mancini
  */
-public class Tile {
+public class Tile implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 2994214506775431820L;
     private TileType type;
     private int x;
     private int y;

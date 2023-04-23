@@ -1,17 +1,21 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.observer.Observable;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * class that defines a game
  * @author Alessandro Mancini
  */
-public class Game extends Observable {
+public class Game extends Observable implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -8506633854746922798L;
     private int num;
     private static final int MAX_PLAYERS = 4;
     private List<Player> players;
-    private List<PersonalGoalCard> personalgoalcards;
+    private List<PersonalGoalCardType> personalgoalcards;
     private List<CommonGoalCard> commongoalcards;
     private List<CommonGoalCardScore> commongoalcardscores;
     private Board board;
@@ -85,6 +89,7 @@ public class Game extends Observable {
     public void addPlayer(String nickname) {
         Player player = new Player(nickname);
         players.add(player);
+        initPersonalgoalcards(player);
         //notify
     }
 
@@ -113,6 +118,23 @@ public class Game extends Observable {
     }
 
     /**
+     * removes a player from the game
+     * notifies all the views if the notifyEnabled is true
+     * @param nickname of the player to remove from the game
+     * @param notifyEnabled set to true to enable a lobby disconnection message, false otherwise
+     * @return true if the player is removed, false otherwise
+     */
+    public boolean removePlayerByNickname(String nickname, boolean notifyEnabled) {
+        boolean result = players.remove(getPlayerByNickname(nickname));
+
+        if (notifyEnabled) {
+            //notifyObserver(new LobbyMessage(getPlayersNicknames(), this.chosenPlayersNumber));
+        }
+
+        return result;
+    }
+
+    /**
      * getter of players
      * @author Alessandro Mancini
      */
@@ -124,26 +146,21 @@ public class Game extends Observable {
      * initializer of personalgoalcards
      * @author Alessandro Mancini
      */
-    private void initPersonalgoalcards() {
-        this.personalgoalcards = new ArrayList<>();
-        ArrayList<PersonalGoalCardType> used = new ArrayList<>();
+    private void initPersonalgoalcards(Player player) {
         PersonalGoalCardType type;
         Random rand = new Random();
-
-        for (int i = 0; i < this.num; i++) {
-            do {
-                type = PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)];
-            } while (used.contains(type));
-            used.add(type);
-            this.personalgoalcards.add(new PersonalGoalCard(type, this.players.get(i)));
-        }
+        do {
+            type = PersonalGoalCardType.values()[rand.nextInt(PersonalGoalCardType.values().length)];
+        } while (personalgoalcards.contains(type));
+        personalgoalcards.add(type);
+        player.setPersonalGoalCard(new PersonalGoalCard(type));
     }
 
     /**
      * getter of personalgoalcards
      * @author Alessandro Mancini
      */
-    public List<PersonalGoalCard> getPersonalgoalcards() {
+    public List<PersonalGoalCardType> getPersonalgoalcards() {
         return personalgoalcards;
     }
 

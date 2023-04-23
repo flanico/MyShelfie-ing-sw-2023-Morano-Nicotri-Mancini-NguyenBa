@@ -2,11 +2,12 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.network.server.Server;
+import it.polimi.ingsw.network.server.SocketServer;
 
 import java.util.Scanner;
 
 /**
- * main of the server app
+ * main of the server application
  */
 public class ServerApp {
     public static void main(String[] args) {
@@ -27,9 +28,12 @@ public class ServerApp {
         GameController gameController = new GameController();
         Server server = new Server(gameController);
 
-        //Implementazione Socket da vedere
-//        SocketServer socketServer = new SocketServer(serverPort, server);
-//        Thread thread = new Thread(socketServer, "socketserver_");
-//        thread.start();
+        //Socket
+        SocketServer socketServer = new SocketServer(serverPort, server);
+        Thread thread = new Thread(socketServer, "socketserver_");
+        thread.start();
+
+        //RMI
+
     }
 }

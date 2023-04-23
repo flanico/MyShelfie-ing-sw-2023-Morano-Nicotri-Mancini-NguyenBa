@@ -14,17 +14,19 @@ public enum MessageType {
     END_TURN,
     COMMON_GOAL_COMPLETE1,
     COMMON_GOAL_COMPLETE2,
-
     SHOW_BOOKSHELF,
     BOOKSHELF_FULL1,
     BOOKSHELF_FULL2,
     LOGIN_REPLY,
     WINNER,
     SCORES,
+    GENERIC,
+    PING,
+    SHOW_COMMON,
+    SHOW_PERSONAL,
     //Client side
     LOGIN_REQ,
     NUM_PLAYERS_REP,
     POSITION_REPLY,
     TILES_REPLY,
-
 }

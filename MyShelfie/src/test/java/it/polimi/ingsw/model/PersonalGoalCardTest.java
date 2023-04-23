@@ -18,7 +18,7 @@ class PersonalGoalCardTest {
     @BeforeEach
     void setUp() {
         player = new Player("Gino");
-        personalgoalcard = new PersonalGoalCard(PersonalGoalCardType.GOAL1, player);
+        personalgoalcard = new PersonalGoalCard(PersonalGoalCardType.GOAL1);
     }
 
     @AfterEach
@@ -39,24 +39,24 @@ class PersonalGoalCardTest {
 
     @Test
     void checkTest() {
-        assertEquals(0, personalgoalcard.check());
+        assertEquals(0, personalgoalcard.check(player));
 
         player.getBookshelf().getMatrix()[1][4].setType(TileType.CAT);
-        assertEquals(1, personalgoalcard.check());
+        assertEquals(1, personalgoalcard.check(player));
 
         player.getBookshelf().getMatrix()[0][0].setType(TileType.PLANT);
-        assertEquals(2, personalgoalcard.check());
+        assertEquals(2, personalgoalcard.check(player));
 
         player.getBookshelf().getMatrix()[2][3].setType(TileType.BOOK);
-        assertEquals(4, personalgoalcard.check());
+        assertEquals(4, personalgoalcard.check(player));
 
         player.getBookshelf().getMatrix()[0][2].setType(TileType.FRAME);
-        assertEquals(6, personalgoalcard.check());
+        assertEquals(6, personalgoalcard.check(player));
 
         player.getBookshelf().getMatrix()[5][2].setType(TileType.TROPHY);
-        assertEquals(9, personalgoalcard.check());
+        assertEquals(9, personalgoalcard.check(player));
 
         player.getBookshelf().getMatrix()[3][1].setType(TileType.GAME);
-        assertEquals(12, personalgoalcard.check());
+        assertEquals(12, personalgoalcard.check(player));
     }
 }

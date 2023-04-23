@@ -1,13 +1,17 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.observer.Observable;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * class that define the living room
  * @author Flavia Nicotri
  */
-public class Board extends Observable {
+public class Board extends Observable implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 5741045381452833395L;
     private final Tile[][] matrix;
     private static final int ROW = 9;
     private static final int COL = 9;

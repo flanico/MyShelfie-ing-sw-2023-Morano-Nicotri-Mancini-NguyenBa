@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.CommonGoalCard;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.network.message.*;
 import it.polimi.ingsw.network.message.serverSide.*;
@@ -7,6 +8,7 @@ import it.polimi.ingsw.network.server.ClientHandler;
 import it.polimi.ingsw.observer.Observer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * class used as view for the controller, it hides the real view and the network to the controller
@@ -55,5 +57,20 @@ public class VirtualView implements View, Observer {
     @Override
     public void update(Message message) {
         clientHandler.sendMessageToClient(message);
+    }
+
+    @Override
+    public void showGenericMessage(String genericMessage) {
+        clientHandler.sendMessageToClient(new GenericMessage("SERVER", genericMessage));
+    }
+
+    @Override
+    public void showCommonCards(List<CommonGoalCard> commonGoalCards) {
+        clientHandler.sendMessageToClient(new ShowCommonCardsMessage(commonGoalCards));
+    }
+
+    @Override
+    public void showPersonalCard(Player player) {
+        clientHandler.sendMessageToClient(new ShowPersonalCardMessage(player));
     }
 }

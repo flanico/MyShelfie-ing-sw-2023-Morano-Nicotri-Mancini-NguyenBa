@@ -6,9 +6,14 @@ import it.polimi.ingsw.view.Cli;
 import java.util.Scanner;
 
 /**
- * main of the client app
+ * main of the client application
  */
 public class ClientApp {
+
+    /**
+     * main method in which the client choose between Cli or GUI view
+     * @param args input stream
+     */
     public static void main(String[] args) {
 
         System.out.println("Choose the modality: 'c' for CLI or 'g' for GUI");
@@ -19,6 +24,8 @@ public class ClientApp {
         if(response.equalsIgnoreCase("c")) {
             Cli view = new Cli();
             ClientController clientController = new ClientController(view);
+            view.addObserver(clientController);
+            view.init();
         }
         else if (response.equalsIgnoreCase("g")) {
             //Lancio la GUI

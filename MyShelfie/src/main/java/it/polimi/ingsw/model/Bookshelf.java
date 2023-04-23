@@ -1,11 +1,15 @@
 package it.polimi.ingsw.model;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * class that define the bookshelf as a matrix of Tile
  * @author Alessandro Mancini
  */
-public class Bookshelf {
+public class Bookshelf implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 7825503445898522125L;
     private final Tile[][] matrix;
     private static final int ROW = 6;
     private static final int COL = 5;

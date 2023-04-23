@@ -1,8 +1,10 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.CommonGoalCard;
 import it.polimi.ingsw.model.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * interface used to define a generic view
@@ -40,8 +42,18 @@ public interface View {
     void showError(String errorMessage);
 
     /**
+     * shows to the client a generic message
+     * @param genericMessage the text of generic message
+     */
+    void showGenericMessage(String genericMessage);
+
+    /**
      * shows to the client who won the game
      * @param winner the winning player of the game
      */
     void showWinner(Player winner);
+
+    void showCommonCards(List<CommonGoalCard> commonGoalCards);
+
+    void showPersonalCard(Player player);
 }

@@ -31,5 +31,5 @@ public abstract class Client extends Observable {
      * sends a ping message in order to keep alive the connection between server and client
      * @param isActive is true to enable the ping, false otherwise
      */
-    public abstract void sendPing(boolean isActive);
+    public abstract void sendPingMessage(boolean isActive);
 }

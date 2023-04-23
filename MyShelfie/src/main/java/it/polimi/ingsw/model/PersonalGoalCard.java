@@ -1,13 +1,17 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * class that define a personal goal card
  * @author Chiara Nguyen Ba
  */
-public class PersonalGoalCard {
+public class PersonalGoalCard implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 4919107560766246112L;
     private final Tile[][] matrix;
     private final PersonalGoalCardType type;
-    private final Player player;
     private static final int ROW = 6;
     private static final int COL = 5;
 
@@ -15,7 +19,7 @@ public class PersonalGoalCard {
      * constructor of personal goal card
      * @author Chiara Nguyen Ba
      */
-    public PersonalGoalCard(PersonalGoalCardType type, Player player) {
+    public PersonalGoalCard(PersonalGoalCardType type) {
         this.matrix = new Tile[ROW][COL];
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
@@ -24,7 +28,6 @@ public class PersonalGoalCard {
         }
         this.type = type;
         this.assignType();
-        this.player = player;
     }
 
     /**
@@ -150,11 +153,11 @@ public class PersonalGoalCard {
      * check the score of personal goal card
      * @author Chiara Nguyen Ba
      */
-    public int check() {
+    public int check(Player player) {
         int correct = 0;
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                if (this.getMatrix()[i][j].getType() != TileType.NULL && this.getMatrix()[i][j].getType() == this.player.getBookshelf().getMatrix()[i][j].getType()) {
+                if (this.getMatrix()[i][j].getType() != TileType.NULL && this.getMatrix()[i][j].getType() == player.getBookshelf().getMatrix()[i][j].getType()) {
                     correct++;
                 }
             }
