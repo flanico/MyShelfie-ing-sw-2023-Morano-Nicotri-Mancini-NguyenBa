@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.CommonGoalCard;
 import it.polimi.ingsw.model.Player;
 
@@ -56,4 +57,10 @@ public interface View {
     void showCommonCards(List<CommonGoalCard> commonGoalCards);
 
     void showPersonalCard(Player player);
+
+    /**
+     * shows to the client the board of the game
+     * @param board the board of the game
+     */
+    void showBoard(Board board);
 }

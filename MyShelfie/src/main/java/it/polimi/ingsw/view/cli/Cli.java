@@ -1,8 +1,9 @@
-package it.polimi.ingsw.view;
+package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
+import it.polimi.ingsw.view.View;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -162,7 +163,7 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void askPlayersNumber() {
+    public void askPlayersNumber() throws NumberFormatException{
         boolean isValid = false;
         int num = 0;
         do {
@@ -261,7 +262,34 @@ public class Cli extends ViewObservable implements View {
                 }
             }
             System.out.println( "|" );
-            System.out.println( "________________________________________________________" );
+            System.out.println( "_______________________________________________________ " );
         }
+    }
+
+    @Override
+    public void showBoard (Board board){
+        out.println("BOARD:");
+        for (int i = 0; i < 9; i++) {
+            System.out.print("  ");
+            System.out.format("   |%4d", i);
+        }
+        System.out.print("     |");
+        System.out.println();
+        System.out.println( "_______________________________________________________________________________________________ " );
+
+        for( int i = 0; i < 9; i++ ) {
+            System.out.format("  %-2d ", i);
+            for (int j = 0; j < 9; j++) {
+                if(board.getMatrix()[i][j].getType() == TileType.NULL){
+                    System.out.format("| %-7s ", " ");
+                }
+                else {
+                    System.out.format("| %-7s ", board.getMatrix()[i][j].getType());
+                }
+            }
+            System.out.println( "|" );
+            System.out.println( "_______________________________________________________________________________________________ " );
+        }
+
     }
 }
