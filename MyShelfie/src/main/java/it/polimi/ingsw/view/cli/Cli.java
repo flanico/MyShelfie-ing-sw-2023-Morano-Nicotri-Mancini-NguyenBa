@@ -280,12 +280,17 @@ public class Cli extends ViewObservable implements View {
         for( int i = 0; i < 9; i++ ) {
             System.out.format("  %-2d ", i);
             for (int j = 0; j < 9; j++) {
-                if(board.getMatrix()[i][j].getType() == TileType.NULL){
-                    System.out.format("| %-7s ", " ");
+                if(board.getMatrix()[i][j].isBlocked()){
+                    System.out.format("| %-7s ", "X");
+                }else {
+                    if(board.getMatrix()[i][j].getType() == TileType.NULL){
+                        System.out.format("| %-7s ", " ");
+                    }
+                    else {
+                        System.out.format("| %-7s ", board.getMatrix()[i][j].getType());
+                    }
                 }
-                else {
-                    System.out.format("| %-7s ", board.getMatrix()[i][j].getType());
-                }
+
             }
             System.out.println( "|" );
             System.out.println( "_______________________________________________________________________________________________ " );
