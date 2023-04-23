@@ -16,12 +16,18 @@ import java.util.Scanner;
 public class Cli extends ViewObservable implements View {
     private final PrintStream out;
     private static final String STR_INPUT_ERR = "\u001b[31;1m Invalid Input! \u001b[0m";
+    public Scanner readLine = new Scanner(System.in);
+
+    /**
+     * constructor of the Cli
+     */
     public Cli() {
         out = System.out;
     }
 
-    public Scanner readLine = new Scanner(System.in);
-
+    /**
+     * prints the welcome message of the game
+     */
     public void init() {
         out.println("" +
                " ███╗   ███╗██╗   ██╗    ███████╗██╗  ██╗███████╗██╗     ███████╗██╗███████╗\n" +
@@ -268,6 +274,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showBoard (Board board){
+        out.println();
         out.println("BOARD:");
         for (int i = 0; i < 9; i++) {
             System.out.print("  ");
@@ -295,6 +302,10 @@ public class Cli extends ViewObservable implements View {
             System.out.println( "|" );
             System.out.println( "_______________________________________________________________________________________________ " );
         }
+    }
+
+    @Override
+    public void askSelectTiles(Board board) {
 
     }
 }

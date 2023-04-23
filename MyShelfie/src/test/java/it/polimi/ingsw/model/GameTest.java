@@ -86,13 +86,11 @@ class GameTest{
         assertNotNull(game.getPlayers());
     }
 
-//        @Test
-//    void getPersonalgoalcardsTest() {
-//        assertEquals(3, game.getPersonalgoalcards().size());
-//        assertNotEquals(game.getPersonalgoalcards().get(0).getType(), game.getPersonalgoalcards().get(1).getType());
-//        assertNotEquals(game.getPersonalgoalcards().get(0).getType(), game.getPersonalgoalcards().get(2).getType());
-//        assertNotEquals(game.getPersonalgoalcards().get(2).getType(), game.getPersonalgoalcards().get(1).getType());
-//    }
+    @Test
+    void getPersonalgoalcardsTest() {
+        assertNotNull(game.getPersonalgoalcards());
+        assertEquals(3, game.getPersonalgoalcards().size());
+    }
 
     @Test
     void getCommongoalcardsTest() {

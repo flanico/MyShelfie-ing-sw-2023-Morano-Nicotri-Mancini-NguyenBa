@@ -77,19 +77,24 @@ public class TurnController implements Serializable {
     public void turnManager() {
 
         while(turnState != TurnState.END) {
+            //If is the first turn, select the first player and give him the seat
+            if(!isStarted) {
+                selectFirstPlayer();
+            }
 
+            //At the begging of each turn check if the board needs to refill
             if(game.getBoard().isRefillable()) {
                 for (VirtualView virtualView : virtualViewMap.values()) {
                     virtualView.showGenericMessage("Board is refilling...");
                 }
                 game.getBoard().fillBoard(game.getBag());
             }
-            //Shows the situation board
-            for (VirtualView virtualView : virtualViewMap.values()) {
-                //Call for vv showBoard
-            }
-            selectFirstPlayer();
 
+            //Shows the situation board
+            showCurrentBoard();
+
+            //Selects the tiles from the board
+            //selectTiles();
         }
     }
 
@@ -120,16 +125,34 @@ public class TurnController implements Serializable {
     private void selectFirstPlayer() {
         //notify del turn
         if(turnState == TurnState.START) {
-            if (!isStarted) {
-                VirtualView virtualView = virtualViewMap.get(getCurrentPlayer());
-                virtualView.showGenericMessage("You're the first player to play! You have the seat");
-                notifyOtherPlayers("It's " + getCurrentPlayer() + " turn!", getCurrentPlayer());
-                isStarted = true;
-            }
+            VirtualView virtualView = virtualViewMap.get(getCurrentPlayer());
+            virtualView.showGenericMessage("You're the first player to play! You have the seat");
+            notifyOtherPlayers("It's " + getCurrentPlayer() + " turn!", getCurrentPlayer());
+            isStarted = true;
         }
-        turnState = TurnState.START;
+        turnState = TurnState.BOARD;
     }
 
+    /**
+     * shows the current board situation
+     */
+    private void showCurrentBoard() {
+        for (VirtualView virtualView : virtualViewMap.values()) {
+            virtualView.showBoard(game.getBoard());
+        }
+        //remove then it's for the end loop
+        turnState = TurnState.END;
+    }
+
+    private void selectTiles() {
+        if(turnState == TurnState.SELECT) {
+            VirtualView virtualView = virtualViewMap.get(getCurrentPlayer());
+            virtualView.showGenericMessage("Hey " + getCurrentPlayer() + " choose tiles from the board (1,2 or 3 tiles)");
+            notifyOtherPlayers(getCurrentPlayer() + "i s selecting the tiles from the board", getCurrentPlayer());
+            virtualView.askSelectTiles(game.getBoard());
+            waitAnswer();
+        }
+    }
     /**
      * waits the player's answer before going on with the game
      */

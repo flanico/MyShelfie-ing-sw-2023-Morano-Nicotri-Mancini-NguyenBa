@@ -4,5 +4,5 @@ package it.polimi.ingsw.controller;
  * enum of different steps of a single game turn
  */
 public enum TurnState {
-    START, SELECT, INSERT, END
+    START, SELECT, INSERT, BOARD, END
 }

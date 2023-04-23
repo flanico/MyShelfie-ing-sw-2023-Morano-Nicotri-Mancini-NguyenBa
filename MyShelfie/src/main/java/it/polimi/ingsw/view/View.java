@@ -63,4 +63,6 @@ public interface View {
      * @param board the board of the game
      */
     void showBoard(Board board);
+
+    void askSelectTiles(Board board);
 }

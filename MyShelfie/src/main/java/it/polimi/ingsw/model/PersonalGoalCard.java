@@ -4,7 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * class that define a personal goal card
+ * class that defines a personal goal card
  * @author Chiara Nguyen Ba
  */
 public class PersonalGoalCard implements Serializable {
@@ -150,7 +150,8 @@ public class PersonalGoalCard implements Serializable {
     }
 
     /**
-     * check the score of personal goal card
+     * checks the score of the personal goal card
+     * @param player of the personal goal card
      * @author Chiara Nguyen Ba
      */
     public int check(Player player) {

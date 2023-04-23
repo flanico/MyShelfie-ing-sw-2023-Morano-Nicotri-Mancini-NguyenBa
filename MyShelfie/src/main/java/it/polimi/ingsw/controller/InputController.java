@@ -59,7 +59,7 @@ public class InputController implements Serializable {
         NumPlayersReplyMessage numPlayersReplyMessage = (NumPlayersReplyMessage) message;
 
         if(numPlayersReplyMessage.getNumPlayers() >= 2 && numPlayersReplyMessage.getNumPlayers() <= 4) {
-            return  true;
+            return true;
         }
         else {
             VirtualView virtualView = virtualViewMap.get(message.getNickname());
@@ -75,8 +75,10 @@ public class InputController implements Serializable {
      */
     public boolean checkTiles(Message message) {
         TilesReplyMessage tilesReplyMessage = (TilesReplyMessage) message;
-        VirtualView virtualView = virtualViewMap.get(message.getNickname());
-        //Check
+        VirtualView virtualView = virtualViewMap.get(tilesReplyMessage.getNickname());
+        if(game.getBoard().isRemovable(tilesReplyMessage.getTiles())) {
+            virtualView.showGenericMessage("Tiles selected are removed from the board");
+        }
         virtualView.showGenericMessage("You didn't provide a correct select of the tiles!");
         return false;
     }

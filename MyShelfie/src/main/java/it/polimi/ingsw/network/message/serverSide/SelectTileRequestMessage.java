@@ -20,6 +20,10 @@ public class SelectTileRequestMessage extends Message{
         this.board = board;
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
     @Override
     public String toString() {
         return "SelectTilesRequestMessage{" + board +

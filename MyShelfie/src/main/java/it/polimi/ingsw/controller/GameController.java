@@ -15,7 +15,7 @@ import java.util.*;
 
 /**
  * class that represents the evolution of the game
- * @author Alessandro Mancini
+ * @author Alessandro Mancini, Chiara Nguyen Ba
  */
 public class GameController implements Serializable {
     @Serial
@@ -104,10 +104,18 @@ public class GameController implements Serializable {
         return game;
     }
 
+    /**
+     * getter of the turn controller
+     * @return the turn controller
+     */
     public TurnController getTurnController() {
         return turnController;
     }
 
+    /**
+     * getter of the input controller
+     * @return the input controller
+     */
     public InputController getInputController() {
         return inputController;
     }
@@ -206,7 +214,6 @@ public class GameController implements Serializable {
             virtualView.showPersonalCard(game.getPlayerByNickname(nick));
         }
         this.turnController = new TurnController(game, this, virtualViewMap);
-        //turnController.newTurn();
         Thread threadTurnManager = new Thread(() -> turnController.turnManager());
         threadTurnManager.start();
     }
@@ -231,7 +238,6 @@ public class GameController implements Serializable {
         while (last == 0) {
             for (int i = 0; i < game.getNum(); i++) {
                 //show the board
-                game.getBoard().printMatrix();
 
                 //choose a tile
                 int number = 3;

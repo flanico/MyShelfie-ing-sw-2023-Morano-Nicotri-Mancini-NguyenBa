@@ -16,26 +16,19 @@ public class ShowBoardMessage extends Message {
     private boolean hasToBeRefilled;
     private Board board;
 
-
-
     public ShowBoardMessage (boolean hasToBeRefilled, Board board){
         super("SERVER", MessageType.SHOW_BOARD);
         this.hasToBeRefilled = hasToBeRefilled;
         this.board = board;
     }
 
-    public boolean HasToBeRefilled() {
-        return hasToBeRefilled;
-    }
-
     public Board getBoard() {
         return board;
     }
+
     @Override
     public String toString() {
         return "ShowBoard{ Board needs to refill" +
-                "=" + hasToBeRefilled + "Show Board:" + board +
-                '}';
+                "=" + hasToBeRefilled + "}";
     }
-
 }

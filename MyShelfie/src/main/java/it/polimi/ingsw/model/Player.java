@@ -59,10 +59,18 @@ public class Player implements Serializable {
         return nickname;
     }
 
+    /**
+     * getter of the personal goal card
+     * @return the personal goal card
+     */
     public PersonalGoalCard getPersonalGoalCard() {
         return personalGoalCard;
     }
 
+    /**
+     * setter of the personal goal card
+     * @param personalGoalCard of the player
+     */
     protected void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
         this.personalGoalCard = personalGoalCard;
     }

@@ -41,6 +41,12 @@ class PlayerTest {
     }
 
     @Test
+    void getPersonalGoalCardTest() {
+        player.setPersonalGoalCard(new PersonalGoalCard(PersonalGoalCardType.GOAL3));
+        assertEquals(PersonalGoalCardType.GOAL3, player.getPersonalGoalCard().getType());
+    }
+
+    @Test
     void getNicknameTest() {
         assertEquals("Gino", player.getNickname());
     }

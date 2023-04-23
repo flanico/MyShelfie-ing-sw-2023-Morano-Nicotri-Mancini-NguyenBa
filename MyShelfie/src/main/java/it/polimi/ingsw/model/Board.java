@@ -245,18 +245,4 @@ public class Board extends Observable implements Serializable {
         }
         //Notify
     }
-
-    /**
-     * print the matrix
-     * @author Alessandro Mancini
-     */
-    public void printMatrix() {
-        for (int i = 0; i < ROW; i++) {
-            for (int j = 0; j < COL; j++) {
-                if (!this.matrix[i][j].isBlocked())
-                    System.out.print(this.matrix[i][j].getType() + " ");
-            }
-            System.out.println();
-        }
-    }
 }

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.Message;
@@ -93,6 +92,14 @@ public class ClientController implements Observer, ViewObserver {
             case SHOW_PERSONAL -> {
                 ShowPersonalCardMessage showPersonalCardMessage = (ShowPersonalCardMessage) message;
                 executorService.execute(() -> view.showPersonalCard(showPersonalCardMessage.getPlayer()));
+            }
+            case SELECT_TILE_REQ -> {
+                SelectTileRequestMessage selectTileRequestMessage = (SelectTileRequestMessage) message;
+                executorService.execute(() -> view.askSelectTiles(selectTileRequestMessage.getBoard()));
+            }
+            case SHOW_BOARD -> {
+                ShowBoardMessage showBoardMessage = (ShowBoardMessage) message;
+                executorService.execute(() -> view.showBoard(showBoardMessage.getBoard()));
             }
         }
     }

@@ -19,6 +19,7 @@ class PersonalGoalCardTest {
     void setUp() {
         player = new Player("Gino");
         personalgoalcard = new PersonalGoalCard(PersonalGoalCardType.GOAL1);
+        player.setPersonalGoalCard(personalgoalcard);
     }
 
     @AfterEach
@@ -29,7 +30,7 @@ class PersonalGoalCardTest {
 
     @Test
     void getMatrixTest() {
-        assertNotEquals(null, personalgoalcard.getMatrix());
+        assertNotNull(personalgoalcard.getMatrix());
     }
 
     @Test
@@ -58,5 +59,21 @@ class PersonalGoalCardTest {
 
         player.getBookshelf().getMatrix()[3][1].setType(TileType.GAME);
         assertEquals(12, personalgoalcard.check(player));
+
+        //Print for debugging
+//        for (int i = 0; i < 6; i++) {
+//            for (int j = 0; j < 5; j++) {
+//                System.out.print(player.getBookshelf().getMatrix()[i][j].getType() + " ");
+//            }
+//            System.out.println();
+//        }
+//
+//        System.out.println();
+//        for (int i = 0; i < 6; i++) {
+//            for (int j = 0; j < 5; j++) {
+//                System.out.print(personalgoalcard.getMatrix()[i][j].getType() + " ");
+//            }
+//            System.out.println();
+//        }
     }
 }
