@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.CommonGoalCard;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.network.message.*;
@@ -41,7 +42,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showGameInfo(ArrayList<Player> players, int num) {
-        clientHandler.sendMessageToClient(new InfoGameStartMessage(players, num));
+        clientHandler.sendMessageToClient(new InfoGameMessage(players, num));
     }
 
     @Override
@@ -72,5 +73,10 @@ public class VirtualView implements View, Observer {
     @Override
     public void showPersonalCard(Player player) {
         clientHandler.sendMessageToClient(new ShowPersonalCardMessage(player));
+    }
+
+    @Override
+    public void showBoard(Board board) {
+        clientHandler.sendMessageToClient(new ShowBoardMessage(board.isRefillable(), board));
     }
 }

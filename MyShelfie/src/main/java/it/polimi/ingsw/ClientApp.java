@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.ClientController;
-import it.polimi.ingsw.view.Cli;
+import it.polimi.ingsw.view.cli.Cli;
 
 import java.util.Scanner;
 

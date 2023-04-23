@@ -110,4 +110,6 @@ class BoardTest {
         assertEquals(game.getBoard().getMatrix()[1][3].getType(), TileType.NULL);
         assertEquals(game.getBoard().getMatrix()[1][4].getType(), TileType.NULL);
     }
+
+
 }
