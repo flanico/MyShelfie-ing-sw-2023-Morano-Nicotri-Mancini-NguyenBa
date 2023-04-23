@@ -10,13 +10,13 @@ import java.io.Serial;
  * message sent to client to notify that his bookshelf is full
  */
 
-public class BookshelfFullMessage extends Message{
+public class BookshelfFull1Message extends Message{
     @Serial
     private static final long serialVersionUID = -3150391058180398618L;
     private final Bookshelf bookshelf;
 
-    public BookshelfFullMessage(Bookshelf bookshelf) {
-        super("SERVER", MessageType.BOOKSHELF_FULL);
+    public BookshelfFull1Message(Bookshelf bookshelf) {
+        super("SERVER", MessageType.BOOKSHELF_FULL1);
         this.bookshelf = bookshelf;
     }
 

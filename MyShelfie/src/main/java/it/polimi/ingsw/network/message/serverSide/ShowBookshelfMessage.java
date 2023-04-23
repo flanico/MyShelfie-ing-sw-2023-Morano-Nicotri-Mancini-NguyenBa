@@ -9,13 +9,13 @@ import java.io.Serial;
 /**
  * message to show the client his bookshelf
  */
-public class ShowBookshelf extends Message {
+public class ShowBookshelfMessage extends Message {
     @Serial
     private static final long serialVersionUID = -9168339307648742424L;
     private String nickname;
     private Bookshelf bookshelf;
 
-    public ShowBookshelf(String nickname, Bookshelf bookshelf) {
+    public ShowBookshelfMessage(String nickname, Bookshelf bookshelf) {
         super("SERVER", MessageType.SHOW_BOOKSHELF);
         this.nickname = nickname;
         this.bookshelf= bookshelf;
