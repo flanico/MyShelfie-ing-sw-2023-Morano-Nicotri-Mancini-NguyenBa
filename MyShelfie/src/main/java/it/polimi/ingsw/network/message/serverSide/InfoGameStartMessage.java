@@ -10,13 +10,13 @@ import java.util.ArrayList;
 /**
  * message used to send to the client information about the game (players and number)
  */
-public class InfoGameMessage extends Message {
+public class InfoGameStartMessage extends Message {
     @Serial
     private static final long serialVersionUID = -6954035833019978470L;
     private ArrayList<Player> players;
     private int num;
 
-    public InfoGameMessage(ArrayList<Player> players, int num) {
+    public InfoGameStartMessage(ArrayList<Player> players, int num) {
         super("SERVER", MessageType.INFO_GAME);
         this.players = players;
         this.num = num;

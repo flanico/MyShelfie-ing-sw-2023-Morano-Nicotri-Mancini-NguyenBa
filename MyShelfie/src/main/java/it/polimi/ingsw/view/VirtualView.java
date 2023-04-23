@@ -39,7 +39,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showGameInfo(ArrayList<Player> players, int num) {
-        clientHandler.sendMessageToClient(new InfoGameMessage(players, num));
+        clientHandler.sendMessageToClient(new InfoGameStartMessage(players, num));
     }
 
     @Override

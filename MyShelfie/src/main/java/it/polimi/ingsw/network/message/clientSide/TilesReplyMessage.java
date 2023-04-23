@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TilesReplyMessage extends Message {
     @Serial
-    private static final long serialVersionUID = -8734293602266471455L;
+    private static final long serialVersionUID = 5909872357046367409L;
     private List<Tile> tiles;
 
     public TilesReplyMessage(String nickname, List<Tile> tiles) {

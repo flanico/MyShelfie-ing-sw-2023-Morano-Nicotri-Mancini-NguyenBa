@@ -23,7 +23,7 @@ public class WinnerPlayerMessage extends Message {
     @Override
     public String toString() {
         return "WinPlayer{" +
-               // "winner=" + winner.getNickname() +
+               winner + "is the winner of the game. Score:" + getWinner().getScore() +
                 '}';
     }
 }
