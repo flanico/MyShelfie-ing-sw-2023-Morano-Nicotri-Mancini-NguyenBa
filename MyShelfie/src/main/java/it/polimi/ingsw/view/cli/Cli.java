@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class Cli extends ViewObservable implements View {
     private final PrintStream out;
-    private static final String STR_INPUT_ERR = "\u001b[31;1m Invalid Input! \u001b[0m";
+    private static final String STR_INPUT_ERR = ColorCli.RED + "Invalid Input!" + ColorCli.RESET;
     public Scanner readLine = new Scanner(System.in);
 
     /**
@@ -29,14 +29,14 @@ public class Cli extends ViewObservable implements View {
      * prints the welcome message of the game
      */
     public void init() {
-        out.println("" +
+        out.println(ColorCli.YELLOW_BOLD  +
                " ███╗   ███╗██╗   ██╗    ███████╗██╗  ██╗███████╗██╗     ███████╗██╗███████╗\n" +
                " ████╗ ████║╚██╗ ██╔╝    ██╔════╝██║  ██║██╔════╝██║     ██╔════╝██║██╔════╝\n" +
                " ██╔████╔██║ ╚████╔╝     ███████╗███████║█████╗  ██║     █████╗  ██║█████╗\n" +
                " ██║╚██╔╝██║  ╚██╔╝      ╚════██║██╔══██║██╔══╝  ██║     ██╔══╝  ██║██╔══╝\n" +
                " ██║ ╚═╝ ██║   ██║       ███████║██║  ██║███████╗███████╗██║     ██║███████╗\n" +
-               " ╚═╝     ╚═╝   ╚═╝       ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝╚══════╝ \n");
-        out.println("Welcome to My Shelfie game!");
+               " ╚═╝     ╚═╝   ╚═╝       ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝╚══════╝ \n" + ColorCli.RESET);
+        out.println(ColorCli.YELLOW_BOLD + "Welcome to My Shelfie game!" + ColorCli.RESET);
 
         selectConnection();
     }
@@ -236,7 +236,8 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showCommonCards(List<CommonGoalCard> commonGoalCards) {
-        out.println("COMMON GOAL CARDS OF THE MATCH ARE: ");
+        out.println();
+        out.println(ColorCli.GREEN + "COMMON GOAL CARDS OF THE MATCH ARE: " + ColorCli.RESET);
         for(CommonGoalCard c : commonGoalCards) {
             int index = commonGoalCards.indexOf(c) + 1;
             out.println(index + ": " + c);
@@ -245,67 +246,115 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showPersonalCard(Player player) {
-        out.println("YOU'RE PERSONAL GOAL CARD IS: ");
+        out.println();
+        out.println(ColorCli.GREEN + "YOU'RE PERSONAL GOAL CARD IS: " + ColorCli.RESET);
         PersonalGoalCard personalGoalCard = player.getPersonalGoalCard();
 
-        System.out.println();
+        out.println();
         for (int i = 0; i < 5; i++) {
-            System.out.print("  ");
-            System.out.format("   |%4d", i);
+            out.print("  ");
+            out.format("   |%4d", i);
         }
-        System.out.print("     |");
-        System.out.println();
-        System.out.println( "________________________________________________________" );
+        out.print("     |");
+        out.println();
+        out.println( "________________________________________________________" );
 
         for( int i = 0; i < 6; i++ ) {
-            System.out.format("  %-2d ", i);
+            out.format("  %-2d ", i);
             for (int j = 0; j < 5; j++) {
                 if(personalGoalCard.getMatrix()[i][j].getType() == TileType.NULL){
-                    System.out.format("| %-7s ", " ");
+                    out.format("| %-8s ", " ");
                 }
                 else {
-                    System.out.format("| %-7s ", personalGoalCard.getMatrix()[i][j].getType());
+                    out.format("| %-8s ", personalGoalCard.getMatrix()[i][j].getType());
                 }
             }
-            System.out.println( "|" );
-            System.out.println( "_______________________________________________________ " );
+            out.println( "|" );
+            out.println( "_______________________________________________________ " );
         }
     }
 
     @Override
     public void showBoard (Board board){
         out.println();
-        out.println("BOARD:");
+        out.println(ColorCli.GREEN + "BOARD:" + ColorCli.RESET);
+        out.println();
         for (int i = 0; i < 9; i++) {
-            System.out.print("  ");
-            System.out.format("   |%4d", i);
+            out.print("  ");
+            out.format("   |%4d", i);
         }
-        System.out.print("     |");
-        System.out.println();
-        System.out.println( "_______________________________________________________________________________________________ " );
+        out.print("     |");
+        out.println();
+        out.println( "_______________________________________________________________________________________________ " );
 
         for( int i = 0; i < 9; i++ ) {
-            System.out.format("  %-2d ", i);
+            out.format("  %-2d ", i);
             for (int j = 0; j < 9; j++) {
                 if(board.getMatrix()[i][j].isBlocked()){
-                    System.out.format("| %-7s ", "X");
+                    out.format("| %-8s ", "X");
                 }else {
                     if(board.getMatrix()[i][j].getType() == TileType.NULL){
-                        System.out.format("| %-7s ", " ");
+                        out.format("| %-8s ", " ");
                     }
                     else {
-                        System.out.format("| %-7s ", board.getMatrix()[i][j].getType());
+                        out.format("| %-8s ", board.getMatrix()[i][j].getType());
                     }
                 }
 
             }
-            System.out.println( "|" );
-            System.out.println( "_______________________________________________________________________________________________ " );
+            out.println( "|" );
+            out.println( "_______________________________________________________________________________________________ " );
         }
     }
 
     @Override
     public void askSelectTiles(Board board) {
+        boolean isValid = false;
+        int num = -1;
+        List<Tile> tiles = new ArrayList<>();
 
+        do {
+            do {
+                out.println("How many tiles do you want to select (1,2 o 3 tiles)?");
+                try {
+                    num = Integer.parseInt(readLine.nextLine());
+                    isValid = true;
+                } catch (NumberFormatException e) {
+                    num = -1;
+                    clearCli();
+                }
+            } while (!isValid);
+
+            for (int i = 0; i < num; i++) {
+                int row = -1;
+                int col = -1;
+                int index = i + 1;
+                do {
+                    isValid = false;
+                    out.println("Digit the corresponding ROW of the tile number " + index);
+                    try {
+                        row = Integer.parseInt(readLine.nextLine());
+                        isValid = true;
+                    } catch (NumberFormatException e) {
+                        row = -1;
+                        clearCli();
+                    }
+                    isValid = false;
+                    out.println("Digit the corresponding COLUMN of the tile number " + index);
+                    try {
+                        col = Integer.parseInt(readLine.nextLine());
+                        isValid = true;
+                    } catch (NumberFormatException e) {
+                        col = -1;
+                        clearCli();
+                    }
+                } while (!isValid);
+
+                Tile tile = new Tile(board.getMatrix()[row][col].getType(), row, col);
+                tiles.add(tile);
+            }
+
+        } while (!isValid);
+        notifyObserver(obs -> obs.sendSelectTiles(tiles));
     }
 }

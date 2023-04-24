@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.GameState;
-import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
 import it.polimi.ingsw.network.message.clientSide.NumPlayersReplyMessage;
@@ -60,11 +59,8 @@ public class GameController implements Serializable {
             if(inputController.checkNumPlayers(message)) {
                 game.setNum(((NumPlayersReplyMessage) message).getNumPlayers());
                 if(game.getCurrentNum() < game.getNum()) {
-                    broadcastingMessage("Waiting other players (1)...");
+                    broadcastingMessage("Waiting other players...");
                 }
-//                else if (game.getCurrentNum() == game.getNum()) {
-//                    startGame(game.getNum());
-//                }
             }
         }
         else {
@@ -225,46 +221,6 @@ public class GameController implements Serializable {
     public void broadcastingMessage(String message) {
         for (VirtualView v : virtualViewMap.values()) {
             v.showGenericMessage(message);
-        }
-    }
-
-    /**
-     * manages the sequencing of the turns of the players
-     * @param game the current game
-     * @author Alessandro Mancini
-     */
-    private static void turnGame (Game game) {
-        int last = 0;
-        while (last == 0) {
-            for (int i = 0; i < game.getNum(); i++) {
-                //show the board
-
-                //choose a tile
-                int number = 3;
-                Integer[][] coordinates = new Integer[number][2];
-                List<Tile> t = game.getBoard().selectTile(number, coordinates);
-
-                //insert the tile
-                game.getPlayers().get(i).getBookshelf().insertTile(t, 3);
-
-                //check if commmon goals are reached
-                if (game.getCommongoalcards().get(0).check(game.getPlayers().get(i).getBookshelf())) {
-                    game.getPlayers().get(i).setScore((game.getPlayers().get(i).getScore() + game.getCommongoalcardscores().get(0).getStack().pop()));
-                }
-                if (game.getCommongoalcards().get(1).check(game.getPlayers().get(i).getBookshelf())) {
-                    game.getPlayers().get(i).setScore((game.getPlayers().get(i).getScore() + game.getCommongoalcardscores().get(1).getStack().pop()));
-                }
-
-                //check if the player ends to play
-                if (game.getPlayers().get(i).getBookshelf().isFull()) {
-                    last = 1;
-                }
-
-                //check if the board has to refill
-                if (game.getBoard().isRefillable()) {
-                    game.getBoard().fillBoard(game.getBag());
-                }
-            }
         }
     }
 

@@ -1,16 +1,19 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.clientSide.LoginRequestMessage;
 import it.polimi.ingsw.network.message.clientSide.NumPlayersReplyMessage;
+import it.polimi.ingsw.network.message.clientSide.TilesReplyMessage;
 import it.polimi.ingsw.network.message.serverSide.*;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ViewObserver;
 import it.polimi.ingsw.view.View;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -131,5 +134,10 @@ public class ClientController implements Observer, ViewObserver {
     @Override
     public void sendNumPlayers(int numPlayers) {
         client.sendMessage(new NumPlayersReplyMessage(this.nickname, numPlayers));
+    }
+
+    @Override
+    public void sendSelectTiles(List<Tile> tiles) {
+        client.sendMessage(new TilesReplyMessage(this.nickname, tiles));
     }
 }

@@ -76,11 +76,13 @@ public class InputController implements Serializable {
     public boolean checkTiles(Message message) {
         TilesReplyMessage tilesReplyMessage = (TilesReplyMessage) message;
         VirtualView virtualView = virtualViewMap.get(tilesReplyMessage.getNickname());
-        if(game.getBoard().isRemovable(tilesReplyMessage.getTiles())) {
-            virtualView.showGenericMessage("Tiles selected are removed from the board");
+        if(!tilesReplyMessage.getTiles().isEmpty() && tilesReplyMessage.getTiles().size() >= 1 && tilesReplyMessage.getTiles().size() <= 3) {
+            return true;
         }
-        virtualView.showGenericMessage("You didn't provide a correct select of the tiles!");
-        return false;
+        else {
+            virtualView.showGenericMessage("You didn't provide a correct select of the tiles!");
+            return false;
+        }
     }
 
     /**

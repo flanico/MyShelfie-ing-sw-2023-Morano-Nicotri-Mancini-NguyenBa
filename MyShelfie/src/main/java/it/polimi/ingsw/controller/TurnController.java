@@ -30,6 +30,7 @@ public class TurnController implements Serializable {
     private int currentPosition;
     private List<Tile> currentTiles;
     private boolean isStarted;
+    private boolean isSelectValid;
 
     /**
      * constructor of the turn controller
@@ -45,6 +46,7 @@ public class TurnController implements Serializable {
         this.currentPlayer = nicknames.get(0);
         this.turnState = TurnState.START;
         this.isStarted = false;
+        this.isSelectValid = false;
     }
 
     /**
@@ -94,7 +96,10 @@ public class TurnController implements Serializable {
             showCurrentBoard();
 
             //Selects the tiles from the board
-            //selectTiles();
+            selectTiles();
+
+            //Shows the situation board
+            showCurrentBoard();
         }
     }
 
@@ -130,7 +135,7 @@ public class TurnController implements Serializable {
             notifyOtherPlayers("It's " + getCurrentPlayer() + " turn!", getCurrentPlayer());
             isStarted = true;
         }
-        turnState = TurnState.BOARD;
+        turnState = TurnState.SELECT;
     }
 
     /**
@@ -140,19 +145,47 @@ public class TurnController implements Serializable {
         for (VirtualView virtualView : virtualViewMap.values()) {
             virtualView.showBoard(game.getBoard());
         }
-        //remove then it's for the end loop
-        turnState = TurnState.END;
     }
 
     private void selectTiles() {
         if(turnState == TurnState.SELECT) {
             VirtualView virtualView = virtualViewMap.get(getCurrentPlayer());
-            virtualView.showGenericMessage("Hey " + getCurrentPlayer() + " choose tiles from the board (1,2 or 3 tiles)");
-            notifyOtherPlayers(getCurrentPlayer() + "i s selecting the tiles from the board", getCurrentPlayer());
-            virtualView.askSelectTiles(game.getBoard());
-            waitAnswer();
+            virtualView.showGenericMessage("Hey " + getCurrentPlayer() + " you have to select the tiles from the board!");
+            notifyOtherPlayers(getCurrentPlayer() + " is selecting the tiles from the board...", getCurrentPlayer());
+
+            while (!isSelectValid) {
+                virtualView.askSelectTiles(game.getBoard());
+                waitAnswer();
+
+                if(game.getBoard().isRemovable(currentTiles)) {
+                    isSelectValid = true;
+                    virtualView.showGenericMessage("Tiles selected are removable from the board!");
+
+                    notifyOtherPlayers("Player " + getCurrentPlayer() + " has selected: ", getCurrentPlayer());
+                    for (VirtualView v : virtualViewMap.values()) {
+                        for (int i = 0; i < currentTiles.size(); i++) {
+                            int index = i + 1;
+                            v.showGenericMessage("Tile " + index + " : ROW -> " + currentTiles.get(i).getX() + ", COLUMN -> " + currentTiles.get(i).getY() + ", TYPE -> " + currentTiles.get(i).getType());
+                        }
+                    }
+                    turnState = TurnState.REMOVE;
+                    removeTilesFromBoard(currentTiles);
+                }
+                else {
+                    virtualView.showGenericMessage("Sorry, tiles selected are NOT removable from the board!");
+                }
+            }
         }
     }
+
+    private void removeTilesFromBoard(List<Tile> tiles) {
+        if(turnState == TurnState.REMOVE) {
+            game.getBoard().removeTiles(tiles);
+        }
+        //For loop
+        turnState = TurnState.END;
+    }
+
     /**
      * waits the player's answer before going on with the game
      */
