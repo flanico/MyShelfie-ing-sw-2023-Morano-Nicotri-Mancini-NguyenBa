@@ -1,43 +1,66 @@
 package it.polimi.ingsw.view.GUI;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
-import java.awt.event.ActionListener;
+import javax.swing.JLabel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+/**
+ * GUI interface class
+ * @author Stefano Morano
+ */
 public class InterfaceGUI extends JFrame {
-    private JPanel menuPanel;
-    private JLabel Title;
-    private JTextField textName;
+    private JPanel mainPanel;
+    private JTable Board;
+    private JTextField nameField;
     private JButton createGameButton;
     private JButton joinGameButton;
-
-
-public InterfaceGUI() {
-
+    private JTable table1;
+    private JPanel menuPanel;
+    private JTextField textName;
+    private JPanel gamePanel;
+    private JButton backButton;
+    private JTextArea nameArea;
+    private JLabel MyShelfie;
+    private String name;
+    public InterfaceGUI() {
+    ImageIcon backgroundImage = new ImageIcon(getClass().getResource("sfondo.jpg"));
+    ImageIcon logo = new ImageIcon(getClass().getResource("./Publisher Material/Title 2000x618px.png"));
+    setTitle("My Shelfie");
+    MyShelfie = new JLabel(logo);
+    //menuPanel.add(MyShelfie);
+    //JLabel background = new JLabel(new ImageIcon(image));
+    setContentPane(mainPanel);
+    setSize(500,500);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    Graphics g= mainPanel.getGraphics();
+    //g.drawImage(,0,0,null);
     createGameButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(createGameButton, textName.getText() + " creates a new game!" );
+            name = nameField.getText();
+            nameArea.append(name + " is joining the game");
+           getContentPane().remove(menuPanel);
+           getContentPane().add(gamePanel);
+           validate();
         }
     });
-    joinGameButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(createGameButton, textName.getText() + " wants to join a game!" );
-        }
-    });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getContentPane().remove(gamePanel);
+                getContentPane().add(menuPanel);
+                validate();
+            }
+        });
 
-}
+    setVisible(true);
+
+    }
 
     public static void main(String[] args){
-        InterfaceGUI window = new InterfaceGUI();
-        window.setContentPane(window.menuPanel);
-        window.setTitle("My Shelfie");
-        window.setSize(500,500);
-        window.setVisible(true);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+         new InterfaceGUI();
     }
 }
