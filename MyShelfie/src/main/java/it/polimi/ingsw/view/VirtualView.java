@@ -1,14 +1,11 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.Board;
-import it.polimi.ingsw.model.CommonGoalCard;
-import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.message.*;
 import it.polimi.ingsw.network.message.serverSide.*;
 import it.polimi.ingsw.network.server.ClientHandler;
 import it.polimi.ingsw.observer.Observer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,7 +38,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showGameInfo(ArrayList<Player> players, int num) {
+    public void showGameInfo(List<Player> players, int num) {
         clientHandler.sendMessageToClient(new InfoGameMessage(players, num));
     }
 
@@ -83,5 +80,40 @@ public class VirtualView implements View, Observer {
     @Override
     public void askSelectTiles(Board board) {
         clientHandler.sendMessageToClient(new SelectTileRequestMessage(board));
+    }
+
+    @Override
+    public void askInsertTiles(Bookshelf bookshelf, List<Tile> tiles) {
+        clientHandler.sendMessageToClient(new InsertTilesRequestMessage(tiles, bookshelf));
+    }
+
+    @Override
+    public void showBookshelf(Player player) {
+        clientHandler.sendMessageToClient(new ShowBookshelfMessage(player, player.getBookshelf()));
+    }
+
+    @Override
+    public void askOrderTiles(List<Tile> tiles) {
+        clientHandler.sendMessageToClient(new OrderRequestMessage(tiles));
+    }
+
+    @Override
+    public void showEndTurn() {
+
+    }
+
+    @Override
+    public void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores) {
+
+    }
+
+    @Override
+    public void showCommonGoalComplete() {
+
+    }
+
+    @Override
+    public void showScores(List<Player> players) {
+
     }
 }

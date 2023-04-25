@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class Cli extends ViewObservable implements View {
     private final PrintStream out;
-    private static final String STR_INPUT_ERR = ColorCli.RED + "Invalid Input!" + ColorCli.RESET;
+    private static final String STR_INPUT_ERR = ColorCli.RED + "Invalid Input! Please retry." + ColorCli.RESET;
     public Scanner readLine = new Scanner(System.in);
 
     /**
@@ -204,13 +204,13 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showGameInfo(ArrayList<Player> players, int numberPlayers) {
-        out.println("MATCH INFO: ");
+    public void showGameInfo(List<Player> players, int numberPlayers) {
+        out.println(ColorCli.GREEN + "MATCH INFO: " + ColorCli.RESET);
         out.print("Players connected: ( ");
         for(int i=0; i < players.size(); i++) {
             out.print(players.get(i).getNickname());
             if(i < players.size() - 1) {
-                out.println(", ");
+                out.print(", ");
             }
         }
         out.println(" ) " +players.size() + " / " + numberPlayers);
@@ -218,13 +218,13 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showError(String errorMessage) {
-        out.println("\u001b[31;1m" + errorMessage + "\u001b[0m \n" + "EXIT");
+        out.println(ColorCli.RED + errorMessage + "EXIT" + ColorCli.RESET);
         System.exit(1);
     }
 
     @Override
     public void showWinner(Player winner) {
-        out.println("Congratulations " +winner.getNickname() + " You have won the match!");
+        out.println("Congratulations " + winner.getNickname() + " You have won the match!");
         out.println("Game finished.");
         System.exit(0);
     }
@@ -240,7 +240,7 @@ public class Cli extends ViewObservable implements View {
         out.println(ColorCli.GREEN + "COMMON GOAL CARDS OF THE MATCH ARE: " + ColorCli.RESET);
         for(CommonGoalCard c : commonGoalCards) {
             int index = commonGoalCards.indexOf(c) + 1;
-            out.println(index + ": " + c);
+            out.println("*" + index + ": " + c);
         }
     }
 
@@ -263,14 +263,14 @@ public class Cli extends ViewObservable implements View {
             out.format("  %-2d ", i);
             for (int j = 0; j < 5; j++) {
                 if(personalGoalCard.getMatrix()[i][j].getType() == TileType.NULL){
-                    out.format("| %-8s ", " ");
+                    out.format("| %-7s ", " ");
                 }
                 else {
-                    out.format("| %-8s ", personalGoalCard.getMatrix()[i][j].getType());
+                    out.format("| %-7s ", personalGoalCard.getMatrix()[i][j].getType());
                 }
             }
             out.println( "|" );
-            out.println( "_______________________________________________________ " );
+            out.println( "________________________________________________________" );
         }
     }
 
@@ -291,19 +291,47 @@ public class Cli extends ViewObservable implements View {
             out.format("  %-2d ", i);
             for (int j = 0; j < 9; j++) {
                 if(board.getMatrix()[i][j].isBlocked()){
-                    out.format("| %-8s ", "X");
+                    out.format("| %-7s ", "X");
                 }else {
                     if(board.getMatrix()[i][j].getType() == TileType.NULL){
-                        out.format("| %-8s ", " ");
+                        out.format("| %-7s ", " ");
                     }
                     else {
-                        out.format("| %-8s ", board.getMatrix()[i][j].getType());
+                        out.format("| %-7s ", board.getMatrix()[i][j].getType());
                     }
                 }
 
             }
             out.println( "|" );
-            out.println( "_______________________________________________________________________________________________ " );
+            out.println( "________________________________________________________________________________________________" );
+        }
+    }
+
+    @Override
+    public void showBookshelf(Player player) {
+        out.println();
+        out.println(ColorCli.GREEN + "BOOKSHELF " + player.getNickname() + ":" +ColorCli.RESET);
+        Bookshelf bookshelf = player.getBookshelf();
+
+        out.println();
+        for (int i = 0; i < 5; i++) {
+            out.format("| %-7s ", i);
+        }
+        out.print("|");
+        out.println();
+        out.println( "___________________________________________________" );
+
+        for( int i = 0; i < 6; i++ ) {
+            for (int j = 0; j < 5; j++) {
+                if(bookshelf.getMatrix()[i][j].getType() == TileType.NULL){
+                    out.format("| %-7s ", " ");
+                }
+                else {
+                    out.format("| %-7s ", bookshelf.getMatrix()[i][j].getType());
+                }
+            }
+            out.println( "|" );
+            out.println( "___________________________________________________" );
         }
     }
 
@@ -314,47 +342,125 @@ public class Cli extends ViewObservable implements View {
         List<Tile> tiles = new ArrayList<>();
 
         do {
+            out.println("How many tiles do you want to select (1,2 o 3 tiles)?");
+            try {
+                num = Integer.parseInt(readLine.nextLine());
+                if(num >= 1 && num <= 3) isValid = true;
+            } catch (NumberFormatException e) {
+                num = -1;
+                clearCli();
+            }
+        } while (!isValid);
+
+        isValid = false;
+        for (int i = 0; i < num; i++) {
+            int row = -1;
+            int col = -1;
+            int index = i + 1;
             do {
-                out.println("How many tiles do you want to select (1,2 o 3 tiles)?");
+                out.println("Digit the corresponding ROW of the tile number " + index);
                 try {
-                    num = Integer.parseInt(readLine.nextLine());
-                    isValid = true;
+                    row = Integer.parseInt(readLine.nextLine());
+                    if (row >= 0 && row <= 8) isValid = true;
+                    else out.println("Error! Your choice is not valid. Retry.");
                 } catch (NumberFormatException e) {
-                    num = -1;
+                    row = -1;
+                    isValid = false;
                     clearCli();
                 }
-            } while (!isValid);
-
-            for (int i = 0; i < num; i++) {
-                int row = -1;
-                int col = -1;
-                int index = i + 1;
-                do {
-                    isValid = false;
-                    out.println("Digit the corresponding ROW of the tile number " + index);
-                    try {
-                        row = Integer.parseInt(readLine.nextLine());
-                        isValid = true;
-                    } catch (NumberFormatException e) {
-                        row = -1;
-                        clearCli();
-                    }
-                    isValid = false;
+                if(isValid) {
                     out.println("Digit the corresponding COLUMN of the tile number " + index);
                     try {
                         col = Integer.parseInt(readLine.nextLine());
-                        isValid = true;
+                        if (col >= 0 && col <= 8) isValid = true;
+                        else {
+                            isValid = false;
+                            out.println(STR_INPUT_ERR);
+                        }
                     } catch (NumberFormatException e) {
                         col = -1;
+                        isValid = false;
                         clearCli();
                     }
-                } while (!isValid);
+                }
+            } while (!isValid);
 
-                Tile tile = new Tile(board.getMatrix()[row][col].getType(), row, col);
-                tiles.add(tile);
-            }
-
-        } while (!isValid);
+            Tile tile = new Tile(board.getMatrix()[row][col].getType(), row, col);
+            tiles.add(tile);
+        }
         notifyObserver(obs -> obs.sendSelectTiles(tiles));
+    }
+
+    @Override
+    public void askInsertTiles(Bookshelf bookshelf, List<Tile> tiles) {
+        boolean isValid = false;
+        int col = -1;
+
+        out.println("Please select the column where to insert the tiles: ");
+        do {
+            try {
+                col = Integer.parseInt(readLine.nextLine());
+                isValid = true;
+            } catch (NumberFormatException e) {
+                col = -1;
+                clearCli();
+            }
+        } while (!isValid);
+
+        int finalCol = col;
+        notifyObserver(obs -> obs.sendInsertTiles(finalCol, tiles));
+    }
+
+    @Override
+    public void askOrderTiles(List<Tile> tiles) {
+        boolean isValid = false;
+        List<Tile> finalTiles = new ArrayList<>(3);
+
+        for (int i = 0; i < tiles.size(); i++) {
+            finalTiles.add(new Tile(TileType.NULL));
+        }
+
+        out.println("Please select the order of the tiles for the insertion in the bookshelf.");
+        out.println("Attention: the first tile sorted is the one placed at the bottom of the bookshelf. The count order start from 0.");
+        for (int i = 0; i < tiles.size(); i++) {
+            int position = -1;
+            do {
+                try {
+                    out.println("Digit the order number for the tile " + tiles.get(i).getType() + " :");
+                    position = Integer.parseInt(readLine.nextLine());
+                    if(position >= 0 && position <= tiles.size()-1 && finalTiles.get(position).getType() == TileType.NULL) {
+                        finalTiles.set(position, tiles.get(i));
+                        isValid = true;
+                    }
+                    else {
+                        out.println(STR_INPUT_ERR);
+                    }
+                } catch (NumberFormatException e) {
+                    position = -1;
+                    clearCli();
+                }
+            } while (!isValid);
+        }
+        notifyObserver(obs -> obs.sendOrderTiles(finalTiles));
+    }
+
+    @Override
+    public void showEndTurn() {
+
+    }
+
+    @Override
+    public void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores) {
+
+    }
+
+    @Override
+    public void showCommonGoalComplete() {
+
+    }
+
+    @Override
+    public void showScores(List<Player> players) {
+
     }
 }

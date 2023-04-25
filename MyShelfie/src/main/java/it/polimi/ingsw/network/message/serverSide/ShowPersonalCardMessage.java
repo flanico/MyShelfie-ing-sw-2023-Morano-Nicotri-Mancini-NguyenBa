@@ -6,6 +6,9 @@ import it.polimi.ingsw.network.message.MessageType;
 
 import java.io.Serial;
 
+/**
+ * message used to show the personal goal card
+ */
 public class ShowPersonalCardMessage extends Message {
     @Serial
     private static final long serialVersionUID = 4878920160881688169L;
@@ -22,7 +25,7 @@ public class ShowPersonalCardMessage extends Message {
 
     @Override
     public String toString() {
-        return "ShowPersonalCard{ Number: " + player.getPersonalGoalCard().getType() +
+        return "ShowPersonalCard{Number: " + player.getPersonalGoalCard().getType() +
                 ", player=" + player.getNickname() +
                 '}';
     }

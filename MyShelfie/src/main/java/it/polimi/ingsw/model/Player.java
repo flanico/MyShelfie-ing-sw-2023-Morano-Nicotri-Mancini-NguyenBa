@@ -74,4 +74,12 @@ public class Player implements Serializable {
     protected void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
         this.personalGoalCard = personalGoalCard;
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "score=" + score +
+                ", nickname='" + nickname + '\'' +
+                '}';
+    }
 }

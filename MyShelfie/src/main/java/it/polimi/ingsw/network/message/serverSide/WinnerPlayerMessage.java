@@ -6,6 +6,9 @@ import it.polimi.ingsw.network.message.MessageType;
 
 import java.io.Serial;
 
+/**
+ * message to notify the winner player of the game
+ */
 public class WinnerPlayerMessage extends Message {
     @Serial
     private static final long serialVersionUID = 7453168361368250724L;

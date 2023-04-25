@@ -7,6 +7,9 @@ import it.polimi.ingsw.network.message.MessageType;
 import java.io.Serial;
 import java.util.List;
 
+/**
+ * message used to shows the common goal cards of the game
+ */
 public class ShowCommonCardsMessage extends Message {
     @Serial
     private static final long serialVersionUID = 4574676858326174828L;
@@ -24,7 +27,7 @@ public class ShowCommonCardsMessage extends Message {
     @Override
     public String toString() {
         return "ShowCommonCards{" +
-                "commonGoalCards=" + commonGoalCards +
+                "commonGoalCards=" + commonGoalCards.toString() +
                 '}';
     }
 }

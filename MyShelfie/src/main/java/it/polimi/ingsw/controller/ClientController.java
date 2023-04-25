@@ -4,9 +4,7 @@ import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.Message;
-import it.polimi.ingsw.network.message.clientSide.LoginRequestMessage;
-import it.polimi.ingsw.network.message.clientSide.NumPlayersReplyMessage;
-import it.polimi.ingsw.network.message.clientSide.TilesReplyMessage;
+import it.polimi.ingsw.network.message.clientSide.*;
 import it.polimi.ingsw.network.message.serverSide.*;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ViewObserver;
@@ -88,6 +86,10 @@ public class ClientController implements Observer, ViewObserver {
                 GenericMessage genericMessage = (GenericMessage) message;
                 executorService.execute(() -> view.showGenericMessage(genericMessage.getMessage()));
             }
+            case INFO_GAME -> {
+                InfoGameMessage infoGameMessage = (InfoGameMessage) message;
+                executorService.execute(() -> view.showGameInfo(infoGameMessage.getPlayers(), infoGameMessage.getNum()));
+            }
             case SHOW_COMMON -> {
                 ShowCommonCardsMessage showCommonCardsMessage = (ShowCommonCardsMessage) message;
                 executorService.execute(() -> view.showCommonCards(showCommonCardsMessage.getCommonGoalCards()));
@@ -103,6 +105,18 @@ public class ClientController implements Observer, ViewObserver {
             case SHOW_BOARD -> {
                 ShowBoardMessage showBoardMessage = (ShowBoardMessage) message;
                 executorService.execute(() -> view.showBoard(showBoardMessage.getBoard()));
+            }
+            case INSERT_TILE_REQ -> {
+                InsertTilesRequestMessage insertTilesRequestMessage = (InsertTilesRequestMessage) message;
+                executorService.execute(() -> view.askInsertTiles(insertTilesRequestMessage.getBookshelf(), insertTilesRequestMessage.getTiles()));
+            }
+            case SHOW_BOOKSHELF -> {
+                ShowBookshelfMessage showBookshelfMessage = (ShowBookshelfMessage) message;
+                executorService.execute(() -> view.showBookshelf(showBookshelfMessage.getPlayer()));
+            }
+            case ORDER_REQ -> {
+                OrderRequestMessage orderRequestMessage = (OrderRequestMessage) message;
+                executorService.execute(() -> view.askOrderTiles(orderRequestMessage.getTiles()));
             }
         }
     }
@@ -139,5 +153,15 @@ public class ClientController implements Observer, ViewObserver {
     @Override
     public void sendSelectTiles(List<Tile> tiles) {
         client.sendMessage(new TilesReplyMessage(this.nickname, tiles));
+    }
+
+    @Override
+    public void sendInsertTiles(int column, List<Tile> tiles) {
+        client.sendMessage(new PositionReplyMessage(this.nickname, column, tiles));
+    }
+
+    @Override
+    public void sendOrderTiles(List<Tile> tiles) {
+        client.sendMessage(new OrderReplyMessage(this.nickname, tiles));
     }
 }

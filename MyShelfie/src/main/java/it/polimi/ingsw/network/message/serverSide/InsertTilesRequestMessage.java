@@ -6,7 +6,7 @@ import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
 
 import java.io.Serial;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * message sent to the client to insert the selected tiles into the bookshelf
@@ -14,26 +14,27 @@ import java.util.ArrayList;
 public class InsertTilesRequestMessage extends Message {
     @Serial
     private static final long serialVersionUID = 6352397701669107548L;
-    private ArrayList <Tile> tiles;
+    private List <Tile> tiles;
     private Bookshelf bookshelf;
 
-    public InsertTilesRequestMessage( ArrayList <Tile> tiles, Bookshelf bookshelf ) {
+    public InsertTilesRequestMessage(List <Tile> tiles, Bookshelf bookshelf ) {
         super("SERVER", MessageType.INSERT_TILE_REQ);
         this.bookshelf = bookshelf;
         this.tiles = tiles;
     }
 
-    public ArrayList<Tile> getTiles() {
+    public List<Tile> getTiles() {
         return tiles;
     }
 
     public Bookshelf getBookshelf() {
         return bookshelf;
     }
+
     @Override
     public String toString() {
-        return "InsertTile{ tiles " + tiles +
-                "bookshelf" + bookshelf +
+        return "InsertTilesRequestMessage{" +
+                "bookshelf=" + bookshelf +
                 '}';
     }
 }

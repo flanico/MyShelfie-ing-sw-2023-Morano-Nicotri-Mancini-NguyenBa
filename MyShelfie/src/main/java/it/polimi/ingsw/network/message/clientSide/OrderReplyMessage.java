@@ -8,15 +8,15 @@ import java.io.Serial;
 import java.util.List;
 
 /**
- * message used to notify the selected tiles from the board
+ * message used to send the selected order for the tiles
  */
-public class TilesReplyMessage extends Message {
+public class OrderReplyMessage extends Message {
     @Serial
-    private static final long serialVersionUID = 5909872357046367409L;
+    private static final long serialVersionUID = 2147176422511553721L;
     private List<Tile> tiles;
 
-    public TilesReplyMessage(String nickname, List<Tile> tiles) {
-        super(nickname, MessageType.TILES_REPLY);
+    public OrderReplyMessage(String nickname, List<Tile> tiles) {
+        super(nickname, MessageType.ORDER_REPLY);
         this.tiles = tiles;
     }
 
@@ -26,8 +26,8 @@ public class TilesReplyMessage extends Message {
 
     @Override
     public String toString() {
-        return "TilesReplyMessage{" +
-                ", tiles=" + tiles.toString() +
+        return "OrderReplyMessage{ nickname=" + getNickname() +
+                "tiles=" + tiles.toString() +
                 '}';
     }
 }

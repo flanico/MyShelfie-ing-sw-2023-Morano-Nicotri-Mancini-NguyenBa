@@ -178,7 +178,7 @@ public class Bookshelf implements Serializable {
      * @return true if the tiles are insertable in the desired column, false otherwise
      * @author Alessandro Mancini, Chiara Nguyen Ba
      */
-    private boolean isInsertableTile(List<Tile> tiles, int column) {
+    public boolean isInsertableTile(List<Tile> tiles, int column) {
         int num = tiles.size();
         int x = ROW-1;
         //If the column is completely full return false

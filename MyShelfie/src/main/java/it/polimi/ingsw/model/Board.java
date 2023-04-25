@@ -175,6 +175,11 @@ public class Board extends Observable implements Serializable {
      * @author Chiara Nguyen Ba
      */
     public boolean isRemovable(List<Tile> tiles) {
+
+        for (Tile tile : tiles) {
+            if (tile.isBlocked() || tile.getType().equals(TileType.NULL)) return false;
+        }
+
         boolean samerow = true;
         boolean samecolumn = true;
         int row = tiles.get(0).getX();

@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.network.message.serverSide.InfoGameMessage;
 import it.polimi.ingsw.observer.Observable;
 
 import java.io.Serial;
@@ -90,7 +91,7 @@ public class Game extends Observable implements Serializable {
         Player player = new Player(nickname);
         players.add(player);
         initPersonalgoalcards(player);
-        //notify
+        notifyObserver(new InfoGameMessage(players, num));
     }
 
     /**
@@ -128,7 +129,7 @@ public class Game extends Observable implements Serializable {
         boolean result = players.remove(getPlayerByNickname(nickname));
 
         if (notifyEnabled) {
-            //notifyObserver(new LobbyMessage(getPlayersNicknames(), this.chosenPlayersNumber));
+            notifyObserver(new InfoGameMessage(players, num));
         }
 
         return result;

@@ -8,9 +8,7 @@ import java.util.Scanner;
 /**
  * main of the client application
  */
-public class
-
-ClientApp {
+public class ClientApp {
 
     /**
      * main method in which the client choose between Cli or GUI view

@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.clientSide.NumPlayersReplyMessage;
+import it.polimi.ingsw.network.message.clientSide.OrderReplyMessage;
 import it.polimi.ingsw.network.message.clientSide.PositionReplyMessage;
 import it.polimi.ingsw.network.message.clientSide.TilesReplyMessage;
 import it.polimi.ingsw.view.View;
@@ -42,7 +43,7 @@ public class InputController implements Serializable {
      * @param view the view for the current client
      * @return true if the nickname is valid, false otherwise
      */
-    public boolean checkNickname(String nickname, View view){
+    protected boolean checkNickname(String nickname, View view){
         if(nickname.isEmpty() || game.isNicknameTaken(nickname)) {
             view.showLoginResult(false, nickname);
             return false;
@@ -55,7 +56,7 @@ public class InputController implements Serializable {
      * @param message the message from the client
      * @return true if it's a valid number, false otherwise
      */
-    public boolean checkNumPlayers(Message message) {
+    protected boolean checkNumPlayers(Message message) {
         NumPlayersReplyMessage numPlayersReplyMessage = (NumPlayersReplyMessage) message;
 
         if(numPlayersReplyMessage.getNumPlayers() >= 2 && numPlayersReplyMessage.getNumPlayers() <= 4) {
@@ -73,14 +74,16 @@ public class InputController implements Serializable {
      * @param message the message from the client
      * @return true if the tiles are valid, false otherwise
      */
-    public boolean checkTiles(Message message) {
+    protected boolean checkTiles(Message message) {
         TilesReplyMessage tilesReplyMessage = (TilesReplyMessage) message;
         VirtualView virtualView = virtualViewMap.get(tilesReplyMessage.getNickname());
-        if(!tilesReplyMessage.getTiles().isEmpty() && tilesReplyMessage.getTiles().size() >= 1 && tilesReplyMessage.getTiles().size() <= 3) {
+        if(game.getBoard().isRemovable(tilesReplyMessage.getTiles())) {
+            virtualView.showGenericMessage("Tiles selected are removable from the board!");
             return true;
         }
         else {
-            virtualView.showGenericMessage("You didn't provide a correct select of the tiles!");
+            virtualView.showGenericMessage("Sorry, tiles selected are NOT removable from the board!");
+            virtualView.askSelectTiles(game.getBoard());
             return false;
         }
     }
@@ -90,12 +93,31 @@ public class InputController implements Serializable {
      * @param message the message from the client
      * @return true if the position is valid, false otherwise
      */
-    public boolean checkPosition(Message message) {
+    protected boolean checkPosition(Message message) {
         PositionReplyMessage positionReplyMessage = (PositionReplyMessage) message;
-        VirtualView virtualView = virtualViewMap.get(message.getNickname());
-        //Check
-        virtualView.showGenericMessage("You didn't provide a correct select of the position!");
-        return false;
+        VirtualView virtualView = virtualViewMap.get(positionReplyMessage.getNickname());
+        if(positionReplyMessage.getColumn() >= 0 && positionReplyMessage.getColumn() <= 4 &&
+                game.getPlayerByNickname(positionReplyMessage.getNickname()).getBookshelf().isInsertableTile(positionReplyMessage.getTiles(), positionReplyMessage.getColumn())) {
+            virtualView.showGenericMessage("The selected column is correct!");
+            return true;
+        }
+        else {
+            virtualView.showGenericMessage("Sorry, you didn't provide a correct select of the column! Retry");
+            virtualView.askInsertTiles(game.getPlayerByNickname(positionReplyMessage.getNickname()).getBookshelf(), positionReplyMessage.getTiles());
+            return false;
+        }
     }
 
+    public boolean checkOrder(Message message) {
+        OrderReplyMessage orderReplyMessage = (OrderReplyMessage) message;
+        VirtualView virtualView = virtualViewMap.get(orderReplyMessage.getNickname());
+        if(!orderReplyMessage.getTiles().isEmpty()) {
+            return true;
+        }
+        else {
+            virtualView.showGenericMessage("Sorry, you didn't provide a correct select of the order of the tiles! Retry");
+            virtualView.askOrderTiles(orderReplyMessage.getTiles());
+            return false;
+        }
+    }
 }

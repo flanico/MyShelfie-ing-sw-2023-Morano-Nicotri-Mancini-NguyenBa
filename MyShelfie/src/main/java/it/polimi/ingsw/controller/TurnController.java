@@ -1,8 +1,10 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.Bookshelf;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.message.Message;
+import it.polimi.ingsw.network.message.clientSide.OrderReplyMessage;
 import it.polimi.ingsw.network.message.clientSide.PositionReplyMessage;
 import it.polimi.ingsw.network.message.clientSide.TilesReplyMessage;
 import it.polimi.ingsw.network.message.serverSide.GenericMessage;
@@ -29,6 +31,7 @@ public class TurnController implements Serializable {
     private boolean hasAnswered = false;
     private int currentPosition;
     private List<Tile> currentTiles;
+    private Bookshelf currentBookshelf;
     private boolean isStarted;
     private boolean isSelectValid;
 
@@ -64,10 +67,16 @@ public class TurnController implements Serializable {
             case POSITION_REPLY -> {
                 PositionReplyMessage positionReplyMessage = (PositionReplyMessage) message;
                 currentPosition = positionReplyMessage.getColumn();
+                currentTiles = positionReplyMessage.getTiles();
                 hasAnswered = true;
             }
             case GENERIC -> {
                 GenericMessage genericMessage = (GenericMessage) message;
+                hasAnswered = true;
+            }
+            case ORDER_REPLY -> {
+                OrderReplyMessage orderReplyMessage = (OrderReplyMessage) message;
+                currentTiles = orderReplyMessage.getTiles();
                 hasAnswered = true;
             }
         }
@@ -100,6 +109,17 @@ public class TurnController implements Serializable {
 
             //Shows the situation board
             showCurrentBoard();
+
+            //Shows bookshelf of the current player
+            showCurrentBookshelf();
+
+            //Inserts the tiles in the bookshelf
+            insertTiles();
+
+            //Shows bookshelf of the current player
+            showCurrentBookshelf();
+
+            turnState = TurnState.END;
         }
     }
 
@@ -147,43 +167,97 @@ public class TurnController implements Serializable {
         }
     }
 
+    /**
+     * phase of selecting the tiles from the board
+     */
     private void selectTiles() {
         if(turnState == TurnState.SELECT) {
             VirtualView virtualView = virtualViewMap.get(getCurrentPlayer());
             virtualView.showGenericMessage("Hey " + getCurrentPlayer() + " you have to select the tiles from the board!");
             notifyOtherPlayers(getCurrentPlayer() + " is selecting the tiles from the board...", getCurrentPlayer());
 
-            while (!isSelectValid) {
-                virtualView.askSelectTiles(game.getBoard());
-                waitAnswer();
+            virtualView.askSelectTiles(game.getBoard());
+            waitAnswer();
 
-                if(game.getBoard().isRemovable(currentTiles)) {
-                    isSelectValid = true;
-                    virtualView.showGenericMessage("Tiles selected are removable from the board!");
-
-                    notifyOtherPlayers("Player " + getCurrentPlayer() + " has selected: ", getCurrentPlayer());
-                    for (VirtualView v : virtualViewMap.values()) {
-                        for (int i = 0; i < currentTiles.size(); i++) {
-                            int index = i + 1;
-                            v.showGenericMessage("Tile " + index + " : ROW -> " + currentTiles.get(i).getX() + ", COLUMN -> " + currentTiles.get(i).getY() + ", TYPE -> " + currentTiles.get(i).getType());
-                        }
-                    }
-                    turnState = TurnState.REMOVE;
-                    removeTilesFromBoard(currentTiles);
-                }
-                else {
-                    virtualView.showGenericMessage("Sorry, tiles selected are NOT removable from the board!");
+            notifyOtherPlayers("Player " + getCurrentPlayer() + " has selected: ", getCurrentPlayer());
+            virtualView.showGenericMessage("You have selected: ");
+            for (VirtualView v : virtualViewMap.values()) {
+                for (int i = 0; i < currentTiles.size(); i++) {
+                    int index = i + 1;
+                    v.showGenericMessage("* Tile " + index + " : ROW -> " + currentTiles.get(i).getX() + ", COLUMN -> " + currentTiles.get(i).getY() + ", TYPE -> " + currentTiles.get(i).getType());
                 }
             }
+            turnState = TurnState.REMOVE;
+            removeTilesFromBoard(currentTiles);
         }
     }
 
+    /**
+     * use in selecting tiles phase for remove the tiles from the board
+     * @param tiles to be removed from the board
+     */
     private void removeTilesFromBoard(List<Tile> tiles) {
         if(turnState == TurnState.REMOVE) {
             game.getBoard().removeTiles(tiles);
         }
-        //For loop
-        turnState = TurnState.END;
+        turnState = TurnState.INSERT;
+    }
+
+    /**
+     * shows the bookshelf of the current player that insert the tile
+     */
+    private void showCurrentBookshelf(){
+        for(VirtualView virtualView : virtualViewMap.values()) {
+                virtualView.showBookshelf(game.getPlayerByNickname(currentPlayer));
+        }
+    }
+
+    /**
+     * shows for each player all the bookshelf of the player in the game
+     */
+    private void showAllBookshelf(){
+        for (String nick : nicknames) {
+            VirtualView virtualView = virtualViewMap.get(nick);
+            for(String n : nicknames) {
+                virtualView.showBookshelf(game.getPlayerByNickname(n));
+            }
+        }
+    }
+
+    /**
+     * phase of inserting the tiles in the bookshelf
+     */
+    private void insertTiles() {
+        if(turnState == TurnState.INSERT) {
+            VirtualView virtualView = virtualViewMap.get(getCurrentPlayer());
+            virtualView.showGenericMessage("Hey " + getCurrentPlayer() + " you have to insert the tiles in the bookshelf!");
+            notifyOtherPlayers(getCurrentPlayer() + " is inserting the tiles in his bookshelf...", getCurrentPlayer());
+
+            virtualView.askInsertTiles(currentBookshelf, currentTiles);
+            waitAnswer();
+
+            virtualView.showGenericMessage("Tiles selected are insertable in the bookshelf!");
+            notifyOtherPlayers("Player " + getCurrentPlayer() + " has inserted the tiles in the column number: " + currentPosition, getCurrentPlayer());
+
+            turnState = TurnState.ORDER;
+            selectOrder();
+        }
+    }
+
+    /**
+     * phase of selecting the order of the tiles in the bookshelf
+     */
+    private void selectOrder() {
+        if (turnState == TurnState.ORDER) {
+            VirtualView virtualView = virtualViewMap.get(getCurrentPlayer());
+            virtualView.showGenericMessage(getCurrentPlayer() + " you have to select the order of the tiles!");
+            virtualView.askOrderTiles(currentTiles);
+            waitAnswer();
+
+            virtualView.showGenericMessage("Tiles are inserting in the bookshelf in the column number " + currentPosition);
+            game.getPlayerByNickname(getCurrentPlayer()).getBookshelf().insertTile(currentTiles, currentPosition);
+        }
+        turnState = TurnState.CHECK;
     }
 
     /**

@@ -25,4 +25,8 @@ public interface ViewObserver {
     void sendNumPlayers(int numPlayers);
 
     void sendSelectTiles(List<Tile> tiles);
+
+    void sendInsertTiles(int column, List<Tile> tiles);
+
+    void sendOrderTiles(List<Tile> tiles);
 }

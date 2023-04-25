@@ -128,4 +128,13 @@ public class Tile implements Serializable {
     public void setCounted(boolean counted) {
         this.counted = counted;
     }
+
+    @Override
+    public String toString() {
+        return "Tile{" +
+                "type=" + type +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

@@ -91,6 +91,14 @@ public class GameController implements Serializable {
                     Server.LOGGER.warning("The format of the message sent by the client is incorrect!");
                 }
             }
+            case ORDER_REPLY -> {
+                if(inputController.checkOrder(message)) {
+                    turnController.messageFromGameController(message);
+                }
+                else {
+                    Server.LOGGER.warning("The format of the message sent by the client is incorrect!");
+                }
+            }
             case GENERIC -> turnController.messageFromGameController(message);
             default -> Server.LOGGER.warning(STR_INVALID_STATE);
         }

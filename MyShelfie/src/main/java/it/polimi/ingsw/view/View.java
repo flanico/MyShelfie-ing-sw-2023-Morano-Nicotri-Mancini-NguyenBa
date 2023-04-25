@@ -1,10 +1,7 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.Board;
-import it.polimi.ingsw.model.CommonGoalCard;
-import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +31,7 @@ public interface View {
      * @param players all the players joined in the game
      * @param numberPlayers number of players in the game
      */
-    void showGameInfo(ArrayList<Player> players, int numberPlayers);
+    void showGameInfo(List<Player> players, int numberPlayers);
 
     /**
      * shows to the client an error
@@ -54,8 +51,16 @@ public interface View {
      */
     void showWinner(Player winner);
 
+    /**
+     * shows to the client the two common goal card of the match
+     * @param commonGoalCards the common goal card of the game
+     */
     void showCommonCards(List<CommonGoalCard> commonGoalCards);
 
+    /**
+     * shows to the client his personal goal card
+     * @param player of the game
+     */
     void showPersonalCard(Player player);
 
     /**
@@ -64,5 +69,36 @@ public interface View {
      */
     void showBoard(Board board);
 
+    /**
+     * asks the client to select the tiles from the board
+     * @param board the board of the game
+     */
     void askSelectTiles(Board board);
+
+    /**
+     * asks the client to insert the tiles in the bookshelf
+     * @param bookshelf of the player
+     * @param tiles to insert in the bookshelf
+     */
+    void askInsertTiles(Bookshelf bookshelf, List<Tile> tiles);
+
+    /**
+     * shows to the client the bookshelf
+     * @param player to show his bookshelf
+     */
+    void showBookshelf(Player player);
+
+    /**
+     * asks the client to select the order of the insertion of the tiles
+     * @param tiles to order
+     */
+    void askOrderTiles(List<Tile> tiles);
+
+    void showEndTurn();
+
+    void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores);
+
+    void showCommonGoalComplete();
+
+    void showScores(List<Player> players);
 }

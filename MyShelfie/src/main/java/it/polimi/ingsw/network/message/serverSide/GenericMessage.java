@@ -5,6 +5,9 @@ import it.polimi.ingsw.network.message.MessageType;
 
 import java.io.Serial;
 
+/**
+ * message used to show a generic text during the game
+ */
 public class GenericMessage extends Message {
     @Serial
     private static final long serialVersionUID = -1459285387719574659L;

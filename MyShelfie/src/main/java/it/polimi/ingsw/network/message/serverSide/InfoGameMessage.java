@@ -5,7 +5,7 @@ import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
 
 import java.io.Serial;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * message used to send to the client information about the game (players and number)
@@ -13,16 +13,16 @@ import java.util.ArrayList;
 public class InfoGameMessage extends Message {
     @Serial
     private static final long serialVersionUID = -6954035833019978470L;
-    private ArrayList<Player> players;
+    private List<Player> players;
     private int num;
 
-    public InfoGameMessage(ArrayList<Player> players, int num) {
+    public InfoGameMessage(List<Player> players, int num) {
         super("SERVER", MessageType.INFO_GAME);
         this.players = players;
         this.num = num;
     }
 
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
@@ -33,7 +33,7 @@ public class InfoGameMessage extends Message {
     @Override
     public String toString() {
         return "InfoGame{" +
-                "players=" + players +
+                "players=" + players.toString() +
                 ", num=" + num +
                 '}';
     }
