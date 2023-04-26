@@ -26,17 +26,20 @@ public class InterfaceGUI extends JFrame {
     private JLabel MyShelfie;
     private String name;
     public InterfaceGUI() {
-    ImageIcon backgroundImage = new ImageIcon(getClass().getResource("sfondo.jpg"));
-    ImageIcon logo = new ImageIcon(getClass().getResource("./Publisher Material/Title 2000x618px.png"));
+    ImageIcon backgroundImage = new ImageIcon(/*getClass().getResource("sfondo.jpg")*/);
+    ImageIcon logo = new ImageIcon("Title 2000x618px.png");
     setTitle("My Shelfie");
+    setIconImage(logo.getImage());
     MyShelfie = new JLabel(logo);
-    //menuPanel.add(MyShelfie);
-    //JLabel background = new JLabel(new ImageIcon(image));
+    add(MyShelfie);
+    JLabel background = new JLabel(backgroundImage);
     setContentPane(mainPanel);
+    background.setHorizontalAlignment(SwingConstants.CENTER);
+    background.setVerticalAlignment(SwingConstants.CENTER);
+    add(background);
     setSize(500,500);
+    pack();
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    Graphics g= mainPanel.getGraphics();
-    //g.drawImage(,0,0,null);
     createGameButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
