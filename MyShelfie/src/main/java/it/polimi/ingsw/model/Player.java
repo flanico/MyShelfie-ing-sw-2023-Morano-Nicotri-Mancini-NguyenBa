@@ -14,6 +14,8 @@ public class Player implements Serializable {
     private int score;
     private final String nickname;
     private PersonalGoalCard personalGoalCard;
+    private boolean isDoneFirstCommon;
+    private boolean isDoneSecondCommon;
 
     /**
      * constructor of Player
@@ -23,6 +25,9 @@ public class Player implements Serializable {
     public Player(String nickname) {
         this.bookshelf = new Bookshelf();
         this.nickname = nickname;
+        this.score = 0;
+        this.isDoneFirstCommon = false;
+        this.isDoneSecondCommon = false;
     }
 
     /**
@@ -73,6 +78,22 @@ public class Player implements Serializable {
      */
     protected void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
         this.personalGoalCard = personalGoalCard;
+    }
+
+    public boolean isDoneFirstCommon() {
+        return isDoneFirstCommon;
+    }
+
+    public void setDoneFirstCommon(boolean doneFirstCommon) {
+        isDoneFirstCommon = doneFirstCommon;
+    }
+
+    public boolean isDoneSecondCommon() {
+        return isDoneSecondCommon;
+    }
+
+    public void setDoneSecondCommon(boolean doneSecondCommon) {
+        isDoneSecondCommon = doneSecondCommon;
     }
 
     @Override

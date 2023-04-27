@@ -341,19 +341,22 @@ public class Cli extends ViewObservable implements View {
         int num = -1;
         List<Tile> tiles = new ArrayList<>();
 
+        out.println("Hey you have to select the tiles from the board!");
         do {
             out.println("How many tiles do you want to select (1,2 o 3 tiles)?");
             try {
                 num = Integer.parseInt(readLine.nextLine());
                 if(num >= 1 && num <= 3) isValid = true;
+                else out.println(STR_INPUT_ERR);
             } catch (NumberFormatException e) {
+                out.println(STR_INPUT_ERR);
                 num = -1;
                 clearCli();
             }
         } while (!isValid);
 
-        isValid = false;
         for (int i = 0; i < num; i++) {
+            isValid = false;
             int row = -1;
             int col = -1;
             int index = i + 1;
@@ -362,7 +365,7 @@ public class Cli extends ViewObservable implements View {
                 try {
                     row = Integer.parseInt(readLine.nextLine());
                     if (row >= 0 && row <= 8) isValid = true;
-                    else out.println("Error! Your choice is not valid. Retry.");
+                    else out.println(STR_INPUT_ERR);
                 } catch (NumberFormatException e) {
                     row = -1;
                     isValid = false;
@@ -396,6 +399,7 @@ public class Cli extends ViewObservable implements View {
         boolean isValid = false;
         int col = -1;
 
+        out.println("Hey you have to insert the tiles in the bookshelf!");
         out.println("Please select the column where to insert the tiles: ");
         do {
             try {
@@ -414,15 +418,16 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void askOrderTiles(List<Tile> tiles) {
         boolean isValid = false;
-        List<Tile> finalTiles = new ArrayList<>(3);
+        List<Tile> finalTiles = new ArrayList<>();
 
         for (int i = 0; i < tiles.size(); i++) {
             finalTiles.add(new Tile(TileType.NULL));
         }
 
-        out.println("Please select the order of the tiles for the insertion in the bookshelf.");
-        out.println("Attention: the first tile sorted is the one placed at the bottom of the bookshelf. The count order start from 0.");
+        out.println("Hey you have to select the order of the tiles!");
+        out.println("Attention: the first tile sorted is the one placed at the bottom of the bookshelf. The count order starts from 0.");
         for (int i = 0; i < tiles.size(); i++) {
+            isValid = false;
             int position = -1;
             do {
                 try {

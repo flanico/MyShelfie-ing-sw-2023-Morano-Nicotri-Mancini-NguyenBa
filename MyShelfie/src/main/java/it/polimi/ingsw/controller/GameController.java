@@ -217,6 +217,13 @@ public class GameController implements Serializable {
             VirtualView virtualView = virtualViewMap.get(nick);
             virtualView.showPersonalCard(game.getPlayerByNickname(nick));
         }
+
+        //Shows the selected game round
+        for(String nick : nicknames) {
+            VirtualView virtualView = virtualViewMap.get(nick);
+            virtualView.showGenericMessage("The game round is: " + nicknames.toString());
+        }
+
         this.turnController = new TurnController(game, this, virtualViewMap);
         Thread threadTurnManager = new Thread(() -> turnController.turnManager());
         threadTurnManager.start();

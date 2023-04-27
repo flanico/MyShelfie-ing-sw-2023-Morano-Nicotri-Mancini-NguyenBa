@@ -82,7 +82,7 @@ public class InputController implements Serializable {
             return true;
         }
         else {
-            virtualView.showGenericMessage("Sorry, tiles selected are NOT removable from the board!");
+            virtualView.showGenericMessage("Sorry, tiles selected are NOT removable from the board! Retry.");
             virtualView.askSelectTiles(game.getBoard());
             return false;
         }
@@ -102,7 +102,7 @@ public class InputController implements Serializable {
             return true;
         }
         else {
-            virtualView.showGenericMessage("Sorry, you didn't provide a correct select of the column! Retry");
+            virtualView.showGenericMessage("Sorry, you didn't provide a correct select of the column! Retry.");
             virtualView.askInsertTiles(game.getPlayerByNickname(positionReplyMessage.getNickname()).getBookshelf(), positionReplyMessage.getTiles());
             return false;
         }
