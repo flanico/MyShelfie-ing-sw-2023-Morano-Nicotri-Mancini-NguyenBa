@@ -463,14 +463,14 @@ public class Cli extends ViewObservable implements View {
                 commonGoalCardScores.toString();
             }
         } catch (NullPointerException e){
-            out.println("Empty Stack: there isn't any score availble");
+            out.println("Empty Stack: there isn't any score available");
         }
     }
+
     @Override
     public void showCommonGoalComplete1(CommonGoalCard commonGoalCard, int score){
-        out.println("You complete the Common Goal card:"+ commonGoalCard.toString() +"score: " + score);
+        out.println("You complete the Common Goal Card: "+ commonGoalCard.toString() + " score: " + score);
     }
-
 
     @Override
     public void showScores(List<Player> players) {

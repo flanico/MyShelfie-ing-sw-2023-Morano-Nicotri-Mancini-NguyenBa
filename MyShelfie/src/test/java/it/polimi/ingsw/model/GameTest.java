@@ -132,4 +132,19 @@ class GameTest{
         Collections.shuffle(originalbag);
         assertNotEquals(bag, originalbag);
     }
+
+    @Test
+    void setRankingScoreTest() {
+        Map<String, Integer> testScore = new HashMap<>();
+        game.getPlayerByNickname("Gino").setScore(10);
+        game.getPlayerByNickname("Anna").setScore(2);
+        game.getPlayerByNickname("Leo").setScore(6);
+        testScore.put("Gino", 10);
+        testScore.put("Leo", 6);
+        testScore.put("Anna", 2);
+
+        game.setRankingScore();
+        assertEquals(testScore.toString(), game.getPlayerScore().toString());
+        //System.out.println(game.getPlayerScore().toString());
+    }
 }

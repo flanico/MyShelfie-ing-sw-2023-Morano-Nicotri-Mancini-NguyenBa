@@ -6,6 +6,7 @@ import it.polimi.ingsw.observer.Observable;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * class that defines a game
@@ -22,6 +23,7 @@ public class Game extends Observable implements Serializable {
     private List<CommonGoalCardScore> commongoalcardscores;
     private Board board;
     private Stack<Tile> bag;
+    private Map<String, Integer> playerScore = new HashMap<>();
 
     /**
      * constructor of Game
@@ -91,7 +93,8 @@ public class Game extends Observable implements Serializable {
     public void addPlayer(String nickname) {
         Player player = new Player(nickname);
         players.add(player);
-        initPersonalgoalcards(player);
+        initPersonalgoalcard(player);
+        playerScore.put(nickname, 0);
         notifyObserver(new InfoGameMessage(players, num));
     }
 
@@ -145,10 +148,11 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
-     * initializer of personalgoalcards
+     * initializer of personalgoalcard of the player
+     * @param player to be set the personal goal card
      * @author Alessandro Mancini
      */
-    private void initPersonalgoalcards(Player player) {
+    private void initPersonalgoalcard(Player player) {
         PersonalGoalCardType type;
         Random rand = new Random();
         do {
@@ -290,6 +294,10 @@ public class Game extends Observable implements Serializable {
         return bag;
     }
 
+    /**
+     * checks if the common goal cards are completed
+     * @param player to be checked the bookshelf
+     */
     public int checkCommonGoalCards(Player player) {
         int score = 0;
         if(!player.isDoneFirstCommon() && commongoalcards.get(0).check(player.getBookshelf())) {
@@ -305,5 +313,28 @@ public class Game extends Observable implements Serializable {
             notifyObserver(new CommonGoalComplete1Message( commongoalcards.get(1), score));
         }
         return score;
+    }
+
+    /**
+     * sets at the end of the game the ranking scores of the players
+     */
+    public void setRankingScore() {
+        Map<String, Integer> scores = new HashMap<>();
+        for (Player p : players) {
+            scores.put(p.getNickname(), p.getScore());
+        }
+
+        playerScore = scores.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+    }
+
+    /**
+     * getter of ranking (Player, Score)
+     * @return playerScore the map of ranking scores
+     */
+    public Map<String, Integer> getPlayerScore() {
+        return playerScore;
     }
 }

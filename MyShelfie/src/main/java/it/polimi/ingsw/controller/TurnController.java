@@ -303,8 +303,6 @@ public class TurnController implements Serializable {
                     virtualView.showGenericMessage("Errore su check Common Goal Card");
                 }
             }
-
-
         }
     }
 

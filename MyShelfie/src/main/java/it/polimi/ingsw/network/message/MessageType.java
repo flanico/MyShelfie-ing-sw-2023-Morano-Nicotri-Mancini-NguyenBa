@@ -25,6 +25,7 @@ public enum MessageType {
     PING,
     SHOW_COMMON,
     SHOW_PERSONAL,
+
     //Client side
     LOGIN_REQ,
     NUM_PLAYERS_REP,
