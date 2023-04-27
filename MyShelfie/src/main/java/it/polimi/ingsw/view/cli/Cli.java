@@ -473,6 +473,16 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
+    public void bookshelfFull() {
+        out.println("Your bookshelf is full!");
+    }
+
+    @Override
+    public void disconnection() {
+        out.println("");
+    }
+
+    @Override
     public void showScores(List<Player> players) {
 
     }

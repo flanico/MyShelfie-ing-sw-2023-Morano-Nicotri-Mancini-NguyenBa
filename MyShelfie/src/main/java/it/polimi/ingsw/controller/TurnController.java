@@ -125,6 +125,7 @@ public class TurnController implements Serializable {
             //Check bookshelf full
             //Game is finish or last round
             if(currentBookshelf.isFull()) {
+                notifyBookshelfFull();
                 if(currentPlayer.equalsIgnoreCase(game.getAllPlayers().get(game.getNum()-1))) {
                     turnState = TurnState.END;
                     //Shows scores
@@ -307,6 +308,15 @@ public class TurnController implements Serializable {
     }
 
     /**
+     * notify to all the player that someone complete is bookshelf
+     */
+    public void notifyBookshelfFull (){
+        VirtualView virtualView = virtualViewMap.get(currentPlayer);
+        virtualView.bookshelfFull();
+        notifyOtherPlayers(currentPlayer+ "'s bookshelf is full", currentPlayer);
+    }
+
+    /**
      * waits the player's answer before going on with the game
      */
     private void waitAnswer() {
@@ -332,4 +342,6 @@ public class TurnController implements Serializable {
             }
         }
     }
+
+
 }

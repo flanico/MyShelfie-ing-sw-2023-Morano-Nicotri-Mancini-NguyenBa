@@ -9,19 +9,15 @@ public class DisconnectionMessage extends Message {
     @Serial
     private static final long serialVersionUID = 4101171297737014184L;
     private String nickname;
-    public DisconnectionMessage(String nickname, MessageType messageType) {
-        super(nickname, MessageType.DISCONNECTION);
-        this.nickname = nickname;
+    public DisconnectionMessage() {
+        super( "SERVER" , MessageType.DISCONNECTION);
     }
 
-    @Override
-    public String getNickname() {
-        return nickname;
-    }
+
 
     @Override
     public String toString() {
-        return "Disconnetion player: " + this.nickname +
+        return "Disconnection player: " +
         '}';
     }
 }

@@ -118,9 +118,27 @@ public class ClientController implements Observer, ViewObserver {
                 OrderRequestMessage orderRequestMessage = (OrderRequestMessage) message;
                 executorService.execute(() -> view.askOrderTiles(orderRequestMessage.getTiles()));
             }
-            case COMMON_GOAL_COMPLETE1 -> {
-                CommonGoalComplete1Message commonGoalComplete1Message = (CommonGoalComplete1Message) message;
+            case COMMON_GOAL_COMPLETE -> {
+                CommonGoalCompleteMessage commonGoalComplete1Message = (CommonGoalCompleteMessage) message;
                 executorService.execute(() -> view.showCommonGoalComplete1( commonGoalComplete1Message.getCommongoal(), commonGoalComplete1Message.getCommonscores()));
+            }
+            case BOOKSHELF_FULL1 -> {
+                executorService.execute(() -> view.bookshelfFull());
+            }
+            case DISCONNECTION -> {
+
+            }
+            case END_TURN -> {
+
+            }
+            case PING -> {
+
+            }
+            case SCORES -> {
+
+            }
+            case WINNER -> {
+
             }
         }
     }

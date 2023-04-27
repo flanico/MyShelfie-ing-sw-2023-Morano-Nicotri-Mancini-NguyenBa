@@ -107,11 +107,21 @@ public class VirtualView implements View, Observer {
 
     }
 
+    @Override
     public void showCommonGoalComplete1(CommonGoalCard commonGoalCard, int score) {
-        clientHandler.sendMessageToClient(new CommonGoalComplete1Message(commonGoalCard, score));
+        clientHandler.sendMessageToClient(new CommonGoalCompleteMessage(commonGoalCard, score));
     }
 
+    @Override
+    public void bookshelfFull() {
+        clientHandler.sendMessageToClient((new BookshelfFullMessage()));
+    }
 
+    //TODO : disconnection part uncompleted in cli-view-virtualview-clientcontroller-turncontroller
+    @Override
+    public void disconnection() {
+        clientHandler.sendMessageToClient(new DisconnectionMessage());
+    }
 
     @Override
     public void showScores(List<Player> players) {

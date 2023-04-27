@@ -1,5 +1,5 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.network.message.serverSide.CommonGoalComplete1Message;
+import it.polimi.ingsw.network.message.serverSide.CommonGoalCompleteMessage;
 import it.polimi.ingsw.network.message.serverSide.InfoGameMessage;
 import it.polimi.ingsw.observer.Observable;
 
@@ -304,13 +304,13 @@ public class Game extends Observable implements Serializable {
             player.setDoneFirstCommon(true);
             score = commongoalcardscores.get(0).getStack().pop();
             player.setScore(player.getScore() + score);
-            notifyObserver(new CommonGoalComplete1Message( commongoalcards.get(0), score));
+            notifyObserver(new CommonGoalCompleteMessage( commongoalcards.get(0), score));
         }
         if(!player.isDoneSecondCommon() && commongoalcards.get(1).check(player.getBookshelf())) {
             player.setDoneSecondCommon(true);
             score = commongoalcardscores.get(1).getStack().pop();
             player.setScore(player.getScore() + score);
-            notifyObserver(new CommonGoalComplete1Message( commongoalcards.get(1), score));
+            notifyObserver(new CommonGoalCompleteMessage( commongoalcards.get(1), score));
         }
         return score;
     }

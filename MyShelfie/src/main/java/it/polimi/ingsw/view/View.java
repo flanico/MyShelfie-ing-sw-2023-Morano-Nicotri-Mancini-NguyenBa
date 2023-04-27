@@ -109,7 +109,21 @@ public interface View {
      */
     void showCommonGoalComplete1(CommonGoalCard commonGoalCard, int score);
 
+    /**
+     * notify to the current player's bookshelf is full
+     */
 
+    void bookshelfFull();
+
+    /**
+     * notify to all the client that a player disconnected
+     */
+    void disconnection();
+
+    /**
+     *
+     * @param players
+     */
 
 
     void showScores(List<Player> players);
