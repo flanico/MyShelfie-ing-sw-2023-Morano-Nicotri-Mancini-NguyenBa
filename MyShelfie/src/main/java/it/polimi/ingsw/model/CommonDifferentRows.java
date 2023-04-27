@@ -29,4 +29,9 @@ public class CommonDifferentRows extends CommonGoalCard {
 
         return counter >= 2;    //the boolean function returns true if the counter is 2 or more
     }
+
+    @Override
+    public String toString() {
+        return "Common Goal Card: Two lines each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.";
+    }
 }

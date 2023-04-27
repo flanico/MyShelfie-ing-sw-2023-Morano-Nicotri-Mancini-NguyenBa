@@ -30,4 +30,9 @@ public class CommonXSameType extends CommonGoalCard {   //the algorithm works, t
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Common Goal Card: Five tiles of the same type forming an X.";
+    }
 }

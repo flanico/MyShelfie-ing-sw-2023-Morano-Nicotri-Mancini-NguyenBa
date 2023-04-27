@@ -32,4 +32,9 @@ public class CommonMaxThreeRows extends CommonGoalCard {
 
         return counter >= 4;                                 //if the counter value is more than 3, it returns true
     }
+
+    @Override
+    public String toString() {
+        return "Common Goal Card: Four lines each formed by 5 tiles of maximum three different types. One line can show the same or a different combination of another line.";
+    }
 }

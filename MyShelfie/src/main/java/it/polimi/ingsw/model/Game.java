@@ -290,18 +290,20 @@ public class Game extends Observable implements Serializable {
         return bag;
     }
 
-    public void checkCommonGoalCards(Player player) {
+    public int checkCommonGoalCards(Player player) {
+        int score = 0;
         if(!player.isDoneFirstCommon() && commongoalcards.get(0).check(player.getBookshelf())) {
             player.setDoneFirstCommon(true);
-            int score = commongoalcardscores.get(0).getStack().pop();
+            score = commongoalcardscores.get(0).getStack().pop();
             player.setScore(player.getScore() + score);
-            notifyObserver(new CommonGoalComplete1Message(player.getNickname(), commongoalcards.get(0), score));
+            notifyObserver(new CommonGoalComplete1Message( commongoalcards.get(0), score));
         }
         if(!player.isDoneSecondCommon() && commongoalcards.get(1).check(player.getBookshelf())) {
             player.setDoneSecondCommon(true);
-            int score = commongoalcardscores.get(1).getStack().pop();
+            score = commongoalcardscores.get(1).getStack().pop();
             player.setScore(player.getScore() + score);
-            notifyObserver(new CommonGoalComplete1Message(player.getNickname(), commongoalcards.get(1), score));
+            notifyObserver(new CommonGoalComplete1Message( commongoalcards.get(1), score));
         }
+        return score;
     }
 }

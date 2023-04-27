@@ -1,5 +1,6 @@
 package it.polimi.ingsw.observer;
 
+import it.polimi.ingsw.model.Bookshelf;
 import it.polimi.ingsw.model.Tile;
 
 import java.util.List;
@@ -29,4 +30,6 @@ public interface ViewObserver {
     void sendInsertTiles(int column, List<Tile> tiles);
 
     void sendOrderTiles(List<Tile> tiles);
+
+
 }

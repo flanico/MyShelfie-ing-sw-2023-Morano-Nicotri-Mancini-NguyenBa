@@ -96,9 +96,21 @@ public interface View {
 
     void showEndTurn();
 
+    /**
+     * show the stack of the selected common goal card
+     * @param commonGoalCardScores is the stack of the available scores
+     */
     void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores);
 
-    void showCommonGoalComplete();
+    /**
+     * check if you complete a common Goal Card
+     * @param commonGoalCard is the common Goal to check
+     * @param score is the score relative at the completed common goal
+     */
+    void showCommonGoalComplete1(CommonGoalCard commonGoalCard, int score);
+
+
+
 
     void showScores(List<Player> players);
 }

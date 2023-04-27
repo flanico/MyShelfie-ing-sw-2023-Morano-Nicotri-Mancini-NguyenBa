@@ -20,4 +20,9 @@ public class CommonFourCorners extends CommonGoalCard {
                 && bookshelf.getMatrix()[0][4].getType().equals(bookshelf.getMatrix()[5][0].getType())
                 && bookshelf.getMatrix()[5][0].getType().equals(bookshelf.getMatrix()[5][4].getType());
     }
+
+    @Override
+    public String toString() {
+        return "Common Goal Card:  Four tiles of the same type in the four corners of the bookshelf.";
+    }
 }

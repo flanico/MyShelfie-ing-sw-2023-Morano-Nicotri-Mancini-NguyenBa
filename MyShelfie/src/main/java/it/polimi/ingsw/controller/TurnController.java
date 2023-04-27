@@ -287,7 +287,24 @@ public class TurnController implements Serializable {
     private void checkCommonCards() {
         if(turnState == TurnState.CHECK) {
             //Check common goal cards
-            game.checkCommonGoalCards(game.getPlayerByNickname(currentPlayer));
+            VirtualView virtualView = virtualViewMap.get(currentPlayer);
+            int score =game.checkCommonGoalCards(game.getPlayerByNickname(currentPlayer));
+            if(score!= 0)
+            {
+                if(game.getPlayerByNickname(currentPlayer).isDoneFirstCommon()){
+                    virtualView.showCommonGoalComplete1( commonGoalCards.get(0), score);
+                    notifyOtherPlayers(currentPlayer+"has completed the common Goal Card 1", currentPlayer);
+                }
+                else if (game.getPlayerByNickname(currentPlayer).isDoneSecondCommon()){
+                    virtualView.showCommonGoalComplete1(commonGoalCards.get(1), score);
+                    notifyOtherPlayers(currentPlayer+"has completed the common Goal Card 2", currentPlayer);
+                }
+                else {
+                    virtualView.showGenericMessage("Errore su check Common Goal Card");
+                }
+            }
+
+
         }
     }
 

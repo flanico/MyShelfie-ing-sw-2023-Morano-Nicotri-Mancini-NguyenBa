@@ -44,4 +44,9 @@ public class CommonEightSameType extends CommonGoalCard {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Common Goal Card: Eight tiles of the same type. There’s no restriction about the position of these tiles.";
+    }
 }

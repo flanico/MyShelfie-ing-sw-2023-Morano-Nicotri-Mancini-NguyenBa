@@ -65,4 +65,9 @@ public class CommonSameDiagonal extends CommonGoalCard {
 
         return flag;
     }
+
+    @Override
+    public String toString() {
+        return "Common Goal Card: Five tiles of the same type forming a diagonal";
+    }
 }

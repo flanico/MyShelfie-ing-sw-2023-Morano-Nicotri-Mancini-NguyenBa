@@ -107,10 +107,11 @@ public class VirtualView implements View, Observer {
 
     }
 
-    @Override
-    public void showCommonGoalComplete() {
-
+    public void showCommonGoalComplete1(CommonGoalCard commonGoalCard, int score) {
+        clientHandler.sendMessageToClient(new CommonGoalComplete1Message(commonGoalCard, score));
     }
+
+
 
     @Override
     public void showScores(List<Player> players) {

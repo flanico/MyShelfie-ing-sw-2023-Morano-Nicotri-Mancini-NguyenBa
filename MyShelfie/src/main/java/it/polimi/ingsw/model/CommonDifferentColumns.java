@@ -28,4 +28,9 @@ public class CommonDifferentColumns extends CommonGoalCard {
         }
         return counter >= 2;
     }
+
+    @Override
+    public String toString() {
+        return "Common Goal Card: Two columns each formed by 6 different types of tiles.";
+    }
 }

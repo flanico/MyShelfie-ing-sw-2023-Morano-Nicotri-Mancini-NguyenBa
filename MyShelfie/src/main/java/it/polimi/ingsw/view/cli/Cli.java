@@ -455,14 +455,22 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores) {
-
+    public void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores) throws NullPointerException {
+        try {
+            for (int i = 0; i<2; i++)
+            {
+                out.println("Stack of the Common Goal Card n." + i + ":");
+                commonGoalCardScores.toString();
+            }
+        } catch (NullPointerException e){
+            out.println("Empty Stack: there isn't any score availble");
+        }
     }
-
     @Override
-    public void showCommonGoalComplete() {
-
+    public void showCommonGoalComplete1(CommonGoalCard commonGoalCard, int score){
+        out.println("You complete the Common Goal card:"+ commonGoalCard.toString() +"score: " + score);
     }
+
 
     @Override
     public void showScores(List<Player> players) {

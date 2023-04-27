@@ -26,4 +26,10 @@ public class CommonMaxThreeColumns extends CommonGoalCard {
         }
         return counter >= 3;    //if the counter is 3 or more, the boolean function will return true
     }
+
+    @Override
+    public String toString() {
+        return "Common Goal Card: Three columns each formed by 6 tiles\n" +
+                "of maximum three different types. One column can show the same or a different combination of another column.";
+    }
 }
