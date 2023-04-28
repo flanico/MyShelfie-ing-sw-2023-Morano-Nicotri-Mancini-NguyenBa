@@ -13,10 +13,7 @@ public enum MessageType {
     INSERT_TILE_REQ,
     END_TURN,
     COMMON_GOAL_COMPLETE,
-    COMMON_GOAL_COMPLETE2,
     SHOW_BOOKSHELF,
-    BOOKSHELF_FULL1,
-    BOOKSHELF_FULL2,
     LOGIN_REPLY,
     WINNER,
     SCORES,
@@ -25,11 +22,13 @@ public enum MessageType {
     PING,
     SHOW_COMMON,
     SHOW_PERSONAL,
+    BOOKSHELF_FULL,
+    ORDER_REQ,
 
     //Client side
     LOGIN_REQ,
     NUM_PLAYERS_REP,
     POSITION_REPLY,
     TILES_REPLY,
-    ORDER_REPLY, ORDER_REQ,
+    ORDER_REPLY,
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.view.cli.ColorCli;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -131,10 +133,17 @@ public class Tile implements Serializable {
 
     @Override
     public String toString() {
-        return "Tile{" +
-                "type=" + type +
-                ", x=" + x +
-                ", y=" + y +
-                '}';
+        StringBuilder builder = new StringBuilder();
+
+        switch (type) {
+            case CAT -> builder.append(ColorCli.GREEN + "\uD83C\uDD32" + ColorCli.RESET);
+            case BOOK -> builder.append(ColorCli.WHITE + "\uD83C\uDD31" + ColorCli.RESET);
+            case PLANT -> builder.append(ColorCli.PINK + "\uD83C\uDD3F" + ColorCli.RESET);
+            case TROPHY -> builder.append(ColorCli.CYAN + "\uD83C\uDD43" + ColorCli.RESET);
+            case GAME -> builder.append(ColorCli.YELLOW + "\uD83C\uDD36" + ColorCli.RESET);
+            case FRAME -> builder.append(ColorCli.BLUE + "\uD83C\uDD35" + ColorCli.RESET);
+            case NULL -> builder.append("  ");
+        }
+        return builder.toString();
     }
 }

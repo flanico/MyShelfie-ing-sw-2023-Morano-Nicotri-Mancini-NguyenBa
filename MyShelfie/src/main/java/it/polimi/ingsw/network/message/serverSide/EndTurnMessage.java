@@ -19,6 +19,10 @@ public class EndTurnMessage extends Message {
         this.nickname = nickname;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
     @Override
     public String toString() {
         return "EndTurn{" + this.nickname + "ended his turn" +

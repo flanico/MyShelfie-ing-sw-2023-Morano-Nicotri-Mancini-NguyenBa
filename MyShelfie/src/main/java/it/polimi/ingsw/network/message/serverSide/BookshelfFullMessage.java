@@ -1,6 +1,5 @@
 package it.polimi.ingsw.network.message.serverSide;
 
-import it.polimi.ingsw.model.Bookshelf;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
 
@@ -15,7 +14,7 @@ public class BookshelfFullMessage extends Message{
     private static final long serialVersionUID = -3150391058180398618L;
 
     public BookshelfFullMessage() {
-        super("SERVER", MessageType.BOOKSHELF_FULL1);
+        super("SERVER", MessageType.BOOKSHELF_FULL);
     }
 
     @Override

@@ -3,6 +3,7 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.model.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * interface used to define a generic view
@@ -49,7 +50,7 @@ public interface View {
      * shows to the client who won the game
      * @param winner the winning player of the game
      */
-    void showWinner(Player winner);
+    void showWinner(String winner);
 
     /**
      * shows to the client the two common goal card of the match
@@ -94,37 +95,39 @@ public interface View {
      */
     void askOrderTiles(List<Tile> tiles);
 
-    void showEndTurn();
+    /**
+     * shows the end turn message
+     * @param nickname of player who finished the turn game
+     */
+    void showEndTurn(String nickname);
 
     /**
-     * show the stack of the selected common goal card
+     * shows the stack of the selected common goal card
      * @param commonGoalCardScores is the stack of the available scores
      */
     void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores);
 
     /**
-     * check if you complete a common Goal Card
+     * checks if the player has completed a common Goal Card
      * @param commonGoalCard is the common Goal to check
      * @param score is the score relative at the completed common goal
      */
     void showCommonGoalComplete1(CommonGoalCard commonGoalCard, int score);
 
     /**
+     * shows the final scores of the players
+     * @param playerScore map contains players and their scores
+     */
+    void showScores(Map<String, Integer> playerScore);
+
+    /**
      * notify to the current player's bookshelf is full
      */
-
     void bookshelfFull();
 
     /**
-     * notify to all the client that a player disconnected
+     * notify to all the client a player disconnection
      */
     void disconnection();
 
-    /**
-     *
-     * @param players
-     */
-
-
-    void showScores(List<Player> players);
 }

@@ -6,9 +6,7 @@ import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.View;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * class that represents the interface view via command line interface
@@ -223,9 +221,9 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showWinner(Player winner) {
-        out.println("Congratulations " + winner.getNickname() + " You have won the match!");
-        out.println("Game finished.");
+    public void showWinner(String winner) {
+        out.println("Congratulations " + winner + " you have won the match!");
+        out.println("Game finished...");
         System.exit(0);
     }
 
@@ -251,26 +249,27 @@ public class Cli extends ViewObservable implements View {
         PersonalGoalCard personalGoalCard = player.getPersonalGoalCard();
 
         out.println();
+        out.print("  ");
         for (int i = 0; i < 5; i++) {
-            out.print("  ");
-            out.format("   |%4d", i);
+            out.print("  | " + i);
         }
-        out.print("     |");
+        out.print(" |");
         out.println();
-        out.println( "________________________________________________________" );
-
+//        out.println( "_____________________________" );
+        out.println("=============================");
         for( int i = 0; i < 6; i++ ) {
-            out.format("  %-2d ", i);
+            out.print("  " +  i);
             for (int j = 0; j < 5; j++) {
                 if(personalGoalCard.getMatrix()[i][j].getType() == TileType.NULL){
-                    out.format("| %-7s ", " ");
+                    out.print(" |   ");
                 }
                 else {
-                    out.format("| %-7s ", personalGoalCard.getMatrix()[i][j].getType());
+                    out.print(" | " + personalGoalCard.getMatrix()[i][j].toString());
                 }
             }
-            out.println( "|" );
-            out.println( "________________________________________________________" );
+            out.println(" |" );
+//            out.println("_____________________________" );
+            out.println("=============================");
         }
     }
 
@@ -313,25 +312,25 @@ public class Cli extends ViewObservable implements View {
         out.println(ColorCli.GREEN + "BOOKSHELF " + player.getNickname() + ":" +ColorCli.RESET);
         Bookshelf bookshelf = player.getBookshelf();
 
-        out.println();
+        out.print("  ");
         for (int i = 0; i < 5; i++) {
-            out.format("| %-7s ", i);
+            out.print("  " + i + "  ");
         }
-        out.print("|");
+//        out.print("|");
         out.println();
-        out.println( "___________________________________________________" );
+        out.println("===========================");
 
         for( int i = 0; i < 6; i++ ) {
             for (int j = 0; j < 5; j++) {
                 if(bookshelf.getMatrix()[i][j].getType() == TileType.NULL){
-                    out.format("| %-7s ", " ");
+                    out.print(" |   ");
                 }
                 else {
-                    out.format("| %-7s ", bookshelf.getMatrix()[i][j].getType());
+                    out.print(" | " + bookshelf.getMatrix()[i][j].toString());
                 }
             }
-            out.println( "|" );
-            out.println( "___________________________________________________" );
+            out.println(" |" );
+            out.println("===========================");
         }
     }
 
@@ -450,8 +449,8 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showEndTurn() {
-
+    public void showEndTurn(String nickname) {
+        out.println(nickname + "has finished his turn!");
     }
 
     @Override
@@ -479,11 +478,12 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void disconnection() {
-        out.println("");
+
     }
 
     @Override
-    public void showScores(List<Player> players) {
-
+    public void showScores(Map<String, Integer> playerScore) {
+        out.println(ColorCli.GREEN + "RANK SCORES OF THE GAME: " + ColorCli.RESET);
+        out.println(Collections.singletonList(playerScore));
     }
 }
