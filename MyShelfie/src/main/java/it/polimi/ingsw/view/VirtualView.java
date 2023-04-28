@@ -7,6 +7,7 @@ import it.polimi.ingsw.network.server.ClientHandler;
 import it.polimi.ingsw.observer.Observer;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * class used as view for the controller, it hides the real view and the network to the controller
@@ -48,7 +49,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showWinner(Player winner) {
+    public void showWinner(String winner) {
         clientHandler.sendMessageToClient(new WinnerPlayerMessage(winner));
     }
 
@@ -98,8 +99,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showEndTurn() {
-
+    public void showEndTurn(String nickname) {
+        clientHandler.sendMessageToClient(new EndTurnMessage(nickname));
     }
 
     @Override
@@ -124,7 +125,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showScores(List<Player> players) {
-
+    public void showScores(Map<String, Integer> playerScore) {
+        clientHandler.sendMessageToClient(new ScoresMessage(playerScore));
     }
 }

@@ -176,8 +176,12 @@ public class Board extends Observable implements Serializable {
      */
     public boolean isRemovable(List<Tile> tiles) {
 
+        //check if the tiles are not NULL and not blocked
         for (Tile tile : tiles) {
-            if (tile.isBlocked() || tile.getType().equals(TileType.NULL)) return false;
+            if (tile.isBlocked() || tile.getType().equals(TileType.NULL)) {
+//                System.out.println("Tiles are NULL or blocked");
+                return false;
+            }
         }
 
         boolean samerow = true;
@@ -185,7 +189,7 @@ public class Board extends Observable implements Serializable {
         int row = tiles.get(0).getX();
         for (int i = 1; i < tiles.size(); i++) {
             if (tiles.get(i).getX() != row) {
-                //System.out.println("Tiles are not in the same row");
+//                System.out.println("Tiles are not in the same row");
                 samerow = false;
                 break;
             }
@@ -194,15 +198,25 @@ public class Board extends Observable implements Serializable {
         int column = tiles.get(0).getY();
         for (int i = 1; i < tiles.size(); i++) {
             if (tiles.get(i).getY() != column) {
-                //System.out.println("Tiles are not in the same column");
+//                System.out.println("Tiles are not in the same column");
                 samecolumn = false;
                 break;
             }
         }
 
         if (!samecolumn && !samerow) {
-            //System.out.println("Tiles are not aligned");
+//            System.out.println("Tiles are not aligned");
             return false;
+        }
+
+        //Reorder the tiles in the list based on x or y for easy checking
+        if (samerow) {
+            tiles.sort(Comparator.comparingInt(Tile::getY));
+//            System.out.println(tiles.toString());
+        }
+        if (samecolumn) {
+            tiles.sort(Comparator.comparingInt(Tile::getX));
+//            System.out.println(tiles.toString());
         }
 
         //check if the tiles have a free side
@@ -213,7 +227,7 @@ public class Board extends Observable implements Serializable {
                     (rowtile <= 7 && matrix[rowtile + 1][columntile].getType() != TileType.NULL) &&
                     (columntile >= 1 && matrix[rowtile][columntile - 1].getType() != TileType.NULL) &&
                     (columntile <= 7 && matrix[rowtile][columntile + 1].getType() != TileType.NULL)) {
-                //System.out.println("Tiles haven't a free side");
+//                System.out.println("Tiles haven't a free side");
                 return false;
             }
         }
@@ -244,7 +258,7 @@ public class Board extends Observable implements Serializable {
     public void removeTiles(List<Tile> tiles) {
         if (isRemovable(tiles)) {
             for (Tile t : tiles) {
-                //System.out.println("Tile " + tiles.indexOf(tile) + " removed of type " + tiles.get(tiles.indexOf(tile)).getType() + " in position x: " + tiles.get(tiles.indexOf(tile)).getX() + " y: " + tiles.get(tiles.indexOf(tile)).getY());
+//                System.out.println("Tile " + tiles.indexOf(t) + " removed of type " + tiles.get(tiles.indexOf(t)).getType() + " in position x: " + tiles.get(tiles.indexOf(t)).getX() + " y: " + tiles.get(tiles.indexOf(t)).getY());
                 this.getMatrix()[t.getX()][t.getY()].setType(TileType.NULL);
             }
         }

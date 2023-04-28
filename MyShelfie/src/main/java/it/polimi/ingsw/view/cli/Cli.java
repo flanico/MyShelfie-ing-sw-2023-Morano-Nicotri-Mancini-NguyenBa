@@ -6,9 +6,7 @@ import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.View;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * class that represents the interface view via command line interface
@@ -223,9 +221,9 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showWinner(Player winner) {
-        out.println("Congratulations " + winner.getNickname() + " You have won the match!");
-        out.println("Game finished.");
+    public void showWinner(String winner) {
+        out.println("Congratulations " + winner + " you have won the match!");
+        out.println("Game finished...");
         System.exit(0);
     }
 
@@ -450,8 +448,8 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showEndTurn() {
-
+    public void showEndTurn(String nickname) {
+        out.println(nickname + "has finished his turn!");
     }
 
     @Override
@@ -479,11 +477,12 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void disconnection() {
-        out.println("");
+
     }
 
     @Override
-    public void showScores(List<Player> players) {
-
+    public void showScores(Map<String, Integer> playerScore) {
+        out.println(ColorCli.GREEN + "RANK SCORES OF THE GAME: " + ColorCli.RESET);
+        out.println(Collections.singletonList(playerScore));
     }
 }

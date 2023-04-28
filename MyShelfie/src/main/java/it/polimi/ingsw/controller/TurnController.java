@@ -10,9 +10,7 @@ import it.polimi.ingsw.view.VirtualView;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * class that manages a turn in the game
@@ -33,6 +31,7 @@ public class TurnController implements Serializable {
     private List<CommonGoalCard> commonGoalCards;
     private boolean isStarted;
     private boolean isLast;
+    private boolean isPlayerFinish;
 
     /**
      * constructor of the turn controller
@@ -49,6 +48,7 @@ public class TurnController implements Serializable {
         this.turnState = TurnState.START;
         this.isStarted = false;
         this.isLast = false;
+        this.isPlayerFinish = false;
         this.commonGoalCards = new ArrayList<>(game.getCommongoalcards());
     }
 
@@ -104,14 +104,17 @@ public class TurnController implements Serializable {
             //Shows the situation board
             showCurrentBoard();
 
+            //Shows personal card
+            showCurrentPersonalCard();
+
+            //Shows bookshelf of the current player
+            showCurrentBookshelf();
+
             //Selects the tiles from the board
             selectTiles();
 
             //Shows the situation board
             showCurrentBoard();
-
-            //Shows bookshelf of the current player
-            showCurrentBookshelf();
 
             //Inserts the tiles in the bookshelf
             insertTiles();
@@ -125,12 +128,22 @@ public class TurnController implements Serializable {
             //Check bookshelf full
             //Game is finish or last round
             if(currentBookshelf.isFull()) {
+                //Final point +1
+                addOneFinalPoint();
+                }
+                //Case: current player is the one that finishes the game
                 notifyBookshelfFull();
                 if(currentPlayer.equalsIgnoreCase(game.getAllPlayers().get(game.getNum()-1))) {
                     turnState = TurnState.END;
                     //Shows scores
-
+                    //Personal
+                    scoresPersonal();
+                    //Adjacent
+                    scoresAdjacentCells();
+                    //Total
+                    endGame();
                 }
+                //Case: last round game
                 else {
                     isLast = true;
                 }
@@ -139,21 +152,26 @@ public class TurnController implements Serializable {
             if (isLast && currentPlayer.equalsIgnoreCase(game.getAllPlayers().get(game.getNum()-1))) {
                 turnState = TurnState.END;
                 //Show scores
-
+                //Personal
+                scoresPersonal();
+                //Adjacent
+                scoresAdjacentCells();
+                //Total
+                endGame();
             }
 
             //New turn player
-            nextPlayer();
+            if(turnState != TurnState.END) nextPlayer();
 
             //For end the loop
-            turnState = TurnState.END;
-        }
+            //turnState = TurnState.END;
     }
 
     /**
      * sets the next current player to play the turn
      */
     private void nextPlayer() {
+        turnState = TurnState.SELECT;
         int currentIndex = nicknames.indexOf(currentPlayer);
         if(currentIndex + 1 < game.getCurrentNum()) {
             currentIndex = currentIndex + 1;
@@ -161,14 +179,10 @@ public class TurnController implements Serializable {
         else {
             currentIndex = 0;
         }
-        notifyOtherPlayers(currentPlayer + " has finished his turn!", currentPlayer);
         VirtualView virtualView = virtualViewMap.get(currentPlayer);
-        virtualView.showGenericMessage("You have finished your turn!");
-
         currentPlayer = nicknames.get(currentIndex);
         currentBookshelf = game.getPlayerByNickname(currentPlayer).getBookshelf();
         notifyOtherPlayers("It's "+ currentPlayer + " turn!", currentPlayer);
-        virtualView = virtualViewMap.get(currentPlayer);
         virtualView.showGenericMessage("It's you turn " + currentPlayer + "!");
     }
 
@@ -188,13 +202,22 @@ public class TurnController implements Serializable {
     }
 
     /**
-     * shows the current board situation
+     * shows the current board situation to all players
      */
     private void showCurrentBoard() {
         for (VirtualView virtualView : virtualViewMap.values()) {
             virtualView.showBoard(game.getBoard());
         }
     }
+
+    /**
+     * shows the current personal goal card to the current player
+     */
+    private void showCurrentPersonalCard() {
+        VirtualView virtualView = virtualViewMap.get(currentPlayer);
+        virtualView.showPersonalCard(game.getPlayerByNickname(currentPlayer));
+    }
+
 
     /**
      * phase of selecting the tiles from the board
@@ -232,23 +255,11 @@ public class TurnController implements Serializable {
     }
 
     /**
-     * shows the bookshelf of the current player that insert the tile
+     * shows the bookshelf of the current player to all players
      */
     private void showCurrentBookshelf(){
         for(VirtualView virtualView : virtualViewMap.values()) {
                 virtualView.showBookshelf(game.getPlayerByNickname(currentPlayer));
-        }
-    }
-
-    /**
-     * shows for each player all the bookshelf of the player in the game
-     */
-    private void showAllBookshelf(){
-        for (String nick : nicknames) {
-            VirtualView virtualView = virtualViewMap.get(nick);
-            for(String n : nicknames) {
-                virtualView.showBookshelf(game.getPlayerByNickname(n));
-            }
         }
     }
 
@@ -285,11 +296,14 @@ public class TurnController implements Serializable {
         turnState = TurnState.CHECK;
     }
 
+    /**
+     * phase of checking the common goal cards
+     */
     private void checkCommonCards() {
         if(turnState == TurnState.CHECK) {
             //Check common goal cards
             VirtualView virtualView = virtualViewMap.get(currentPlayer);
-            int score =game.checkCommonGoalCards(game.getPlayerByNickname(currentPlayer));
+            int score = game.checkCommonGoalCards(game.getPlayerByNickname(currentPlayer));
             if(score!= 0)
             {
                 if(game.getPlayerByNickname(currentPlayer).isDoneFirstCommon()){
@@ -308,12 +322,79 @@ public class TurnController implements Serializable {
     }
 
     /**
-     * notify to all the player that someone complete is bookshelf
+     * assigns the end game token to the score of the player who has firstly completed the bookshelf
+     */
+    private void addOneFinalPoint() {
+        if(!isPlayerFinish) {
+            isPlayerFinish = true;
+            Player player = game.getPlayerByNickname(currentPlayer);
+            VirtualView virtualView = virtualViewMap.get(currentPlayer);
+            player.setScore(player.getScore() + 1);
+            virtualView.showGenericMessage(currentPlayer + " you have the end game token! (+1 point)");
+            notifyOtherPlayers(currentPlayer + " have the end game token! (+1 point)", currentPlayer);
+        }
+    }
+
+    /**
+     * calculate for all players the score made with the Personal Goal Card
+     */
+    private void scoresPersonal() {
+        for (Player p : game.getPlayers()) {
+            int score = p.getPersonalGoalCard().check(p);
+            p.setScore(p.getScore() + score);
+            VirtualView virtualView = virtualViewMap.get(p.getNickname());
+            virtualView.showGenericMessage("You have made " + score + " points with the Personal Goal Card!");
+            notifyOtherPlayers(p.getNickname() + " has made " + score + " points with the Personal Goal Card!", p.getNickname());
+        }
+    }
+
+    /**
+     * calculate for all players the score made with the Adjacent Cells
+     */
+    private void scoresAdjacentCells() {
+        for (Player p : game.getPlayers()) {
+            int score = p.getBookshelf().adjacentCells();
+            p.setScore(p.getScore() + score);
+            VirtualView virtualView = virtualViewMap.get(p.getNickname());
+            virtualView.showGenericMessage("You have made " + score + " points with the adjacent item tiles!");
+            notifyOtherPlayers(p.getNickname() + " has made " + score + " points with the adjacent item tiles!", p.getNickname());
+        }
+    }
+
+    /**
+     * shows the rank scores of the players
+     */
+    private void endGame() {
+        game.setRankingScore();
+        turnState = TurnState.END;
+
+        //Find the winner
+        Iterator<String> iterator = game.getPlayerScore().keySet().iterator();
+        String winner = "No one";
+        if(iterator.hasNext()){
+            winner = iterator.next();
+        }
+
+        //Shows the rank scores to all players
+        for (VirtualView v : virtualViewMap.values()) {
+            v.showScores(game.getPlayerScore());
+        }
+
+        //Notify the winner
+        VirtualView virtualView = virtualViewMap.get(winner);
+        virtualView.showWinner(winner);
+
+        //Notify losers
+        notifyOtherPlayers("Player " + winner + " has won the match!", winner);
+    }
+
+    /**
+     * notify to all the player that someone has completed his bookshelf
      */
     public void notifyBookshelfFull (){
         VirtualView virtualView = virtualViewMap.get(currentPlayer);
         virtualView.bookshelfFull();
-        notifyOtherPlayers(currentPlayer+ "'s bookshelf is full", currentPlayer);
+        notifyOtherPlayers(currentPlayer+ "'s bookshelf is full!", currentPlayer);
     }
 
     /**
@@ -342,6 +423,4 @@ public class TurnController implements Serializable {
             }
         }
     }
-
-
 }

@@ -122,23 +122,24 @@ public class ClientController implements Observer, ViewObserver {
                 CommonGoalCompleteMessage commonGoalComplete1Message = (CommonGoalCompleteMessage) message;
                 executorService.execute(() -> view.showCommonGoalComplete1( commonGoalComplete1Message.getCommongoal(), commonGoalComplete1Message.getCommonscores()));
             }
-            case BOOKSHELF_FULL1 -> {
-                executorService.execute(() -> view.bookshelfFull());
-            }
+//            case BOOKSHELF_FULL -> {
+//                BookshelfFullMessage bookshelfFullMessage = (BookshelfFullMessage) message;
+//                executorService.execute(() -> view.bookshelfFull());
+//            }
             case DISCONNECTION -> {
 
             }
             case END_TURN -> {
-
-            }
-            case PING -> {
-
+                EndTurnMessage endTurnMessage = (EndTurnMessage) message;
+                executorService.execute(() -> view.showEndTurn(endTurnMessage.getNickname()));
             }
             case SCORES -> {
-
+                ScoresMessage scoresMessage = (ScoresMessage) message;
+                executorService.execute(() -> view.showScores(scoresMessage.getPlayerScore()));
             }
             case WINNER -> {
-
+                WinnerPlayerMessage winnerPlayerMessage = (WinnerPlayerMessage) message;
+                executorService.execute(() -> view.showWinner(winnerPlayerMessage.getWinner()));
             }
         }
     }

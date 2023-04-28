@@ -98,7 +98,7 @@ class BoardTest {
     }
 
     @Test
-    void removeTilesTest() {
+    void removeTilesTest_TwoTiles() {
         ArrayList <Tile> tiles = new ArrayList<>();
         Tile t1 = new Tile(TileType.NULL, 1,3);
         t1.setType(game.getBoard().getMatrix()[1][3].getType());
@@ -111,5 +111,27 @@ class BoardTest {
         assertEquals(game.getBoard().getMatrix()[1][4].getType(), TileType.NULL);
     }
 
+    @Test
+    void removeTilesTest_ThreeTiles() {
+        game.getBoard().getMatrix()[1][4].setType(TileType.NULL);
+        game.getBoard().getMatrix()[2][4].setType(TileType.NULL);
+        game.getBoard().getMatrix()[2][2].setType(TileType.NULL);
 
+        ArrayList <Tile> tiles = new ArrayList<>();
+        Tile t1 = new Tile(TileType.NULL, 0,3);
+        t1.setType(game.getBoard().getMatrix()[0][3].getType());
+        tiles.add(t1);
+        Tile t2 = new Tile(TileType.NULL, 2,3);
+        t2.setType(game.getBoard().getMatrix()[2][3].getType());
+        tiles.add(t2);
+        Tile t3 = new Tile(TileType.NULL, 1,3);
+        t3.setType(game.getBoard().getMatrix()[1][3].getType());
+        tiles.add(t3);
+        game.getBoard().isRemovable(tiles);
+
+        game.getBoard().removeTiles(tiles);
+        assertEquals(game.getBoard().getMatrix()[0][3].getType(), TileType.NULL);
+        assertEquals(game.getBoard().getMatrix()[2][3].getType(), TileType.NULL);
+        assertEquals(game.getBoard().getMatrix()[1][3].getType(), TileType.NULL);
+    }
 }

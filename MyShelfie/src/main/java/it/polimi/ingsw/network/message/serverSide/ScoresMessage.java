@@ -1,35 +1,29 @@
 package it.polimi.ingsw.network.message.serverSide;
 
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
 
 import java.io.Serial;
+import java.util.Map;
 
 public class ScoresMessage extends Message {
     @Serial
     private static final long serialVersionUID = 7453168361368250724L;
-    private final Player winner;
-    private  Player player;
+    private Map<String, Integer> playerScore;
 
-    public ScoresMessage(Player winner, Player player) {
+    public ScoresMessage(Map<String, Integer> playerScore) {
         super("SERVER", MessageType.SCORES);
-        this.winner = winner;
-        this.player = player;
+        this.playerScore = playerScore;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public Player getWinner() {
-        return winner;
+    public Map<String, Integer> getPlayerScore() {
+        return playerScore;
     }
 
     @Override
     public String toString() {
-        return "END GAME -WinPlayer{" + winner + "is the winner of the game. Score:" + getWinner().getScore() +
-                "Your score: " + player.getScore() +
+        return "ScoresMessage{" +
+                "playerScore=" + playerScore +
                 '}';
     }
 }
