@@ -249,26 +249,27 @@ public class Cli extends ViewObservable implements View {
         PersonalGoalCard personalGoalCard = player.getPersonalGoalCard();
 
         out.println();
+        out.print("  ");
         for (int i = 0; i < 5; i++) {
-            out.print("  ");
-            out.format("   |%4d", i);
+            out.print("  | " + i);
         }
-        out.print("     |");
+        out.print(" |");
         out.println();
-        out.println( "________________________________________________________" );
-
+//        out.println( "_____________________________" );
+        out.println("=============================");
         for( int i = 0; i < 6; i++ ) {
-            out.format("  %-2d ", i);
+            out.print("  " +  i);
             for (int j = 0; j < 5; j++) {
                 if(personalGoalCard.getMatrix()[i][j].getType() == TileType.NULL){
-                    out.format("| %-7s ", " ");
+                    out.print(" |   ");
                 }
                 else {
-                    out.format("| %-7s ", personalGoalCard.getMatrix()[i][j].getType());
+                    out.print(" | " + personalGoalCard.getMatrix()[i][j].toString());
                 }
             }
-            out.println( "|" );
-            out.println( "________________________________________________________" );
+            out.println(" |" );
+//            out.println("_____________________________" );
+            out.println("=============================");
         }
     }
 
@@ -311,25 +312,25 @@ public class Cli extends ViewObservable implements View {
         out.println(ColorCli.GREEN + "BOOKSHELF " + player.getNickname() + ":" +ColorCli.RESET);
         Bookshelf bookshelf = player.getBookshelf();
 
-        out.println();
+        out.print("  ");
         for (int i = 0; i < 5; i++) {
-            out.format("| %-7s ", i);
+            out.print("  " + i + "  ");
         }
-        out.print("|");
+//        out.print("|");
         out.println();
-        out.println( "___________________________________________________" );
+        out.println("===========================");
 
         for( int i = 0; i < 6; i++ ) {
             for (int j = 0; j < 5; j++) {
                 if(bookshelf.getMatrix()[i][j].getType() == TileType.NULL){
-                    out.format("| %-7s ", " ");
+                    out.print(" |   ");
                 }
                 else {
-                    out.format("| %-7s ", bookshelf.getMatrix()[i][j].getType());
+                    out.print(" | " + bookshelf.getMatrix()[i][j].toString());
                 }
             }
-            out.println( "|" );
-            out.println( "___________________________________________________" );
+            out.println(" |" );
+            out.println("===========================");
         }
     }
 

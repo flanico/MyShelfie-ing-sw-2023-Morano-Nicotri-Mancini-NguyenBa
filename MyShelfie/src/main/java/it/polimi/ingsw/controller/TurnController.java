@@ -87,14 +87,14 @@ public class TurnController implements Serializable {
      */
     public void turnManager() {
 
-        while(turnState != TurnState.END) {
+        while (turnState != TurnState.END) {
             //If is the first turn, select the first player and give him the seat
-            if(!isStarted) {
+            if (!isStarted) {
                 selectFirstPlayer();
             }
 
             //At the begging of each turn check if the board needs to refill
-            if(game.getBoard().isRefillable()) {
+            if (game.getBoard().isRefillable()) {
                 for (VirtualView virtualView : virtualViewMap.values()) {
                     virtualView.showGenericMessage("Board is refilling...");
                 }
@@ -116,6 +116,10 @@ public class TurnController implements Serializable {
             //Shows the situation board
             showCurrentBoard();
 
+            //Shows the current player bookshelf
+            VirtualView virtualView = virtualViewMap.get(currentPlayer);
+            virtualView.showBookshelf(game.getPlayerByNickname(currentPlayer));
+
             //Inserts the tiles in the bookshelf
             insertTiles();
 
@@ -127,13 +131,12 @@ public class TurnController implements Serializable {
 
             //Check bookshelf full
             //Game is finish or last round
-            if(currentBookshelf.isFull()) {
+            if (currentBookshelf.isFull()) {
                 //Final point +1
                 addOneFinalPoint();
-                }
                 //Case: current player is the one that finishes the game
                 notifyBookshelfFull();
-                if(currentPlayer.equalsIgnoreCase(game.getAllPlayers().get(game.getNum()-1))) {
+                if (currentPlayer.equalsIgnoreCase(game.getAllPlayers().get(game.getNum() - 1))) {
                     turnState = TurnState.END;
                     //Shows scores
                     //Personal
@@ -149,7 +152,7 @@ public class TurnController implements Serializable {
                 }
             }
 
-            if (isLast && currentPlayer.equalsIgnoreCase(game.getAllPlayers().get(game.getNum()-1))) {
+            if (isLast && currentPlayer.equalsIgnoreCase(game.getAllPlayers().get(game.getNum() - 1))) {
                 turnState = TurnState.END;
                 //Show scores
                 //Personal
@@ -161,10 +164,11 @@ public class TurnController implements Serializable {
             }
 
             //New turn player
-            if(turnState != TurnState.END) nextPlayer();
+            if (turnState != TurnState.END) nextPlayer();
 
             //For end the loop
             //turnState = TurnState.END;
+        }
     }
 
     /**
