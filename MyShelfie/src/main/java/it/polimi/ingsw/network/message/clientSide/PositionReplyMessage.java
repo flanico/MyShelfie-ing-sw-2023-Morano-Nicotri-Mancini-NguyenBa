@@ -33,7 +33,6 @@ public class PositionReplyMessage extends Message {
     @Override
     public String toString() {
         return "PositionReplyMessage{" +
-                "column=" + column +
-                ", tiles=" + tiles.stream().toList();
+                "nickname = " + getNickname() + ", column = " + column + ", tiles = " + tiles.toString();
     }
 }

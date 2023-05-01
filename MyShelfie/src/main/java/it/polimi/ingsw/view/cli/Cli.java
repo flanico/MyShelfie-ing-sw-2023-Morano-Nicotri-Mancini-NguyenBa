@@ -244,66 +244,56 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showPersonalCard(Player player) {
-        out.println();
         out.println(ColorCli.GREEN + "YOU'RE PERSONAL GOAL CARD IS: " + ColorCli.RESET);
         PersonalGoalCard personalGoalCard = player.getPersonalGoalCard();
 
-        out.println();
-        out.print("  ");
+        out.print("   ");
         for (int i = 0; i < 5; i++) {
-            out.print("  | " + i);
+            out.print("   " + i);
         }
-        out.print(" |");
         out.println();
-//        out.println( "_____________________________" );
-        out.println("=============================");
+        out.println("    ┌───┬───┬───┬───┬───┐");
         for( int i = 0; i < 6; i++ ) {
-            out.print("  " +  i);
+            out.print(" " +  i + "  ");
             for (int j = 0; j < 5; j++) {
                 if(personalGoalCard.getMatrix()[i][j].getType() == TileType.NULL){
-                    out.print(" |   ");
+                    out.print("│   ");
                 }
                 else {
-                    out.print(" | " + personalGoalCard.getMatrix()[i][j].toString());
+                    out.print("│" + personalGoalCard.getMatrix()[i][j].toString());
                 }
             }
-            out.println(" |" );
-//            out.println("_____________________________" );
-            out.println("=============================");
+            out.println("│" );
+            if(i != 5) out.println("    ├───┼───┼───┼───┼───┤");
         }
+        out.println("    └───┴───┴───┴───┴───┘");
     }
 
     @Override
     public void showBoard (Board board){
         out.println();
         out.println(ColorCli.GREEN + "BOARD:" + ColorCli.RESET);
-        out.println();
+        out.print("     ");
         for (int i = 0; i < 9; i++) {
-            out.print("  ");
-            out.format("   |%4d", i);
+            out.print(i + "   ");
         }
-        out.print("     |");
         out.println();
-        out.println( "_______________________________________________________________________________________________ " );
+        out.print( "  ╔═════════════════════════════════════╗\n" );
 
         for( int i = 0; i < 9; i++ ) {
-            out.format("  %-2d ", i);
+            out.print(i + " ║ ");
             for (int j = 0; j < 9; j++) {
                 if(board.getMatrix()[i][j].isBlocked()){
-                    out.format("| %-7s ", "X");
-                }else {
-                    if(board.getMatrix()[i][j].getType() == TileType.NULL){
-                        out.format("| %-7s ", " ");
-                    }
-                    else {
-                        out.format("| %-7s ", board.getMatrix()[i][j].getType());
-                    }
+                    out.print(ColorCli.BLACK + " X " + ColorCli.RESET + " ");
+                } else {
+                    if (board.getMatrix()[i][j].getType() == TileType.NULL) out.print("    ");
+                    else out.print(board.getMatrix()[i][j].toString() + " ");
                 }
 
             }
-            out.println( "|" );
-            out.println( "________________________________________________________________________________________________" );
+            out.print("║\n");
         }
+        out.print( "  ╚═════════════════════════════════════╝\n" );
     }
 
     @Override

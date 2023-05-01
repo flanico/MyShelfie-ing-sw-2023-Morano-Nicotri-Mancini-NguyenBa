@@ -33,8 +33,6 @@ public class InsertTilesRequestMessage extends Message {
 
     @Override
     public String toString() {
-        return "InsertTilesRequestMessage{" +
-                "bookshelf=" + bookshelf +
-                '}';
+        return "InsertTilesRequestMessage";
     }
 }

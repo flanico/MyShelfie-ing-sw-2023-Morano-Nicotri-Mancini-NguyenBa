@@ -62,7 +62,6 @@ public class SocketClientHandler implements ClientHandler, Runnable {
             while (!Thread.currentThread().isInterrupted()) {
                 synchronized (inputLock) {
                     Message message = (Message) inputStream.readObject();
-                    //Aggiungere Ping message
                     if(message != null && message.getMessageType() != MessageType.PING) {
                         //if is a LOGIN message
                         if (message.getMessageType() == MessageType.LOGIN_REQ) {
