@@ -26,7 +26,7 @@ public class SelectTileRequestMessage extends Message{
 
     @Override
     public String toString() {
-        return "SelectTilesRequestMessage{" + board +
+        return "SelectTilesRequestMessage{" + getNickname() +
                 "}";
     }
 }

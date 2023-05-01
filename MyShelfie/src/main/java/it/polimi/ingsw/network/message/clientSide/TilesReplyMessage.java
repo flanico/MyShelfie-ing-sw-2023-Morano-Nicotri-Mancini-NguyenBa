@@ -26,8 +26,8 @@ public class TilesReplyMessage extends Message {
 
     @Override
     public String toString() {
-        return "TilesReplyMessage{" +
-                ", tiles=" + tiles.toString() +
+        return "TilesReplyMessage{ nickname = " + getNickname() +
+                ", tiles = " + tiles.toString() +
                 '}';
     }
 }

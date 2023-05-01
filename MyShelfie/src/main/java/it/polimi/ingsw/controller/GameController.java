@@ -214,14 +214,16 @@ public class GameController implements Serializable {
 
         //Shows the personal goal card selected for the match
         for(String nick : nicknames) {
-            VirtualView virtualView = virtualViewMap.get(nick);
-            virtualView.showPersonalCard(game.getPlayerByNickname(nick));
+            if(!Objects.equals(nick, nicknames.get(0))) {
+                VirtualView vv = virtualViewMap.get(nick);
+                vv.showPersonalCard(game.getPlayerByNickname(nick));
+            }
         }
 
         //Shows the selected game round
         for(String nick : nicknames) {
             VirtualView virtualView = virtualViewMap.get(nick);
-            virtualView.showGenericMessage("The game round is: " + nicknames.toString());
+            virtualView.showGenericMessage("The game round is: " + nicknames);
         }
 
         this.turnController = new TurnController(game, this, virtualViewMap);
@@ -238,15 +240,4 @@ public class GameController implements Serializable {
             v.showGenericMessage(message);
         }
     }
-
-//    /**
-//     * checks the final points of the players
-//     * @param game the current game
-//     * @author Alessandro Mancini
-//     */
-//    public static void checkGame (Game game) {
-//        for (int i = 0; i < game.getNum(); i++) {
-//            game.getPlayers().get(i).setScore(game.getPlayers().get(i).getScore() + game.getPersonalgoalcards().get(i).check() + game.getPlayers().get(i).getBookshelf().adjacentCells());
-//        }
-//    }
 }

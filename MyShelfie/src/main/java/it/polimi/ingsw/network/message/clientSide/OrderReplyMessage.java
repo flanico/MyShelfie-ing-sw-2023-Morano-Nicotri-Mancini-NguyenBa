@@ -26,8 +26,8 @@ public class OrderReplyMessage extends Message {
 
     @Override
     public String toString() {
-        return "OrderReplyMessage{ nickname=" + getNickname() +
-                "tiles=" + tiles.toString() +
+        return "OrderReplyMessage{ nickname = " + getNickname() +
+                "tiles = " + tiles.toString() +
                 '}';
     }
 }

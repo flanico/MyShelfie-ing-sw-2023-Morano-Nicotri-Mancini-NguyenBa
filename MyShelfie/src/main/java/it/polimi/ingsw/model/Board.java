@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.observer.Observable;
-import it.polimi.ingsw.view.cli.ColorCli;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -265,35 +264,4 @@ public class Board extends Observable implements Serializable {
         }
         //Notify
     }
-
-//    @Override
-//    public String toString() {
-//        StringBuilder builder = new StringBuilder();
-//        builder.append("\n");
-//        builder.append(ColorCli.GREEN + "BOARD:" + ColorCli.RESET);
-//        builder.append("\n");
-//
-//        builder.append("    ");
-//        for (int i = 0; i < 9; i++) {
-//        builder.append(i).append("   ");
-//    }
-//        builder.append("\n");
-//        builder.append( "  __________________________________" );
-//        builder.append("\n");
-//
-//        for( int i = 0; i < 9; i++ ) {
-//        builder.append(i).append(" |");
-//        for (int j = 0; j < 9; j++) {
-//            if(matrix[i][j].isBlocked()){
-//                builder.append(" " + ColorCli.BLACK + "\uD83C\uDD47" + ColorCli.RESET + " ");
-//            } else {
-//                builder.append(" ").append(matrix[i][j].toString()).append(" ");
-//            }
-//
-//        }
-//            builder.append("\n");
-//    }
-//
-//        return builder.toString();
-//        }
 }

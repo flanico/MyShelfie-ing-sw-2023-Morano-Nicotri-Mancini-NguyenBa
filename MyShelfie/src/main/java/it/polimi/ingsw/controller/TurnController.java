@@ -183,11 +183,11 @@ public class TurnController implements Serializable {
         else {
             currentIndex = 0;
         }
-        VirtualView virtualView = virtualViewMap.get(currentPlayer);
         currentPlayer = nicknames.get(currentIndex);
         currentBookshelf = game.getPlayerByNickname(currentPlayer).getBookshelf();
         notifyOtherPlayers("It's "+ currentPlayer + " turn!", currentPlayer);
-        virtualView.showGenericMessage("It's you turn " + currentPlayer + "!");
+        VirtualView virtualView = virtualViewMap.get(currentPlayer);
+        virtualView.showGenericMessage("It's your turn " + currentPlayer + "!");
     }
 
     /**
@@ -239,7 +239,7 @@ public class TurnController implements Serializable {
             for (VirtualView v : virtualViewMap.values()) {
                 for (int i = 0; i < currentTiles.size(); i++) {
                     int index = i + 1;
-                    v.showGenericMessage("* Tile " + index + " : ROW -> " + currentTiles.get(i).getX() + ", COLUMN -> " + currentTiles.get(i).getY() + ", TYPE -> " + currentTiles.get(i).getType());
+                    v.showGenericMessage("* Tile " + index + " : ROW -> " + currentTiles.get(i).getX() + ", COLUMN -> " + currentTiles.get(i).getY() + ", TYPE -> " + currentTiles.get(i).toString());
                 }
             }
             turnState = TurnState.REMOVE;

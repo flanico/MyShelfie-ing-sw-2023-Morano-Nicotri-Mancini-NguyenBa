@@ -19,7 +19,6 @@ public class BookshelfFullMessage extends Message{
 
     @Override
     public String toString() {
-        return "BookshelfFull{Your bookshelf is full" +
-                '}';
+        return "BookshelfFul: {bookshelf is full}";
     }
 }
