@@ -23,6 +23,7 @@ public class CommonSixGroups extends CommonGoalCard {
         for (int x=0; x<5; x++){
             for (int y=0; y<5; y++){
                 if (!bookshelf.getMatrix()[x][y].isCounted() && !bookshelf.getMatrix()[x+1][y].isCounted()
+                        && !bookshelf.getMatrix()[x][y].getType().equals(TileType.NULL) && !bookshelf.getMatrix()[x+1][y].getType().equals(TileType.NULL)
                       && bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+1][y].getType())) {
                     bookshelf.getMatrix()[x][y].setCounted(true);
                     bookshelf.getMatrix()[x+1][y].setCounted(true);
@@ -34,6 +35,7 @@ public class CommonSixGroups extends CommonGoalCard {
         for (int x=0; x<6; x++){
             for (int y=0; y<4; y++){
                 if (!bookshelf.getMatrix()[x][y].isCounted() && !bookshelf.getMatrix()[x][y+1].isCounted()
+                        && !bookshelf.getMatrix()[x][y].getType().equals(TileType.NULL) && !bookshelf.getMatrix()[x][y+1].getType().equals(TileType.NULL)
                         && bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x][y+1].getType())) {
                     bookshelf.getMatrix()[x][y].setCounted(true);
                     bookshelf.getMatrix()[x][y+1].setCounted(true);
@@ -56,6 +58,7 @@ public class CommonSixGroups extends CommonGoalCard {
             for (int x=0; x<6; x++){
                 for (int y=0; y<4; y++){
                     if (!bookshelf.getMatrix()[x][y].isCounted() && !bookshelf.getMatrix()[x][y+1].isCounted()
+                            && !bookshelf.getMatrix()[x][y].getType().equals(TileType.NULL) && !bookshelf.getMatrix()[x][y+1].getType().equals(TileType.NULL)
                             && bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x][y+1].getType())) {
                         bookshelf.getMatrix()[x][y].setCounted(true);
                         bookshelf.getMatrix()[x][y+1].setCounted(true);
@@ -67,6 +70,7 @@ public class CommonSixGroups extends CommonGoalCard {
             for (int x=0; x<5; x++){
                 for (int y=0; y<5; y++){
                     if (!bookshelf.getMatrix()[x][y].isCounted() && !bookshelf.getMatrix()[x+1][y].isCounted()
+                            && !bookshelf.getMatrix()[x][y].getType().equals(TileType.NULL) && !bookshelf.getMatrix()[x+1][y].getType().equals(TileType.NULL)
                             && bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+1][y].getType())) {
                         bookshelf.getMatrix()[x][y].setCounted(true);
                         bookshelf.getMatrix()[x+1][y].setCounted(true);

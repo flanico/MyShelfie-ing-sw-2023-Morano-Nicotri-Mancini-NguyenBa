@@ -11,12 +11,12 @@ class CommonSixGroupsTest {
     private Bookshelf bookshelf = new Bookshelf();
     public CommonGoalCard card = new CommonSixGroups();
     public int[][] shelf = {
-            {1,5,3,0,1},
-            {2,1,5,4,2},
-            {1,1,3,3,4},
-            {1,2,3,4,2},
-            {4,2,3,4,1},
-            {1,2,1,6,5},
+            {0,0,0,0,0},
+            {0,0,0,0,0},
+            {0,0,0,0,0},
+            {0,0,0,0,0},
+            {0,0,0,0,0},
+            {0,0,0,0,0},
     };
     /**
      * Create the matrix of the bookshelf using the matrix of integer "shelf"
