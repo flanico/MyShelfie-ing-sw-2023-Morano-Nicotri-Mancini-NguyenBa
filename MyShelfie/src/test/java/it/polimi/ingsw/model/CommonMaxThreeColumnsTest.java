@@ -8,7 +8,7 @@ class CommonMaxThreeColumnsTest {
     private Bookshelf bookshelf = new Bookshelf();
     public CommonGoalCard card = new CommonMaxThreeColumns();
     public int[][] shelf = {
-            {1,0,3,0,0},
+            {1,3,3,0,0},
             {2,1,3,0,0},
             {2,3,2,0,0},
             {2,2,1,0,0},

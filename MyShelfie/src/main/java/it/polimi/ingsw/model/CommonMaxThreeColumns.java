@@ -19,6 +19,10 @@ public class CommonMaxThreeColumns extends CommonGoalCard {
             for (int x=0; x<6; x++){                        //for each row, the algorithm adds the TileType of the card in the HashSet
                 if (!bookshelf.getMatrix()[x][y].getType().equals(TileType.NULL))
                     cards.add(bookshelf.getMatrix()[x][y].getType());
+                else {
+                    cards.clear();
+                    x=6;
+                }
             }
             if (cards.size() <= 3 && cards.size() >= 1)                 //if the quantity of the TileType in the HashSet is between 1 and 3, the counter will be increased
                 counter++;
