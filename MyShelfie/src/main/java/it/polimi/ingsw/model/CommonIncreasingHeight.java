@@ -54,6 +54,6 @@ public class CommonIncreasingHeight extends CommonGoalCard {
 
     @Override
     public String toString() {
-        return "Common Goal Card: Five columns of increasing or decreasing height. Starting from the first column on the left or on the right, each next column must be made of exactly one more tile. Tiles can be of any type.";
+        return "Common Goal Card: Five columns of increasing or decreasing height. \nStarting from the first column on the left or on the right, each next column must be made of exactly one more tile. \nTiles can be of any type.";
     }
 }

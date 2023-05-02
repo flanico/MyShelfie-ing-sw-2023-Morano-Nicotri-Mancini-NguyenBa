@@ -40,6 +40,6 @@ public class CommonTwoSquares extends CommonGoalCard {
 
     @Override
     public String toString() {
-        return "Common Goal Card: Two groups each containing 4 tiles of the same type in a 2x2 square. The tiles of one square can be different from those of the other square.";
+        return "Common Goal Card: Two groups each containing 4 tiles of the same type in a 2x2 square. \nThe tiles of one square can be different from those of the other square.";
     }
 }

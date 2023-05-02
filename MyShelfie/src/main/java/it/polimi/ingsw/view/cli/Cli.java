@@ -249,24 +249,24 @@ public class Cli extends ViewObservable implements View {
 
         out.print("   ");
         for (int i = 0; i < 5; i++) {
-            out.print("   " + i);
+            out.print(ColorCli.BROWN_BOOK + "   " + i+ ColorCli.RESET);
         }
         out.println();
-        out.println("    ┌───┬───┬───┬───┬───┐");
+        out.println(ColorCli.BROWN_BOOK + "    ┌───┬───┬───┬───┬───┐"+ ColorCli.RESET);
         for( int i = 0; i < 6; i++ ) {
-            out.print(" " +  i + "  ");
+            out.print(ColorCli.BROWN_BOOK +" " +  i + "  "+ ColorCli.RESET);
             for (int j = 0; j < 5; j++) {
                 if(personalGoalCard.getMatrix()[i][j].getType() == TileType.NULL){
-                    out.print("│   ");
+                    out.print(ColorCli.BROWN_BOOK + "│   "+ ColorCli.RESET);
                 }
                 else {
-                    out.print("│" + personalGoalCard.getMatrix()[i][j].toString());
+                    out.print(ColorCli.BROWN_BOOK + "│"+ ColorCli.RESET + personalGoalCard.getMatrix()[i][j].toString());
                 }
             }
-            out.println("│" );
-            if(i != 5) out.println("    ├───┼───┼───┼───┼───┤");
+            out.println(ColorCli.BROWN_BOOK + "│" + ColorCli.RESET);
+            if(i != 5) out.println(ColorCli.BROWN_BOOK + "    ├───┼───┼───┼───┼───┤"+ ColorCli.RESET);
         }
-        out.println("    └───┴───┴───┴───┴───┘");
+        out.println(ColorCli.BROWN_BOOK + "    └───┴───┴───┴───┴───┘"+ ColorCli.RESET);
     }
 
     @Override
@@ -275,13 +275,13 @@ public class Cli extends ViewObservable implements View {
         out.println(ColorCli.GREEN + "BOARD:" + ColorCli.RESET);
         out.print("     ");
         for (int i = 0; i < 9; i++) {
-            out.print(i + "   ");
+            out.print(ColorCli.GREEN_BOARD + i + "   "+ ColorCli.RESET);
         }
         out.println();
-        out.print( "  ╔═════════════════════════════════════╗\n" );
+        out.print( ColorCli.GREEN_BOARD + "  ╔═════════════════════════════════════╗\n"+ ColorCli.RESET );
 
         for( int i = 0; i < 9; i++ ) {
-            out.print(i + " ║ ");
+            out.print(ColorCli.GREEN_BOARD +i + " ║ " + ColorCli.RESET);
             for (int j = 0; j < 9; j++) {
                 if(board.getMatrix()[i][j].isBlocked()){
                     out.print(ColorCli.BLACK + " X " + ColorCli.RESET + " ");
@@ -291,9 +291,9 @@ public class Cli extends ViewObservable implements View {
                 }
 
             }
-            out.print("║\n");
+            out.print(ColorCli.GREEN_BOARD + "║\n"+ ColorCli.RESET);
         }
-        out.print( "  ╚═════════════════════════════════════╝\n" );
+        out.print( ColorCli.GREEN_BOARD + "  ╚═════════════════════════════════════╝\n" + ColorCli.RESET);
     }
 
     @Override
@@ -304,25 +304,25 @@ public class Cli extends ViewObservable implements View {
 
         out.print("  ");
         for (int i = 0; i < 5; i++) {
-            out.print(i + "   ");
+            out.print(ColorCli.BROWN_BOOK + i + "   "+ ColorCli.RESET);
         }
 //        out.print("|");
         out.println();
-        out.println("╔═══╦═══╦═══╦═══╦═══╗");
+        out.println(ColorCli.BROWN_BOOK + "╔═══╦═══╦═══╦═══╦═══╗"+ ColorCli.RESET);
 
         for( int i = 0; i < 6; i++ ) {
             for (int j = 0; j < 5; j++) {
                 if(bookshelf.getMatrix()[i][j].getType() == TileType.NULL){
-                    out.print("║   ");
+                    out.print(ColorCli.BROWN_BOOK +"║   "+ ColorCli.RESET);
                 }
                 else {
-                    out.print("║" + bookshelf.getMatrix()[i][j].toString());
+                    out.print(ColorCli.BROWN_BOOK +"║"+ ColorCli.RESET + bookshelf.getMatrix()[i][j].toString());
                 }
             }
-            out.println("║" );
-            if(i != 5) out.println("╠═══╬═══╬═══╬═══╬═══╣");
+            out.println(ColorCli.BROWN_BOOK +"║"+ ColorCli.RESET );
+            if(i != 5) out.println(ColorCli.BROWN_BOOK +"╠═══╬═══╬═══╬═══╬═══╣"+ ColorCli.RESET);
         }
-        out.println("╚═══╩═══╩═══╩═══╩═══╝");
+        out.println(ColorCli.BROWN_BOOK +"╚═══╩═══╩═══╩═══╩═══╝"+ ColorCli.RESET);
 
     }
 

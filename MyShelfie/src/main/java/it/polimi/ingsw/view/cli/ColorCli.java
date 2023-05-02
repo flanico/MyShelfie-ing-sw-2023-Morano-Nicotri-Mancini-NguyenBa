@@ -12,15 +12,15 @@ public class ColorCli {
     public static final String BLUE = "\u001B[34m";
     public static final String GREEN = "\u001B[32m";
     public static final String WHITE = "\u001B[37m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String YELLOW = "\u001B[33m";
+    public static final String GREEN_BOARD = "\u001b[38;5;66m";
+    public static final String BROWN_BOOK = "\u001b[38;5;94m";
     public static final String BLACK = "\u001b[30m";
-    public static final String BACK_CYAN = "\u001b[46;1m";
-    public static final String BACK_BLUE = "\u001b[44;1m";
-    public static final String BACK_GREEN = "\u001b[42;1m";
-    public static final String BACK_YELLOW = "\u001b[43;1m";
-    public static final String BACK_PURPLE = "\u001b[45;1m";
-    public static final String BACK_WHITE = "\u001b[47;1m";
+    public static final String BACK_CYAN = "\u001b[48;5;39m";
+    public static final String BACK_BLUE = "\u001b[48;5;19m";
+    public static final String BACK_GREEN = "\u001b[48;5;34m";
+    public static final String BACK_YELLOW = "\u001b[48;5;220m";
+    public static final String BACK_PURPLE = "\u001b[48;5;200m";
+    public static final String BACK_WHITE = "\u001b[48;5;230m";
     public static final String BACK_BLACK = "\u001b[40;1m";
 
     public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
