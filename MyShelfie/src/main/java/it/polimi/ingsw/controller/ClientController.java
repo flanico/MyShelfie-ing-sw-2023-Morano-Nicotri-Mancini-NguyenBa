@@ -30,7 +30,7 @@ public class ClientController implements Observer, ViewObserver {
     }
 
     /**
-     * checks if the given ip address is correct (ip address is X.X.X.X, where every X is a number bewtween 0 and 255)
+     * checks if the given ip address is correct (ip address is X.X.X.X, where every X is a number between 0 and 255)
      * @param ip address inserted by the client
      * @return true if the ip address is valid, false otherwise
      */
@@ -120,7 +120,7 @@ public class ClientController implements Observer, ViewObserver {
             }
             case COMMON_GOAL_COMPLETE -> {
                 CommonGoalCompleteMessage commonGoalComplete1Message = (CommonGoalCompleteMessage) message;
-                executorService.execute(() -> view.showCommonGoalComplete1( commonGoalComplete1Message.getCommongoal(), commonGoalComplete1Message.getCommonscores()));
+                executorService.execute(() -> view.showCommonGoalComplete( commonGoalComplete1Message.getCommongoal(), commonGoalComplete1Message.getCommonscores()));
             }
 //            case BOOKSHELF_FULL -> {
 //                BookshelfFullMessage bookshelfFullMessage = (BookshelfFullMessage) message;

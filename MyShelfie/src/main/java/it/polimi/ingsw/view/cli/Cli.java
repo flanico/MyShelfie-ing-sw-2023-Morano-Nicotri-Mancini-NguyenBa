@@ -222,7 +222,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showWinner(String winner) {
-        out.println("Congratulations " + winner + " you have won the match!");
+        out.println("Congratulations to " + winner + "! He/She has won the match!");
         out.println("Game finished...");
         System.exit(0);
     }
@@ -304,24 +304,26 @@ public class Cli extends ViewObservable implements View {
 
         out.print("  ");
         for (int i = 0; i < 5; i++) {
-            out.print("  " + i + "  ");
+            out.print(i + "   ");
         }
 //        out.print("|");
         out.println();
-        out.println("===========================");
+        out.println("╔═══╦═══╦═══╦═══╦═══╗");
 
         for( int i = 0; i < 6; i++ ) {
             for (int j = 0; j < 5; j++) {
                 if(bookshelf.getMatrix()[i][j].getType() == TileType.NULL){
-                    out.print(" |   ");
+                    out.print("║   ");
                 }
                 else {
-                    out.print(" | " + bookshelf.getMatrix()[i][j].toString());
+                    out.print("║" + bookshelf.getMatrix()[i][j].toString());
                 }
             }
-            out.println(" |" );
-            out.println("===========================");
+            out.println("║" );
+            if(i != 5) out.println("╠═══╬═══╬═══╬═══╬═══╣");
         }
+        out.println("╚═══╩═══╩═══╩═══╩═══╝");
+
     }
 
     @Override
@@ -420,7 +422,7 @@ public class Cli extends ViewObservable implements View {
             int position = -1;
             do {
                 try {
-                    out.println("Digit the order number for the tile " + tiles.get(i).getType() + " :");
+                    out.println("Digit the order number for the tile " + tiles.get(i).toString() + " :");
                     position = Integer.parseInt(readLine.nextLine());
                     if(position >= 0 && position <= tiles.size()-1 && finalTiles.get(position).getType() == TileType.NULL) {
                         finalTiles.set(position, tiles.get(i));
@@ -457,8 +459,8 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showCommonGoalComplete1(CommonGoalCard commonGoalCard, int score){
-        out.println("You complete the Common Goal Card: "+ commonGoalCard.toString() + " score: " + score);
+    public void showCommonGoalComplete(CommonGoalCard commonGoalCard, int score){
+        out.println("You have completed the Common Goal Card: "+ commonGoalCard + "\n Score: " + score);
     }
 
     @Override
@@ -474,6 +476,10 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void showScores(Map<String, Integer> playerScore) {
         out.println(ColorCli.GREEN + "RANK SCORES OF THE GAME: " + ColorCli.RESET);
-        out.println(Collections.singletonList(playerScore));
+        int position = 1;
+        for (String player : playerScore.keySet()) {
+            out.println(position + "- " + player + ": " + playerScore.get(player));
+            position++;
+        }
     }
 }

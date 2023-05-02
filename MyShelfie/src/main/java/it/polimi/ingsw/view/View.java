@@ -112,7 +112,7 @@ public interface View {
      * @param commonGoalCard is the common Goal to check
      * @param score is the score relative at the completed common goal
      */
-    void showCommonGoalComplete1(CommonGoalCard commonGoalCard, int score);
+    void showCommonGoalComplete(CommonGoalCard commonGoalCard, int score);
 
     /**
      * shows the final scores of the players

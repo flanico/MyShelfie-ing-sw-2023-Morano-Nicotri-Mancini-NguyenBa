@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * class that manages a turn in the game
+ * class that manages turn in the game
  */
 public class TurnController implements Serializable {
     @Serial
@@ -311,12 +311,12 @@ public class TurnController implements Serializable {
             if(score!= 0)
             {
                 if(game.getPlayerByNickname(currentPlayer).isDoneFirstCommon()){
-                    virtualView.showCommonGoalComplete1( commonGoalCards.get(0), score);
-                    notifyOtherPlayers(currentPlayer+"has completed the common Goal Card 1", currentPlayer);
+//                    virtualView.showCommonGoalComplete( commonGoalCards.get(0), score);
+                    notifyOtherPlayers(currentPlayer+" has completed the common Goal Card 1", currentPlayer);
                 }
                 else if (game.getPlayerByNickname(currentPlayer).isDoneSecondCommon()){
-                    virtualView.showCommonGoalComplete1(commonGoalCards.get(1), score);
-                    notifyOtherPlayers(currentPlayer+"has completed the common Goal Card 2", currentPlayer);
+//                    virtualView.showCommonGoalComplete(commonGoalCards.get(1), score);
+                    notifyOtherPlayers(currentPlayer+" has completed the common Goal Card 2", currentPlayer);
                 }
                 else {
                     virtualView.showGenericMessage("Errore su check Common Goal Card");
@@ -335,7 +335,7 @@ public class TurnController implements Serializable {
             VirtualView virtualView = virtualViewMap.get(currentPlayer);
             player.setScore(player.getScore() + 1);
             virtualView.showGenericMessage(currentPlayer + " you have the end game token! (+1 point)");
-            notifyOtherPlayers(currentPlayer + " have the end game token! (+1 point)", currentPlayer);
+            notifyOtherPlayers(currentPlayer + " has the end game token! (+1 point)", currentPlayer);
         }
     }
 
@@ -385,11 +385,9 @@ public class TurnController implements Serializable {
         }
 
         //Notify the winner
-        VirtualView virtualView = virtualViewMap.get(winner);
-        virtualView.showWinner(winner);
-
-        //Notify losers
-        notifyOtherPlayers("Player " + winner + " has won the match!", winner);
+        for (VirtualView v : virtualViewMap.values()) {
+            v.showWinner(winner);
+        }
     }
 
     /**
