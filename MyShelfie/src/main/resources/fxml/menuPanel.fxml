@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Controller">
+   <children>
+      <ImageView fitHeight="590.0" fitWidth="720.0" layoutY="-5.0" pickOnBounds="true">
+         <image>
+            <Image url="@/misc/sfondo.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="130.0" fitWidth="377.0" layoutX="172.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Publisher Material/Title 2000x618px.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="usernameField" layoutX="141.0" layoutY="276.0" prefHeight="28.0" prefWidth="439.0">
+         <effect>
+            <Blend />
+         </effect>
+      </TextField>
+      <Text layoutX="282.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserisci Username">
+         <font>
+            <Font name="Cambria" size="19.0" />
+         </font>
+      </Text>
+      <TextField fx:id="serverAddressField" layoutX="139.0" layoutY="446.0" />
+      <Text layoutX="165.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server address">
+         <font>
+            <Font name="Cambria" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="481.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server port">
+         <font>
+            <Font name="Cambria" size="15.0" />
+         </font>
+      </Text>
+      <TextField fx:id="serverPortField" layoutX="443.0" layoutY="446.0" />
+      <ChoiceBox fx:id="server_type_field" layoutX="285.0" layoutY="366.0" prefWidth="150.0">
+
+      </ChoiceBox>
+      <Button fx:id="join_game_button" layoutX="325.0" layoutY="507.0" mnemonicParsing="false" onAction="#joinGame" text="Join Game" />
+   </children>
+</Pane>
