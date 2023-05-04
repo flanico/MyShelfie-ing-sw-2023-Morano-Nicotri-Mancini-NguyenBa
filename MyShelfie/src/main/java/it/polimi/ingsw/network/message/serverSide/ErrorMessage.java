@@ -11,7 +11,7 @@ import java.io.Serial;
 public class ErrorMessage extends Message {
     @Serial
     private static final long serialVersionUID = 5355978810741721251L;
-    private String messageError;
+    private final String messageError;
 
     public ErrorMessage(String messageError) {
         super("SERVER", MessageType.ERROR);

@@ -13,8 +13,8 @@ import java.util.List;
 public class PositionReplyMessage extends Message {
     @Serial
     private static final long serialVersionUID = 139374498578028212L;
-    private int column;
-    private List<Tile> tiles;
+    private final int column;
+    private final List<Tile> tiles;
 
     public PositionReplyMessage(String nickname, int column, List<Tile> tiles) {
         super(nickname, MessageType.POSITION_REPLY);
@@ -33,6 +33,6 @@ public class PositionReplyMessage extends Message {
     @Override
     public String toString() {
         return "PositionReplyMessage{" +
-                "nickname = " + getNickname() + ", column = " + column + ", tiles = " + tiles.toString();
+                "nickname= " + getNickname() + ", column= " + column + ", tiles= " + tiles.toString();
     }
 }

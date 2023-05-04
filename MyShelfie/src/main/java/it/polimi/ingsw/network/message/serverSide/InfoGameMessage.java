@@ -13,8 +13,8 @@ import java.util.List;
 public class InfoGameMessage extends Message {
     @Serial
     private static final long serialVersionUID = -6954035833019978470L;
-    private List<Player> players;
-    private int num;
+    private final List<Player> players;
+    private final int num;
 
     public InfoGameMessage(List<Player> players, int num) {
         super("SERVER", MessageType.INFO_GAME);

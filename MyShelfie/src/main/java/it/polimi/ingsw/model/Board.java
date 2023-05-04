@@ -1,5 +1,4 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.observer.Observable;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -9,7 +8,7 @@ import java.util.*;
  * class that define the living room
  * @author Flavia Nicotri
  */
-public class Board extends Observable implements Serializable {
+public class Board implements Serializable {
     @Serial
     private static final long serialVersionUID = 5741045381452833395L;
     private final Tile[][] matrix;
@@ -97,7 +96,6 @@ public class Board extends Observable implements Serializable {
                 }
             }
         }
-        //Notify
     }
 
     /**
@@ -133,27 +131,6 @@ public class Board extends Observable implements Serializable {
             return false;
         }
         return true;
-    }
-
-    /**
-     * selects tiles from the board
-     * @param number of tiles to remove
-     * @param coordinates of the tiles
-     * @author Alessandro Mancini
-     */
-    public List<Tile> selectTile(int number, Integer[][] coordinates) {
-        List<Tile> selected = new ArrayList<>();
-
-        do {
-            for (int i = 0; i < number; i ++) {
-                int x = coordinates[i][0];
-                int y = coordinates[i][1];
-                selected.add(this.getMatrix()[x][y]);
-            }
-        } while (!this.isRemovable(selected));
-
-        this.removeTiles(selected);
-        return selected;
     }
 
     /**
@@ -250,7 +227,6 @@ public class Board extends Observable implements Serializable {
                 this.getMatrix()[t.getX()][t.getY()].setType(TileType.NULL);
             }
         }
-        //Notify
     }
 
     public int maxTilesBoard(){

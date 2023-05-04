@@ -25,8 +25,8 @@ public class ShowPersonalCardMessage extends Message {
 
     @Override
     public String toString() {
-        return "ShowPersonalCard{Number: " + player.getPersonalGoalCard().getType() +
-                ", player=" + player.getNickname() +
+        return "ShowPersonalCardMessage{" +
+                "player=" + player + " ,personal=" + player.getPersonalGoalCard().getType() +
                 '}';
     }
 }

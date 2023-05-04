@@ -13,8 +13,8 @@ import java.io.Serial;
 public class ShowBookshelfMessage extends Message {
     @Serial
     private static final long serialVersionUID = -9168339307648742424L;
-    private Player player;
-    private Bookshelf bookshelf;
+    private final Player player;
+    private final Bookshelf bookshelf;
 
     public ShowBookshelfMessage(Player player, Bookshelf bookshelf) {
         super("SERVER", MessageType.SHOW_BOOKSHELF);
@@ -32,8 +32,7 @@ public class ShowBookshelfMessage extends Message {
 
     @Override
     public String toString() {
-        return "ShowBookshelf{" +
-                "bookshelf, " + "player= " + player.getNickname() +
+        return "ShowBookshelf{player=" + player.getNickname() +
                 '}';
     }
 }

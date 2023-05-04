@@ -13,7 +13,7 @@ import java.util.List;
 public class TilesReplyMessage extends Message {
     @Serial
     private static final long serialVersionUID = 5909872357046367409L;
-    private List<Tile> tiles;
+    private final List<Tile> tiles;
 
     public TilesReplyMessage(String nickname, List<Tile> tiles) {
         super(nickname, MessageType.TILES_REPLY);
@@ -26,8 +26,8 @@ public class TilesReplyMessage extends Message {
 
     @Override
     public String toString() {
-        return "TilesReplyMessage{ nickname = " + getNickname() +
-                ", tiles = " + tiles.toString() +
+        return "TilesReplyMessage{nickname= " + getNickname() +
+                ", tiles= " + tiles.toString() +
                 '}';
     }
 }

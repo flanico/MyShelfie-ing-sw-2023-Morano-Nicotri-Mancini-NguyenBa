@@ -29,7 +29,7 @@ public class InputController implements Serializable {
      * @param gameController the game controller
      * @param virtualViewMap the virtual view of all the clients
      */
-    public InputController(GameController gameController, Map<String, VirtualView> virtualViewMap) {
+    protected InputController(GameController gameController, Map<String, VirtualView> virtualViewMap) {
         this.game = gameController.getGame();
         this.gameController = gameController;
         this.virtualViewMap = virtualViewMap;
@@ -118,7 +118,7 @@ public class InputController implements Serializable {
         }
     }
 
-    public boolean checkOrder(Message message) {
+    protected boolean checkOrder(Message message) {
         OrderReplyMessage orderReplyMessage = (OrderReplyMessage) message;
         VirtualView virtualView = virtualViewMap.get(orderReplyMessage.getNickname());
         if(!orderReplyMessage.getTiles().isEmpty()) {

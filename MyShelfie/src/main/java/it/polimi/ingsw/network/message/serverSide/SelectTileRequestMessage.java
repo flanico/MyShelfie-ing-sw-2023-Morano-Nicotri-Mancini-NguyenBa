@@ -9,11 +9,10 @@ import java.io.Serial;
 /**
  * message sent to client to request to select tiles from the board
  */
-
 public class SelectTileRequestMessage extends Message{
     @Serial
     private static final long serialVersionUID  = -6332107747110883202L;
-    private Board board;
+    private final Board board;
 
     public SelectTileRequestMessage(Board board) {
         super("SERVER", MessageType.SELECT_TILE_REQ);
@@ -26,7 +25,7 @@ public class SelectTileRequestMessage extends Message{
 
     @Override
     public String toString() {
-        return "SelectTilesRequestMessage{" + getNickname() +
+        return "SelectTilesRequestMessage{nickname=" + getNickname() +
                 "}";
     }
 }

@@ -9,12 +9,11 @@ import java.io.Serial;
 /**
  * message sent to the client to show the board
  */
-
 public class ShowBoardMessage extends Message {
     @Serial
     private static final long serialVersionUID = -1220642280749517895L;
     private boolean hasToBeRefilled;
-    private Board board;
+    private final Board board;
 
     public ShowBoardMessage (boolean hasToBeRefilled, Board board){
         super("SERVER", MessageType.SHOW_BOARD);
@@ -28,7 +27,7 @@ public class ShowBoardMessage extends Message {
 
     @Override
     public String toString() {
-        return "ShowBoard{ Board needs to refill" +
+        return "ShowBoard{Board needs to refill" +
                 "=" + hasToBeRefilled + "}";
     }
 }

@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.View;
 
-import javax.swing.*;
 import java.io.PrintStream;
 import java.util.*;
 
@@ -54,7 +53,7 @@ public class Cli extends ViewObservable implements View {
     public void selectConnection() {
         int connectingType = 0;
         out.println("Do you want to use Socket or RMI?");
-        out.println("Digit 's' for Socket or 'r' for RMI");
+        out.print("Digit 's' for Socket or 'r' for RMI: ");
 
         while(connectingType == 0) {
             connectingType = chooseConnectingType();
@@ -79,7 +78,7 @@ public class Cli extends ViewObservable implements View {
         if(input.equalsIgnoreCase("s")) return 1;
         else if(input.equalsIgnoreCase("r")) return 2;
         else {
-            out.println("Please input Socket ('s') or RMI ('r')");
+            out.print("Please input Socket ('s') or RMI ('r'): ");
             return 0;
         }
     }
@@ -99,7 +98,7 @@ public class Cli extends ViewObservable implements View {
         out.println("The value between the brackets is the default value.");
 
         do {
-            out.println("Enter the server address (Default address: '" + defaultIp + "') : ");
+            out.print("Enter the server address (Default address: '" + defaultIp + "') : ");
             inputIp = readLine.nextLine();
 
             if (inputIp.isEmpty()) {
@@ -122,7 +121,7 @@ public class Cli extends ViewObservable implements View {
 
         isValid = false;
         do {
-            out.println("Enter the server port (Default port: '" + defaultPort + "') : ");
+            out.print("Enter the server port (Default port: '" + defaultPort + "') : ");
             inputPort = readLine.nextLine();
 
             if (inputPort.isEmpty()) {
@@ -150,7 +149,7 @@ public class Cli extends ViewObservable implements View {
         boolean isValid;
         String nickname;
         do {
-            out.println("Enter your nickname: ");
+            out.print("Enter your nickname: ");
             nickname = readLine.nextLine();
 
             if(nickname.isEmpty()) {
@@ -168,11 +167,11 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void askPlayersNumber() throws NumberFormatException{
+    public void askPlayersNumber() throws NumberFormatException {
         boolean isValid = false;
         int num = 0;
         do {
-            out.println("Select the desired number of players (Max. 4): ");
+            out.print("Select the desired number of players (Max. 4): ");
             try {
                 num = Integer.parseInt(readLine.nextLine());
             } catch (NumberFormatException e) {
@@ -204,7 +203,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showGameInfo(List<Player> players, int numberPlayers) {
-        out.println(ColorCli.GREEN + "MATCH INFO: " + ColorCli.RESET);
+        out.println(ColorCli.GREEN + "\nMATCH INFO: " + ColorCli.RESET);
         out.print("Players connected: ( ");
         for(int i=0; i < players.size(); i++) {
             out.print(players.get(i).getNickname());
@@ -239,13 +238,13 @@ public class Cli extends ViewObservable implements View {
         out.println(ColorCli.GREEN + "COMMON GOAL CARDS OF THE MATCH ARE: " + ColorCli.RESET);
         for(CommonGoalCard c : commonGoalCards) {
             int index = commonGoalCards.indexOf(c) + 1;
-            out.println("*" + index + ": " + c+"\n");
+            out.println("*" + index + ": " + c);
         }
     }
 
     @Override
     public void showPersonalCard(Player player) {
-        out.println(ColorCli.GREEN + "YOU'RE PERSONAL GOAL CARD IS: " + ColorCli.RESET);
+        out.println(ColorCli.GREEN + "\nYOU'RE PERSONAL GOAL CARD IS: " + ColorCli.RESET);
         PersonalGoalCard personalGoalCard = player.getPersonalGoalCard();
 
         out.print("   ");
@@ -328,14 +327,14 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void askSelectTiles(Board board) {
+    public void askSelectTiles(Board board) throws NumberFormatException {
         boolean isValid = false;
         int num = -1;
         List<Tile> tiles = new ArrayList<>();
 
         out.println("Hey you have to select the tiles from the board!");
         do {
-            out.println("How many tiles do you want to select (1,2 o 3 tiles)?");
+            out.print("How many tiles do you want to select (1,2 o 3 tiles): ");
             try {
                 num = Integer.parseInt(readLine.nextLine());
                 if(num >= 1 && num <= 3) {
@@ -359,7 +358,7 @@ public class Cli extends ViewObservable implements View {
             int col = -1;
             int index = i + 1;
             do {
-                out.println("Digit the corresponding ROW of the tile number " + index);
+                out.print("Digit the corresponding ROW of the tile number " + index + ": ");
                 try {
                     row = Integer.parseInt(readLine.nextLine());
                     if (row >= 0 && row <= 8) isValid = true;
@@ -370,7 +369,7 @@ public class Cli extends ViewObservable implements View {
                     clearCli();
                 }
                 if(isValid) {
-                    out.println("Digit the corresponding COLUMN of the tile number " + index);
+                    out.print("Digit the corresponding COLUMN of the tile number " + index + ": ");
                     try {
                         col = Integer.parseInt(readLine.nextLine());
                         if (col >= 0 && col <= 8) isValid = true;
@@ -393,12 +392,12 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void askInsertTiles(Bookshelf bookshelf, List<Tile> tiles) {
+    public void askInsertTiles(Bookshelf bookshelf, List<Tile> tiles) throws NumberFormatException {
         boolean isValid = false;
         int col = -1;
 
         out.println("Hey you have to insert the tiles in the bookshelf!");
-        out.println("Please select the column where to insert the tiles: ");
+        out.print("Please select the column where to insert the tiles: ");
         do {
             try {
                 col = Integer.parseInt(readLine.nextLine());
@@ -414,7 +413,7 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void askOrderTiles(List<Tile> tiles) {
+    public void askOrderTiles(List<Tile> tiles) throws NumberFormatException {
         boolean isValid = false;
         List<Tile> finalTiles = new ArrayList<>();
 
@@ -429,7 +428,7 @@ public class Cli extends ViewObservable implements View {
                 int position = -1;
                 do {
                     try {
-                        out.println("Digit the order number for the tile " + tiles.get(i).toString() + " :");
+                        out.print("Digit the order number for the tile " + tiles.get(i).toString() + " : ");
                         position = Integer.parseInt(readLine.nextLine());
                         if(position >= 0 && position <= tiles.size()-1 && finalTiles.get(position).getType() == TileType.NULL) {
                             finalTiles.set(position, tiles.get(i));
@@ -452,41 +451,31 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showEndTurn(String nickname) {
-        out.println(nickname + "has finished his turn!");
-    }
-
-    @Override
-    public void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores) throws NullPointerException {
-        try {
-            for (int i = 0; i<2; i++)
-            {
-                out.println("Stack of the Common Goal Card n." + i + ":");
-                commonGoalCardScores.toString();
+    public void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores){
+        int index = 1;
+        for (int i = 0; i < 2; i++)
+        {
+            out.println("\nScores of the Common Goal Card " + index + ": ");
+            for (int j = 0; j < commonGoalCardScores.get(i).getStack().size(); j++) {
+                out.print(commonGoalCardScores.get(i).getStack().get(j) + " ");
             }
-        } catch (NullPointerException e){
-            out.println("Empty Stack: there isn't any score available");
+            index++;
         }
     }
 
     @Override
     public void showCommonGoalComplete(CommonGoalCard commonGoalCard, int score){
-        out.println("You have completed the Common Goal Card: "+ commonGoalCard + "\n Score: " + score);
+        out.println("You have completed: "+ commonGoalCard + "\nScore: " + score);
     }
 
     @Override
-    public void bookshelfFull() {
-        out.println("Your bookshelf is full!");
-    }
-
-    @Override
-    public void disconnection() {
-
+    public void disconnection(String nickname) {
+        out.print(nickname + "has been disconnecting from the game");
     }
 
     @Override
     public void showScores(Map<String, Integer> playerScore) {
-        out.println(ColorCli.GREEN + "RANK SCORES OF THE GAME: " + ColorCli.RESET);
+        out.println(ColorCli.GREEN + "\nRANK SCORES OF THE GAME: " + ColorCli.RESET);
         int position = 1;
         for (String player : playerScore.keySet()) {
             out.println(position + "- " + player + ": " + playerScore.get(player));

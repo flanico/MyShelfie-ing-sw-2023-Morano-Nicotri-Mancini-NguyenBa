@@ -11,7 +11,7 @@ import java.io.Serial;
 public class GenericMessage extends Message {
     @Serial
     private static final long serialVersionUID = -1459285387719574659L;
-    private String message;
+    private final String message;
 
     public GenericMessage(String nickname, String message) {
         super(nickname, MessageType.GENERIC);
