@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.View;
 
+import javax.swing.*;
 import java.io.PrintStream;
 import java.util.*;
 
@@ -420,7 +421,7 @@ public class Cli extends ViewObservable implements View {
         for (int i = 0; i < tiles.size(); i++) {
             finalTiles.add(new Tile(TileType.NULL));
         }
-        if(finalTiles.size() !=1 ){
+        if(tiles.size() !=1 ){
             out.println("Hey you have to select the order of the tiles!");
             out.println("Attention: the first tile sorted is the one placed at the bottom of the bookshelf. The count order starts from 0.");
             for (int i = 0; i < tiles.size(); i++) {
@@ -443,6 +444,8 @@ public class Cli extends ViewObservable implements View {
                     }
                 } while (!isValid);
             }
+        }else {
+            finalTiles.set(0, tiles.get(0));
         }
 
         notifyObserver(obs -> obs.sendOrderTiles(finalTiles));
