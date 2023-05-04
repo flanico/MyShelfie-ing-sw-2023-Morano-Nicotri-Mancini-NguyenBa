@@ -17,11 +17,7 @@ public class Player implements Serializable {
     private boolean isDoneFirstCommon;
     private boolean isDoneSecondCommon;
 
-    /**
-     * constructor of Player
-     * @param nickname of the player
-     * @author Alessandro Mancini
-     */
+
     public Player(String nickname) {
         this.bookshelf = new Bookshelf();
         this.nickname = nickname;
@@ -30,52 +26,32 @@ public class Player implements Serializable {
         this.isDoneSecondCommon = false;
     }
 
-    /**
-     * getter of bookshelf
-     * @return bookshelf
-     * @author Alessandro Mancini
-     */
+
     public Bookshelf getBookshelf() {
         return bookshelf;
     }
 
-    /**
-     * getter of score
-     * @return score
-     * @author Alessandro Mancini
-     */
+
     public int getScore() {
         return score;
     }
 
-    /**
-     * setter of score
-     * @author Alessandro Mancini
-     */
+
     public void setScore(int score) {
         this.score = score;
     }
 
-    /**
-     * getter of the nickname
-     * @return nickname
-     */
+
     public String getNickname() {
         return nickname;
     }
 
-    /**
-     * getter of the personal goal card
-     * @return the personal goal card
-     */
+
     public PersonalGoalCard getPersonalGoalCard() {
         return personalGoalCard;
     }
 
-    /**
-     * setter of the personal goal card
-     * @param personalGoalCard of the player
-     */
+
     protected void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
         this.personalGoalCard = personalGoalCard;
     }

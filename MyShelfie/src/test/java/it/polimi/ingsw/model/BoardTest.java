@@ -134,4 +134,52 @@ class BoardTest {
         assertEquals(game.getBoard().getMatrix()[2][3].getType(), TileType.NULL);
         assertEquals(game.getBoard().getMatrix()[1][3].getType(), TileType.NULL);
     }
+
+    /**
+     * test the method maxTilesBoard
+     * @author Flavia Nicotri
+     */
+
+    @Test
+    void maxTilesBoard_TwoTest(){
+
+        board.getMatrix()[4][5].setType(TileType.BOOK);
+        board.getMatrix()[4][6].setType(TileType.BOOK);
+
+
+        board.getMatrix()[5][2].setType(TileType.TROPHY);
+        board.getMatrix()[6][6].setType(TileType.BOOK);
+
+        assertEquals(2, board.maxTilesBoard());
+    }
+
+
+    @Test
+    void maxTilesBoard_OneTest(){
+        board.getMatrix()[3][2].setType(TileType.BOOK);
+
+        board.getMatrix()[6][4].setType(TileType.CAT);
+
+
+        board.getMatrix()[5][2].setType(TileType.TROPHY);
+        board.getMatrix()[6][6].setType(TileType.BOOK);
+
+        assertEquals(1, board.maxTilesBoard());
+    }
+
+    @Test
+    void maxTilesBoard_ThreeTest(){
+        board.getMatrix()[3][2].setType(TileType.BOOK);
+
+        board.getMatrix()[6][4].setType(TileType.CAT);
+        board.getMatrix()[5][4].setType(TileType.PLANT);
+        board.getMatrix()[4][4].setType(TileType.PLANT);
+
+        board.getMatrix()[5][2].setType(TileType.TROPHY);
+
+        board.getMatrix()[6][5].setType(TileType.PLANT);
+        board.getMatrix()[6][6].setType(TileType.BOOK);
+
+        assertEquals(3, board.maxTilesBoard());
+    }
 }

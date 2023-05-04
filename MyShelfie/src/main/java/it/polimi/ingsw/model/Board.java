@@ -73,34 +73,22 @@ public class Board extends Observable implements Serializable {
         }
     }
 
-    /**
-     * getter of matrix
-     * @author Alessandro Mancini
-     */
+
     public Tile[][] getMatrix() {
         return matrix;
     }
 
-    /**
-     * getter of ROW
-     * @author Alessandro Mancini
-     */
+
     public int getROW() {
         return ROW;
     }
 
-    /**
-     * getter of COL
-     * @author Alessandro Mancini
-     */
+
     public int getCOL() {
         return COL;
     }
 
-    /**
-     * fill the board with tiles from the bag
-     * @author Alessandro Mancini
-     */
+
     public void fillBoard(Stack<Tile> bag) {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
@@ -263,5 +251,65 @@ public class Board extends Observable implements Serializable {
             }
         }
         //Notify
+    }
+
+    public int maxTilesBoard(){
+        int max = 1;
+        List<Tile> tiles = new ArrayList<>();
+
+        for (int i=0; i<ROW; i++){
+            for (int j=0; j<COL; j++)
+            {
+
+                if (i< ROW-2)
+                {
+                    tiles.add(this.getMatrix()[i][j]);
+                    tiles.add(this.getMatrix()[i+1][j]);
+                    tiles.add(this.getMatrix()[i+2][j]);
+                    if(isRemovable(tiles)){
+                        return 3;
+                    }
+                }
+                if (i < ROW-1)
+                {
+                    tiles.removeAll(tiles);
+                    //System.out.println("\ncontrollo 2 row : i= "+ i + "j=" +j);
+                    tiles.add(this.getMatrix()[i][j]);
+                    tiles.add(this.getMatrix()[i+1][j]);
+                    if(isRemovable(tiles)){
+                        if (max == 1){
+                            max= 2;
+                        }
+                        //System.out.println("max:" + max);
+                    }
+                }
+
+
+                if (j< COL-2) {
+                    tiles.add(this.getMatrix()[i][j]);
+                    tiles.add(this.getMatrix()[i][j + 1]);
+                    tiles.add(this.getMatrix()[i][j + 2]);
+                    if (isRemovable(tiles)) {
+                        return 3;
+                    }
+                }
+                if (j < COL-1)
+                {
+                    tiles.removeAll(tiles);
+                    //System.out.println("\ncontrollo 2 col : i= "+ i + "j=" +j);
+                    tiles.add(this.getMatrix()[i][j]);
+                    tiles.add(this.getMatrix()[i][j+1]);
+                    if(isRemovable(tiles)){
+                        if (max == 1){
+                            max= 2;
+                        }
+                        //System.out.println("max:" + max);
+                    }
+                }
+
+
+            }
+        }
+        return max;
     }
 }

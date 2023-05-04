@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.model.Bookshelf;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.clientSide.NumPlayersReplyMessage;
@@ -75,11 +76,20 @@ public class InputController implements Serializable {
      * @return true if the tiles are valid, false otherwise
      */
     protected boolean checkTiles(Message message) {
+        Bookshelf bookshelfOfTheRoundPlayer;
+        int maxTiles;
         TilesReplyMessage tilesReplyMessage = (TilesReplyMessage) message;
         VirtualView virtualView = virtualViewMap.get(tilesReplyMessage.getNickname());
         if(game.getBoard().isRemovable(tilesReplyMessage.getTiles())) {
             virtualView.showGenericMessage("Tiles selected are removable from the board!");
-            return true;
+            bookshelfOfTheRoundPlayer = game.getPlayerByNickname(tilesReplyMessage.getNickname()).getBookshelf();
+            maxTiles = bookshelfOfTheRoundPlayer.maxTilesBookshelf();
+            if (tilesReplyMessage.getTiles().size() > maxTiles)
+            {
+                virtualView.showGenericMessage("Sorry, you don't have enough space in your bookshelf. You can select MAX "+ maxTiles + "tiles. Retry.");
+                return false;
+            }else
+                 return true;
         }
         else {
             virtualView.showGenericMessage("Sorry, tiles selected are NOT removable from the board! Retry.");

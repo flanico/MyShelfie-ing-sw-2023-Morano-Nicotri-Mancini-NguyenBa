@@ -238,7 +238,7 @@ public class Cli extends ViewObservable implements View {
         out.println(ColorCli.GREEN + "COMMON GOAL CARDS OF THE MATCH ARE: " + ColorCli.RESET);
         for(CommonGoalCard c : commonGoalCards) {
             int index = commonGoalCards.indexOf(c) + 1;
-            out.println("*" + index + ": " + c);
+            out.println("*" + index + ": " + c+"\n");
         }
     }
 
@@ -337,7 +337,13 @@ public class Cli extends ViewObservable implements View {
             out.println("How many tiles do you want to select (1,2 o 3 tiles)?");
             try {
                 num = Integer.parseInt(readLine.nextLine());
-                if(num >= 1 && num <= 3) isValid = true;
+                if(num >= 1 && num <= 3) {
+                    if (num <= board.maxTilesBoard()){
+                        isValid = true;
+                    }else {
+                        out.println("There isn't enough removable tiles on the board. You can select MAX "+ board.maxTilesBoard()+ "tiles. Please retry.");
+                    }
+                }
                 else out.println(STR_INPUT_ERR);
             } catch (NumberFormatException e) {
                 out.println(STR_INPUT_ERR);
