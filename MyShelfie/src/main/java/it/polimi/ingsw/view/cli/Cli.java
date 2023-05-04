@@ -420,29 +420,31 @@ public class Cli extends ViewObservable implements View {
         for (int i = 0; i < tiles.size(); i++) {
             finalTiles.add(new Tile(TileType.NULL));
         }
-
-        out.println("Hey you have to select the order of the tiles!");
-        out.println("Attention: the first tile sorted is the one placed at the bottom of the bookshelf. The count order starts from 0.");
-        for (int i = 0; i < tiles.size(); i++) {
-            isValid = false;
-            int position = -1;
-            do {
-                try {
-                    out.println("Digit the order number for the tile " + tiles.get(i).toString() + " :");
-                    position = Integer.parseInt(readLine.nextLine());
-                    if(position >= 0 && position <= tiles.size()-1 && finalTiles.get(position).getType() == TileType.NULL) {
-                        finalTiles.set(position, tiles.get(i));
-                        isValid = true;
+        if(finalTiles.size() !=1 ){
+            out.println("Hey you have to select the order of the tiles!");
+            out.println("Attention: the first tile sorted is the one placed at the bottom of the bookshelf. The count order starts from 0.");
+            for (int i = 0; i < tiles.size(); i++) {
+                isValid = false;
+                int position = -1;
+                do {
+                    try {
+                        out.println("Digit the order number for the tile " + tiles.get(i).toString() + " :");
+                        position = Integer.parseInt(readLine.nextLine());
+                        if(position >= 0 && position <= tiles.size()-1 && finalTiles.get(position).getType() == TileType.NULL) {
+                            finalTiles.set(position, tiles.get(i));
+                            isValid = true;
+                        }
+                        else {
+                            out.println(STR_INPUT_ERR);
+                        }
+                    } catch (NumberFormatException e) {
+                        position = -1;
+                        clearCli();
                     }
-                    else {
-                        out.println(STR_INPUT_ERR);
-                    }
-                } catch (NumberFormatException e) {
-                    position = -1;
-                    clearCli();
-                }
-            } while (!isValid);
+                } while (!isValid);
+            }
         }
+
         notifyObserver(obs -> obs.sendOrderTiles(finalTiles));
     }
 
