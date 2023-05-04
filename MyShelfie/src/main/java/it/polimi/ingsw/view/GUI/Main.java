@@ -16,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("/fxml/menuPanel.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/fxml/gamePanel.fxml"));
     //primaryStage.getIcons().add(new Image("@/Publisher Material/Title 2000x618px.png"));
     primaryStage.setTitle("MyShelfie");
     primaryStage.setScene(new Scene(root));
