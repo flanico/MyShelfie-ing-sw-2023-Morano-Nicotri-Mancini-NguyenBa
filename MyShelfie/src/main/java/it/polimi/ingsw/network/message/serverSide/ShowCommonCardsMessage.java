@@ -8,7 +8,7 @@ import java.io.Serial;
 import java.util.List;
 
 /**
- * message used to shows the common goal cards of the game
+ * message used to show the common goal cards of the game
  */
 public class ShowCommonCardsMessage extends Message {
     @Serial

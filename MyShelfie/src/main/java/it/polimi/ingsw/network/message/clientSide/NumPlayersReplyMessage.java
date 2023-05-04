@@ -26,7 +26,7 @@ public class NumPlayersReplyMessage extends Message {
     @Override
     public String toString() {
         return "NumPlayersReplyMessage{" +
-                "nickname = " + getNickname() + " ,numPlayers = " + numPlayers +
+                "nickname= " + getNickname() + " ,numPlayers= " + numPlayers +
                 '}';
     }
 }

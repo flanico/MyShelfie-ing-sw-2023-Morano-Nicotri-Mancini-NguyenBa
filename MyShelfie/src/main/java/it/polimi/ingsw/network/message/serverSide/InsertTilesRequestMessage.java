@@ -14,8 +14,8 @@ import java.util.List;
 public class InsertTilesRequestMessage extends Message {
     @Serial
     private static final long serialVersionUID = 6352397701669107548L;
-    private List <Tile> tiles;
-    private Bookshelf bookshelf;
+    private final List <Tile> tiles;
+    private final Bookshelf bookshelf;
 
     public InsertTilesRequestMessage(List <Tile> tiles, Bookshelf bookshelf ) {
         super("SERVER", MessageType.INSERT_TILE_REQ);

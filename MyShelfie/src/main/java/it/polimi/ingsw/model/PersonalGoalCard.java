@@ -15,10 +15,7 @@ public class PersonalGoalCard implements Serializable {
     private static final int ROW = 6;
     private static final int COL = 5;
 
-    /**
-     * constructor of personal goal card
-     * @author Chiara Nguyen Ba
-     */
+
     public PersonalGoalCard(PersonalGoalCardType type) {
         this.matrix = new Tile[ROW][COL];
         for (int i = 0; i < ROW; i++) {
@@ -30,18 +27,12 @@ public class PersonalGoalCard implements Serializable {
         this.assignType();
     }
 
-    /**
-     * getter of matrix
-     * @author Chiara Nguyen Ba
-     */
+
     public Tile[][] getMatrix() {
         return matrix;
     }
 
-    /**
-     * getter of type
-     * @author Chiara Nguyen Ba
-     */
+
     public PersonalGoalCardType getType() {
         return type;
     }

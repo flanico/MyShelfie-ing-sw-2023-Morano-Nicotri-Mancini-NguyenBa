@@ -99,13 +99,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showEndTurn(String nickname) {
-        clientHandler.sendMessageToClient(new EndTurnMessage(nickname));
-    }
-
-    @Override
     public void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores) {
-
+        clientHandler.sendMessageToClient(new ShowCommonScoresMessage(commonGoalCardScores));
     }
 
     @Override
@@ -113,15 +108,10 @@ public class VirtualView implements View, Observer {
         clientHandler.sendMessageToClient(new CommonGoalCompleteMessage(commonGoalCard, score));
     }
 
-    @Override
-    public void bookshelfFull() {
-        clientHandler.sendMessageToClient((new BookshelfFullMessage()));
-    }
-
     //TODO : disconnection part uncompleted in cli-view-virtualview-clientcontroller-turncontroller
     @Override
-    public void disconnection() {
-        clientHandler.sendMessageToClient(new DisconnectionMessage());
+    public void disconnection(String nickname) {
+        clientHandler.sendMessageToClient(new DisconnectionMessage(nickname));
     }
 
     @Override

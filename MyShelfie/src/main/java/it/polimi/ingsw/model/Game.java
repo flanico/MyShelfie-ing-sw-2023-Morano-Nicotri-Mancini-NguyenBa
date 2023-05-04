@@ -1,5 +1,4 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.network.message.serverSide.CommonGoalCompleteMessage;
 import it.polimi.ingsw.network.message.serverSide.InfoGameMessage;
 import it.polimi.ingsw.observer.Observable;
 
@@ -25,10 +24,7 @@ public class Game extends Observable implements Serializable {
     private Stack<Tile> bag;
     private Map<String, Integer> playerScore = new HashMap<>();
 
-    /**
-     * constructor of Game
-     * @author Alessandro Mancini
-     */
+
     public Game() {
         this.players = new ArrayList<>();
         this.commongoalcards = new ArrayList<>();
@@ -61,7 +57,6 @@ public class Game extends Observable implements Serializable {
 
     /**
      * getter of the max number of players chosen by the first player
-     * @author Alessandro Mancini
      */
     public int getNum() {
         return num;
@@ -139,10 +134,7 @@ public class Game extends Observable implements Serializable {
         return result;
     }
 
-    /**
-     * getter of players
-     * @author Alessandro Mancini
-     */
+
     public List<Player> getPlayers() {
         return players;
     }
@@ -162,10 +154,7 @@ public class Game extends Observable implements Serializable {
         player.setPersonalGoalCard(new PersonalGoalCard(type));
     }
 
-    /**
-     * getter of personalgoalcards
-     * @author Alessandro Mancini
-     */
+
     public List<PersonalGoalCardType> getPersonalgoalcards() {
         return personalgoalcards;
     }
@@ -212,10 +201,7 @@ public class Game extends Observable implements Serializable {
         };
     }
 
-    /**
-     * getter of commongoalcards
-     * @author Alessandro Mancini
-     */
+
     public List<CommonGoalCard> getCommongoalcards() {
         return commongoalcards;
     }
@@ -229,10 +215,7 @@ public class Game extends Observable implements Serializable {
         this.commongoalcardscores.add(new CommonGoalCardScore(this.num));
     }
 
-    /**
-     * getter of commongoalcardscores
-     * @author Alessandro Mancini
-     */
+
     public List<CommonGoalCardScore> getCommongoalcardscores() {
         return commongoalcardscores;
     }
@@ -245,18 +228,12 @@ public class Game extends Observable implements Serializable {
         this.board = new Board(this.num);
     }
 
-    /**
-     * getter of board
-     * @author Alessandro Mancini
-     */
+
     public Board getBoard() {
         return board;
     }
 
-    /**
-     * initializer of bag
-     * @author Alessandro Mancini
-     */
+
     private void initBag() {
         this.bag = new Stack<>();
         for (int i = 0; i < 22; i++) {
@@ -286,10 +263,6 @@ public class Game extends Observable implements Serializable {
         Collections.shuffle(this.bag);
     }
 
-    /**
-     * getter of bag
-     * @author Alessandro Mancini
-     */
     public Stack<Tile> getBag() {
         return bag;
     }
@@ -304,13 +277,11 @@ public class Game extends Observable implements Serializable {
             player.setDoneFirstCommon(true);
             score = commongoalcardscores.get(0).getStack().pop();
             player.setScore(player.getScore() + score);
-            notifyObserver(new CommonGoalCompleteMessage(commongoalcards.get(0), score));
         }
         if(!player.isDoneSecondCommon() && commongoalcards.get(1).check(player.getBookshelf())) {
             player.setDoneSecondCommon(true);
             score = commongoalcardscores.get(1).getStack().pop();
             player.setScore(player.getScore() + score);
-            notifyObserver(new CommonGoalCompleteMessage(commongoalcards.get(1), score));
         }
         return score;
     }

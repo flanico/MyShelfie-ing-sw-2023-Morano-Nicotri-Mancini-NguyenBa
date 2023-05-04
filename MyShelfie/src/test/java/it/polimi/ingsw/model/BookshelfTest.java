@@ -146,4 +146,49 @@ class BookshelfTest {
         bookshelf.getMatrix()[1][2].setType(TileType.GAME);
         assertTrue(bookshelf.isFull());
     }
+
+    /**
+     * Test the max of the selectable tiles
+     * @author Flavia Nicotri
+     */
+
+    @Test
+    void isMaxTiles_OneTest() {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 5; y++) {
+                switch (shelf[x][y]) {
+                    case 0 -> bookshelf.getMatrix()[x][y].setType(TileType.NULL);
+                    case 1 -> bookshelf.getMatrix()[x][y].setType(TileType.CAT);
+                    case 2 -> bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
+                    case 3 -> bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
+                    case 4 -> bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
+                    case 5 -> bookshelf.getMatrix()[x][y].setType(TileType.GAME);
+                    case 6 -> bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
+                }
+            }
+        }
+
+        bookshelf.getMatrix()[0][4].setType(TileType.NULL);
+        assertEquals(1, bookshelf.maxTilesBookshelf());
+    }
+    @Test
+    void isMaxTiles_TwoTest() {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 5; y++) {
+                switch (shelf[x][y]) {
+                    case 0 -> bookshelf.getMatrix()[x][y].setType(TileType.NULL);
+                    case 1 -> bookshelf.getMatrix()[x][y].setType(TileType.CAT);
+                    case 2 -> bookshelf.getMatrix()[x][y].setType(TileType.PLANT);
+                    case 3 -> bookshelf.getMatrix()[x][y].setType(TileType.BOOK);
+                    case 4 -> bookshelf.getMatrix()[x][y].setType(TileType.FRAME);
+                    case 5 -> bookshelf.getMatrix()[x][y].setType(TileType.GAME);
+                    case 6 -> bookshelf.getMatrix()[x][y].setType(TileType.TROPHY);
+                }
+            }
+        }
+
+        bookshelf.getMatrix()[0][4].setType(TileType.NULL);
+        bookshelf.getMatrix()[0][2].setType(TileType.NULL);
+        assertEquals(2, bookshelf.maxTilesBookshelf());
+    }
 }

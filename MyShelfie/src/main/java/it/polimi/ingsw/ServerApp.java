@@ -15,7 +15,7 @@ public class ServerApp {
         int serverPort = 12345; //default port
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the port (Default port: " + serverPort + ")");
+        System.out.print("Enter the port (Default port: " + serverPort + ") : ");
 
         try {
             serverPort = Integer.parseInt(scanner.nextLine());

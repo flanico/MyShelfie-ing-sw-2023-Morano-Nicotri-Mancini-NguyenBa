@@ -7,33 +7,32 @@ import it.polimi.ingsw.network.message.MessageType;
 import java.io.Serial;
 
 /**
- * message tu notify that another player completed the common goal card
+ * message to notify that a player completed the common goal card
  */
 public class CommonGoalCompleteMessage extends Message {
     @Serial
     private static final long serialVersionUID = 5506828047860036031L;
-    private CommonGoalCard commongoal;
+    private final CommonGoalCard commonGoal;
+    private final int commonGoalScore;
 
-    private int commonGoalScore;
-    public CommonGoalCompleteMessage(CommonGoalCard commongoal, int commonGoalScore) {
+    public CommonGoalCompleteMessage(CommonGoalCard commonGoal, int commonGoalScore) {
         super("SERVER", MessageType.COMMON_GOAL_COMPLETE);
-        this.commongoal = commongoal;
+        this.commonGoal = commonGoal;
         this.commonGoalScore = commonGoalScore;
     }
 
-
-    public CommonGoalCard getCommongoal() {
-        return commongoal;
+    public CommonGoalCard getCommonGoal() {
+        return commonGoal;
     }
 
-    public int getCommonscores() { return commonGoalScore;
+    public int getCommonGoalScore() { return commonGoalScore;
     }
 
     @Override
     public String toString() {
-        return "CommonGoalComplete{ You" +
-                "complete the common goal :" + commongoal +
-                "score: " + commonGoalScore +
+        return "CommonGoalCompleteMessage{" +
+                "commonGoal=" + commonGoal.toString() +
+                ", commonGoalScore=" + commonGoalScore +
                 '}';
     }
 }

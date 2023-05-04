@@ -24,7 +24,8 @@ public class WinnerPlayerMessage extends Message {
 
     @Override
     public String toString() {
-        return "END GAME -WinPlayer{You are the winner of the game. Score:" + winner +
+        return "WinnerPlayerMessage{" +
+                "winner='" + winner + '\'' +
                 '}';
     }
 }

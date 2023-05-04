@@ -120,22 +120,19 @@ public class ClientController implements Observer, ViewObserver {
             }
             case COMMON_GOAL_COMPLETE -> {
                 CommonGoalCompleteMessage commonGoalComplete1Message = (CommonGoalCompleteMessage) message;
-                executorService.execute(() -> view.showCommonGoalComplete( commonGoalComplete1Message.getCommongoal(), commonGoalComplete1Message.getCommonscores()));
+                executorService.execute(() -> view.showCommonGoalComplete(commonGoalComplete1Message.getCommonGoal(), commonGoalComplete1Message.getCommonGoalScore()));
             }
-//            case BOOKSHELF_FULL -> {
-//                BookshelfFullMessage bookshelfFullMessage = (BookshelfFullMessage) message;
-//                executorService.execute(() -> view.bookshelfFull());
-//            }
             case DISCONNECTION -> {
-
-            }
-            case END_TURN -> {
-                EndTurnMessage endTurnMessage = (EndTurnMessage) message;
-                executorService.execute(() -> view.showEndTurn(endTurnMessage.getNickname()));
+                DisconnectionMessage disconnectionMessage = (DisconnectionMessage) message;
+                executorService.execute(() -> view.disconnection(disconnectionMessage.getNickname()));
             }
             case SCORES -> {
                 ScoresMessage scoresMessage = (ScoresMessage) message;
                 executorService.execute(() -> view.showScores(scoresMessage.getPlayerScore()));
+            }
+            case COMMON_SCORES -> {
+                ShowCommonScoresMessage showCommonScoresMessage = (ShowCommonScoresMessage) message;
+                executorService.execute(() -> view.showCommonScores(showCommonScoresMessage.getCommonGoalCardScores()));
             }
             case WINNER -> {
                 WinnerPlayerMessage winnerPlayerMessage = (WinnerPlayerMessage) message;

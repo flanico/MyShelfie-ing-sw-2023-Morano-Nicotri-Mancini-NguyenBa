@@ -26,6 +26,7 @@ public class GameController implements Serializable {
     private TurnController turnController;
     private InputController inputController;
     private static final String STR_INVALID_STATE = "Invalid game state";
+    private boolean lockLogin;
 
     /**
      * constructor of the game controller
@@ -35,6 +36,7 @@ public class GameController implements Serializable {
         this.virtualViewMap = Collections.synchronizedMap(new HashMap<>());
         this.inputController = new InputController(this, virtualViewMap);
         this.nicknames = new ArrayList<>();
+        this.lockLogin = false;
         setGameState(GameState.LOGIN);
     }
 
@@ -206,10 +208,11 @@ public class GameController implements Serializable {
     private void startGame(int numPlayers, List<String> nicknames) {
         game.initGame(numPlayers);
         setGameState(GameState.IN_GAME);
-        broadcastingMessage("Game is starting, all players are connected!");
+        broadcastingMessage("\nGame is starting, all players are connected!");
         //Shows the two common goal cards selected for the match
         for (VirtualView v : virtualViewMap.values()) {
             v.showCommonCards(game.getCommongoalcards());
+            v.showCommonScores(game.getCommongoalcardscores());
         }
 
         //Shows the personal goal card selected for the match
@@ -221,10 +224,7 @@ public class GameController implements Serializable {
         }
 
         //Shows the selected game round
-        for(String nick : nicknames) {
-            VirtualView virtualView = virtualViewMap.get(nick);
-            virtualView.showGenericMessage("The game round is: " + nicknames);
-        }
+        broadcastingMessage("\nThe game round is: " + nicknames);
 
         this.turnController = new TurnController(game, this, virtualViewMap);
         Thread threadTurnManager = new Thread(() -> turnController.turnManager());

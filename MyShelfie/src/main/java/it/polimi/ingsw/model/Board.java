@@ -1,5 +1,4 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.observer.Observable;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -9,7 +8,7 @@ import java.util.*;
  * class that define the living room
  * @author Flavia Nicotri
  */
-public class Board extends Observable implements Serializable {
+public class Board implements Serializable {
     @Serial
     private static final long serialVersionUID = 5741045381452833395L;
     private final Tile[][] matrix;
@@ -73,34 +72,22 @@ public class Board extends Observable implements Serializable {
         }
     }
 
-    /**
-     * getter of matrix
-     * @author Alessandro Mancini
-     */
+
     public Tile[][] getMatrix() {
         return matrix;
     }
 
-    /**
-     * getter of ROW
-     * @author Alessandro Mancini
-     */
+
     public int getROW() {
         return ROW;
     }
 
-    /**
-     * getter of COL
-     * @author Alessandro Mancini
-     */
+
     public int getCOL() {
         return COL;
     }
 
-    /**
-     * fill the board with tiles from the bag
-     * @author Alessandro Mancini
-     */
+
     public void fillBoard(Stack<Tile> bag) {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
@@ -109,7 +96,6 @@ public class Board extends Observable implements Serializable {
                 }
             }
         }
-        //Notify
     }
 
     /**
@@ -145,27 +131,6 @@ public class Board extends Observable implements Serializable {
             return false;
         }
         return true;
-    }
-
-    /**
-     * selects tiles from the board
-     * @param number of tiles to remove
-     * @param coordinates of the tiles
-     * @author Alessandro Mancini
-     */
-    public List<Tile> selectTile(int number, Integer[][] coordinates) {
-        List<Tile> selected = new ArrayList<>();
-
-        do {
-            for (int i = 0; i < number; i ++) {
-                int x = coordinates[i][0];
-                int y = coordinates[i][1];
-                selected.add(this.getMatrix()[x][y]);
-            }
-        } while (!this.isRemovable(selected));
-
-        this.removeTiles(selected);
-        return selected;
     }
 
     /**
@@ -262,6 +227,65 @@ public class Board extends Observable implements Serializable {
                 this.getMatrix()[t.getX()][t.getY()].setType(TileType.NULL);
             }
         }
-        //Notify
+    }
+
+    public int maxTilesBoard(){
+        int max = 1;
+        List<Tile> tiles = new ArrayList<>();
+
+        for (int i=0; i<ROW; i++){
+            for (int j=0; j<COL; j++)
+            {
+
+                if (i< ROW-2)
+                {
+                    tiles.add(this.getMatrix()[i][j]);
+                    tiles.add(this.getMatrix()[i+1][j]);
+                    tiles.add(this.getMatrix()[i+2][j]);
+                    if(isRemovable(tiles)){
+                        return 3;
+                    }
+                }
+                if (i < ROW-1)
+                {
+                    tiles.removeAll(tiles);
+                    //System.out.println("\ncontrollo 2 row : i= "+ i + "j=" +j);
+                    tiles.add(this.getMatrix()[i][j]);
+                    tiles.add(this.getMatrix()[i+1][j]);
+                    if(isRemovable(tiles)){
+                        if (max == 1){
+                            max= 2;
+                        }
+                        //System.out.println("max:" + max);
+                    }
+                }
+
+
+                if (j< COL-2) {
+                    tiles.add(this.getMatrix()[i][j]);
+                    tiles.add(this.getMatrix()[i][j + 1]);
+                    tiles.add(this.getMatrix()[i][j + 2]);
+                    if (isRemovable(tiles)) {
+                        return 3;
+                    }
+                }
+                if (j < COL-1)
+                {
+                    tiles.removeAll(tiles);
+                    //System.out.println("\ncontrollo 2 col : i= "+ i + "j=" +j);
+                    tiles.add(this.getMatrix()[i][j]);
+                    tiles.add(this.getMatrix()[i][j+1]);
+                    if(isRemovable(tiles)){
+                        if (max == 1){
+                            max= 2;
+                        }
+                        //System.out.println("max:" + max);
+                    }
+                }
+
+
+            }
+        }
+        return max;
     }
 }

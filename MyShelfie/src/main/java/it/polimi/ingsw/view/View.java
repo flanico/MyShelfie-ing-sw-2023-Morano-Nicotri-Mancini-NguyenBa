@@ -96,12 +96,6 @@ public interface View {
     void askOrderTiles(List<Tile> tiles);
 
     /**
-     * shows the end turn message
-     * @param nickname of player who finished the turn game
-     */
-    void showEndTurn(String nickname);
-
-    /**
      * shows the stack of the selected common goal card
      * @param commonGoalCardScores is the stack of the available scores
      */
@@ -121,13 +115,7 @@ public interface View {
     void showScores(Map<String, Integer> playerScore);
 
     /**
-     * notify to the current player's bookshelf is full
-     */
-    void bookshelfFull();
-
-    /**
      * notify to all the client a player disconnection
      */
-    void disconnection();
-
+    void disconnection(String nickname);
 }

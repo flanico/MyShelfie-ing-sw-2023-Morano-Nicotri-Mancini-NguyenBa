@@ -13,7 +13,7 @@ import java.util.List;
 public class OrderReplyMessage extends Message {
     @Serial
     private static final long serialVersionUID = 2147176422511553721L;
-    private List<Tile> tiles;
+    private final List<Tile> tiles;
 
     public OrderReplyMessage(String nickname, List<Tile> tiles) {
         super(nickname, MessageType.ORDER_REPLY);
@@ -26,8 +26,8 @@ public class OrderReplyMessage extends Message {
 
     @Override
     public String toString() {
-        return "OrderReplyMessage{ nickname = " + getNickname() +
-                "tiles = " + tiles.toString() +
+        return "OrderReplyMessage{nickname= " + getNickname() +
+                ", tiles= " + tiles.toString() +
                 '}';
     }
 }

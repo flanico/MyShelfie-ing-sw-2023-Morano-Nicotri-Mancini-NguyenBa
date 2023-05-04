@@ -14,10 +14,7 @@ public class Bookshelf implements Serializable {
     private static final int ROW = 6;
     private static final int COL = 5;
 
-    /**
-     * constructor of bookshelf
-     * @author Alessandro Mancini
-     */
+
     public Bookshelf() {
         this.matrix = new Tile[ROW][COL];
         for (int i = 0; i < ROW; i++) {
@@ -27,10 +24,6 @@ public class Bookshelf implements Serializable {
         }
     }
 
-    /**
-     * getter of matrix
-     * @author Alessandro Mancini
-     */
     public Tile[][] getMatrix() {
         return matrix;
     }
@@ -190,5 +183,22 @@ public class Bookshelf implements Serializable {
             x--;
         }
         return num <= x + 1;
+    }
+
+    public int maxTilesBookshelf(){
+        int count = 0;
+        int max = 0;
+        for (int i =0; i< COL; i++)
+        {
+            for (int j = 0; j<ROW; j++){
+                if (this.getMatrix()[j][i].getType() == TileType.NULL){
+                    count++;
+                }
+            }
+            if (count > max)
+                max=count;
+            count = 0;
+        }
+        return max;
     }
 }
