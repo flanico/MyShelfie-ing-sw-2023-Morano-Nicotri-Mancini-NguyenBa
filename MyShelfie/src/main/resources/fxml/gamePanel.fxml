@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:controller="it.polimi.ingsw.view.GUI.GameController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.GameController">
    <children>
       <ImageView fx:id="background" fitHeight="727.0" fitWidth="1290.0" layoutX="-10.0" layoutY="-4.0" pickOnBounds="true">
          <image>
@@ -59,7 +59,7 @@
             <Image url="@/personal goal cards/Personal_Goals2.png" />
          </image>
       </ImageView>
-      <Text layoutX="576.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Common Goal Card 1" />
+      <Text fx:id="upperText" layoutX="576.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Common Goal Card 1" />
       <Text layoutX="576.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Common Goal Card 2" />
       <Text layoutX="583.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Goal Card" />
       <ImageView fitHeight="53.0" fitWidth="61.0" layoutX="659.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" rotate="-8.1">

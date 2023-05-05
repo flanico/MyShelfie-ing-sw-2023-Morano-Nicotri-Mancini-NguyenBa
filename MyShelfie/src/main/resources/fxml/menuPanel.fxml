@@ -32,7 +32,7 @@
             <Font name="Cambria" size="19.0" />
          </font>
       </Text>
-      <TextField fx:id="serverAddressField" layoutX="139.0" layoutY="446.0" />
+      <TextField fx:id="serverPortField" layoutX="139.0" layoutY="446.0" />
       <Text layoutX="165.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server address">
          <font>
             <Font name="Cambria" size="15.0" />
@@ -43,8 +43,8 @@
             <Font name="Cambria" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="serverPortField" layoutX="443.0" layoutY="446.0" />
-      <ChoiceBox fx:id="server_type_field" layoutX="285.0" layoutY="366.0" prefWidth="150.0">
+      <TextField fx:id="serverIPField" layoutX="443.0" layoutY="446.0" />
+      <ChoiceBox fx:id="server_type_box" layoutX="285.0" layoutY="366.0" prefWidth="150.0">
 
       </ChoiceBox>
       <Button fx:id="join_game_button" layoutX="325.0" layoutY="507.0" mnemonicParsing="false" onAction="#joinGame" text="Join Game" />
