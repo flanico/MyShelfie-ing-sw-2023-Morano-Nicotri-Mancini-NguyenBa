@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.observer.ViewObservable;
+import it.polimi.ingsw.view.View;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 
 import javax.lang.model.type.NullType;
 
-public class MenuController extends ViewObservable{
+public class MenuController extends ViewObservable {
     @FXML
     TextField serverPortField ;
     @FXML
@@ -44,8 +45,7 @@ public class MenuController extends ViewObservable{
                         stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                         stage.setScene(new Scene(root));
                         stage.show();
-                    }
-                    else {
+                    } else {
                         alert.setTitle("Errore");
                         alert.setHeaderText(null);
                         alert.setContentText("Select a server type");
