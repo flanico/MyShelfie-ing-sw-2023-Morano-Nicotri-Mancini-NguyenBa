@@ -2,6 +2,8 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.view.cli.Cli;
+import it.polimi.ingsw.view.GUI.MainGui;
+import javafx.application.Application;
 
 import java.util.Scanner;
 
@@ -28,7 +30,7 @@ public class ClientApp {
             view.init();
         }
         else if (response.equalsIgnoreCase("g")) {
-            //Lancio la GUI
+            Application.launch(MainGui.class);
         }
         else {
             System.err.println("Invalid argument! Please run the executable again");
