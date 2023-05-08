@@ -2,16 +2,16 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
+import it.polimi.ingsw.view.GUI.Scene.MenuController;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
-
 import java.util.List;
 import java.util.Map;
 
 public class Gui extends ViewObservable implements View {
     @Override
     public void askNickname(){
-        //Platform.runLater(() -> );
+        Platform.runLater(() -> SceneController.changeRootPane(observers, "NamePanel.fxml"));
     }
 
     @Override

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.ConnectionController">
+   <children>
+      <ImageView fitHeight="606.0" fitWidth="800.0" layoutY="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="@/misc/sfondo.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="serverPortField" layoutX="123.0" layoutY="388.0" promptText="12345" />
+      <TextField fx:id="addressField" layoutX="542.0" layoutY="388.0" promptText="localhost" />
+      <ChoiceBox layoutX="325.0" layoutY="290.0" prefWidth="150.0" />
+      <Text layoutX="353.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connection Menu" />
+      <Text layoutX="168.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server Port" />
+      <Text layoutX="588.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address IP" />
+      <Button fx:id="ContinueButton" layoutX="368.0" layoutY="487.0" mnemonicParsing="false" onAction="#ContinuePressed" text="Continue" />
+   </children>
+</Pane>
