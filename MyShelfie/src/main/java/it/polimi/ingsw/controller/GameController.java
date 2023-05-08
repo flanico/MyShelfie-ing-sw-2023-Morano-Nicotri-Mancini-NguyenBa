@@ -1,6 +1,5 @@
 package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
 import it.polimi.ingsw.network.message.clientSide.NumPlayersReplyMessage;
@@ -37,7 +36,7 @@ public class GameController implements Serializable {
         this.inputController = new InputController(this, virtualViewMap);
         this.nicknames = new ArrayList<>();
         this.lockLogin = false;
-        setGameState(GameState.LOGIN);
+        gameState = GameState.LOGIN;
     }
 
     /**
@@ -127,14 +126,6 @@ public class GameController implements Serializable {
     }
 
     /**
-     * sets of the game state
-     * @param gameState to be set
-     */
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
-    }
-
-    /**
      * checks if the game is already started (no more players can connect) or not
      * @return true if the game is started, false otherwise
      */
@@ -176,6 +167,7 @@ public class GameController implements Serializable {
             broadcastingMessage("Waiting other players...");
             //If all players are connect to the game the match starts
             if(game.getCurrentNum() == game.getNum()) {
+                gameState = GameState.IN_GAME;
                 startGame(game.getNum(), nicknames);
             }
         }
@@ -207,7 +199,6 @@ public class GameController implements Serializable {
      */
     private void startGame(int numPlayers, List<String> nicknames) {
         game.initGame(numPlayers);
-        setGameState(GameState.IN_GAME);
         broadcastingMessage("\nGame is starting, all players are connected!");
         //Shows the two common goal cards selected for the match
         for (VirtualView v : virtualViewMap.values()) {

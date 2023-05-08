@@ -10,10 +10,9 @@ import java.util.logging.Logger;
  */
 public abstract class Client extends Observable {
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
-
     /**
      * sends a message to the server
-     * @param message
+     * @param message to be sent
      */
     public abstract void sendMessage(Message message);
 

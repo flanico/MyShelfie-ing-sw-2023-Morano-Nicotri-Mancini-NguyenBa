@@ -16,9 +16,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * class used from client side, it is the mediator between the network and a generic view
+ * class used from client side, it is the mediator between the network and a generic view (cli or gui)
  */
 public class ClientController implements Observer, ViewObserver {
+    //abstract class both for cli and gui
     private final View view;
     private Client client;
     private String nickname;
@@ -72,12 +73,13 @@ public class ClientController implements Observer, ViewObserver {
     @Override
     public void update(Message message) {
         switch (message.getMessageType()) {
-            //Tutti i messaggi lato server
             case LOGIN_REPLY -> {
                 LoginReplyMessage loginReplyMessage = (LoginReplyMessage) message;
                 executorService.execute(() -> view.showLoginResult(loginReplyMessage.isNicknameAccepted(), nickname));
             }
-            case NUM_PLAYERS_REQ -> executorService.execute(view::askPlayersNumber);
+            case NUM_PLAYERS_REQ -> {
+                executorService.execute(view::askPlayersNumber);
+            }
             case ERROR -> {
                 ErrorMessage errorMessage = (ErrorMessage) message;
                 executorService.execute(() -> view.showError(errorMessage.getMessageError()));
