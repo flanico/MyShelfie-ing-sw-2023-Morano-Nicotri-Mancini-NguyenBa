@@ -27,6 +27,7 @@ public class Cli extends ViewObservable implements View {
      * prints the welcome message of the game
      */
     public void init() {
+        out.println();
         out.println(ColorCli.YELLOW_BOLD  +
                " ███╗   ███╗██╗   ██╗    ███████╗██╗  ██╗███████╗██╗     ███████╗██╗███████╗\n" +
                " ████╗ ████║╚██╗ ██╔╝    ██╔════╝██║  ██║██╔════╝██║     ██╔════╝██║██╔════╝\n" +
@@ -171,7 +172,7 @@ public class Cli extends ViewObservable implements View {
         boolean isValid = false;
         int num = 0;
         do {
-            out.print("Select the desired number of players (Max. 4): ");
+            out.print("Select the number of players (Max. 4): ");
             try {
                 num = Integer.parseInt(readLine.nextLine());
             } catch (NumberFormatException e) {
@@ -193,7 +194,7 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void showLoginResult(boolean isNicknameAccepted, String nickname) {
         if(isNicknameAccepted) {
-            out.println("Welcome "+ nickname +", you are connected to the game!");
+            out.println(ColorCli.YELLOW_BOLD + "Welcome "+ nickname +", you are connected to the game!" + ColorCli.RESET);
         }
         else {
             out.println("Sorry, this nickname is already taken!");
@@ -216,13 +217,13 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showError(String errorMessage) {
-        out.println(ColorCli.RED + errorMessage + "EXIT" + ColorCli.RESET);
+        out.println(ColorCli.RED + errorMessage + " EXIT" + ColorCli.RESET);
         System.exit(1);
     }
 
     @Override
     public void showWinner(String winner) {
-        out.println("Congratulations to " + winner + "! He/She has won the match!");
+        out.println("Congratulations to " + winner + "! You have won the match!");
         out.println("Game finished...");
         System.exit(0);
     }
@@ -306,7 +307,6 @@ public class Cli extends ViewObservable implements View {
         for (int i = 0; i < 5; i++) {
             out.print(ColorCli.BROWN_BOOK + i + "   "+ ColorCli.RESET);
         }
-//        out.print("|");
         out.println();
         out.println(ColorCli.BROWN_BOOK + "╔═══╦═══╦═══╦═══╦═══╗"+ ColorCli.RESET);
 
@@ -323,7 +323,6 @@ public class Cli extends ViewObservable implements View {
             if(i != 5) out.println(ColorCli.BROWN_BOOK +"╠═══╬═══╬═══╬═══╬═══╣"+ ColorCli.RESET);
         }
         out.println(ColorCli.BROWN_BOOK +"╚═══╩═══╩═══╩═══╩═══╝"+ ColorCli.RESET);
-
     }
 
     @Override
@@ -332,7 +331,7 @@ public class Cli extends ViewObservable implements View {
         int num = -1;
         List<Tile> tiles = new ArrayList<>();
 
-        out.println("Hey you have to select the tiles from the board!");
+        out.println(ColorCli.YELLOW_BOLD + "Hey you have to select the tiles from the board!" + ColorCli.RESET);
         do {
             out.print("How many tiles do you want to select (1,2 o 3 tiles): ");
             try {
@@ -384,7 +383,6 @@ public class Cli extends ViewObservable implements View {
                     }
                 }
             } while (!isValid);
-
             Tile tile = new Tile(board.getMatrix()[row][col].getType(), row, col);
             tiles.add(tile);
         }
@@ -396,7 +394,7 @@ public class Cli extends ViewObservable implements View {
         boolean isValid = false;
         int col = -1;
 
-        out.println("Hey you have to insert the tiles in the bookshelf!");
+        out.println(ColorCli.YELLOW_BOLD + "Hey you have to insert the tiles in the bookshelf!" + ColorCli.RESET);
         out.print("Please select the column where to insert the tiles: ");
         do {
             try {
@@ -407,7 +405,6 @@ public class Cli extends ViewObservable implements View {
                 clearCli();
             }
         } while (!isValid);
-
         int finalCol = col;
         notifyObserver(obs -> obs.sendInsertTiles(finalCol, tiles));
     }
@@ -421,7 +418,7 @@ public class Cli extends ViewObservable implements View {
             finalTiles.add(new Tile(TileType.NULL));
         }
         if(tiles.size() !=1 ){
-            out.println("Hey you have to select the order of the tiles!");
+            out.println(ColorCli.YELLOW_BOLD + "Hey you have to select the order of the tiles!" + ColorCli.RESET);
             out.println("Attention: the first tile sorted is the one placed at the bottom of the bookshelf. The count order starts from 0.");
             for (int i = 0; i < tiles.size(); i++) {
                 isValid = false;
@@ -443,10 +440,9 @@ public class Cli extends ViewObservable implements View {
                     }
                 } while (!isValid);
             }
-        }else {
+        } else {
             finalTiles.set(0, tiles.get(0));
         }
-
         notifyObserver(obs -> obs.sendOrderTiles(finalTiles));
     }
 
@@ -455,17 +451,18 @@ public class Cli extends ViewObservable implements View {
         int index = 1;
         for (int i = 0; i < 2; i++)
         {
-            out.println("\nScores of the Common Goal Card " + index + ": ");
+            out.println(ColorCli.YELLOW_BOLD + "\nScores of the Common Goal Card " + index + ": " + ColorCli.RESET);
             for (int j = 0; j < commonGoalCardScores.get(i).getStack().size(); j++) {
-                out.print(commonGoalCardScores.get(i).getStack().get(j) + " ");
+                out.print(ColorCli.YELLOW_BOLD + commonGoalCardScores.get(i).getStack().get(j) + " " + ColorCli.RESET);
             }
             index++;
         }
+        out.println();
     }
 
     @Override
     public void showCommonGoalComplete(CommonGoalCard commonGoalCard, int score){
-        out.println("You have completed: "+ commonGoalCard + "\nScore: " + score);
+        out.println(ColorCli.YELLOW_BOLD + "You have completed "+ commonGoalCard + "\nScore: " + score + ColorCli.RESET);
     }
 
     @Override

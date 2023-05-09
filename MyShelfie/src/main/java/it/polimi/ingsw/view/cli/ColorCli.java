@@ -23,6 +23,6 @@ public class ColorCli {
     public static final String BACK_WHITE = "\u001b[48;5;230m";
     public static final String BACK_BLACK = "\u001b[40;1m";
 
-    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
-    public static final String CYAN_BOLD ="\033[1;36m";    // CYAN
+    public static final String YELLOW_BOLD = "\033[1;33m";
+    public static final String CYAN_BOLD ="\033[1;36m";
 }

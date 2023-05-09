@@ -35,9 +35,6 @@ public class InputController implements Serializable {
         this.virtualViewMap = virtualViewMap;
     }
 
-    //Check all message types send by the client
-
-
     /**
      * checks if a nickname is valid or not
      * @param nickname of the client
@@ -59,7 +56,6 @@ public class InputController implements Serializable {
      */
     protected boolean checkNumPlayers(Message message) {
         NumPlayersReplyMessage numPlayersReplyMessage = (NumPlayersReplyMessage) message;
-
         if(numPlayersReplyMessage.getNumPlayers() >= 2 && numPlayersReplyMessage.getNumPlayers() <= 4) {
             return true;
         }
@@ -81,12 +77,12 @@ public class InputController implements Serializable {
         TilesReplyMessage tilesReplyMessage = (TilesReplyMessage) message;
         VirtualView virtualView = virtualViewMap.get(tilesReplyMessage.getNickname());
         if(game.getBoard().isRemovable(tilesReplyMessage.getTiles())) {
-            virtualView.showGenericMessage("Tiles selected are removable from the board!");
+//            virtualView.showGenericMessage("Tiles selected are removable from the board!");
             bookshelfOfTheRoundPlayer = game.getPlayerByNickname(tilesReplyMessage.getNickname()).getBookshelf();
             maxTiles = bookshelfOfTheRoundPlayer.maxTilesBookshelf();
             if (tilesReplyMessage.getTiles().size() > maxTiles)
             {
-                virtualView.showGenericMessage("Sorry, you don't have enough space in your bookshelf. You can select MAX "+ maxTiles + "tiles. Retry.");
+                virtualView.showGenericMessage("Sorry, you don't have enough space in your bookshelf. You can select MAX "+ maxTiles + " tiles. Retry.");
                 return false;
             }else
                  return true;
@@ -108,7 +104,7 @@ public class InputController implements Serializable {
         VirtualView virtualView = virtualViewMap.get(positionReplyMessage.getNickname());
         if(positionReplyMessage.getColumn() >= 0 && positionReplyMessage.getColumn() <= 4 &&
                 game.getPlayerByNickname(positionReplyMessage.getNickname()).getBookshelf().isInsertableTile(positionReplyMessage.getTiles(), positionReplyMessage.getColumn())) {
-            virtualView.showGenericMessage("The selected column is correct!");
+//            virtualView.showGenericMessage("The selected column is correct!");
             return true;
         }
         else {
@@ -118,6 +114,11 @@ public class InputController implements Serializable {
         }
     }
 
+    /**
+     * checks if the selected order of tiles is valid or not
+     * @param message the message from the client
+     * @return true if the order is valid, false otherwise
+     */
     protected boolean checkOrder(Message message) {
         OrderReplyMessage orderReplyMessage = (OrderReplyMessage) message;
         VirtualView virtualView = virtualViewMap.get(orderReplyMessage.getNickname());
