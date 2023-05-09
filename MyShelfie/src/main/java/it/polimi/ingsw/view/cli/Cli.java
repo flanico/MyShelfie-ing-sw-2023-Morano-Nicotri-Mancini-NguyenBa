@@ -478,6 +478,7 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void disconnection(String nickname) {
         out.print(nickname + "has been disconnecting from the game");
+        System.exit(1);
     }
 
     @Override

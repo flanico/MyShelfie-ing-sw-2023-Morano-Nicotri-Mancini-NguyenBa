@@ -26,33 +26,27 @@ public class Player implements Serializable {
         this.isDoneSecondCommon = false;
     }
 
-
     public Bookshelf getBookshelf() {
         return bookshelf;
     }
-
 
     public int getScore() {
         return score;
     }
 
-
     public void setScore(int score) {
         this.score = score;
     }
-
 
     public String getNickname() {
         return nickname;
     }
 
-
     public PersonalGoalCard getPersonalGoalCard() {
         return personalGoalCard;
     }
 
-
-    protected void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
+    public void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
         this.personalGoalCard = personalGoalCard;
     }
 

@@ -5,6 +5,7 @@ import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.clientSide.OrderReplyMessage;
 import it.polimi.ingsw.network.message.clientSide.PositionReplyMessage;
 import it.polimi.ingsw.network.message.clientSide.TilesReplyMessage;
+import it.polimi.ingsw.persistence.Persistence;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.view.cli.ColorCli;
 
@@ -18,10 +19,10 @@ import java.util.*;
 public class TurnController implements Serializable {
     @Serial
     private static final long serialVersionUID = -1731938445482154456L;
-    private final Game game;
+    private Game game;
     private TurnState turnState;
     private final GameController gameController;
-    private Map<String, VirtualView> virtualViewMap;
+    private transient Map<String, VirtualView> virtualViewMap;
     private final List<String> nicknames;
     private String currentPlayer;
     private boolean hasAnswered = false;
@@ -29,6 +30,7 @@ public class TurnController implements Serializable {
     private List<Tile> currentTiles;
     private Bookshelf currentBookshelf;
     private List<CommonGoalCard> commonGoalCards;
+    private Board currentBoard;
     private boolean isStarted;
     private boolean isLast;
     private boolean isPlayerFinish;
@@ -50,6 +52,7 @@ public class TurnController implements Serializable {
         this.isLast = false;
         this.isPlayerFinish = false;
         this.commonGoalCards = new ArrayList<>(game.getCommongoalcards());
+        this.currentBoard = game.getBoard();
     }
 
     /**
@@ -88,11 +91,11 @@ public class TurnController implements Serializable {
                 selectFirstPlayer();
             }
             //At the begging of each turn check if the board needs to refill
-            if (game.getBoard().isRefillable()) {
+            if (currentBoard.isRefillable()) {
                 for (VirtualView virtualView : virtualViewMap.values()) {
                     virtualView.showGenericMessage("Board is refilling...");
                 }
-                game.getBoard().fillBoard(game.getBag());
+                currentBoard.fillBoard(game.getBag());
             }
             //Shows the situation board
             showCurrentBoard();
@@ -156,6 +159,9 @@ public class TurnController implements Serializable {
                 //Total
                 endGame();
             }
+            //Save info in a file
+            Persistence persistence = new Persistence(gameController);
+            persistence.storeGame(gameController);
             //New turn player
             if (turnState != TurnState.END) nextPlayer();
         }
@@ -199,7 +205,7 @@ public class TurnController implements Serializable {
      */
     private void showCurrentBoard() {
         for (VirtualView virtualView : virtualViewMap.values()) {
-            virtualView.showBoard(game.getBoard());
+            virtualView.showBoard(currentBoard);
         }
     }
 
@@ -218,7 +224,7 @@ public class TurnController implements Serializable {
         if(turnState == TurnState.SELECT) {
             VirtualView virtualView = virtualViewMap.get(currentPlayer);
             notifyOtherPlayers("\n" + currentPlayer + " is selecting the tiles from the board...", currentPlayer);
-            virtualView.askSelectTiles(game.getBoard(), currentBookshelf);
+            virtualView.askSelectTiles(currentBoard, currentBookshelf);
             waitAnswer();
             turnState = TurnState.REMOVE;
             removeTilesFromBoard(currentTiles);
@@ -231,7 +237,7 @@ public class TurnController implements Serializable {
      */
     private void removeTilesFromBoard(List<Tile> tiles) {
         if(turnState == TurnState.REMOVE) {
-            game.getBoard().removeTiles(tiles);
+            currentBoard.removeTiles(tiles);
         }
         turnState = TurnState.INSERT;
     }
@@ -368,6 +374,7 @@ public class TurnController implements Serializable {
         for (VirtualView v : virtualViewMap.values()) {
             v.showScores(game.getPlayerScore());
         }
+        gameController.endGame();
         //Notify the winner
         for (VirtualView v : virtualViewMap.values()) {
             v.showWinner(winner);
@@ -381,6 +388,14 @@ public class TurnController implements Serializable {
         VirtualView virtualView = virtualViewMap.get(currentPlayer);
         virtualView.showGenericMessage(ColorCli.YELLOW_BOLD + "You have completed the bookshelf!" + ColorCli.RESET);
         notifyOtherPlayers(ColorCli.YELLOW_BOLD + currentPlayer+ "'s bookshelf is full!" + ColorCli.RESET, currentPlayer);
+    }
+
+    public void setVirtualViewMap(Map<String, VirtualView> virtualViewMap) {
+        this.virtualViewMap = virtualViewMap;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     /**

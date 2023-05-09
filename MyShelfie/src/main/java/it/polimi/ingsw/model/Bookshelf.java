@@ -143,8 +143,6 @@ public class Bookshelf implements Serializable {
                 }
             }
         }
-
-
         //System.out.println("Escape condition 2 " + counter);
         return counter;
     }

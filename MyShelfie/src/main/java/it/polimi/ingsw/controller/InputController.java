@@ -22,7 +22,7 @@ public class InputController implements Serializable {
     private static final long serialVersionUID = -7743359196379310184L;
     private final Game game;
     private final GameController gameController;
-    private final Map<String, VirtualView> virtualViewMap;
+    private transient Map<String, VirtualView> virtualViewMap;
 
     /**
      * constructor of the input controller

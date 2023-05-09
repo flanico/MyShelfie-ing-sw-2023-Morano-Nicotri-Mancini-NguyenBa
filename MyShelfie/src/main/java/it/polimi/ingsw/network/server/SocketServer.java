@@ -37,7 +37,6 @@ public class SocketServer implements Runnable {
                 SocketClientHandler socketClientConnection = new SocketClientHandler(client,this);
                 Thread thread = new Thread(socketClientConnection, "SocketServerThread:" + client.getInetAddress());
                 thread.start();
-
             } catch (IOException e) {
                 Server.LOGGER.severe("The connection has dropped");
             }

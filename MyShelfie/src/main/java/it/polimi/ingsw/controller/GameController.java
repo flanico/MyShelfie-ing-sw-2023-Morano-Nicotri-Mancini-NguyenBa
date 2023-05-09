@@ -1,9 +1,10 @@
 package it.polimi.ingsw.controller;
-import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
 import it.polimi.ingsw.network.message.clientSide.NumPlayersReplyMessage;
 import it.polimi.ingsw.network.server.Server;
+import it.polimi.ingsw.persistence.Persistence;
 import it.polimi.ingsw.view.View;
 import it.polimi.ingsw.view.VirtualView;
 
@@ -20,12 +21,11 @@ public class GameController implements Serializable {
     private final static long serialVersionUID = 1523751286666277956L;
     private Game game;
     private GameState gameState;
-    private Map<String, VirtualView> virtualViewMap;
+    private transient Map<String, VirtualView> virtualViewMap;
     private final List<String> nicknames;
     private TurnController turnController;
     private InputController inputController;
     private static final String STR_INVALID_STATE = "Invalid game state";
-    private boolean lockLogin;
 
     /**
      * constructor of the game controller
@@ -35,7 +35,6 @@ public class GameController implements Serializable {
         this.virtualViewMap = Collections.synchronizedMap(new HashMap<>());
         this.inputController = new InputController(this, virtualViewMap);
         this.nicknames = new ArrayList<>();
-        this.lockLogin = false;
         gameState = GameState.LOGIN;
     }
 
@@ -153,10 +152,10 @@ public class GameController implements Serializable {
         //If the player is the first to connect he must choose the max number of players
         if(virtualViewMap.isEmpty()) {
             addVirtualViewMap(nickname, virtualView);
-            game.addPlayer(nickname);
             nicknames.add(nickname);
             virtualView.showLoginResult(true, "SERVER");
             virtualView.askPlayersNumber();
+            game.addPlayer(nickname);
         }
         //If the player is not the first player to connect to the game, he joins in the game
         else if (virtualViewMap.size() < game.getNum()) {
@@ -167,6 +166,12 @@ public class GameController implements Serializable {
             broadcastingMessage("Waiting other players...");
             //If all players are connect to the game the match starts
             if(game.getCurrentNum() == game.getNum()) {
+                Persistence persistence = new Persistence(this);
+                GameController gameControllerPrevious = persistence.restoreGame();
+                if(gameControllerPrevious != null && new HashSet<>(gameControllerPrevious.getNicknames()).containsAll(game.getAllPlayers())) {
+                    broadcastingMessage("Server went down, the game is restoring!");
+                    replace(gameControllerPrevious);
+                }
                 gameState = GameState.IN_GAME;
                 startGame(game.getNum(), nicknames);
             }
@@ -189,9 +194,12 @@ public class GameController implements Serializable {
      */
     public void removeVirtualView(String nickname, boolean notifyEnabled) {
         VirtualView virtualView = virtualViewMap.remove(nickname);
-
         game.removeObserver(virtualView);
         game.removePlayerByNickname(nickname, notifyEnabled);
+        //Shows the nickname of the disconnected player
+        for (VirtualView v : virtualViewMap.values()) {
+            v.showGenericMessage(nickname + " has been disconnected from the game");
+        }
     }
 
     /**
@@ -205,7 +213,6 @@ public class GameController implements Serializable {
             v.showCommonCards(game.getCommongoalcards());
             v.showCommonScores(game.getCommongoalcardscores());
         }
-
         //Shows the personal goal card selected for the match
         for(String nick : nicknames) {
             if(!Objects.equals(nick, nicknames.get(0))) {
@@ -213,13 +220,27 @@ public class GameController implements Serializable {
                 vv.showPersonalCard(game.getPlayerByNickname(nick));
             }
         }
-
         //Shows the selected game round
         broadcastingMessage("\nThe game round is: " + nicknames);
-
         this.turnController = new TurnController(game, this, virtualViewMap);
         Thread threadTurnManager = new Thread(() -> turnController.turnManager());
         threadTurnManager.start();
+    }
+
+    public List<String> getNicknames() {
+        return nicknames;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    /**
+     * delete the file game of the finished current game at the end
+     */
+    protected void endGame() {
+        Persistence persistence = new Persistence(this);
+        persistence.deleteGame();
     }
 
     /**
@@ -230,5 +251,32 @@ public class GameController implements Serializable {
         for (VirtualView v : virtualViewMap.values()) {
             v.showGenericMessage(message);
         }
+    }
+
+    /**
+     * replace the game controller if the game is restored
+     * @param gameController game controller of the restored game
+     */
+    private void replace(GameController gameController) {
+        List<Player> players = gameController.getGame().getPlayers();
+        int num = gameController.getGame().getNum();
+        Board board = gameController.getGame().getBoard();
+        List<CommonGoalCard> commonGoalCards = gameController.getGame().getCommongoalcards();
+        List<CommonGoalCardScore> commonGoalCardScores = gameController.getGame().getCommongoalcardscores();
+        Stack<Tile> bag = gameController.getGame().getBag();
+        Map<String, Integer> playerScore = gameController.getGame().getPlayerScore();
+        for (Player p : players) {
+            p.setPersonalGoalCard(gameController.getGame().getPlayerByNickname(p.getNickname()).getPersonalGoalCard());
+        }
+
+        this.game.replaceGame(players, num, board,commonGoalCards,commonGoalCardScores, bag, playerScore);
+
+        this.gameState = gameController.getGameState();
+        this.turnController = gameController.getTurnController();
+        this.turnController.setGame(this.game);
+        this.turnController.setVirtualViewMap(this.virtualViewMap);
+        this.inputController = new InputController(this, this.virtualViewMap);
+        Thread threadTurnManager = new Thread(() -> turnController.turnManager());
+        threadTurnManager.start();
     }
 }

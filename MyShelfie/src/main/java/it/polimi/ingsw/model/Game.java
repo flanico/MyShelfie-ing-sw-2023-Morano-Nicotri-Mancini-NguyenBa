@@ -130,7 +130,6 @@ public class Game extends Observable implements Serializable {
         if (notifyEnabled) {
             notifyObserver(new InfoGameMessage(players, num));
         }
-
         return result;
     }
 
@@ -294,7 +293,6 @@ public class Game extends Observable implements Serializable {
         for (Player p : players) {
             scores.put(p.getNickname(), p.getScore());
         }
-
         playerScore = scores.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
@@ -307,5 +305,18 @@ public class Game extends Observable implements Serializable {
      */
     public Map<String, Integer> getPlayerScore() {
         return playerScore;
+    }
+
+    public void replaceGame(List<Player> players, int num, Board board, List<CommonGoalCard> commonGoalCards, List<CommonGoalCardScore> commonGoalCardScores, Stack<Tile> bag, Map<String, Integer> playerScore) {
+        this.players = players;
+        this.num = num;
+        this.board = board;
+        this.commongoalcards = commonGoalCards;
+        this.commongoalcardscores = commonGoalCardScores;
+        this.bag = bag;
+        this.playerScore = playerScore;
+        for (Player p : players) {
+            p.setPersonalGoalCard(getPlayerByNickname(p.getNickname()).getPersonalGoalCard());
+        }
     }
 }

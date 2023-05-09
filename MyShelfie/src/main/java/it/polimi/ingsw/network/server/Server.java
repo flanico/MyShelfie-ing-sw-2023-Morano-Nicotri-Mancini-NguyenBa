@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- *  class that represents tha socket server
+ *  class that represents the server
  */
 public class Server {
     public static final Logger LOGGER =  Logger.getLogger(Server.class.getName());
@@ -39,6 +39,7 @@ public class Server {
         }
         else {
             virtualView.showLoginResult(false, null);
+            LOGGER.info(() -> "Game is already started");
             clientHandler.disconnect();
         }
     }
