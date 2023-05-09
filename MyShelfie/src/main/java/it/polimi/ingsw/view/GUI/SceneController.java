@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.event.Event;
+import javafx.scene.control.Alert;
 
 
 public class SceneController extends ViewObservable {
@@ -77,60 +78,11 @@ public class SceneController extends ViewObservable {
         changeRootPane(controller, activeScene, fxml);
     }
 
-  /*
-    public static void showAlert(String title, String message) {
-        FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/fxml/alert_scene.fxml"));
-
-        Parent parent;
-        try {
-            parent = loader.load();
-        } catch (IOException e) {
-            Client.LOGGER.severe(e.getMessage());
-            return;
-        }
-        AlertSceneController alertSceneController = loader.getController();
-        Scene alertScene = new Scene(parent);
-        alertSceneController.setScene(alertScene);
-        alertSceneController.setAlertTitle(title);
-        alertSceneController.setAlertMessage(message);
-        alertSceneController.displayAlert();
+     public static void showAlert(String message) {
+         Alert alert = new Alert(Alert.AlertType.ERROR);
+         alert.setTitle("Error");
+         alert.setContentText(message);
+         alert.showAndWait();
     }
 
-
-    public static void showGodInformation(String name, String caption, String description) {
-        FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/fxml/god_info_scene.fxml"));
-
-        Parent parent;
-        try {
-            parent = loader.load();
-        } catch (IOException e) {
-            Client.LOGGER.severe(e.getMessage());
-            return;
-        }
-        GodInfoSceneController godInfoSceneController = loader.getController();
-        Scene godInfoScene = new Scene(parent);
-        godInfoSceneController.setScene(godInfoScene);
-        godInfoSceneController.setGodName(name);
-        godInfoSceneController.setGodCaption(caption);
-        godInfoSceneController.setGodDescription(description);
-        godInfoSceneController.setGodImage();
-        godInfoSceneController.displayGodInfo();
-    }
-
-    public static void showWin(String nickname) {
-        FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/fxml/win_scene.fxml"));
-
-        Parent parent;
-        try {
-            parent = loader.load();
-        } catch (IOException e) {
-            Client.LOGGER.severe(e.getMessage());
-            return;
-        }
-        WinSceneController winSceneController = loader.getController();
-        Scene winScene = new Scene(parent);
-        winSceneController.setScene(winScene);
-        winSceneController.setWinnerNickname(nickname);
-        winSceneController.displayWinScene();
-    }*/
 }

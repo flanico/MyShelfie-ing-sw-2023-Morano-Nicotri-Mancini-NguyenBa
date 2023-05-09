@@ -16,12 +16,18 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void askPlayersNumber(){
-        
+        Platform.runLater(() -> SceneController.changeRootPane(observers, "SelectPlayersPanel.fxml"));
     }
 
     @Override
     public void showLoginResult(boolean isNicknameAccepted, String nickname){
+        if(isNicknameAccepted) {
 
+        }
+        else {
+            Platform.runLater(() -> SceneController.showAlert("This nickname is already taken!"));
+            askNickname();
+        }
     }
 
     /**
@@ -40,7 +46,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showError(String errorMessage){
-
+        //Platform.runLater(() -> SceneController.showAlert("Error", errorMessage));
     }
 
     /**
