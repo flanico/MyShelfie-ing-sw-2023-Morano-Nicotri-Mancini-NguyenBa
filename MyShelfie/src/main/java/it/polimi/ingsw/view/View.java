@@ -74,7 +74,7 @@ public interface View {
      * asks the client to select the tiles from the board
      * @param board the board of the game
      */
-    void askSelectTiles(Board board);
+    void askSelectTiles(Board board, Bookshelf bookshelf);
 
     /**
      * asks the client to insert the tiles in the bookshelf
