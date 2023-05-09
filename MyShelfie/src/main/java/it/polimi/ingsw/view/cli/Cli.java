@@ -344,7 +344,7 @@ public class Cli extends ViewObservable implements View {
                     if (num <= board.maxTilesBoard()){
                         isValid = true;
                     }else {
-                        out.println("There isn't enough removable tiles on the board. You can select MAX "+ board.maxTilesBoard()+ "tiles. Please retry.");
+                        out.println("There isn't enough removable tiles on the board. You can select MAX "+ board.maxTilesBoard()+ " tiles. Please retry.");
                     }
                 }
                 else out.println(STR_INPUT_ERR);
