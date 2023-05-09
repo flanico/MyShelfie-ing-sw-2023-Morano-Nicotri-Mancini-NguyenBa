@@ -33,10 +33,6 @@ public class ServerApp {
         Thread socketThread = new Thread(socketServer, "socketserver_");
         socketThread.start();
 
-
-
-
-
         //RMI
         int serverRMIPort = 1099; //default RMI port
 
