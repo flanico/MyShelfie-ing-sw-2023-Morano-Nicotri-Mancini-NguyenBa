@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:controller="it.polimi.ingsw.view.GUI.Scene.LobbyController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <ImageView fitHeight="616.0" fitWidth="812.0" layoutX="-6.0" layoutY="-9.0" pickOnBounds="true">
          <image>
             <Image url="@/misc/sfondo.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="83.0" fitWidth="120.0" layoutX="337.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="40.0" fitWidth="80.0" layoutX="377.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Effects/loading-gif.gif" />
          </image></ImageView>

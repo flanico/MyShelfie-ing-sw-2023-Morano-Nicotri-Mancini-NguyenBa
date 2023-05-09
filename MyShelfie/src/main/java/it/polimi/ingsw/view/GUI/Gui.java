@@ -49,8 +49,8 @@ public class Gui extends ViewObservable implements View {
             scene.addAllObservers(observers);
             scene.setNicknames(players);
             scene.setNum_players(numberPlayers);
-            //LobbyController finalScene = scene;
-            Platform.runLater(() -> SceneController.changeRootPane(observers, "lobbyPanel.fxml"));
+            LobbyController finalScene = scene;
+            Platform.runLater(() -> SceneController.changeRootPane(finalScene, "lobbyPanel.fxml"));
         }
     }
 

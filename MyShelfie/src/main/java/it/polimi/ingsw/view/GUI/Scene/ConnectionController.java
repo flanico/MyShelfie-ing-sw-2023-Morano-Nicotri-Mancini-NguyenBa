@@ -10,6 +10,10 @@ import javafx.scene.control.ChoiceBox;
 
 import java.awt.*;
 
+/**
+ * class that controls the connectionPanel.fxml for the client connection
+ * @author Stefano Morano
+ */
 public class ConnectionController extends ViewObservable implements GenericSceneController{
 
     @FXML

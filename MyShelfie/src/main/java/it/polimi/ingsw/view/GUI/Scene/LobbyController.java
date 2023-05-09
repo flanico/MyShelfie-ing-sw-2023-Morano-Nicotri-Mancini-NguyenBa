@@ -26,13 +26,20 @@ public class LobbyController extends ViewObservable implements GenericSceneContr
     private List<Player> nicknames;
     private int num_players;
 
-
-
-    void init(){
-        player_1.setText(nicknames.get(0).getNickname());
-        player_2.setText("");
-        player_3.setText("");
-        player_4.setText("");
+    public void initialize(){
+        for (int x=1; x<=nicknames.size(); x++)
+            switch (x) {
+                case 1 -> player_1.setText(nicknames.get(0).getNickname());
+                case 2 -> player_2.setText(nicknames.get(1).getNickname());
+                case 3 -> player_3.setText(nicknames.get(2).getNickname());
+                case 4 -> player_4.setText(nicknames.get(3).getNickname());
+            }
+        for (int x= nicknames.size()+1; x<=4; x++)
+            switch (x) {
+                case 2 -> player_2.setText("");
+                case 3 -> player_3.setText("");
+                case 4 -> player_4.setText("");
+            }
         number.setText(nicknames.size() + "/" + num_players);
     }
 
@@ -45,17 +52,12 @@ public class LobbyController extends ViewObservable implements GenericSceneContr
     }
 
     public void update() {
-        switch (nicknames.size()){
-            case 2:
-                player_2.setText(nicknames.get(1).getNickname());
-                break;
-            case 3:
-                player_3.setText(nicknames.get(2).getNickname());
-                break;
-            case 4:
-                player_4.setText(nicknames.get(3).getNickname());
-                break;
-        }
+        for (int x=2; x<=nicknames.size(); x++)
+            switch (x) {
+                case 2 -> player_2.setText(nicknames.get(1).getNickname());
+                case 3 -> player_3.setText(nicknames.get(2).getNickname());
+                case 4 -> player_4.setText(nicknames.get(3).getNickname());
+            }
         number.setText(nicknames.size() + "/" + num_players);
     }
 }
