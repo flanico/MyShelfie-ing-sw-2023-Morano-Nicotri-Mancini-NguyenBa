@@ -73,23 +73,16 @@ public class InputController implements Serializable {
      */
     protected boolean checkTiles(Message message) {
         Bookshelf bookshelfOfTheRoundPlayer;
-        int maxTiles;
         TilesReplyMessage tilesReplyMessage = (TilesReplyMessage) message;
         VirtualView virtualView = virtualViewMap.get(tilesReplyMessage.getNickname());
+        bookshelfOfTheRoundPlayer = game.getPlayerByNickname(tilesReplyMessage.getNickname()).getBookshelf();
         if(game.getBoard().isRemovable(tilesReplyMessage.getTiles())) {
 //            virtualView.showGenericMessage("Tiles selected are removable from the board!");
-            bookshelfOfTheRoundPlayer = game.getPlayerByNickname(tilesReplyMessage.getNickname()).getBookshelf();
-            maxTiles = bookshelfOfTheRoundPlayer.maxTilesBookshelf();
-            if (tilesReplyMessage.getTiles().size() > maxTiles)
-            {
-                virtualView.showGenericMessage("Sorry, you don't have enough space in your bookshelf. You can select MAX "+ maxTiles + " tiles. Retry.");
-                return false;
-            }else
-                 return true;
+            return true;
         }
         else {
             virtualView.showGenericMessage("Sorry, tiles selected are NOT removable from the board! Retry.");
-            virtualView.askSelectTiles(game.getBoard());
+            virtualView.askSelectTiles(game.getBoard(), bookshelfOfTheRoundPlayer);
             return false;
         }
     }

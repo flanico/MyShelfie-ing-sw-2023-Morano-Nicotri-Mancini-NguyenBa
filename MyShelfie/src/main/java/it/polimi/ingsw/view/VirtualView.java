@@ -79,8 +79,8 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void askSelectTiles(Board board) {
-        clientHandler.sendMessageToClient(new SelectTileRequestMessage(board));
+    public void askSelectTiles(Board board, Bookshelf bookshelf) {
+        clientHandler.sendMessageToClient(new SelectTileRequestMessage(board, bookshelf));
     }
 
     @Override

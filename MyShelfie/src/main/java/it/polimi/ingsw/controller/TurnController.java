@@ -218,7 +218,7 @@ public class TurnController implements Serializable {
         if(turnState == TurnState.SELECT) {
             VirtualView virtualView = virtualViewMap.get(currentPlayer);
             notifyOtherPlayers("\n" + currentPlayer + " is selecting the tiles from the board...", currentPlayer);
-            virtualView.askSelectTiles(game.getBoard());
+            virtualView.askSelectTiles(game.getBoard(), currentBookshelf);
             waitAnswer();
             turnState = TurnState.REMOVE;
             removeTilesFromBoard(currentTiles);

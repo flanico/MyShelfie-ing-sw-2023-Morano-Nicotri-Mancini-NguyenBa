@@ -102,7 +102,7 @@ public class ClientController implements Observer, ViewObserver {
             }
             case SELECT_TILE_REQ -> {
                 SelectTileRequestMessage selectTileRequestMessage = (SelectTileRequestMessage) message;
-                executorService.execute(() -> view.askSelectTiles(selectTileRequestMessage.getBoard()));
+                executorService.execute(() -> view.askSelectTiles(selectTileRequestMessage.getBoard(), selectTileRequestMessage.getBookshelf()));
             }
             case SHOW_BOARD -> {
                 ShowBoardMessage showBoardMessage = (ShowBoardMessage) message;

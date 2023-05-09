@@ -99,7 +99,7 @@ public class Gui extends ViewObservable implements View {
      * @param board the board of the game
      */
     @Override
-    public void askSelectTiles(Board board){
+    public void askSelectTiles(Board board, Bookshelf bookshelf){
 
     }
 

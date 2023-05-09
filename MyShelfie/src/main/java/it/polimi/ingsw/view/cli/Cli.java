@@ -330,10 +330,11 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void askSelectTiles(Board board) throws NumberFormatException {
+    public void askSelectTiles(Board board, Bookshelf bookshelf) throws NumberFormatException {
         boolean isValid = false;
         int num = -1;
         List<Tile> tiles = new ArrayList<>();
+        int maxTiles = 0;
 
         out.println(ColorCli.YELLOW_BOLD + "Hey you have to select the tiles from the board!" + ColorCli.RESET);
         do {
@@ -342,7 +343,12 @@ public class Cli extends ViewObservable implements View {
                 num = Integer.parseInt(readLine.nextLine());
                 if(num >= 1 && num <= 3) {
                     if (num <= board.maxTilesBoard()){
-                        isValid = true;
+                        maxTiles = bookshelf.maxTilesBookshelf();
+                        if (num > maxTiles){
+                            out.println("You don't have enough space in your bookshelf. You can select MAX "+ maxTiles + " tiles. Please retry.");
+                        }else{
+                            isValid = true;
+                        }
                     }else {
                         out.println("There isn't enough removable tiles on the board. You can select MAX "+ board.maxTilesBoard()+ " tiles. Please retry.");
                     }
