@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
+import it.polimi.ingsw.view.GUI.Scene.LobbyController;
 import it.polimi.ingsw.view.GUI.Scene.MenuController;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
@@ -37,7 +38,20 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showGameInfo(List<Player> players, int numberPlayers){
-
+        LobbyController scene;
+        try {
+            scene = (LobbyController) SceneController.getActiveController();
+            scene.setNicknames(players);
+            scene.setNum_players(numberPlayers);
+            Platform.runLater(scene::update);
+        } catch (ClassCastException e) {
+            scene = new LobbyController();
+            scene.addAllObservers(observers);
+            scene.setNicknames(players);
+            scene.setNum_players(numberPlayers);
+            //LobbyController finalScene = scene;
+            Platform.runLater(() -> SceneController.changeRootPane(observers, "lobbyPanel.fxml"));
+        }
     }
 
     /**

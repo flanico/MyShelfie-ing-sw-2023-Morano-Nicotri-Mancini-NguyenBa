@@ -8,6 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+/**
+ * main of the Gui application
+ */
 public class MainGui extends Application {
     public static void main(String[] args) {
         launch(args);

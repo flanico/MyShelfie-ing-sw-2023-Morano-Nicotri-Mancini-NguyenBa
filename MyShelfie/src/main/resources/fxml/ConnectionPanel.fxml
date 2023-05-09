@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import java.lang.String?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.ConnectionController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.ConnectionController">
    <children>
       <ImageView fitHeight="606.0" fitWidth="800.0" layoutY="-1.0" pickOnBounds="true">
          <image>
@@ -19,8 +16,8 @@
       <TextField fx:id="serverPortField" layoutX="123.0" layoutY="388.0" promptText="12345" />
       <TextField fx:id="addressField" layoutX="542.0" layoutY="388.0" promptText="localhost" />
       <ChoiceBox fx:id="serverType" layoutX="325.0" layoutY="290.0" prefWidth="150.0">
-         <String fx:value="Socket"/>
-         <String fx:value="RMI"/>
+         <String fx:value="Socket" />
+         <String fx:value="RMI" />
       </ChoiceBox>
       <Text layoutX="353.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connection Menu" />
       <Text layoutX="168.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server Port" />

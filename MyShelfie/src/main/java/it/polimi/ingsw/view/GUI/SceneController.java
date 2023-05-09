@@ -13,15 +13,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.event.Event;
 import javafx.scene.control.Alert;
 
+/**
+ * Class that controls every change of scenes, panels and observers
+ * @author Stefano Morano
+ */
 
 public class SceneController extends ViewObservable {
     private static Scene activeScene;
     private static GenericSceneController activeController;
-
     public static Scene getActiveScene() {
         return activeScene;
     }
-
     public static GenericSceneController getActiveController() {
         return activeController;
     }
