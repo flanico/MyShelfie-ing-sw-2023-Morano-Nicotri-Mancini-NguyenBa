@@ -239,49 +239,78 @@ public class Board implements Serializable {
 
                 if (i< ROW-2)
                 {
+                    tiles.removeAll(tiles);
                     tiles.add(this.getMatrix()[i][j]);
                     tiles.add(this.getMatrix()[i+1][j]);
                     tiles.add(this.getMatrix()[i+2][j]);
                     if(isRemovable(tiles)){
-                        return 3;
+                        max=3;
                     }
-                }
-                if (i < ROW-1)
-                {
-                    tiles.removeAll(tiles);
-                    //System.out.println("\ncontrollo 2 row : i= "+ i + "j=" +j);
-                    tiles.add(this.getMatrix()[i][j]);
-                    tiles.add(this.getMatrix()[i+1][j]);
-                    if(isRemovable(tiles)){
-                        if (max == 1){
-                            max= 2;
-                        }
-                        //System.out.println("max:" + max);
-                    }
-                }
+                    else{
+                        tiles.removeAll(tiles);
+                        //System.out.println("\ncontrollo 2 row : i= "+ i + "j=" +j);
+                        tiles.add(this.getMatrix()[i][j]);
+                        tiles.add(this.getMatrix()[i+1][j]);
+                        if(isRemovable(tiles)){
+                            if (max == 1){
+                                max= 2;
+                            }
+                            //System.out.println("max:" + max);
 
+                        }
+                    }
+                }else {
+                    if (i < ROW-1)
+                    {
+                        tiles.removeAll(tiles);
+                        //System.out.println("\ncontrollo 2 row : i= "+ i + "j=" +j);
+                        tiles.add(this.getMatrix()[i][j]);
+                        tiles.add(this.getMatrix()[i+1][j]);
+                        if(isRemovable(tiles)){
+                            if (max == 1){
+                                max= 2;
+                            }
+                            //System.out.println("max:" + max);
+
+                        }
+                    }
+                }
 
                 if (j< COL-2) {
+                    tiles.removeAll(tiles);
                     tiles.add(this.getMatrix()[i][j]);
                     tiles.add(this.getMatrix()[i][j + 1]);
                     tiles.add(this.getMatrix()[i][j + 2]);
                     if (isRemovable(tiles)) {
-                        return 3;
-                    }
-                }
-                if (j < COL-1)
-                {
-                    tiles.removeAll(tiles);
-                    //System.out.println("\ncontrollo 2 col : i= "+ i + "j=" +j);
-                    tiles.add(this.getMatrix()[i][j]);
-                    tiles.add(this.getMatrix()[i][j+1]);
-                    if(isRemovable(tiles)){
-                        if (max == 1){
-                            max= 2;
+                        max= 3;
+                    }else {
+                        tiles.removeAll(tiles);
+                        //System.out.println("\ncontrollo 2 col : i= "+ i + "j=" +j);
+                        tiles.add(this.getMatrix()[i][j]);
+                        tiles.add(this.getMatrix()[i][j+1]);
+                        if(isRemovable(tiles)){
+                            if (max == 1){
+                                max= 2;
+                            }
+                            //System.out.println("max:" + max);
                         }
-                        //System.out.println("max:" + max);
+                    }
+                }else{
+                    if (j < COL-1)
+                    {
+                        tiles.removeAll(tiles);
+                        //System.out.println("\ncontrollo 2 col : i= "+ i + "j=" +j);
+                        tiles.add(this.getMatrix()[i][j]);
+                        tiles.add(this.getMatrix()[i][j+1]);
+                        if(isRemovable(tiles)){
+                            if (max == 1){
+                                max= 2;
+                            }
+                            //System.out.println("max:" + max);
+                        }
                     }
                 }
+
 
 
             }
