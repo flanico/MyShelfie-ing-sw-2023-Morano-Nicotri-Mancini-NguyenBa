@@ -66,7 +66,7 @@ public class Cli extends ViewObservable implements View {
         }
         else if (connectingType == 2) {
             out.println("RMI connection to do...");
-            //Chiamo connessione RMI
+            connectingRMI();
         }
     }
 
@@ -143,6 +143,10 @@ public class Cli extends ViewObservable implements View {
             correctPort = inputPort;
         }
         notifyObserver(obs -> obs.createConnection(correctIp, correctPort));
+    }
+
+    public void connectingRMI () {
+
     }
 
     @Override
