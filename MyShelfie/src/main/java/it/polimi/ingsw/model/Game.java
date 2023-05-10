@@ -22,7 +22,7 @@ public class Game extends Observable implements Serializable {
     private List<CommonGoalCardScore> commongoalcardscores;
     private Board board;
     private Stack<Tile> bag;
-    private Map<String, Integer> playerScore = new HashMap<>();
+    private Map<String, Integer> playerScore;
 
 
     public Game() {
@@ -30,6 +30,7 @@ public class Game extends Observable implements Serializable {
         this.commongoalcards = new ArrayList<>();
         this.commongoalcardscores = new ArrayList<>();
         this.personalgoalcards = new ArrayList<>();
+        this.playerScore = new HashMap<>();
         this.initCommongoalcards();
         this.initBag();
     }
@@ -74,6 +75,7 @@ public class Game extends Observable implements Serializable {
      * check if a nickname is already use or not in the game
      * @param nickname selected by the client
      * @return true if the nickname is already used, false otherwise
+     * @author Chiara Nguyen Ba
      */
     public boolean isNicknameTaken(String nickname) {
         return players.stream()
@@ -232,7 +234,9 @@ public class Game extends Observable implements Serializable {
         return board;
     }
 
-
+    /**
+     * initializer of the bag
+     */
     private void initBag() {
         this.bag = new Stack<>();
         for (int i = 0; i < 22; i++) {
@@ -269,6 +273,7 @@ public class Game extends Observable implements Serializable {
     /**
      * checks if the common goal cards are completed
      * @param player to be checked the bookshelf
+     * @author Chiara Nguyen Ba
      */
     public int checkCommonGoalCards(Player player) {
         int score = 0;
@@ -287,6 +292,7 @@ public class Game extends Observable implements Serializable {
 
     /**
      * sets at the end of the game the ranking scores of the players
+     * @author Chiara Nguyen Ba
      */
     public void setRankingScore() {
         Map<String, Integer> scores = new HashMap<>();
@@ -307,6 +313,16 @@ public class Game extends Observable implements Serializable {
         return playerScore;
     }
 
+    /**
+     * replace the game for the implementation of the persistence
+     * @param players
+     * @param num
+     * @param board
+     * @param commonGoalCards
+     * @param commonGoalCardScores
+     * @param bag
+     * @param playerScore
+     */
     public void replaceGame(List<Player> players, int num, Board board, List<CommonGoalCard> commonGoalCards, List<CommonGoalCardScore> commonGoalCardScores, Stack<Tile> bag, Map<String, Integer> playerScore) {
         this.players = players;
         this.num = num;

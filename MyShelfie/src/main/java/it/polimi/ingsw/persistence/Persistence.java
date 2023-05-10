@@ -23,12 +23,11 @@ public class Persistence implements Serializable {
      * @param gameController game controller of the match
      */
     public void storeGame(GameController gameController) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream("game-saved.txt")) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream("game-saved.ser")) {
             ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
             outputStream.writeObject(gameController);
             Server.LOGGER.info("Server saves the current game on the disk");
         } catch (IOException e) {
-            e.printStackTrace();
             Server.LOGGER.severe("Failed to save the game on a file");
         }
     }
@@ -38,7 +37,7 @@ public class Persistence implements Serializable {
      * @return game controller of the previous game saved in the file
      */
     public GameController restoreGame() {
-        try (FileInputStream fileInputStream = new FileInputStream("game-saved.txt")) {
+        try (FileInputStream fileInputStream = new FileInputStream("game-saved.ser")) {
             ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);
             gameController = (GameController) inputStream.readObject();
             Server.LOGGER.info("Server restore the game from the disk");
@@ -53,7 +52,7 @@ public class Persistence implements Serializable {
      * delete the file game
      */
     public void deleteGame() {
-        File file = new File("game-saved.txt");
+        File file = new File("game-saved.ser");
         try {
             Files.deleteIfExists(file.toPath());
             Server.LOGGER.info("Server delete the game from the disk");

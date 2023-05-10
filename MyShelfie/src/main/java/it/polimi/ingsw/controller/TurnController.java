@@ -25,7 +25,7 @@ public class TurnController implements Serializable {
     private transient Map<String, VirtualView> virtualViewMap;
     private final List<String> nicknames;
     private String currentPlayer;
-    private boolean hasAnswered = false;
+    private boolean hasReplied = false;
     private int currentPosition;
     private List<Tile> currentTiles;
     private Bookshelf currentBookshelf;
@@ -65,18 +65,18 @@ public class TurnController implements Serializable {
             case TILES_REPLY -> {
                 TilesReplyMessage tilesReplyMessage = (TilesReplyMessage) message;
                 currentTiles = tilesReplyMessage.getTiles();
-                hasAnswered = true;
+                hasReplied = true;
             }
             case POSITION_REPLY -> {
                 PositionReplyMessage positionReplyMessage = (PositionReplyMessage) message;
                 currentPosition = positionReplyMessage.getColumn();
                 currentTiles = positionReplyMessage.getTiles();
-                hasAnswered = true;
+                hasReplied = true;
             }
             case ORDER_REPLY -> {
                 OrderReplyMessage orderReplyMessage = (OrderReplyMessage) message;
                 currentTiles = orderReplyMessage.getTiles();
-                hasAnswered = true;
+                hasReplied = true;
             }
         }
     }
@@ -402,14 +402,14 @@ public class TurnController implements Serializable {
      * waits the player's answer before going on with the game
      */
     private void waitAnswer() {
-        while (!hasAnswered) {
+        while (!hasReplied) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        hasAnswered = false;
+        hasReplied = false;
     }
 
     /**

@@ -104,6 +104,13 @@ class GameTest{
     }
 
     @Test
+    void getCommongoalcardscoresTest_Size() {
+        for (int i = 0; i < 2; i++) {
+            assertEquals(3, game.getCommongoalcardscores().get(i).getStack().size());
+        }
+    }
+
+    @Test
     void getBoardTest() {
         assertNotEquals(null, game.getBoard());
         assertEquals(9, game.getBoard().getCOL());

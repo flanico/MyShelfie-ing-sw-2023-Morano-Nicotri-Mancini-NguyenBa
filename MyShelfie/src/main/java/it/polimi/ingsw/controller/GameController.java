@@ -58,6 +58,7 @@ public class GameController implements Serializable {
         if(message.getMessageType() == MessageType.NUM_PLAYERS_REP) {
             if(inputController.checkNumPlayers(message)) {
                 game.setNum(((NumPlayersReplyMessage) message).getNumPlayers());
+                game.addPlayer(nicknames.get(0));
                 if(game.getCurrentNum() < game.getNum()) {
                     broadcastingMessage("Waiting other players...");
                 }
@@ -155,7 +156,6 @@ public class GameController implements Serializable {
             nicknames.add(nickname);
             virtualView.showLoginResult(true, "SERVER");
             virtualView.askPlayersNumber();
-            game.addPlayer(nickname);
         }
         //If the player is not the first player to connect to the game, he joins in the game
         else if (virtualViewMap.size() < game.getNum()) {
