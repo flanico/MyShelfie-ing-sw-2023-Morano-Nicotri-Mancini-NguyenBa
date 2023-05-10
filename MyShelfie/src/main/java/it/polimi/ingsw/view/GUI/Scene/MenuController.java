@@ -17,7 +17,9 @@ import it.polimi.ingsw.view.GUI.SceneController;
 import javax.lang.model.type.NullType;
 
 public class MenuController extends ViewObservable implements GenericSceneController {
+    public void initialize(){
 
+    }
     public void playPressed(ActionEvent actionEvent) throws Exception{
         SceneController.changeRootPane(observers, actionEvent, "ConnectionPanel.fxml");
     }

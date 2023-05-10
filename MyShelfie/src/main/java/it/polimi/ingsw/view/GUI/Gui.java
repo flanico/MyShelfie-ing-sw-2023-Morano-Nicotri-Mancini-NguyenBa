@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
+import it.polimi.ingsw.view.GUI.Scene.GameControllerScene;
 import it.polimi.ingsw.view.GUI.Scene.LobbyController;
 import it.polimi.ingsw.view.GUI.Scene.MenuController;
 import it.polimi.ingsw.view.View;
@@ -38,19 +39,19 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showGameInfo(List<Player> players, int numberPlayers){
-        LobbyController scene;
+        LobbyController lobby_ctrl;
         try {
-            scene = (LobbyController) SceneController.getActiveController();
-            scene.setNicknames(players);
-            scene.setNum_players(numberPlayers);
-            Platform.runLater(scene::update);
+            lobby_ctrl = (LobbyController) SceneController.getActiveController();
+            lobby_ctrl.setNicknames(players);
+            lobby_ctrl.setNum_players(numberPlayers);
+            Platform.runLater(lobby_ctrl::update);
         } catch (ClassCastException e) {
-            scene = new LobbyController();
-            scene.addAllObservers(observers);
-            scene.setNicknames(players);
-            scene.setNum_players(numberPlayers);
-            LobbyController finalScene = scene;
-            Platform.runLater(() -> SceneController.changeRootPane(finalScene, "lobbyPanel.fxml"));
+            lobby_ctrl = new LobbyController();
+            lobby_ctrl.addAllObservers(observers);
+            lobby_ctrl.setNicknames(players);
+            lobby_ctrl.setNum_players(numberPlayers);
+            LobbyController new_ctrl = lobby_ctrl;
+            Platform.runLater(() -> SceneController.changeRootPane(new_ctrl, "lobbyPanel.fxml"));
         }
     }
 
@@ -105,7 +106,18 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showBoard(Board board){
-
+        GameControllerScene game_ctrl;
+        try {
+            game_ctrl = (GameControllerScene) SceneController.getActiveController();
+            game_ctrl.setBoard(board);
+            Platform.runLater(game_ctrl::updateBoard);
+        } catch (ClassCastException e) {
+            game_ctrl = new GameControllerScene();
+            game_ctrl.addAllObservers(observers);
+            game_ctrl.setBoard(board);
+            GameControllerScene new_ctrl = game_ctrl;
+            Platform.runLater(() -> SceneController.changeRootPane(new_ctrl, "gamePanel.fxml"));
+        }
     }
 
     /**

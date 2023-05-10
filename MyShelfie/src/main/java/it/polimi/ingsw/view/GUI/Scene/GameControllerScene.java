@@ -4,15 +4,21 @@ import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.observer.ViewObservable;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.text.Element;
+import javax.swing.text.html.ImageView;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.io.IOException;
 
 
-public class GameController extends ViewObservable implements GenericSceneController {
+public class GameControllerScene extends ViewObservable implements GenericSceneController {
     private String frase;
 
     @FXML
@@ -109,21 +115,29 @@ public class GameController extends ViewObservable implements GenericSceneContro
     Board board;
 
     public void initialize(){
-        for (int x=0; x<8; x++){
-            for (int y=0; x<9; y++){
-                reference = getButton(x,y);
-                if (!reference.equals(null) && board.getMatrix()[x][y].isBlocked()){
-                    reference.setVisible(false);
-                }
-            }
-        }
+        updateBoard();
     }
 
     public void setBoard(Board board) {
         this.board = board;
     }
 
-    private Button getButton (int x, int y) {
+    public void updateBoard(){
+        Button ref_but;
+        for (int x=0; x<9; x++)
+            for (int y = 0; y < 9; y++) {
+                ref_but = getButton(x,y);
+                if (ref_but != null)
+                    if (board.getMatrix()[x][y].isBlocked()) {
+                        ref_but.setVisible(false);
+                        ref_but.setDisable(true);
+                    } else {
+                        setImage(ref_but, board.getMatrix()[x][y].getType());
+                    }
+            }
+    }
+
+    private Button getButton(int x, int y){
         String concat = x + "," + y;
         return switch (concat) {
             case "0,3" -> button_03;
@@ -175,34 +189,21 @@ public class GameController extends ViewObservable implements GenericSceneContro
         };
     }
 
-    /*private ImageView getImage(TileType type){
-        switch (type){
-            case CAT:
-                Image path = new Image("UIControls/logo.png");
-                ImageView imageView = new ImageView(path);
-                break;
-            case PLANT:
-                Image path = new Image("UIControls/logo.png");
-                ImageView imageView = new ImageView(path);
-                break;
-            case BOOK:
-                Image path = new Image("UIControls/logo.png");
-                ImageView imageView = new ImageView(path);
-                break;
-            case FRAME:
-                Image path = new Image("UIControls/logo.png");
-                ImageView imageView = new ImageView(path);
-                break;
-            case GAME:
-                Image path = new Image("UIControls/logo.png");
-                ImageView imageView = new ImageView(path);
-                break;
-            case TROPHY:
-                Image path = new Image("UIControls/logo.png");
-                ImageView imageView = new ImageView(path);
-                break;
-                };
-        }
-    }*/
+    private void setImage(Button ref_button, TileType type) {
+       /* Image img = null;
 
+        switch (type) {
+            case CAT -> img = new ImageIcon("/item tiles/Gatti1.1.png").getImage();
+            case PLANT -> img = new ImageIcon("/item tiles/Piante1.1.png").getImage();
+            case BOOK -> img = new ImageIcon("/item tiles/Libri1.1.png").getImage();
+            case FRAME -> img = new ImageIcon("/item tiles/Cornici1.1.png").getImage();
+            case GAME -> img = new ImageIcon("/item tiles/Giochi1.1.png").getImage();
+            case TROPHY -> img = new ImageIcon("/item tiles/Trofei1.1.png").getImage();
+        }
+        ImageView view = new ImageView(getClass().getClassLoader().getResource("/pawn.png"));
+
+        ref_button.setGraphic(view);
+
+    }*/
+    }
 }

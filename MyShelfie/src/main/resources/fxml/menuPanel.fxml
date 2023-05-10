@@ -22,6 +22,11 @@
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="25.0" />
          </font>
+         <graphic>
+            <ImageView>
+               <Image url="@../misc/sfondo.jpg"/>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </Pane>
