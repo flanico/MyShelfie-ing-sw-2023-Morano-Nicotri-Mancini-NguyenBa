@@ -10,16 +10,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import it.polimi.ingsw.view.GUI.SceneController;
 import javax.lang.model.type.NullType;
 
 public class MenuController extends ViewObservable implements GenericSceneController {
-    public void initialize(){
 
-    }
     public void playPressed(ActionEvent actionEvent) throws Exception{
         SceneController.changeRootPane(observers, actionEvent, "ConnectionPanel.fxml");
     }

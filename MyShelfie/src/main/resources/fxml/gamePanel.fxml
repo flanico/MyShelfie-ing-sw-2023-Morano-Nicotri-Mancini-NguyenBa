@@ -1,89 +1,252 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.GameControllerScene">
    <children>
-      <ImageView fitHeight="728.0" fitWidth="1286.0" layoutX="-5.0" layoutY="-2.0" pickOnBounds="true">
+      <ImageView fitHeight="728.0" fitWidth="1288.0" layoutX="-5.0" layoutY="-2.0" pickOnBounds="true">
        <Image url="@/misc/sfondo.jpg" />
       </ImageView>
-      <ImageView fitHeight="476.0" fitWidth="425.0" layoutX="144.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="380.0" fitWidth="400.0" layoutX="39.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/boards/livingroom.png" />
          </image>
       </ImageView>
-      <GridPane layoutX="160.0" layoutY="144.0" prefHeight="389.0" prefWidth="389.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button fx:id="button_22" mnemonicParsing="false" prefHeight="103.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="button_03" mnemonicParsing="false" prefHeight="64.0" prefWidth="43.0" GridPane.columnIndex="3" />
-            <Button fx:id="button_04" mnemonicParsing="false" prefHeight="79.0" prefWidth="43.0" GridPane.columnIndex="4" />
-            <Button fx:id="button_13" mnemonicParsing="false" prefHeight="115.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button fx:id="button_14" mnemonicParsing="false" prefHeight="122.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Button fx:id="button_23" mnemonicParsing="false" prefHeight="125.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button fx:id="button_24" mnemonicParsing="false" prefHeight="127.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Button fx:id="button_15" mnemonicParsing="false" prefHeight="132.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Button fx:id="button_25" mnemonicParsing="false" prefHeight="134.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <Button fx:id="button_26" mnemonicParsing="false" prefHeight="118.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Button fx:id="button_31" mnemonicParsing="false" prefHeight="80.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="button_32" mnemonicParsing="false" prefHeight="89.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="button_33" mnemonicParsing="false" prefHeight="105.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Button fx:id="button_34" mnemonicParsing="false" prefHeight="134.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-            <Button fx:id="button_35" mnemonicParsing="false" prefHeight="126.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-            <Button fx:id="button_36" mnemonicParsing="false" prefHeight="87.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-            <Button fx:id="button_37" mnemonicParsing="false" prefHeight="90.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-            <Button fx:id="button_38" mnemonicParsing="false" prefHeight="130.0" prefWidth="43.0" GridPane.columnIndex="8" GridPane.rowIndex="3" />
-            <Button fx:id="button_40" mnemonicParsing="false" prefHeight="188.0" prefWidth="43.0" GridPane.rowIndex="4" />
-            <Button fx:id="button_41" mnemonicParsing="false" prefHeight="170.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="button_42" mnemonicParsing="false" prefHeight="166.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button fx:id="button_43" mnemonicParsing="false" prefHeight="124.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <Button fx:id="button_44" mnemonicParsing="false" prefHeight="137.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-            <Button fx:id="button_45" mnemonicParsing="false" prefHeight="181.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-            <Button fx:id="button_46" mnemonicParsing="false" prefHeight="152.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-            <Button fx:id="button_47" mnemonicParsing="false" prefHeight="181.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
-            <Button fx:id="button_48" mnemonicParsing="false" prefHeight="173.0" prefWidth="43.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
-            <Button fx:id="button_50" mnemonicParsing="false" prefHeight="128.0" prefWidth="43.0" GridPane.rowIndex="5" />
-            <Button fx:id="button_51" mnemonicParsing="false" prefHeight="115.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="button_52" mnemonicParsing="false" prefHeight="121.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Button fx:id="button_53" mnemonicParsing="false" prefHeight="156.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-            <Button fx:id="button_54" mnemonicParsing="false" prefHeight="166.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-            <Button fx:id="button_55" mnemonicParsing="false" prefHeight="129.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-            <Button fx:id="button_56" mnemonicParsing="false" prefHeight="169.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-            <Button fx:id="button_57" mnemonicParsing="false" prefHeight="164.0" prefWidth="43.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-            <Button fx:id="button_62" mnemonicParsing="false" prefHeight="129.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <Button fx:id="button_63" mnemonicParsing="false" prefHeight="109.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-            <Button fx:id="button_64" mnemonicParsing="false" prefHeight="109.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-            <Button fx:id="button_65" mnemonicParsing="false" prefHeight="95.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-            <Button fx:id="button_66" mnemonicParsing="false" prefHeight="120.0" prefWidth="43.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-            <Button fx:id="button_73" mnemonicParsing="false" prefHeight="141.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-            <Button fx:id="button_74" mnemonicParsing="false" prefHeight="80.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-            <Button fx:id="button_75" mnemonicParsing="false" prefHeight="89.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-            <Button fx:id="button_84" mnemonicParsing="false" prefHeight="90.0" prefWidth="43.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-            <Button fx:id="button_85" mnemonicParsing="false" prefHeight="112.0" prefWidth="43.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-         </children>
-      </GridPane>
+      <ImageView fitHeight="401.0" fitWidth="389.0" layoutX="863.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/boards/bookshelf.png" />
+         </image></ImageView>
+      <ImageView fitHeight="190.0" fitWidth="163.0" layoutX="577.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../personal%20goal%20cards/Personal_Goals6.png" />
+         </image></ImageView>
+      <ImageView fx:id="button_03" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_04" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="93.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="54.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="324.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="362.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="324.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="362.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="324.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="93.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="93.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="54.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../item%20tiles/Cornici1.1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="109.0" fitWidth="167.0" layoutX="471.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../common%20goal%20cards/2.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="109.0" fitWidth="167.0" layoutX="643.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../common%20goal%20cards/2.jpg" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

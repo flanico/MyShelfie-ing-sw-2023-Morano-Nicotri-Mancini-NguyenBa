@@ -4,18 +4,10 @@ import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.observer.ViewObservable;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.text.Element;
-import javax.swing.text.html.ImageView;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.io.IOException;
 
 
 public class GameControllerScene extends ViewObservable implements GenericSceneController {
@@ -190,20 +182,21 @@ public class GameControllerScene extends ViewObservable implements GenericSceneC
     }
 
     private void setImage(Button ref_button, TileType type) {
-       /* Image img = null;
+        String path = "";
 
         switch (type) {
-            case CAT -> img = new ImageIcon("/item tiles/Gatti1.1.png").getImage();
-            case PLANT -> img = new ImageIcon("/item tiles/Piante1.1.png").getImage();
-            case BOOK -> img = new ImageIcon("/item tiles/Libri1.1.png").getImage();
-            case FRAME -> img = new ImageIcon("/item tiles/Cornici1.1.png").getImage();
-            case GAME -> img = new ImageIcon("/item tiles/Giochi1.1.png").getImage();
-            case TROPHY -> img = new ImageIcon("/item tiles/Trofei1.1.png").getImage();
+            case CAT -> path = "/item tiles/Gatti1.1.png";
+            case PLANT -> path = "/item tiles/Piante1.1.png";
+            case BOOK -> path = "/item tiles/Libri1.1.png";
+            case FRAME -> path = "/item tiles/Cornici1.1.png";
+            case GAME -> path = "/item tiles/Giochi1.1.png";
+            case TROPHY -> path = "/item tiles/Trofei1.1.png";
         }
-        ImageView view = new ImageView(getClass().getClassLoader().getResource("/pawn.png"));
+
+        Image img = new Image(getClass().getResourceAsStream(path));
+        ImageView view = new ImageView(img);
 
         ref_button.setGraphic(view);
 
-    }*/
     }
 }
