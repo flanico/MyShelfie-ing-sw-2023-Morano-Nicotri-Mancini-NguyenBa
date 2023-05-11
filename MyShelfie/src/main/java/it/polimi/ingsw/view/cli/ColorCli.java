@@ -9,7 +9,7 @@ public class ColorCli {
 
     public static final String PINK = "\u001B[95m";
     public static final String RED = "\u001B[31m";
-    public static final String BLUE = "\u001B[34m";
+    public static final String BLUE_INFO = "\u001B[34;5;69m";
     public static final String GREEN = "\u001B[32m";
     public static final String WHITE = "\u001B[37m";
     public static final String GREEN_BOARD = "\u001b[38;5;66m";

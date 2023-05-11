@@ -208,7 +208,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showGameInfo(List<Player> players, int numberPlayers) {
-        out.println(ColorCli.GREEN + "\nMATCH INFO: " + ColorCli.RESET);
+        out.println(ColorCli.BLUE_INFO  + "\nMATCH INFO: " + ColorCli.RESET);
         out.print("Players connected: ( ");
         for(int i=0; i < players.size(); i++) {
             out.print(players.get(i).getNickname());
@@ -227,8 +227,8 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showWinner(String winner) {
-        out.println("Congratulations to " + winner + "! You have won the match!");
-        out.println("Game finished...");
+        out.println(ColorCli.GREEN  +"Congratulations to " + winner + "! You have won the match!"+ColorCli.RESET);
+        out.println(ColorCli.YELLOW_BOLD  +"Game finished..."+ ColorCli.RESET  );
         System.exit(0);
     }
 
@@ -240,16 +240,16 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void showCommonCards(List<CommonGoalCard> commonGoalCards) {
         out.println();
-        out.println(ColorCli.GREEN + "COMMON GOAL CARDS OF THE MATCH ARE: " + ColorCli.RESET);
+        out.println(ColorCli.BLUE_INFO  + "COMMON GOAL CARDS OF THE MATCH ARE: " + ColorCli.RESET);
         for(CommonGoalCard c : commonGoalCards) {
             int index = commonGoalCards.indexOf(c) + 1;
-            out.println("*" + index + ": " + c);
+            out.println(ColorCli.BLUE_INFO + "*" + index + ": "+ColorCli.RESET + c);
         }
     }
 
     @Override
     public void showPersonalCard(Player player) {
-        out.println(ColorCli.GREEN + "\nYOU'RE PERSONAL GOAL CARD IS: " + ColorCli.RESET);
+        out.println(ColorCli.BLUE_INFO + "\nYOU'RE PERSONAL GOAL CARD IS: " + ColorCli.RESET);
         PersonalGoalCard personalGoalCard = player.getPersonalGoalCard();
 
         out.print("   ");
@@ -277,7 +277,7 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void showBoard (Board board){
         out.println();
-        out.println(ColorCli.GREEN + "BOARD:" + ColorCli.RESET);
+        out.println(ColorCli.BLUE_INFO  + "BOARD:" + ColorCli.RESET);
         out.print("     ");
         for (int i = 0; i < 9; i++) {
             out.print(ColorCli.GREEN_BOARD + i + "   "+ ColorCli.RESET);
@@ -304,7 +304,7 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void showBookshelf(Player player) {
         out.println();
-        out.println(ColorCli.GREEN + "BOOKSHELF " + player.getNickname() + ":" +ColorCli.RESET);
+        out.println(ColorCli.BLUE_INFO  + "BOOKSHELF " + player.getNickname() + ":" +ColorCli.RESET);
         Bookshelf bookshelf = player.getBookshelf();
 
         out.print("  ");
@@ -345,12 +345,12 @@ public class Cli extends ViewObservable implements View {
                     if (num <= board.maxTilesBoard()){
                         maxTiles = bookshelf.maxTilesBookshelf();
                         if (num > maxTiles){
-                            out.println("You don't have enough space in your bookshelf. You can select MAX "+ maxTiles + " tiles. Please retry.");
+                            out.println(ColorCli.RED +"You don't have enough space in your bookshelf. You can select MAX "+ maxTiles + " tiles. Please retry." + ColorCli.RESET );
                         }else{
                             isValid = true;
                         }
                     }else {
-                        out.println("There isn't enough removable tiles on the board. You can select MAX "+ board.maxTilesBoard()+ " tiles. Please retry.");
+                        out.println(ColorCli.RED +"There isn't enough removable tiles on the board. You can select MAX "+ board.maxTilesBoard()+ " tiles. Please retry."+ ColorCli.RESET);
                     }
                 }
                 else out.println(STR_INPUT_ERR);
@@ -461,9 +461,9 @@ public class Cli extends ViewObservable implements View {
         int index = 1;
         for (int i = 0; i < 2; i++)
         {
-            out.println(ColorCli.YELLOW_BOLD + "\nScores of the Common Goal Card " + index + ": " + ColorCli.RESET);
+            out.println(ColorCli.BLUE_INFO + "\nScores of the Common Goal Card " + index + ": " + ColorCli.RESET);
             for (Integer score : commonGoalCardScores.get(i).getStack()) {
-                out.print(ColorCli.YELLOW_BOLD + score + " " + ColorCli.RESET);
+                out.print(ColorCli.BLUE_INFO + score + " " + ColorCli.RESET);
             }
             index++;
         }
