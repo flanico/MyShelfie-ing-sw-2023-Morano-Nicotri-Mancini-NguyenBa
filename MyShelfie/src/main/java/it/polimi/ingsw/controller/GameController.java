@@ -110,22 +110,6 @@ public class GameController implements Serializable {
     }
 
     /**
-     * getter of the turn controller
-     * @return the turn controller
-     */
-    public TurnController getTurnController() {
-        return turnController;
-    }
-
-    /**
-     * getter of the input controller
-     * @return the input controller
-     */
-    public InputController getInputController() {
-        return inputController;
-    }
-
-    /**
      * checks if the game is already started (no more players can connect) or not
      * @return true if the game is started, false otherwise
      */
@@ -168,12 +152,16 @@ public class GameController implements Serializable {
             if(game.getCurrentNum() == game.getNum()) {
                 Persistence persistence = new Persistence(this);
                 GameController gameControllerPrevious = persistence.restoreGame();
-                if(gameControllerPrevious != null && new HashSet<>(gameControllerPrevious.getNicknames()).containsAll(game.getAllPlayers())) {
-                    broadcastingMessage("Server went down, the game is restoring!");
+                //If the game is restoring
+                if(gameControllerPrevious != null && new HashSet<>(gameControllerPrevious.nicknames).containsAll(game.getAllPlayers())) {
+                    broadcastingMessage("\nServer went down, the game is restoring!");
                     replace(gameControllerPrevious);
                 }
-                gameState = GameState.IN_GAME;
-                startGame(game.getNum(), nicknames);
+                //If is a new game
+                else {
+                    gameState = GameState.IN_GAME;
+                    startGame(game.getNum(), nicknames);
+                }
             }
         }
     }
@@ -183,7 +171,7 @@ public class GameController implements Serializable {
      * @param nickname of the player to add
      * @param virtualView of the player to add
      */
-    public void addVirtualViewMap(String nickname, VirtualView virtualView) {
+    private void addVirtualViewMap(String nickname, VirtualView virtualView) {
         virtualViewMap.put(nickname, virtualView);
         game.addObserver(virtualView);
     }
@@ -227,14 +215,6 @@ public class GameController implements Serializable {
         threadTurnManager.start();
     }
 
-    public List<String> getNicknames() {
-        return nicknames;
-    }
-
-    public GameState getGameState() {
-        return gameState;
-    }
-
     /**
      * delete the file game of the finished current game at the end
      */
@@ -247,7 +227,7 @@ public class GameController implements Serializable {
      * sends a message contains generic game information to all players in the game
      * @param message to send
      */
-    public void broadcastingMessage(String message) {
+    private void broadcastingMessage(String message) {
         for (VirtualView v : virtualViewMap.values()) {
             v.showGenericMessage(message);
         }
@@ -258,21 +238,21 @@ public class GameController implements Serializable {
      * @param gameController game controller of the restored game
      */
     private void replace(GameController gameController) {
-        List<Player> players = gameController.getGame().getPlayers();
-        int num = gameController.getGame().getNum();
-        Board board = gameController.getGame().getBoard();
-        List<CommonGoalCard> commonGoalCards = gameController.getGame().getCommongoalcards();
-        List<CommonGoalCardScore> commonGoalCardScores = gameController.getGame().getCommongoalcardscores();
-        Stack<Tile> bag = gameController.getGame().getBag();
-        Map<String, Integer> playerScore = gameController.getGame().getPlayerScore();
+        List<Player> players = gameController.game.getPlayers();
+        int num = gameController.game.getNum();
+        Board board = gameController.game.getBoard();
+        List<CommonGoalCard> commonGoalCards = gameController.game.getCommongoalcards();
+        List<CommonGoalCardScore> commonGoalCardScores = gameController.game.getCommongoalcardscores();
+        Stack<Tile> bag = gameController.game.getBag();
+        Map<String, Integer> playerScore = gameController.game.getPlayerScore();
         for (Player p : players) {
-            p.setPersonalGoalCard(gameController.getGame().getPlayerByNickname(p.getNickname()).getPersonalGoalCard());
+            p.setPersonalGoalCard(gameController.game.getPlayerByNickname(p.getNickname()).getPersonalGoalCard());
         }
 
-        this.game.replaceGame(players, num, board,commonGoalCards,commonGoalCardScores, bag, playerScore);
+        this.game.replaceGame(players, num, board, commonGoalCards, commonGoalCardScores, bag, playerScore);
 
-        this.gameState = gameController.getGameState();
-        this.turnController = gameController.getTurnController();
+        this.gameState = gameController.gameState;
+        this.turnController = gameController.turnController;
         this.turnController.setGame(this.game);
         this.turnController.setVirtualViewMap(this.virtualViewMap);
         this.inputController = new InputController(this, this.virtualViewMap);

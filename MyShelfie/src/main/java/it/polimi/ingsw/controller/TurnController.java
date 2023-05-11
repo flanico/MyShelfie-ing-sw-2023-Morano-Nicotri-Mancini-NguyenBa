@@ -390,11 +390,11 @@ public class TurnController implements Serializable {
         notifyOtherPlayers(ColorCli.YELLOW_BOLD + currentPlayer+ "'s bookshelf is full!" + ColorCli.RESET, currentPlayer);
     }
 
-    public void setVirtualViewMap(Map<String, VirtualView> virtualViewMap) {
+    protected void setVirtualViewMap(Map<String, VirtualView> virtualViewMap) {
         this.virtualViewMap = virtualViewMap;
     }
 
-    public void setGame(Game game) {
+    protected void setGame(Game game) {
         this.game = game;
     }
 
