@@ -6,9 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-import java.awt.*;
-
-public class NameController extends ViewObservable implements GenericSceneController{
+public class NameController extends ViewObservable implements Controller {
     @FXML
     TextField usernameField;
     public void continuePressed(ActionEvent actionEvent) {

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.observer.ViewObservable;
-import it.polimi.ingsw.view.GUI.Scene.GenericSceneController;
+import it.polimi.ingsw.view.GUI.Scene.Controller;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,11 +20,11 @@ import javafx.scene.control.Alert;
 
 public class SceneController extends ViewObservable {
     private static Scene activeScene;
-    private static GenericSceneController activeController;
+    private static Controller activeController;
     public static Scene getActiveScene() {
         return activeScene;
     }
-    public static GenericSceneController getActiveController() {
+    public static Controller getActiveController() {
         return activeController;
     }
 
@@ -37,7 +37,7 @@ public class SceneController extends ViewObservable {
             controller = loader.getController();
             ((ViewObservable) controller).addAllObservers(observerList);
 
-            activeController = (GenericSceneController) controller;
+            activeController = (Controller) controller;
             activeScene = scene;
             activeScene.setRoot(root);
         } catch (IOException e) {
@@ -55,11 +55,10 @@ public class SceneController extends ViewObservable {
         return changeRootPane(observerList, activeScene, fxml);
     }
 
-    public static void changeRootPane(GenericSceneController controller, Scene scene, String fxml) {
+    public static void changeRootPane(Controller controller, Scene scene, String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/fxml/" + fxml));
 
-            // Setting the controller BEFORE the load() method.
             loader.setController(controller);
             activeController = controller;
             Parent root = loader.load();
@@ -71,12 +70,12 @@ public class SceneController extends ViewObservable {
         }
     }
 
-    public static void changeRootPane(GenericSceneController controller, Event event, String fxml) {
+    public static void changeRootPane(Controller controller, Event event, String fxml) {
         Scene scene = ((Node) event.getSource()).getScene();
         changeRootPane(controller, scene, fxml);
     }
 
-    public static void changeRootPane(GenericSceneController controller, String fxml) {
+    public static void changeRootPane(Controller controller, String fxml) {
         changeRootPane(controller, activeScene, fxml);
     }
 

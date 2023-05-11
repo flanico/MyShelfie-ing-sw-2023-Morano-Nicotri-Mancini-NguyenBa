@@ -4,11 +4,11 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.observer.ViewObservable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import java.awt.*;
+
 import java.util.List;
 
 
-public class LobbyController extends ViewObservable implements GenericSceneController {
+public class LobbyController extends ViewObservable implements Controller {
     @FXML
     Label player_1;
 

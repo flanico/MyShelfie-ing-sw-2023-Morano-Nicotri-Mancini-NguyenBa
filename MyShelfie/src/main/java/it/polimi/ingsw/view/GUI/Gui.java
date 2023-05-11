@@ -4,9 +4,10 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.Scene.GameControllerScene;
 import it.polimi.ingsw.view.GUI.Scene.LobbyController;
-import it.polimi.ingsw.view.GUI.Scene.MenuController;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
+import javafx.stage.Stage;
+
 import java.util.List;
 import java.util.Map;
 
@@ -97,7 +98,9 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showPersonalCard(Player player){
-
+        GameControllerScene game_ctrl = getGameControllerScene();
+        game_ctrl.setPersonalCard(player.getPersonalGoalCard());
+        Platform.runLater(game_ctrl::updatePersonalCard);
     }
 
     /**
@@ -106,18 +109,9 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showBoard(Board board){
-        GameControllerScene game_ctrl;
-        try {
-            game_ctrl = (GameControllerScene) SceneController.getActiveController();
-            game_ctrl.setBoard(board);
-            Platform.runLater(game_ctrl::updateBoard);
-        } catch (ClassCastException e) {
-            game_ctrl = new GameControllerScene();
-            game_ctrl.addAllObservers(observers);
-            game_ctrl.setBoard(board);
-            GameControllerScene new_ctrl = game_ctrl;
-            Platform.runLater(() -> SceneController.changeRootPane(new_ctrl, "gamePanel.fxml"));
-        }
+        GameControllerScene game_ctrl = getGameControllerScene();
+        game_ctrl.setBoard(board);
+        Platform.runLater(game_ctrl::updateBoard);
     }
 
     /**
@@ -126,7 +120,8 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void askSelectTiles(Board board, Bookshelf bookshelf){
-
+        GameControllerScene game_ctrl = getGameControllerScene();
+        Platform.runLater(game_ctrl::activeSelection);
     }
 
     /**
@@ -173,6 +168,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showCommonGoalComplete(CommonGoalCard commonGoalCard, int score){
+        GameControllerScene game_ctrl = getGameControllerScene();
 
     }
 
@@ -191,6 +187,22 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void disconnection(String nickname){
 
+    }
+
+    private GameControllerScene getGameControllerScene(){
+        GameControllerScene game_ctrl;
+        try {
+            game_ctrl = (GameControllerScene) SceneController.getActiveController();
+        } catch (ClassCastException e) {
+            game_ctrl = new GameControllerScene();
+            game_ctrl.addAllObservers(observers);
+            GameControllerScene new_ctrl = game_ctrl;
+            Stage stage = (Stage) SceneController.getActiveScene().getWindow();
+            stage.setWidth(1280d);
+            stage.setHeight(720d);
+            SceneController.changeRootPane(new_ctrl, SceneController.getActiveScene(),"gamePanel.fxml");
+        }
+        return game_ctrl;
     }
 
 }

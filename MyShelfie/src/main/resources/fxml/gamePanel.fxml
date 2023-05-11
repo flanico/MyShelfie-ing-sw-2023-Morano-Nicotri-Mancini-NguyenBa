@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.GameControllerScene">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="728.0" fitWidth="1288.0" layoutX="-5.0" layoutY="-2.0" pickOnBounds="true">
        <Image url="@/misc/sfondo.jpg" />
@@ -17,236 +19,59 @@
          <image>
             <Image url="@/boards/bookshelf.png" />
          </image></ImageView>
-      <ImageView fitHeight="190.0" fitWidth="163.0" layoutX="577.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../personal%20goal%20cards/Personal_Goals6.png" />
-         </image></ImageView>
-      <ImageView fx:id="button_03" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="button_04" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="93.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="54.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="324.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="362.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="324.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="362.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="324.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="93.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="93.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="54.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../item%20tiles/Cornici1.1.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="109.0" fitWidth="167.0" layoutX="471.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../common%20goal%20cards/2.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="109.0" fitWidth="167.0" layoutX="643.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../common%20goal%20cards/2.jpg" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="personalCardImage" fitHeight="190.0" fitWidth="163.0" layoutX="577.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_03" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="76.0" onMouseClicked="#button_03_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_04" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="76.0" onMouseClicked="#button_04_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_13" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="114.0" onMouseClicked="#button_13_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_14" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="114.0" onMouseClicked="#button_14_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_23" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="152.0" onMouseClicked="#button_23_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_24" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="152.0" onMouseClicked="#button_24_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_44" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="229.0" onMouseClicked="#button_44_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_43" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="229.0" onMouseClicked="#button_43_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_42" fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="229.0" onMouseClicked="#button_42_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_41" fitHeight="38.0" fitWidth="40.0" layoutX="93.0" layoutY="229.0" onMouseClicked="#button_41_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_40" fitHeight="38.0" fitWidth="40.0" layoutX="54.0" layoutY="229.0" onMouseClicked="#button_40_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_45" fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="229.0" onMouseClicked="#button_45_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_46" fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="229.0" onMouseClicked="#button_46_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_47" fitHeight="38.0" fitWidth="40.0" layoutX="324.0" layoutY="229.0" onMouseClicked="#button_47_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_48" fitHeight="38.0" fitWidth="40.0" layoutX="362.0" layoutY="229.0" onMouseClicked="#button_48_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_34" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="190.0" onMouseClicked="#button_34_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_54" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="268.0" onMouseClicked="#button_54_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_64" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="307.0" onMouseClicked="#button_64_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_74" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="345.0" onMouseClicked="#button_74_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_84" fitHeight="38.0" fitWidth="40.0" layoutX="209.0" layoutY="383.0" onMouseClicked="#button_84_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_15" fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="114.0" onMouseClicked="#button_15_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_25" fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="152.0" onMouseClicked="#button_25_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_35" fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="190.0" onMouseClicked="#button_35_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_55" fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="268.0" onMouseClicked="#button_55_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_65" fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="307.0" onMouseClicked="#button_65_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_75" fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="345.0" onMouseClicked="#button_75_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_85" fitHeight="38.0" fitWidth="40.0" layoutX="248.0" layoutY="383.0" onMouseClicked="#button_85_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_36" fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="190.0" onMouseClicked="#button_36_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_26" fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="152.0" onMouseClicked="#button_26_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_37" fitHeight="38.0" fitWidth="40.0" layoutX="324.0" layoutY="190.0" onMouseClicked="#button_37_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_38" fitHeight="38.0" fitWidth="40.0" layoutX="362.0" layoutY="190.0" onMouseClicked="#button_38_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_56" fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="268.0" onMouseClicked="#button_56_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_57" fitHeight="38.0" fitWidth="40.0" layoutX="324.0" layoutY="268.0" onMouseClicked="#button_57_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_66" fitHeight="38.0" fitWidth="40.0" layoutX="286.0" layoutY="307.0" onMouseClicked="#button_66_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_33" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="190.0" onMouseClicked="#button_33_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_32" fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="190.0" onMouseClicked="#button_32_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_22" fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="152.0" onMouseClicked="#button_22_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_52" fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="268.0" onMouseClicked="#button_52_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_62" fitHeight="38.0" fitWidth="40.0" layoutX="131.0" layoutY="307.0" onMouseClicked="#button_62_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_53" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="268.0" onMouseClicked="#button_53_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_63" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="307.0" onMouseClicked="#button_63_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_73" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="345.0" onMouseClicked="#button_73_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_51" fitHeight="38.0" fitWidth="40.0" layoutX="93.0" layoutY="268.0" onMouseClicked="#button_51_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_31" fitHeight="38.0" fitWidth="40.0" layoutX="93.0" layoutY="190.0" onMouseClicked="#button_31_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="button_50" fitHeight="38.0" fitWidth="40.0" layoutX="54.0" layoutY="268.0" onMouseClicked="#button_50_click" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="common_goal1" fitHeight="109.0" fitWidth="167.0" layoutX="471.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="common_goal2" fitHeight="109.0" fitWidth="167.0" layoutX="643.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="turn_text" layoutX="39.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="It's your turn! Select your tiles:" />
+      <ImageView fx:id="sel_tile_1" fitHeight="86.0" fitWidth="90.0" layoutX="39.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="sel_tile_2" fitHeight="86.0" fitWidth="90.0" layoutX="154.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="sel_tile_3" fitHeight="86.0" fitWidth="90.0" layoutX="279.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="cancel_button" layoutX="58.0" layoutY="613.0" mnemonicParsing="false" onAction="#cancelPressed" text="Cancel" />
+      <Button fx:id="confirm_button" layoutX="298.0" layoutY="613.0" mnemonicParsing="false" onAction="#confirmPressed" text="Confirm" />
    </children>
 </Pane>

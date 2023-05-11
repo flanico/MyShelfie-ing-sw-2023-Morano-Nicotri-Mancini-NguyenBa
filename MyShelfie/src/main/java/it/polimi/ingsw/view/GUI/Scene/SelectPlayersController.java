@@ -6,15 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 
-import javax.swing.*;
-
 /**
  * Controller class for the SelectPlayer panel
  * This panel is shown only at the first player
  * Panel creating for the choice of the number of player in the game
  * @author Stefano Morano
  */
-public class SelectPlayersController extends ViewObservable implements GenericSceneController{
+public class SelectPlayersController extends ViewObservable implements Controller {
     @FXML
     CheckBox twoCheck;
 
