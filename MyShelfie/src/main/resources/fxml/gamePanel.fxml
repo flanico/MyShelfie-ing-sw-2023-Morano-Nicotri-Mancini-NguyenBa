@@ -73,11 +73,11 @@
       <ImageView fx:id="sel_tile_3" fitHeight="86.0" fitWidth="90.0" layoutX="279.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="cancel_button" layoutX="58.0" layoutY="613.0" mnemonicParsing="false" onAction="#cancelPressed" text="Cancel" />
       <Button fx:id="confirm_button" layoutX="298.0" layoutY="613.0" mnemonicParsing="false" onAction="#confirmPressed" text="Confirm" />
-      <Button fx:id="column0" layoutX="919.0" layoutY="26.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="0.0" text="V" />
-      <Button fx:id="column1" layoutX="983.0" layoutY="26.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="0.0" text="V" />
-      <Button fx:id="column2" layoutX="1045.0" layoutY="26.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="0.0" text="V" />
-      <Button fx:id="column3" layoutX="1109.0" layoutY="26.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="0.0" text="V" />
-      <Button fx:id="column4" layoutX="1171.0" layoutY="26.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="0.0" text="V" />
+      <Button fx:id="column0" layoutX="919.0" layoutY="26.0" mnemonicParsing="false" onAction="#colum0Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
+      <Button fx:id="column1" layoutX="983.0" layoutY="26.0" mnemonicParsing="false" onAction="#column1Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
+      <Button fx:id="column2" layoutX="1045.0" layoutY="26.0" mnemonicParsing="false" onAction="#column2Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
+      <Button fx:id="column3" layoutX="1109.0" layoutY="26.0" mnemonicParsing="false" onAction="#column3Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
+      <Button fx:id="column4" layoutX="1171.0" layoutY="26.0" mnemonicParsing="false" onAction="#column4Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
       <Text fx:id="boardError" fill="RED" layoutX="43.0" layoutY="688.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MESSAGGIO DI ERRORE">
          <font>
             <Font name="Arial Black" size="14.0" />

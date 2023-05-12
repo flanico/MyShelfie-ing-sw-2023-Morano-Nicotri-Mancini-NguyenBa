@@ -212,6 +212,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public Bookshelf shelf;
 
     public ErrorType error;
+    private int selected_column;
+
+
 
     public void initialize(){
        turn_text.setText("");
@@ -238,7 +241,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
        SelectedTiles.clear();
        select_card_phase=false;
     }
-
     public void setBoard(Board board) {
         this.board = board;
     }
@@ -267,7 +269,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
         cancel_button.setDisable(false);
         confirm_button.setDisable(false);
     }
-
     private void rotate(String direction){
         if (SelectedTiles.size()==2)
             Collections.swap(SelectedTiles,0,1);
@@ -349,6 +350,21 @@ public class GameControllerScene extends ViewObservable implements Controller {
 
         }
             case*/
+    }
+    //TODO Togli il controllo dello spazio rimanente da qua e mettilo nei tasti delle colonne
+    private void tryInsert(int col){
+        ImageView img;
+        if (SelectedTiles.size()<=free_cells(col))
+            for (int x=0; x< SelectedTiles.size(); x++){
+                img = getShelf(free_cells(col)-x-1, col);
+                setImage(img, SelectedTiles.get(x).getType());
+            }
+    }
+
+    private int free_cells(int col){
+        int row = 0;
+        while (shelf.getMatrix()[row][col].getType().equals(TileType.NULL) && row<6) row++;
+        return row;
     }
 
     public void updatePersonalCard(){
@@ -460,20 +476,24 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
 
     private void setImage(ImageView ref_button, TileType type) {
-        String path = "";
+        if (type.equals(TileType.NULL)){
+            ref_button.setImage(null);
+        } else {
+            String path = "";
 
-        switch (type) {
-            case CAT -> path = "/item tiles/Gatti1.1.png";
-            case PLANT -> path = "/item tiles/Piante1.1.png";
-            case BOOK -> path = "/item tiles/Libri1.1.png";
-            case FRAME -> path = "/item tiles/Cornici1.1.png";
-            case GAME -> path = "/item tiles/Giochi1.1.png";
-            case TROPHY -> path = "/item tiles/Trofei1.1.png";
+            switch (type) {
+                case CAT -> path = "/item tiles/Gatti1.1.png";
+                case PLANT -> path = "/item tiles/Piante1.1.png";
+                case BOOK -> path = "/item tiles/Libri1.1.png";
+                case FRAME -> path = "/item tiles/Cornici1.1.png";
+                case GAME -> path = "/item tiles/Giochi1.1.png";
+                case TROPHY -> path = "/item tiles/Trofei1.1.png";
+            }
+
+            Image img = new Image(getClass().getResourceAsStream(path));
+            ref_button.setImage(img);
+            ref_button.setOpacity(1.0);
         }
-
-        Image img = new Image(getClass().getResourceAsStream(path));
-        ref_button.setImage(img);
-        ref_button.setOpacity(1.0);
 
     }
 
@@ -781,5 +801,30 @@ public class GameControllerScene extends ViewObservable implements Controller {
 
     public void upPressed(ActionEvent actionEvent) {
         rotate("up");
+    }
+
+    public void colum0Pressed(ActionEvent actionEvent) {
+        updateBookShelf();
+        selected_column=0;
+    }
+
+    public void column1Pressed(ActionEvent actionEvent) {
+        updateBookShelf();
+        selected_column=0;
+    }
+
+    public void column2Pressed(ActionEvent actionEvent) {
+        updateBookShelf();
+        selected_column=0;
+    }
+
+    public void column3Pressed(ActionEvent actionEvent) {
+        updateBookShelf();
+        selected_column=0;
+    }
+
+    public void column4Pressed(ActionEvent actionEvent) {
+        updateBookShelf();
+        selected_column=0;
     }
 }
