@@ -7,9 +7,11 @@ import it.polimi.ingsw.view.GUI.Scene.LobbyController;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-
+import it.polimi.ingsw.view.GUI.ErrorType;
 import java.util.List;
 import java.util.Map;
+
+import static it.polimi.ingsw.view.GUI.ErrorType.WRONG_CHOICE;
 
 public class Gui extends ViewObservable implements View {
     @Override
@@ -24,10 +26,7 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void showLoginResult(boolean isNicknameAccepted, String nickname){
-        if(isNicknameAccepted) {
-
-        }
-        else {
+        if(!isNicknameAccepted) {
             Platform.runLater(() -> SceneController.showAlert("This nickname is already taken!"));
             askNickname();
         }
@@ -71,6 +70,12 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showGenericMessage(String genericMessage){
+
+        if (genericMessage.equals("Sorry, tiles selected are NOT removable from the board! Retry.")){
+            GameControllerScene game_ctrl = new GameControllerScene();
+            game_ctrl.setError(WRONG_CHOICE);
+            Platform.runLater(game_ctrl::showMessage);
+        }
 
     }
 
@@ -131,7 +136,8 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void askInsertTiles(Bookshelf bookshelf, List<Tile> tiles){
-
+        GameControllerScene game_ctrl = new GameControllerScene();
+        Platform.runLater(game_ctrl::activeShelf);
     }
 
     /**
@@ -140,7 +146,9 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showBookshelf(Player player){
-
+        GameControllerScene game_ctrl = getGameControllerScene();
+        game_ctrl.setShelf(player.getBookshelf());
+        Platform.runLater(game_ctrl::updateBookShelf);
     }
 
     /**
@@ -149,7 +157,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void askOrderTiles(List<Tile> tiles){
-
+        //useless in the gui
     }
 
     /**
@@ -189,18 +197,16 @@ public class Gui extends ViewObservable implements View {
 
     }
 
-    private GameControllerScene getGameControllerScene(){
+   private GameControllerScene getGameControllerScene(){
         GameControllerScene game_ctrl;
         try {
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
         } catch (ClassCastException e) {
-            game_ctrl = new GameControllerScene();
-            game_ctrl.addAllObservers(observers);
-            GameControllerScene new_ctrl = game_ctrl;
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1280d);
             stage.setHeight(720d);
-            SceneController.changeRootPane(new_ctrl, SceneController.getActiveScene(),"gamePanel.fxml");
+            SceneController.changeRootPane(observers, SceneController.getActiveScene(),"gamePanel.fxml");
+            game_ctrl = (GameControllerScene) SceneController.getActiveController();
         }
         return game_ctrl;
     }
