@@ -73,7 +73,7 @@
       <ImageView fx:id="sel_tile_3" fitHeight="86.0" fitWidth="90.0" layoutX="279.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="cancel_button" layoutX="58.0" layoutY="613.0" mnemonicParsing="false" onAction="#cancelPressed" text="Cancel" />
       <Button fx:id="confirm_button" layoutX="298.0" layoutY="613.0" mnemonicParsing="false" onAction="#confirmPressed" text="Confirm" />
-      <Button fx:id="column0" layoutX="919.0" layoutY="26.0" mnemonicParsing="false" onAction="#colum0Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
+      <Button fx:id="column0" layoutX="919.0" layoutY="26.0" mnemonicParsing="false" onAction="#column0Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
       <Button fx:id="column1" layoutX="983.0" layoutY="26.0" mnemonicParsing="false" onAction="#column1Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
       <Button fx:id="column2" layoutX="1045.0" layoutY="26.0" mnemonicParsing="false" onAction="#column2Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
       <Button fx:id="column3" layoutX="1109.0" layoutY="26.0" mnemonicParsing="false" onAction="#column3Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
@@ -116,5 +116,6 @@
       <ImageView fx:id="shelf_52" fitHeight="49.0" fitWidth="48.0" layoutX="1034.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_53" fitHeight="49.0" fitWidth="48.0" layoutX="1095.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_54" fitHeight="49.0" fitWidth="48.0" layoutX="1156.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="okButton" layoutX="1043.0" layoutY="505.0" mnemonicParsing="false" onAction="#okPressed" text="OK" />
    </children>
 </Pane>

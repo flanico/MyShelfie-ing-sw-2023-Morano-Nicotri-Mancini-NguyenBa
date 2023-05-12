@@ -128,6 +128,8 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void askSelectTiles(Board board, Bookshelf bookshelf){
         GameControllerScene game_ctrl = getGameControllerScene();
+        game_ctrl.setBoard(board);
+        game_ctrl.setShelf(bookshelf);
         Platform.runLater(game_ctrl::activeSelection);
     }
 
@@ -138,7 +140,9 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void askInsertTiles(Bookshelf bookshelf, List<Tile> tiles){
-        GameControllerScene game_ctrl = new GameControllerScene();
+        GameControllerScene game_ctrl = getGameControllerScene();
+        game_ctrl.setShelf(bookshelf);
+        game_ctrl.setFinalTiles(tiles);
         Platform.runLater(game_ctrl::activeShelf);
     }
 
@@ -159,7 +163,8 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void askOrderTiles(List<Tile> tiles){
-        //useless in the gui
+        GameControllerScene game_ctrl = getGameControllerScene();
+        Platform.runLater(game_ctrl::sendFinalTiles);
     }
 
     /**
@@ -179,7 +184,6 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void showCommonGoalComplete(CommonGoalCard commonGoalCard, int score){
         GameControllerScene game_ctrl = getGameControllerScene();
-
 
     }
 

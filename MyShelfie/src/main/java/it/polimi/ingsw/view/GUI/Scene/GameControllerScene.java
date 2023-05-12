@@ -205,10 +205,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
     ImageView common_goal1;
     @FXML
     ImageView common_goal2;
+    @FXML
+    Button okButton;
 
 
     public Board board;
     List<Tile> SelectedTiles = new ArrayList<>();
+    List<Tile> finalTiles = new ArrayList<>();
     private boolean select_card_phase;
     PersonalGoalCard personalCard;
     List<CommonGoalCard> commonGoalCards;
@@ -217,7 +220,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
 
     public ErrorType error;
     private int selected_column = -1;
-
 
 
     public void initialize(){
@@ -233,6 +235,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
        column4.setVisible(false);
        upButton.setVisible(false);
        downButton.setVisible(false);
+       okButton.setVisible(false);
        cancel_button.setDisable(true);
        confirm_button.setDisable(true);
        column0.setDisable(true);
@@ -242,6 +245,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
        column4.setDisable(true);
        upButton.setDisable(true);
        downButton.setDisable(true);
+       okButton.setDisable(true);
        SelectedTiles.clear();
        select_card_phase=false;
     }
@@ -260,6 +264,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public void setError(ErrorType error) {
         this.error = error;
     }
+    public void setFinalTiles(List<Tile> finalTiles) {
+        this.finalTiles = finalTiles;
+    }
     public void activeSelection(){
         updateBoard();
         SelectedTiles.clear();
@@ -274,32 +281,34 @@ public class GameControllerScene extends ViewObservable implements Controller {
         confirm_button.setDisable(false);
     }
     private void rotate(String direction){
-        if (SelectedTiles.size()==2)
-            Collections.swap(SelectedTiles,0,1);
-        else if (SelectedTiles.size()==3)
+        if (finalTiles.size()==2)
+            Collections.swap(finalTiles,0,1);
+        else if (finalTiles.size()==3)
             if (direction.equals("down"))
-                Collections.rotate(SelectedTiles, -1);
+                Collections.rotate(finalTiles, -1);
             else if (direction.equals("up"))
-                Collections.rotate(SelectedTiles, 1);
+                Collections.rotate(finalTiles, 1);
     }
     public void activeShelf(){
         shelf_text.setText("Please select the column where to insert the tiles and decide their orders with the lateral arrows");
-        column0.setVisible(true);
-        column1.setVisible(true);
-        column2.setVisible(true);
-        column3.setVisible(true);
-        column4.setVisible(true);
         column0.setDisable(false);
         column1.setDisable(false);
         column2.setDisable(false);
         column3.setDisable(false);
         column4.setDisable(false);
+        okButton.setDisable(false);
+        column0.setVisible(true);
+        column1.setVisible(true);
+        column2.setVisible(true);
+        column3.setVisible(true);
+        column4.setVisible(true);
+        okButton.setVisible(true);
 
         if (SelectedTiles.size()>1){
             upButton.setVisible(true);
             downButton.setVisible(true);
             upButton.setDisable(false);
-            downButton.setDisable(true);
+            downButton.setDisable(false);
         }
     }
     private void insertSelected(ImageView button, int x, int y) {
@@ -368,14 +377,15 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
     private void tryInsert(int col){
         ImageView img;
-            for (int x=0; x< SelectedTiles.size(); x++) {
-                img = getShelf(free_cells(col) - x - 1, col);
-                setImage(img, SelectedTiles.get(x).getType());
+            for (int x=0; x< finalTiles.size(); x++) {
+                img = getShelf(free_cells(col) - x, col);
+                setImage(img, finalTiles.get(x).getType());
+                img.setOpacity(0.5);
             }
     }
     private int free_cells(int col){
         int row = 0;
-        while (shelf.getMatrix()[row][col].getType().equals(TileType.NULL) && row<6) row++;
+        while (shelf.getMatrix()[row][col].getType().equals(TileType.NULL) && row<5) row++;
         return row;
     }
     public void updatePersonalCard(){
@@ -804,48 +814,73 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
     public void downPressed(ActionEvent actionEvent) {
         rotate("down");
+        tryInsert(selected_column);
     }
     public void upPressed(ActionEvent actionEvent) {
         rotate("up");
+        tryInsert(selected_column);
     }
-
-    public void colum0Pressed(ActionEvent actionEvent) {
-        if (SelectedTiles.size()<=free_cells(0)) {
+    public void column0Pressed(ActionEvent actionEvent) {
+        if (finalTiles.size()<=free_cells(0) && selected_column!=0) {
             updateBookShelf();
             selected_column = 0;
             tryInsert(0);
         }
     }
-
     public void column1Pressed(ActionEvent actionEvent) {
-        if (SelectedTiles.size()<=free_cells(1)) {
+        if (finalTiles.size()<=free_cells(1) && selected_column!=1) {
             updateBookShelf();
             selected_column = 1;
             tryInsert(1);
         }
     }
-
     public void column2Pressed(ActionEvent actionEvent) {
-        if (SelectedTiles.size()<=free_cells(2)) {
+        if (finalTiles.size()<=free_cells(2) && selected_column!=2) {
             updateBookShelf();
             selected_column = 2;
             tryInsert(2);
         }
     }
-
     public void column3Pressed(ActionEvent actionEvent) {
-        if (SelectedTiles.size()<=free_cells(3)) {
+        if (finalTiles.size()<=free_cells(3) && selected_column!=3) {
             updateBookShelf();
             selected_column = 3;
             tryInsert(3);
         }
     }
-
     public void column4Pressed(ActionEvent actionEvent) {
-        if (SelectedTiles.size()<=free_cells(4)) {
+        if (finalTiles.size()<=free_cells(4) && selected_column!=4) {
             updateBookShelf();
             selected_column = 4;
             tryInsert(4);
         }
     }
+    public void okPressed(ActionEvent actionEvent) {
+        if (selected_column!=-1){
+            shelf_text.setText("");
+            column0.setVisible(false);
+            column1.setVisible(false);
+            column2.setVisible(false);
+            column3.setVisible(false);
+            column4.setVisible(false);
+            upButton.setVisible(false);
+            downButton.setVisible(false);
+            okButton.setVisible(false);
+            column0.setDisable(true);
+            column1.setDisable(true);
+            column2.setDisable(true);
+            column3.setDisable(true);
+            column4.setDisable(true);
+            upButton.setDisable(true);
+            downButton.setDisable(true);
+            okButton.setDisable(true);
+            notifyObserver(obs -> obs.sendInsertTiles(selected_column, finalTiles));
+            selected_column=-1;
+        }
+    }
+
+    public void sendFinalTiles() {
+        notifyObserver(obs -> obs.sendOrderTiles(finalTiles));
+    }
+
 }
