@@ -5,6 +5,8 @@ package it.polimi.ingsw.model;
  * @author Flavia Nicotri
  */
 public class CommonFourGroups extends CommonGoalCard {
+
+    public final int number = 3;
     /**
      * two groups of four tiles in a square shape, that can contains two different type of tiles
      *@param bookshelf RoundPlayer
@@ -50,5 +52,9 @@ public class CommonFourGroups extends CommonGoalCard {
         return "Common Goal Card: Four groups each containing at least " +
                 "4 tiles of the same type.\n" +
                 "The tiles of one group can be different from those of another group";
+    }
+    @Override
+    public int getNumber() {
+        return number;
     }
 }

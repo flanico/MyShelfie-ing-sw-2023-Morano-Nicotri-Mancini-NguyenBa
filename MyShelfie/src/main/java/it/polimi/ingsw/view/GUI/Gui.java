@@ -94,7 +94,9 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showCommonCards(List<CommonGoalCard> commonGoalCards){
-
+        GameControllerScene game_ctrl = getGameControllerScene();
+        game_ctrl.setCommonGoalCards(commonGoalCards);
+        Platform.runLater(game_ctrl::updateCommonGoalCards);
     }
 
     /**
@@ -177,6 +179,7 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void showCommonGoalComplete(CommonGoalCard commonGoalCard, int score){
         GameControllerScene game_ctrl = getGameControllerScene();
+
 
     }
 

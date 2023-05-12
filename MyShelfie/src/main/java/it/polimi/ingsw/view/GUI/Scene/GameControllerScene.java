@@ -201,18 +201,22 @@ public class GameControllerScene extends ViewObservable implements Controller {
     Button downButton;
     @FXML
     Text shelf_text;
+    @FXML
+    ImageView common_goal1;
+    @FXML
+    ImageView common_goal2;
 
 
     public Board board;
     List<Tile> SelectedTiles = new ArrayList<>();
     private boolean select_card_phase;
     PersonalGoalCard personalCard;
-    List<CommonGoalCard> commonGoalCard;
+    List<CommonGoalCard> commonGoalCards;
 
     public Bookshelf shelf;
 
     public ErrorType error;
-    private int selected_column;
+    private int selected_column = -1;
 
 
 
@@ -244,8 +248,8 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public void setBoard(Board board) {
         this.board = board;
     }
-    public void setCommonGoalCard(List<CommonGoalCard> commonGoalCard) {
-        this.commonGoalCard = commonGoalCard;
+    public void setCommonGoalCards(List<CommonGoalCard> commonGoalCard) {
+        this.commonGoalCards = commonGoalCard;
     }
     public void setPersonalCard(PersonalGoalCard personalCard) {
         this.personalCard = personalCard;
@@ -278,7 +282,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
             else if (direction.equals("up"))
                 Collections.rotate(SelectedTiles, 1);
     }
-
     public void activeShelf(){
         shelf_text.setText("Please select the column where to insert the tiles and decide their orders with the lateral arrows");
         column0.setVisible(true);
@@ -299,7 +302,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
             downButton.setDisable(true);
         }
     }
-
     private void insertSelected(ImageView button, int x, int y) {
         boardError.setText("");
         Image img = button.getImage();
@@ -315,15 +317,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
-
-    public void showMessage(){
-        switch (error){
+    public void showMessage() {
+        switch (error) {
             case WRONG_CHOICE -> {
                 boardError.setText("You can't choose this tiles!");
             }
         }
     }
-
     public void updateBookShelf(){
         ImageView ref_shelf;
         for (int x=0; x<6; x++){
@@ -334,7 +334,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
-
     public void updateBoard(){
         ImageView ref_but;
         for (int x=0; x<9; x++)
@@ -344,29 +343,41 @@ public class GameControllerScene extends ViewObservable implements Controller {
                         setImage(ref_but, board.getMatrix()[x][y].getType());
             }
     }
-
-    public void updateCommonGoalCard(){
-       /* switch (commonGoalCard.get(0)) {
-
+    public void updateCommonGoalCards(){
+        String path = null;
+        for (int x=1; x<3; x++) {
+            switch (commonGoalCards.get(x-1).getNumber()) {
+                case 1 -> path = "/common goal cards/1.jpg";
+                case 2 -> path = "/common goal cards/2.jpg";
+                case 3 -> path = "/common goal cards/3.jpg";
+                case 4 -> path = "/common goal cards/4.jpg";
+                case 5 -> path = "/common goal cards/5.jpg";
+                case 6 -> path = "/common goal cards/6.jpg";
+                case 7 -> path = "/common goal cards/7.jpg";
+                case 8 -> path = "/common goal cards/8.jpg";
+                case 9 -> path = "/common goal cards/9.jpg";
+                case 10 -> path = "/common goal cards/10.jpg";
+                case 11 -> path = "/common goal cards/11.jpg";
+                case 12 -> path = "/common goal cards/12.jpg";
+            }
+            switch (x){
+                case 1 -> common_goal1.setImage(new Image(path));
+                case 2 -> common_goal2.setImage(new Image(path));
+            }
         }
-            case*/
     }
-    //TODO Togli il controllo dello spazio rimanente da qua e mettilo nei tasti delle colonne
     private void tryInsert(int col){
         ImageView img;
-        if (SelectedTiles.size()<=free_cells(col))
-            for (int x=0; x< SelectedTiles.size(); x++){
-                img = getShelf(free_cells(col)-x-1, col);
+            for (int x=0; x< SelectedTiles.size(); x++) {
+                img = getShelf(free_cells(col) - x - 1, col);
                 setImage(img, SelectedTiles.get(x).getType());
             }
     }
-
     private int free_cells(int col){
         int row = 0;
         while (shelf.getMatrix()[row][col].getType().equals(TileType.NULL) && row<6) row++;
         return row;
     }
-
     public void updatePersonalCard(){
         String path = null;
         switch (personalCard.getType()){
@@ -386,7 +397,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
         Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream(path)));
         personalCardImage.setImage(img);
     }
-
     private ImageView getButton(int x, int y){
         String concat = x + "," + y;
         return switch (concat) {
@@ -474,7 +484,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
             default -> null;
         };
     }
-
     private void setImage(ImageView ref_button, TileType type) {
         if (type.equals(TileType.NULL)){
             ref_button.setImage(null);
@@ -496,7 +505,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
         }
 
     }
-
     public void confirmPressed(ActionEvent actionEvent) throws Exception{
         select_card_phase = false;
         cancel_button.setVisible(false);
@@ -794,37 +802,50 @@ public class GameControllerScene extends ViewObservable implements Controller {
         }
         System.out.println("Button_85 clicked");
     }
-
     public void downPressed(ActionEvent actionEvent) {
         rotate("down");
     }
-
     public void upPressed(ActionEvent actionEvent) {
         rotate("up");
     }
 
     public void colum0Pressed(ActionEvent actionEvent) {
-        updateBookShelf();
-        selected_column=0;
+        if (SelectedTiles.size()<=free_cells(0)) {
+            updateBookShelf();
+            selected_column = 0;
+            tryInsert(0);
+        }
     }
 
     public void column1Pressed(ActionEvent actionEvent) {
-        updateBookShelf();
-        selected_column=0;
+        if (SelectedTiles.size()<=free_cells(1)) {
+            updateBookShelf();
+            selected_column = 1;
+            tryInsert(1);
+        }
     }
 
     public void column2Pressed(ActionEvent actionEvent) {
-        updateBookShelf();
-        selected_column=0;
+        if (SelectedTiles.size()<=free_cells(2)) {
+            updateBookShelf();
+            selected_column = 2;
+            tryInsert(2);
+        }
     }
 
     public void column3Pressed(ActionEvent actionEvent) {
-        updateBookShelf();
-        selected_column=0;
+        if (SelectedTiles.size()<=free_cells(3)) {
+            updateBookShelf();
+            selected_column = 3;
+            tryInsert(3);
+        }
     }
 
     public void column4Pressed(ActionEvent actionEvent) {
-        updateBookShelf();
-        selected_column=0;
+        if (SelectedTiles.size()<=free_cells(4)) {
+            updateBookShelf();
+            selected_column = 4;
+            tryInsert(4);
+        }
     }
 }

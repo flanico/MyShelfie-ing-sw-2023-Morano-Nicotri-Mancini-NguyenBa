@@ -7,6 +7,7 @@ import java.util.HashSet;
  * @author Stefano Morano
  */
 public class CommonDifferentRows extends CommonGoalCard {
+    public final int number = 6;
     /**
      * Two lines each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.
      *@param bookshelf RoundPlayer
@@ -33,5 +34,9 @@ public class CommonDifferentRows extends CommonGoalCard {
     @Override
     public String toString() {
         return "Common Goal Card: Two lines each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.";
+    }
+    @Override
+    public int getNumber() {
+        return number;
     }
 }

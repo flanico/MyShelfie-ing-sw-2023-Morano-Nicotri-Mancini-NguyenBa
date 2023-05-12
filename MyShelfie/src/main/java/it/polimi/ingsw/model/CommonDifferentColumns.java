@@ -6,7 +6,7 @@ import java.util.HashSet;
  * @author Stefano Morano
  */
 public class CommonDifferentColumns extends CommonGoalCard {
-
+      public final int number = 2;
     /**
      * check in the player's bookshelf there are 2 columns full of different types of tiles
      * @param bookshelf RoundPlayer
@@ -32,5 +32,9 @@ public class CommonDifferentColumns extends CommonGoalCard {
     @Override
     public String toString() {
         return "Common Goal Card: Two columns each formed by 6 different types of tiles.";
+    }
+    @Override
+    public int getNumber() {
+        return number;
     }
 }
