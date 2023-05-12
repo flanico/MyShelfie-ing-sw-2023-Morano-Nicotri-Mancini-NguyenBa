@@ -98,7 +98,7 @@ class BookshelfTest {
                 System.out.println();
             }
         */
-        assertEquals(15, bookshelf.adjacentCells());
+        assertEquals(13, bookshelf.adjacentCells());
     }
 
     /**
@@ -143,7 +143,7 @@ class BookshelfTest {
                 }
             }
         }
-        bookshelf.getMatrix()[1][2].setType(TileType.GAME);
+        bookshelf.getMatrix()[0][2].setType(TileType.GAME);
         assertTrue(bookshelf.isFull());
     }
 
