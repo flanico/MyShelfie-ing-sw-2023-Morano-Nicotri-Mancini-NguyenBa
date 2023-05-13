@@ -22,10 +22,10 @@ public class ClientApp {
         response = scanner.nextLine();
 
         if(response.equalsIgnoreCase("c")) {
-            Cli view = new Cli();
-            ClientController clientController = new ClientController(view);
-            view.addObserver(clientController);
-            view.init();
+            Cli cli = new Cli();
+            ClientController clientController = new ClientController(cli);
+            cli.addObserver(clientController);
+            cli.init();
         }
         else if (response.equalsIgnoreCase("g")) {
             Application.launch(MainGui.class);
