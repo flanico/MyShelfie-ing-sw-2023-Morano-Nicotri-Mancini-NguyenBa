@@ -8,5 +8,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface RMIInterface extends  Remote {
-    void onMessage(Message message) throws RemoteException;
+    void onMessage(Message message, RMIClient client) throws RemoteException;
+
 }

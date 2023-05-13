@@ -1,14 +1,17 @@
 package it.polimi.ingsw.network.server;
 
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.network.client.RMIClient;
 import it.polimi.ingsw.network.message.Message;
 
 public class RMIClientHandler implements ClientHandler {
     private final Server server;
+    private final RMIClient client;
     private boolean connected = true;
 
-    public RMIClientHandler(Server server) {
+    public RMIClientHandler(Server server, RMIClient client) {
         this.server = server;
+        this.client = client;
     }
 
     /**
