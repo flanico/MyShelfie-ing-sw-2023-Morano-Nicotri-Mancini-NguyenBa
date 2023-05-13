@@ -8,7 +8,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class RMIClient extends Client{
+public class RMIClient extends Client {
+
     public RMIClient(String ip, int port) throws RemoteException, NotBoundException {
         Registry registry = LocateRegistry.getRegistry(ip, port);
         RMIClientHandler remote = (RMIClientHandler) registry.lookup("rmiServer");

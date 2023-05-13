@@ -7,7 +7,7 @@ import java.io.Serial;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RMIClientHandler extends UnicastRemoteObject implements ClientHandler {
+public class RMIClientHandler extends UnicastRemoteObject implements ClientHandler, Runnable {
     @Serial
     private static final long serialVersionUID = 7973004963846163594L;
     private final transient Server server;
