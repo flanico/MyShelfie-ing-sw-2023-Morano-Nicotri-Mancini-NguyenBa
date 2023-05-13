@@ -12,6 +12,7 @@ import it.polimi.ingsw.observer.ViewObserver;
 import it.polimi.ingsw.view.View;
 
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -162,6 +163,8 @@ public class ClientController implements Observer, ViewObserver {
             executorService.execute(view::askNickname);
         } catch (IOException e) {
             executorService.execute(() -> view.showLoginResult(false, null));
+        } catch (NotBoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -60,14 +60,8 @@ public class Cli extends ViewObservable implements View {
             connectingType = chooseConnectingType();
         }
 
-        if(connectingType == 1) {
-            out.println("Socket connection...");
-            connectingSocket();
-        }
-        else if (connectingType == 2) {
-            out.println("RMI connection to do...");
-            connectingRMI();
-        }
+        out.println("Connection...");
+        connecting(connectingType);
     }
 
     /**
@@ -87,13 +81,15 @@ public class Cli extends ViewObservable implements View {
     /**
      * socket connection: asks the server address and port to the client
      */
-    public void connectingSocket(){
+    public void connecting(int type){
         final String correctIp;
         final String correctPort;
         String inputIp;
         String inputPort;
         String defaultIp = "localhost";
-        String defaultPort = "12345";
+        String defaultPort = "12345";   // Socket default port value
+        if (type == 2)
+            defaultPort = "1099";   //RMI default port value
         boolean isValid = false;
 
         out.println("The value between the brackets is the default value.");
@@ -142,64 +138,7 @@ public class Cli extends ViewObservable implements View {
         else {
             correctPort = inputPort;
         }
-        notifyObserver(obs -> obs.createSocketConnection(correctIp, correctPort));
-    }
-
-    public void connectingRMI () {
-        final String correctIp;
-        final String correctPort;
-        String inputIp;
-        String inputPort;
-        String defaultIp = "localhost";
-        String defaultPort = "1099";
-        boolean isValid = false;
-
-        do {
-            out.print("Enter the server address (default: " + defaultIp + "): ");
-            inputIp = readLine.nextLine();
-
-            if (inputIp.isEmpty()) {
-                isValid = true;
-            } else if (ClientController.isValidAddress(inputIp)) {
-                isValid = true;
-            }
-            else {
-                out.println(STR_INPUT_ERR);
-                clearCli();
-            }
-        } while ((!isValid));
-
-        if(inputIp.isEmpty()) {
-            correctIp = defaultIp;
-        }
-        else {
-            correctIp = inputIp;
-        }
-
-        isValid = false;
-        do {
-            out.print("Enter the server port (default: " + defaultPort + "): ");
-            inputPort = readLine.nextLine();
-
-            if (inputPort.isEmpty()) {
-                isValid = true;
-            } else if (ClientController.isValidPort(inputPort)) {
-                isValid = true;
-            }
-            else {
-                out.println(STR_INPUT_ERR);
-                clearCli();
-            }
-        } while ((!isValid));
-
-        if(inputPort.isEmpty()) {
-            correctPort = defaultPort;
-        }
-        else {
-            correctPort = inputPort;
-        }
-
-        notifyObserver(obs -> obs.createRMIConnection(correctIp, correctPort));
+        notifyObserver(obs -> obs.createSocketConnection(correctIp, correctPort, type));
     }
 
     @Override

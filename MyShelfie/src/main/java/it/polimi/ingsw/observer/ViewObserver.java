@@ -7,18 +7,11 @@ import java.util.List;
 public interface ViewObserver {
 
     /**
-     * creates a new socket connection to the server
+     * creates a new connection to the server
      * @param ip the ip address
      * @param port the port number
      */
-    void createSocketConnection(String ip, String port);
-
-    /**
-     * creates a new RMI connection to the server
-     * @param ip the ip address
-     * @param port the port number
-     */
-    void createRMIConnection(String ip, String port);
+    void createConnection(String ip, String port, int type);
 
     /**
      * sends a message to the server with the chosen nickname
