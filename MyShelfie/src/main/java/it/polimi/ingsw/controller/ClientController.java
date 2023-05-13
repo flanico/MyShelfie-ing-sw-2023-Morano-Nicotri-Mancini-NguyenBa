@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.network.client.RMIClient;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.clientSide.*;
@@ -144,32 +145,17 @@ public class ClientController implements Observer, ViewObserver {
     }
 
     /**
-     * create a new socket connection between server and client
+     * create a new connection between server and client
      * @param ip the ip address
      * @param port the port number
      */
     @Override
-    public void createSocketConnection(String ip, String port) {
+    public void createConnection(String ip, String port, int type) {
         try {
-            client = new SocketClient(ip, Integer.parseInt(port));
-            client.addObserver(this);
-            client.readMessage();
-            client.sendPingMessage(true);
-            executorService.execute(view::askNickname);
-        } catch (IOException e) {
-            executorService.execute(() -> view.showLoginResult(false, null));
-        }
-    }
-
-    /**
-     * create a new RMI connection between server and client
-     * @param ip the ip address
-     * @param port the port number
-     */
-    @Override
-    public void createRMIConnection(String ip, String port) {
-        try {
-            client = new SocketClient(ip, Integer.parseInt(port));
+            if (type == 1)
+                client = new SocketClient(ip, Integer.parseInt(port));
+            else if (type == 2)
+                client = new RMIClient(ip, Integer.parseInt(port));
             client.addObserver(this);
             client.readMessage();
             client.sendPingMessage(true);
