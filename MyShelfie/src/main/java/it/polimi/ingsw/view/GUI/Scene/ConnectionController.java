@@ -57,7 +57,7 @@ public class ConnectionController extends ViewObservable implements Controller {
 
                 switch (error) {
                     case 0:
-                        new Thread(() -> notifyObserver(obs -> obs.createSocketConnection(correctAddress, correctPort))).start();
+                        new Thread(() -> notifyObserver(obs -> obs.createConnection(correctAddress, correctPort, 1))).start();
                         break;
                     case 1:
                         SceneController.showAlert("Invalid Port");
