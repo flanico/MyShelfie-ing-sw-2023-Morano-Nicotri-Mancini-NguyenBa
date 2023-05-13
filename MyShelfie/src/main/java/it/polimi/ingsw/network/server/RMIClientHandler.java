@@ -3,18 +3,14 @@ package it.polimi.ingsw.network.server;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.message.Message;
 
-public class RMIClientHandler implements ClientHandler, Runnable {
+public class RMIClientHandler implements ClientHandler {
     private final Server server;
     private final Client client;
+    private boolean connected = true;
 
     public RMIClientHandler(Server server, Client client) {
         this.server = server;
         this.client = client;
-    }
-
-    @Override
-    public void run() {
-
     }
 
     /**
