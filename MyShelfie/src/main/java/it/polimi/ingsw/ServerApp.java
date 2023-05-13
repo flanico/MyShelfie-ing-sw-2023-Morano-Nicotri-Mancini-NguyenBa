@@ -6,18 +6,20 @@ import it.polimi.ingsw.network.server.SocketServer;
 
 import it.polimi.ingsw.network.server.RMIServer;
 
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
 /**
  * main of the server application
  */
 public class ServerApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
+        Scanner scanner = new Scanner(System.in);
+        GameController gameController = new GameController();
+        Server server = new Server(gameController);
 
         //socket
         int serverSocketPort = 12345; //default socket port
-
-        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter the socket port (default: " + serverSocketPort + ") : ");
         try {
@@ -25,9 +27,6 @@ public class ServerApp {
         } catch (IllegalArgumentException e) {
             Server.LOGGER.warning("Invalid port inserted! Using default port");
         }
-
-        GameController gameController = new GameController();
-        Server server = new Server(gameController);
 
         SocketServer socketServer = new SocketServer(serverSocketPort, server);
         Thread socketThread = new Thread(socketServer, "socketserver_");
@@ -43,7 +42,8 @@ public class ServerApp {
             Server.LOGGER.warning("Invalid port inserted! Using default port");
         }
 
-        RMIServer rmiServer = new RMIServer(serverRMIPort, server);
+        RMIServer rmiServer = null;
+        rmiServer = new RMIServer(serverRMIPort, server);
         Thread rmiThread = new Thread(rmiServer, "rmiserver_");
         rmiThread.start();
 

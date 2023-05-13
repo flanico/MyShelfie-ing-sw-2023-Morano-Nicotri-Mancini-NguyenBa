@@ -46,7 +46,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
             this.handleClientConnection();
         } catch (IOException e) {
             Server.LOGGER.severe("Client " + clientSocket.getInetAddress() + " connection dropped");
-            disconnect();
+            disconnectClient();
         }
     }
 
@@ -85,7 +85,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
      * disconnects the socket
      */
     @Override
-    public void disconnect() {
+    public void disconnectClient() {
         if(isConnected) {
             try {
                 if(!clientSocket.isClosed()) {
@@ -114,7 +114,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
             }
         } catch (IOException e) {
             Server.LOGGER.severe(e.getMessage());
-            disconnect();
+            disconnectClient();
         }
     }
 }

@@ -60,14 +60,8 @@ public class Cli extends ViewObservable implements View {
             connectingType = chooseConnectingType();
         }
 
-        if(connectingType == 1) {
-            out.println("Socket connection...");
-            connectingSocket();
-        }
-        else if (connectingType == 2) {
-            out.println("RMI connection to do...");
-            connectingRMI();
-        }
+        out.println("Connection...");
+        connecting(connectingType);
     }
 
     /**
@@ -87,13 +81,15 @@ public class Cli extends ViewObservable implements View {
     /**
      * socket connection: asks the server address and port to the client
      */
-    public void connectingSocket(){
+    public void connecting(int type){
         final String correctIp;
         final String correctPort;
         String inputIp;
         String inputPort;
         String defaultIp = "localhost";
-        String defaultPort = "12345";
+        String defaultPort = "12345";   // Socket default port value
+        if (type == 2)
+            defaultPort = "1099";   //RMI default port value
         boolean isValid = false;
 
         out.println("The value between the brackets is the default value.");
@@ -142,11 +138,7 @@ public class Cli extends ViewObservable implements View {
         else {
             correctPort = inputPort;
         }
-        notifyObserver(obs -> obs.createConnection(correctIp, correctPort));
-    }
-
-    public void connectingRMI () {
-
+        notifyObserver(obs -> obs.createConnection(correctIp, correctPort, type));
     }
 
     @Override

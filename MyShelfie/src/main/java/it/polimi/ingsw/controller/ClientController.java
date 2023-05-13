@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.client.Client;
+import it.polimi.ingsw.network.client.RMIClient;
 import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.clientSide.*;
@@ -11,6 +12,7 @@ import it.polimi.ingsw.observer.ViewObserver;
 import it.polimi.ingsw.view.View;
 
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -144,27 +146,32 @@ public class ClientController implements Observer, ViewObserver {
     }
 
     /**
-     * create a new socket connection between server and client
+     * create a new connection between server and client
      * @param ip the ip address
      * @param port the port number
      */
     @Override
-    public void createConnection(String ip, String port) {
+    public void createConnection(String ip, String port, int type) {
         try {
-            client = new SocketClient(ip, Integer.parseInt(port));
-            client.addObserver(this);
-            client.readMessage();
-            client.sendPingMessage(true);
-            executorService.execute(view::askNickname);
+            if (type == 1)
+                this.client = new SocketClient(ip, Integer.parseInt(port));
+            else if (type == 2)
+                this.client = new RMIClient(ip, Integer.parseInt(port));
+            this.client.addObserver(this);
+            this.client.readMessage();
+            this.client.sendPingMessage(true);
+            this.executorService.execute(this.view::askNickname);
         } catch (IOException e) {
-            executorService.execute(() -> view.showLoginResult(false, null));
+            this.executorService.execute(() -> this.view.showLoginResult(false, null));
+        } catch (NotBoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void sendNickname(String nickname) {
         this.nickname = nickname;
-        client.sendMessage(new LoginRequestMessage(this.nickname));
+        this.client.sendMessage(new LoginRequestMessage(this.nickname));
     }
 
     @Override

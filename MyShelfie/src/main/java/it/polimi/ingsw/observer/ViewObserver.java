@@ -11,7 +11,7 @@ public interface ViewObserver {
      * @param ip the ip address
      * @param port the port number
      */
-    void createConnection(String ip, String port);
+    void createConnection(String ip, String port, int type);
 
     /**
      * sends a message to the server with the chosen nickname

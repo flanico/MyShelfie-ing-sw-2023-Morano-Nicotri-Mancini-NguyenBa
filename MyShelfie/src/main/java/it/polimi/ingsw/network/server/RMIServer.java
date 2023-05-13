@@ -1,29 +1,28 @@
 package it.polimi.ingsw.network.server;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIServer implements Runnable {
-    protected final Server server;
-    private final int port;
+    private final Registry registry;
+    private final RMIImplementation remote;
 
-    public RMIServer(int port, Server server) {
-        this.port = port;
-        this.server = server;
+    public RMIServer(int port, Server server) throws RemoteException {
+        this.registry = LocateRegistry.createRegistry(port);
+        this.remote = new RMIImplementation(server);
     }
 
     @Override
     public void run() {
         try {
-            Registry registry = LocateRegistry.createRegistry(this.port);
-        } catch (RemoteException e) {
+            this.registry.bind("rmiServer", remote);
+            Server.LOGGER.info(() -> "The RMI server started");
+        } catch (RemoteException | AlreadyBoundException e) {
             throw new RuntimeException(e);
         }
-
-
-
-
-
     }
 }

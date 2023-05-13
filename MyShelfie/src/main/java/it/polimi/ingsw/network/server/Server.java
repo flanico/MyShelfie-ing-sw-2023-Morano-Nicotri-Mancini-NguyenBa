@@ -4,6 +4,7 @@ import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.view.VirtualView;
 
+import java.rmi.RemoteException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class Server {
         else {
             virtualView.showLoginResult(false, null);
             LOGGER.info(() -> "Game is already started");
-            clientHandler.disconnect();
+                clientHandler.disconnectClient();
         }
     }
 
