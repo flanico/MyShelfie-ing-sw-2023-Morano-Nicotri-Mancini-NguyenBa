@@ -17,7 +17,7 @@ public class ServerApp {
         Scanner scanner = new Scanner(System.in);
         GameController gameController = new GameController();
         Server server = new Server(gameController);
-/*
+
         //socket
         int serverSocketPort = 12345; //default socket port
 
@@ -31,7 +31,7 @@ public class ServerApp {
         SocketServer socketServer = new SocketServer(serverSocketPort, server);
         Thread socketThread = new Thread(socketServer, "socketserver_");
         socketThread.start();
-*/
+
         //RMI
         int serverRMIPort = 1099; //default RMI port
 
