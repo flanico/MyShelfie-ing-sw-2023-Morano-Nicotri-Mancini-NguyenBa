@@ -6,13 +6,14 @@ import it.polimi.ingsw.network.server.SocketServer;
 
 import it.polimi.ingsw.network.server.RMIServer;
 
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
 /**
  * main of the server application
  */
 public class ServerApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
 
         //socket
         int serverSocketPort = 12345; //default socket port
@@ -43,7 +44,12 @@ public class ServerApp {
             Server.LOGGER.warning("Invalid port inserted! Using default port");
         }
 
-        RMIServer rmiServer = new RMIServer(serverRMIPort, server);
+        RMIServer rmiServer = null;
+        try {
+            rmiServer = new RMIServer(serverRMIPort, server);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
         Thread rmiThread = new Thread(rmiServer, "rmiserver_");
         rmiThread.start();
 
