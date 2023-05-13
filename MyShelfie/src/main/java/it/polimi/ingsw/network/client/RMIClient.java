@@ -9,10 +9,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIClient extends Client {
+    private final Registry registry;
+    private final RMIClientHandler remote;
 
     public RMIClient(String ip, int port) throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(ip, port);
-        RMIClientHandler remote = (RMIClientHandler) registry.lookup("rmiServer");
+        this.registry = LocateRegistry.getRegistry(ip, port);
+        this.remote = (RMIClientHandler) this.registry.lookup("rmiServer");
     }
 
     public  void sendMessage(Message message) {}

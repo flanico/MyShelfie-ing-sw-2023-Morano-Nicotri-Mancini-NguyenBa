@@ -8,13 +8,15 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class RMIClientHandler extends UnicastRemoteObject implements ClientHandler, Runnable {
-    @Serial
-    private static final long serialVersionUID = 7973004963846163594L;
-    private final transient Server server;
-
+    private final Server server;
 
     public RMIClientHandler(Server server) throws RemoteException {
         this.server = server;
+    }
+
+    @Override
+    public void run () {
+
     }
 
     public void sendMessageToClient(Message message) {
