@@ -17,9 +17,9 @@ public class RMIServer implements Runnable {
     @Override
     public void run() {
         try {
-            RMIInterfaceImp rmiInterfaceImp = new RMIInterfaceImp(this.server);
+            RMIClientHandler remote = new RMIClientHandler(this.server);
             Registry registry = LocateRegistry.createRegistry(this.port);
-            registry.bind("rmiServer", rmiInterfaceImp);
+            registry.bind("rmiServer", remote);
             System.out.println("Server is ready");
         } catch (RemoteException | AlreadyBoundException e) {
             throw new RuntimeException(e);

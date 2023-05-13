@@ -45,11 +45,7 @@ public class ServerApp {
         }
 
         RMIServer rmiServer = null;
-        try {
-            rmiServer = new RMIServer(serverRMIPort, server);
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
+        rmiServer = new RMIServer(serverRMIPort, server);
         Thread rmiThread = new Thread(rmiServer, "rmiserver_");
         rmiThread.start();
 
