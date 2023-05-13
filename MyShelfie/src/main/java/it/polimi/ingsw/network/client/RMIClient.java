@@ -17,16 +17,10 @@ public class RMIClient extends Client {
     public RMIClient(String ip, int port) throws RemoteException, NotBoundException {
         this.registry = LocateRegistry.getRegistry(ip, port);
         this.remote = (RMIInterface) this.registry.lookup("rmiServer");
+        this.remote.login(this);
     }
 
-    public void sendMessage(Message message) {
-        try {
-            remote.sendRemoteMessage(message);
-            System.out.println("ciaooo");
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public void sendMessage(Message message) {}
 
     public void readMessage() {}
 

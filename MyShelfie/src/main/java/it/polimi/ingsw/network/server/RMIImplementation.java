@@ -13,7 +13,9 @@ public class RMIImplementation extends UnicastRemoteObject implements RMIInterfa
         this.server = server;
     }
 
-    public void sendRemoteMessage(Message message) throws RemoteException {
-
+    public void login(Client client) throws RemoteException {
+        RMIClientHandler rmiClientHandler = new RMIClientHandler(this.server, client);
+        Thread rmiClientHandlerThread = new Thread(rmiClientHandler, "rmiclienthandler_");
+        rmiClientHandlerThread.start();
     }
 }
