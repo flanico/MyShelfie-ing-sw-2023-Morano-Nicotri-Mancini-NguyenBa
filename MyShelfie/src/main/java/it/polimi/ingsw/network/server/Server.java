@@ -40,7 +40,7 @@ public class Server {
         else {
             virtualView.showLoginResult(false, null);
             LOGGER.info(() -> "Game is already started");
-            clientHandler.disconnect();
+            clientHandler.disconnectClient();
         }
     }
 

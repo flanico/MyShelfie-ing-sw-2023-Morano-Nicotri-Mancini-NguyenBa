@@ -3,7 +3,6 @@ package it.polimi.ingsw.network.server;
 import it.polimi.ingsw.network.client.RMIClient;
 import it.polimi.ingsw.network.message.Message;
 
-import java.io.Serial;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -23,10 +22,7 @@ public class RMIClientHandler extends UnicastRemoteObject implements ClientHandl
 
     }
 
-    /**
-     * disconnect the client from the server
-     */
-    public void disconnect() {
+    public void disconnectClient() {
 
     }
 }

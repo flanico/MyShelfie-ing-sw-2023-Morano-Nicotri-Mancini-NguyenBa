@@ -18,7 +18,7 @@ public class RMIServer implements Runnable {
     public void run() {
         try {
             this.registry.bind("rmiServer", remote);
-            System.out.println("Server is ready");
+            Server.LOGGER.info(() -> "The RMI server started");
         } catch (RemoteException | AlreadyBoundException e) {
             throw new RuntimeException(e);
         }
