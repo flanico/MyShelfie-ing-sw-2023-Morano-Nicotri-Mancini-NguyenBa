@@ -142,11 +142,64 @@ public class Cli extends ViewObservable implements View {
         else {
             correctPort = inputPort;
         }
-        notifyObserver(obs -> obs.createConnection(correctIp, correctPort));
+        notifyObserver(obs -> obs.createSocketConnection(correctIp, correctPort));
     }
 
     public void connectingRMI () {
+        final String correctIp;
+        final String correctPort;
+        String inputIp;
+        String inputPort;
+        String defaultIp = "localhost";
+        String defaultPort = "1099";
+        boolean isValid = false;
 
+        do {
+            out.print("Enter the server address (default: " + defaultIp + "): ");
+            inputIp = readLine.nextLine();
+
+            if (inputIp.isEmpty()) {
+                isValid = true;
+            } else if (ClientController.isValidAddress(inputIp)) {
+                isValid = true;
+            }
+            else {
+                out.println(STR_INPUT_ERR);
+                clearCli();
+            }
+        } while ((!isValid));
+
+        if(inputIp.isEmpty()) {
+            correctIp = defaultIp;
+        }
+        else {
+            correctIp = inputIp;
+        }
+
+        isValid = false;
+        do {
+            out.print("Enter the server port (default: " + defaultPort + "): ");
+            inputPort = readLine.nextLine();
+
+            if (inputPort.isEmpty()) {
+                isValid = true;
+            } else if (ClientController.isValidPort(inputPort)) {
+                isValid = true;
+            }
+            else {
+                out.println(STR_INPUT_ERR);
+                clearCli();
+            }
+        } while ((!isValid));
+
+        if(inputPort.isEmpty()) {
+            correctPort = defaultPort;
+        }
+        else {
+            correctPort = inputPort;
+        }
+
+        notifyObserver(obs -> obs.createRMIConnection(correctIp, correctPort));
     }
 
     @Override

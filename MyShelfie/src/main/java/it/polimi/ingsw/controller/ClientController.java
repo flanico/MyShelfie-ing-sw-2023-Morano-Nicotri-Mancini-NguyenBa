@@ -149,7 +149,25 @@ public class ClientController implements Observer, ViewObserver {
      * @param port the port number
      */
     @Override
-    public void createConnection(String ip, String port) {
+    public void createSocketConnection(String ip, String port) {
+        try {
+            client = new SocketClient(ip, Integer.parseInt(port));
+            client.addObserver(this);
+            client.readMessage();
+            client.sendPingMessage(true);
+            executorService.execute(view::askNickname);
+        } catch (IOException e) {
+            executorService.execute(() -> view.showLoginResult(false, null));
+        }
+    }
+
+    /**
+     * create a new RMI connection between server and client
+     * @param ip the ip address
+     * @param port the port number
+     */
+    @Override
+    public void createRMIConnection(String ip, String port) {
         try {
             client = new SocketClient(ip, Integer.parseInt(port));
             client.addObserver(this);
