@@ -10,8 +10,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIClient extends Client {
-    @Serial
-    private final static long serialVersionUID = 3182630738296108821L;
     private final Registry registry;
     private final RMIInterface remote;
 

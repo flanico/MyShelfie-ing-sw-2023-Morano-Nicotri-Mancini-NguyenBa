@@ -10,9 +10,6 @@ import java.util.logging.Logger;
  * abstract class used to communicate with the server, every type of connection must implement this class
  */
 public abstract class Client extends Observable {
-    @Serial
-    private final static long serialVersionUID = 3182670738299108821L;
-
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     /**
      * sends a message to the server
