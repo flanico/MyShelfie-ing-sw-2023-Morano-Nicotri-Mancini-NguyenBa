@@ -7,7 +7,6 @@ import it.polimi.ingsw.view.GUI.Scene.LobbyController;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import it.polimi.ingsw.view.GUI.ErrorType;
 import java.util.List;
 import java.util.Map;
 
@@ -173,7 +172,9 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores){
-
+        GameControllerScene game_ctrl = getGameControllerScene();
+        game_ctrl.setCommonGoalCardScores(commonGoalCardScores);
+        Platform.runLater(game_ctrl::updateScores);
     }
 
     /**
@@ -184,7 +185,9 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void showCommonGoalComplete(CommonGoalCard commonGoalCard, int score){
         GameControllerScene game_ctrl = getGameControllerScene();
-
+        game_ctrl.setWin_card(commonGoalCard);
+        game_ctrl.setCommon_score(score);
+        Platform.runLater(game_ctrl::winCard);
     }
 
     /**

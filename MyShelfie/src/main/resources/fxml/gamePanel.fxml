@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.GameControllerScene">
    <children>
-      <ImageView fitHeight="728.0" fitWidth="1288.0" layoutX="-5.0" layoutY="-2.0" pickOnBounds="true">
+      <ImageView fx:id="common_score_2" fitHeight="728.0" fitWidth="1288.0" layoutX="-5.0" layoutY="-2.0" pickOnBounds="true">
        <Image url="@/misc/sfondo.jpg" />
       </ImageView>
       <ImageView fitHeight="380.0" fitWidth="400.0" layoutX="39.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
@@ -117,5 +117,9 @@
       <ImageView fx:id="shelf_53" fitHeight="49.0" fitWidth="48.0" layoutX="1095.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_54" fitHeight="49.0" fitWidth="48.0" layoutX="1156.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="okButton" layoutX="1043.0" layoutY="505.0" mnemonicParsing="false" onAction="#okPressed" text="OK" />
+      <ImageView fx:id="common_prize_1" fitHeight="86.0" fitWidth="90.0" layoutX="531.0" layoutY="487.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="common_prize_2" fitHeight="86.0" fitWidth="90.0" layoutX="656.0" layoutY="487.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="common_score_1" fitHeight="49.0" fitWidth="48.0" layoutX="568.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" />
+      <ImageView fx:id="common_score_2" fitHeight="49.0" fitWidth="48.0" layoutX="740.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" />
    </children>
 </Pane>
