@@ -138,7 +138,7 @@ public class Cli extends ViewObservable implements View {
         else {
             correctPort = inputPort;
         }
-        notifyObserver(obs -> obs.createSocketConnection(correctIp, correctPort, type));
+        notifyObserver(obs -> obs.createConnection(correctIp, correctPort, type));
     }
 
     @Override
