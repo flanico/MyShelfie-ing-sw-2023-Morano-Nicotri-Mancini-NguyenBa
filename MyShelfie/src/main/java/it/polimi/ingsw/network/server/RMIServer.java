@@ -1,5 +1,7 @@
 package it.polimi.ingsw.network.server;
 
+import java.rmi.AlreadyBoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -18,12 +20,11 @@ public class RMIServer extends UnicastRemoteObject implements Runnable {
     public void run() {
         try {
             Registry registry = LocateRegistry.createRegistry(this.port);
-        } catch (RemoteException e) {
+            registry.bind("server", (Remote)this);
+            System.out.println("Server is ready");
+        } catch (RemoteException | AlreadyBoundException e) {
             throw new RuntimeException(e);
         }
-
-
-
 
 
     }
