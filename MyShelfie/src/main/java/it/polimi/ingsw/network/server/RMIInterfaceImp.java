@@ -7,11 +7,11 @@ import it.polimi.ingsw.network.message.MessageType;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RMIImplementation extends UnicastRemoteObject implements RMIInterface {
+public class RMIInterfaceImp extends UnicastRemoteObject implements RMIInterface {
     private static final long serialVersionUID = 7973004963846163594L;
     private final Server server;
 
-    protected RMIImplementation(Server server) throws RemoteException {
+    protected RMIInterfaceImp(Server server) throws RemoteException {
         this.server = server;
     }
 
