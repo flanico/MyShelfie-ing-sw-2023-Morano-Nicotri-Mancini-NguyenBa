@@ -3,6 +3,7 @@ package it.polimi.ingsw.network.server;
 import it.polimi.ingsw.network.message.Message;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.net.ServerSocket;
 import java.net.Socket;
 

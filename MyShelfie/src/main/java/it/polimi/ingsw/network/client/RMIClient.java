@@ -20,7 +20,7 @@ public class RMIClient extends Client {
 
     public void sendMessage(Message message) {
         try {
-            remote.onMessage(message, this);
+            remote.onMessage(message);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
