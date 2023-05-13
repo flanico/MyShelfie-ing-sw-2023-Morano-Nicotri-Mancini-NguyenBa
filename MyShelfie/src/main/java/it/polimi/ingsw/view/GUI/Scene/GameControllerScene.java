@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.ErrorType;
 import it.polimi.ingsw.view.GUI.SceneController;
+import it.polimi.ingsw.view.cli.ColorCli;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -207,6 +208,14 @@ public class GameControllerScene extends ViewObservable implements Controller {
     ImageView common_goal2;
     @FXML
     Button okButton;
+    @FXML
+    ImageView common_score_1;
+    @FXML
+    ImageView common_score_2;
+    @FXML
+    ImageView common_prize_1;
+    @FXML
+    ImageView common_prize_2;
 
 
     public Board board;
@@ -215,12 +224,15 @@ public class GameControllerScene extends ViewObservable implements Controller {
     private boolean select_card_phase;
     PersonalGoalCard personalCard;
     List<CommonGoalCard> commonGoalCards;
-
     public Bookshelf shelf;
-
     public ErrorType error;
     private int selected_column = -1;
+    List<CommonGoalCardScore> commonGoalCardScores = new ArrayList<>();
+    public CommonGoalCard win_card;
 
+
+
+    public int common_score;
 
     public void initialize(){
        turn_text.setText("");
@@ -267,6 +279,17 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public void setFinalTiles(List<Tile> finalTiles) {
         this.finalTiles = finalTiles;
     }
+    public void setCommonGoalCardScores(List<CommonGoalCardScore> commonGoalCardScores){
+        this.commonGoalCardScores = commonGoalCardScores;
+    }
+    public void setWin_card(CommonGoalCard win_card) {
+        this.win_card = win_card;
+    }
+    public void setCommon_score(int common_score) {
+        this.common_score = common_score;
+    }
+
+
     public void activeSelection(){
         updateBoard();
         SelectedTiles.clear();
@@ -279,6 +302,24 @@ public class GameControllerScene extends ViewObservable implements Controller {
         confirm_button.setVisible(true);
         cancel_button.setDisable(false);
         confirm_button.setDisable(false);
+    }
+
+    public void updateScores(){
+        String path = null;
+        for (int i = 0; i < 2; i++) {
+            for (Integer score : commonGoalCardScores.get(i).getStack()) {
+                switch (score){
+                    case 2 -> path = "/scoring tokens/scoring_2.jpg";
+                    case 4 -> path = "/scoring tokens/scoring_4.jpg";
+                    case 6 -> path = "/scoring tokens/scoring_6.jpg";
+                    case 8 -> path = "/scoring tokens/scoring_8.jpg";
+                }
+                if (i==0)
+                    common_score_1.setImage(new Image(path));
+                else
+                    common_score_2.setImage(new Image(path));
+            }
+        }
     }
     private void rotate(String direction){
         if (finalTiles.size()==2)
@@ -352,6 +393,19 @@ public class GameControllerScene extends ViewObservable implements Controller {
                         setImage(ref_but, board.getMatrix()[x][y].getType());
             }
     }
+
+    public void winCard(){
+        String path = null;
+        switch (common_score){
+            case 2 -> path = "/scoring tokens/scoring_2.jpg";
+            case 4 -> path = "/scoring tokens/scoring_4.jpg";
+            case 6 -> path = "/scoring tokens/scoring_6.jpg";
+            case 8 -> path = "/scoring tokens/scoring_8.jpg";
+        }
+        if ( commonGoalCards.get(0).getNumber() == win_card.getNumber() )
+            common_prize_1.setImage(new Image(path));
+        else common_prize_2.setImage(new Image(path));
+    }
     public void updateCommonGoalCards(){
         String path = null;
         for (int x=1; x<3; x++) {
@@ -377,15 +431,36 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
     private void tryInsert(int col){
         ImageView img;
-            for (int x=0; x< finalTiles.size(); x++) {
-                img = getShelf(free_cells(col) - x, col);
-                setImage(img, finalTiles.get(x).getType());
+        int size = finalTiles.size();
+        switch (size) {
+            case 1 -> {
+                img = getShelf(free_cells(col) - 1, col);
+                setImage(img, finalTiles.get(0).getType());
                 img.setOpacity(0.5);
             }
-    }
+            case 2 -> {
+                for (int x=0; x<2; x++) {
+                    img = getShelf(free_cells(col) - x - 3, col);
+                    setImage(img, finalTiles.get(x).getType());
+                    img.setOpacity(0.5);
+                }
+            }
+            case 3 -> {
+                for (int x=0; x<3; x++) {
+                    img = getShelf(free_cells(col) - x - 4, col);
+                    setImage(img, finalTiles.get(x).getType());
+                    img.setOpacity(0.5);
+                }
+            }
+            }
+        }
+
     private int free_cells(int col){
         int row = 0;
-        while (shelf.getMatrix()[row][col].getType().equals(TileType.NULL) && row<5) row++;
+        while (shelf.getMatrix()[row][col].getType().equals(TileType.NULL))
+            if (row==5)
+                return 6;
+            else row++;
         return row;
     }
     public void updatePersonalCard(){
