@@ -19,7 +19,6 @@ public class RMIInterfaceImp extends UnicastRemoteObject implements RMIInterface
             if (message.getMessageType() == MessageType.LOGIN_REQ) {
                 RMIClientHandler rmiClientHandler = new RMIClientHandler(this.server, client);
                 this.server.addClient(message.getNickname(), rmiClientHandler);
-                System.out.println("ciao");
             }
             else {
                 Server.LOGGER.info(() -> "Message received from: " + message.getNickname() + ": " + message);
