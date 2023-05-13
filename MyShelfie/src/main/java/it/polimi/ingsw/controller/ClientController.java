@@ -154,15 +154,15 @@ public class ClientController implements Observer, ViewObserver {
     public void createConnection(String ip, String port, int type) {
         try {
             if (type == 1)
-                client = new SocketClient(ip, Integer.parseInt(port));
+                this.client = new SocketClient(ip, Integer.parseInt(port));
             else if (type == 2)
-                client = new RMIClient(ip, Integer.parseInt(port));
-            client.addObserver(this);
-            client.readMessage();
-            client.sendPingMessage(true);
-            executorService.execute(view::askNickname);
+                this.client = new RMIClient(ip, Integer.parseInt(port));
+            this.client.addObserver(this);
+            this.client.readMessage();
+            this.client.sendPingMessage(true);
+            this.executorService.execute(this.view::askNickname);
         } catch (IOException e) {
-            executorService.execute(() -> view.showLoginResult(false, null));
+            this.executorService.execute(() -> this.view.showLoginResult(false, null));
         } catch (NotBoundException e) {
             throw new RuntimeException(e);
         }
@@ -171,7 +171,7 @@ public class ClientController implements Observer, ViewObserver {
     @Override
     public void sendNickname(String nickname) {
         this.nickname = nickname;
-        client.sendMessage(new LoginRequestMessage(this.nickname));
+        this.client.sendMessage(new LoginRequestMessage(this.nickname));
     }
 
     @Override
