@@ -1,12 +1,12 @@
 package it.polimi.ingsw.network.server;
 
-import it.polimi.ingsw.network.client.RMIClient;
 import it.polimi.ingsw.network.message.Message;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RMIClientHandler extends UnicastRemoteObject implements RClientHandler, Runnable {
+public class RMIClientHandler extends UnicastRemoteObject implements Runnable, ClientHandler {
     private final Server server;
 
     public RMIClientHandler(Server server) throws RemoteException {

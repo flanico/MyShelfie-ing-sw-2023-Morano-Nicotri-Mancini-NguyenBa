@@ -14,11 +14,12 @@ import java.util.Scanner;
  */
 public class ServerApp {
     public static void main(String[] args) throws RemoteException {
-
+        Scanner scanner = new Scanner(System.in);
+        GameController gameController = new GameController();
+        Server server = new Server(gameController);
+/*
         //socket
         int serverSocketPort = 12345; //default socket port
-
-        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter the socket port (default: " + serverSocketPort + ") : ");
         try {
@@ -27,13 +28,10 @@ public class ServerApp {
             Server.LOGGER.warning("Invalid port inserted! Using default port");
         }
 
-        GameController gameController = new GameController();
-        Server server = new Server(gameController);
-
         SocketServer socketServer = new SocketServer(serverSocketPort, server);
         Thread socketThread = new Thread(socketServer, "socketserver_");
         socketThread.start();
-
+*/
         //RMI
         int serverRMIPort = 1099; //default RMI port
 
