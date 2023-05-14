@@ -1,29 +1,49 @@
 package it.polimi.ingsw.network.server;
 
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.network.client.RMIClient;
 import it.polimi.ingsw.network.message.Message;
+import it.polimi.ingsw.network.message.MessageType;
 
-public class RMIClientHandler implements ClientHandler {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class RMIClientHandler extends UnicastRemoteObject implements RMIInterface, ClientHandler {
     private final Server server;
-    private final RMIClient client;
-    private boolean connected = true;
+    private Client client = null;
+    private Message currentMessage = null;
+    private boolean read = false;
 
-    public RMIClientHandler(Server server, RMIClient client) {
+    protected RMIClientHandler(Server server) throws RemoteException {
         this.server = server;
+    }
+
+    public void sendMessageToServer(Message message, Client client) throws RemoteException {
         this.client = client;
+        if (message != null && message.getMessageType() != MessageType.PING) {
+            if (message.getMessageType() == MessageType.LOGIN_REQ) {
+                Server.LOGGER.info(() -> "Message LoginRequest received from " + message.getNickname() + ": " + message);
+                this.server.addClient(message.getNickname(), this);
+            }
+            else {
+                Server.LOGGER.info(() -> "Message received from: " + message.getNickname() + ": " + message);
+                this.server.forwardsMessage(message);
+            }
+        }
     }
 
-    /**
-     * sends a message from the server to the client
-     * @param message to be sent
-     */
+    public Message takeMessage() throws RemoteException {
+        this.read = false;
+        return this.currentMessage;
+    }
+
     public void sendMessageToClient(Message message) {
-        this.client.readMessage(message);
+        this.currentMessage = message;
+        this.read = true;
     }
 
-    /**
-     * disconnect the client from the server
-     */
     public void disconnectClient() {}
+
+    public Boolean isReadable() {
+        return this.read;
+    }
 }

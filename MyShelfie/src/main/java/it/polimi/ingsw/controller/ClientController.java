@@ -7,6 +7,7 @@ import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.clientSide.*;
 import it.polimi.ingsw.network.message.serverSide.*;
+import it.polimi.ingsw.network.server.RMIServer;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ViewObserver;
 import it.polimi.ingsw.view.View;
@@ -74,74 +75,75 @@ public class ClientController implements Observer, ViewObserver {
      */
     @Override
     public void update(Message message) {
-        System.out.println("ciao");
-        switch (message.getMessageType()) {
-            case LOGIN_REPLY -> {
-                LoginReplyMessage loginReplyMessage = (LoginReplyMessage) message;
-                executorService.execute(() -> view.showLoginResult(loginReplyMessage.isNicknameAccepted(), nickname));
-            }
-            case NUM_PLAYERS_REQ -> {
-                executorService.execute(view::askPlayersNumber);
-            }
-            case ERROR -> {
-                ErrorMessage errorMessage = (ErrorMessage) message;
-                executorService.execute(() -> view.showError(errorMessage.getMessageError()));
-            }
-            case GENERIC -> {
-                GenericMessage genericMessage = (GenericMessage) message;
-                executorService.execute(() -> view.showGenericMessage(genericMessage.getMessage()));
-            }
-            case INFO_GAME -> {
-                InfoGameMessage infoGameMessage = (InfoGameMessage) message;
-                executorService.execute(() -> view.showGameInfo(infoGameMessage.getPlayers(), infoGameMessage.getNum()));
-            }
-            case SHOW_COMMON -> {
-                ShowCommonCardsMessage showCommonCardsMessage = (ShowCommonCardsMessage) message;
-                executorService.execute(() -> view.showCommonCards(showCommonCardsMessage.getCommonGoalCards()));
-            }
-            case SHOW_PERSONAL -> {
-                ShowPersonalCardMessage showPersonalCardMessage = (ShowPersonalCardMessage) message;
-                executorService.execute(() -> view.showPersonalCard(showPersonalCardMessage.getPlayer()));
-            }
-            case SELECT_TILE_REQ -> {
-                SelectTileRequestMessage selectTileRequestMessage = (SelectTileRequestMessage) message;
-                executorService.execute(() -> view.askSelectTiles(selectTileRequestMessage.getBoard(), selectTileRequestMessage.getBookshelf()));
-            }
-            case SHOW_BOARD -> {
-                ShowBoardMessage showBoardMessage = (ShowBoardMessage) message;
-                executorService.execute(() -> view.showBoard(showBoardMessage.getBoard()));
-            }
-            case INSERT_TILE_REQ -> {
-                InsertTilesRequestMessage insertTilesRequestMessage = (InsertTilesRequestMessage) message;
-                executorService.execute(() -> view.askInsertTiles(insertTilesRequestMessage.getBookshelf(), insertTilesRequestMessage.getTiles()));
-            }
-            case SHOW_BOOKSHELF -> {
-                ShowBookshelfMessage showBookshelfMessage = (ShowBookshelfMessage) message;
-                executorService.execute(() -> view.showBookshelf(showBookshelfMessage.getPlayer()));
-            }
-            case ORDER_REQ -> {
-                OrderRequestMessage orderRequestMessage = (OrderRequestMessage) message;
-                executorService.execute(() -> view.askOrderTiles(orderRequestMessage.getTiles()));
-            }
-            case COMMON_GOAL_COMPLETE -> {
-                CommonGoalCompleteMessage commonGoalComplete1Message = (CommonGoalCompleteMessage) message;
-                executorService.execute(() -> view.showCommonGoalComplete(commonGoalComplete1Message.getCommonGoal(), commonGoalComplete1Message.getCommonGoalScore()));
-            }
-            case DISCONNECTION -> {
-                DisconnectionMessage disconnectionMessage = (DisconnectionMessage) message;
-                executorService.execute(() -> view.disconnection(disconnectionMessage.getNickname()));
-            }
-            case SCORES -> {
-                ScoresMessage scoresMessage = (ScoresMessage) message;
-                executorService.execute(() -> view.showScores(scoresMessage.getPlayerScore()));
-            }
-            case COMMON_SCORES -> {
-                ShowCommonScoresMessage showCommonScoresMessage = (ShowCommonScoresMessage) message;
-                executorService.execute(() -> view.showCommonScores(showCommonScoresMessage.getCommonGoalCardScores()));
-            }
-            case WINNER -> {
-                WinnerPlayerMessage winnerPlayerMessage = (WinnerPlayerMessage) message;
-                executorService.execute(() -> view.showWinner(winnerPlayerMessage.getWinner()));
+        if (message != null) {
+            switch (message.getMessageType()) {
+                case LOGIN_REPLY -> {
+                    LoginReplyMessage loginReplyMessage = (LoginReplyMessage) message;
+                    executorService.execute(() -> view.showLoginResult(loginReplyMessage.isNicknameAccepted(), nickname));
+                }
+                case NUM_PLAYERS_REQ -> {
+                    executorService.execute(view::askPlayersNumber);
+                }
+                case ERROR -> {
+                    ErrorMessage errorMessage = (ErrorMessage) message;
+                    executorService.execute(() -> view.showError(errorMessage.getMessageError()));
+                }
+                case GENERIC -> {
+                    GenericMessage genericMessage = (GenericMessage) message;
+                    executorService.execute(() -> view.showGenericMessage(genericMessage.getMessage()));
+                }
+                case INFO_GAME -> {
+                    InfoGameMessage infoGameMessage = (InfoGameMessage) message;
+                    executorService.execute(() -> view.showGameInfo(infoGameMessage.getPlayers(), infoGameMessage.getNum()));
+                }
+                case SHOW_COMMON -> {
+                    ShowCommonCardsMessage showCommonCardsMessage = (ShowCommonCardsMessage) message;
+                    executorService.execute(() -> view.showCommonCards(showCommonCardsMessage.getCommonGoalCards()));
+                }
+                case SHOW_PERSONAL -> {
+                    ShowPersonalCardMessage showPersonalCardMessage = (ShowPersonalCardMessage) message;
+                    executorService.execute(() -> view.showPersonalCard(showPersonalCardMessage.getPlayer()));
+                }
+                case SELECT_TILE_REQ -> {
+                    SelectTileRequestMessage selectTileRequestMessage = (SelectTileRequestMessage) message;
+                    executorService.execute(() -> view.askSelectTiles(selectTileRequestMessage.getBoard(), selectTileRequestMessage.getBookshelf()));
+                }
+                case SHOW_BOARD -> {
+                    ShowBoardMessage showBoardMessage = (ShowBoardMessage) message;
+                    executorService.execute(() -> view.showBoard(showBoardMessage.getBoard()));
+                }
+                case INSERT_TILE_REQ -> {
+                    InsertTilesRequestMessage insertTilesRequestMessage = (InsertTilesRequestMessage) message;
+                    executorService.execute(() -> view.askInsertTiles(insertTilesRequestMessage.getBookshelf(), insertTilesRequestMessage.getTiles()));
+                }
+                case SHOW_BOOKSHELF -> {
+                    ShowBookshelfMessage showBookshelfMessage = (ShowBookshelfMessage) message;
+                    executorService.execute(() -> view.showBookshelf(showBookshelfMessage.getPlayer()));
+                }
+                case ORDER_REQ -> {
+                    OrderRequestMessage orderRequestMessage = (OrderRequestMessage) message;
+                    executorService.execute(() -> view.askOrderTiles(orderRequestMessage.getTiles()));
+                }
+                case COMMON_GOAL_COMPLETE -> {
+                    CommonGoalCompleteMessage commonGoalComplete1Message = (CommonGoalCompleteMessage) message;
+                    executorService.execute(() -> view.showCommonGoalComplete(commonGoalComplete1Message.getCommonGoal(), commonGoalComplete1Message.getCommonGoalScore()));
+                }
+                case DISCONNECTION -> {
+                    DisconnectionMessage disconnectionMessage = (DisconnectionMessage) message;
+                    executorService.execute(() -> view.disconnection(disconnectionMessage.getNickname()));
+                }
+                case SCORES -> {
+                    ScoresMessage scoresMessage = (ScoresMessage) message;
+                    executorService.execute(() -> view.showScores(scoresMessage.getPlayerScore()));
+                }
+                case COMMON_SCORES -> {
+                    ShowCommonScoresMessage showCommonScoresMessage = (ShowCommonScoresMessage) message;
+                    executorService.execute(() -> view.showCommonScores(showCommonScoresMessage.getCommonGoalCardScores()));
+                }
+                case WINNER -> {
+                    WinnerPlayerMessage winnerPlayerMessage = (WinnerPlayerMessage) message;
+                    executorService.execute(() -> view.showWinner(winnerPlayerMessage.getWinner()));
+                }
             }
         }
     }
@@ -156,16 +158,22 @@ public class ClientController implements Observer, ViewObserver {
         try {
             if (type == 1)
                 this.client = new SocketClient(ip, Integer.parseInt(port));
-            else if (type == 2)
+            if (type == 2)
                 this.client = new RMIClient(ip, Integer.parseInt(port));
             this.client.addObserver(this);
-            this.client.readMessage();
-            this.client.sendPingMessage(true);
+            if (type == 1)
+                this.client.readMessage();
+            if (type == 1)
+                this.client.sendPingMessage(true);
             this.executorService.execute(this.view::askNickname);
         } catch (IOException e) {
             this.executorService.execute(() -> this.view.showLoginResult(false, null));
         } catch (NotBoundException e) {
             throw new RuntimeException(e);
+        }
+        if (type == 2) {
+            Thread clientThread = new Thread((Runnable) this.client, "rmiclient_");
+            clientThread.start();
         }
     }
 
