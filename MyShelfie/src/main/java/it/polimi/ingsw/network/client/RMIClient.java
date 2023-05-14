@@ -19,10 +19,11 @@ public class RMIClient extends Client implements Serializable {
 
     public RMIClient(String ip, int port) throws RemoteException, NotBoundException {
         this.registry = LocateRegistry.getRegistry(ip, port);
-        this.remote = (RMIInterface) this.registry.lookup("rmi_server");
+        this.remote = (RMIInterface) this.registry.lookup("SERVER");
     }
 
     public void sendMessage(Message message) {
+
         try {
             remote.onMessage(message, this);
         } catch (RemoteException e) {
@@ -31,6 +32,10 @@ public class RMIClient extends Client implements Serializable {
     }
 
     public void readMessage() {}
+
+    public void readMessage(Message message) {
+        notifyObserver(message);
+    }
 
     public void disconnect() {}
 

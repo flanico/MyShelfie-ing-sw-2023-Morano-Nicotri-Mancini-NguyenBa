@@ -17,7 +17,7 @@ public class RMIServer implements Runnable {
     @Override
     public void run() {
         try {
-            this.registry.bind("rmi_server", remote);
+            this.registry.bind("SERVER", remote);
             Server.LOGGER.info(() -> "The RMI server started");
         } catch (RemoteException | AlreadyBoundException e) {
             throw new RuntimeException(e);

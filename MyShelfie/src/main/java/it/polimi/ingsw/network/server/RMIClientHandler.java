@@ -18,7 +18,9 @@ public class RMIClientHandler implements ClientHandler {
      * sends a message from the server to the client
      * @param message to be sent
      */
-    public void sendMessageToClient(Message message) {}
+    public void sendMessageToClient(Message message) {
+        this.client.readMessage(message);
+    }
 
     /**
      * disconnect the client from the server
