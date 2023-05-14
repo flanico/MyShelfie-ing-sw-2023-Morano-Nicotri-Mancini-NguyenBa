@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1280.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.GameControllerScene">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.GameControllerScene">
    <children>
-      <ImageView fx:id="common_score_2" fitHeight="1288.0" fitWidth="1288.0" layoutX="-5.0" layoutY="-2.0" pickOnBounds="true">
+      <ImageView fx:id="background" fitHeight="908.0" fitWidth="1288.0" layoutX="-5.0" layoutY="-2.0" pickOnBounds="true">
        <Image url="@/misc/sfondo.jpg" />
       </ImageView>
       <ImageView fitHeight="380.0" fitWidth="400.0" layoutX="39.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
@@ -115,12 +115,107 @@
       <ImageView fx:id="shelf_51" fitHeight="46.0" fitWidth="46.0" layoutX="972.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_52" fitHeight="46.0" fitWidth="46.0" layoutX="1034.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_53" fitHeight="46.0" fitWidth="46.0" layoutX="1097.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shelf_54" fitHeight="46.0" fitWidth="46.0" layoutX="1159.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="okButton" layoutX="1043.0" layoutY="505.0" mnemonicParsing="false" onAction="#okPressed" text="OK" />
       <ImageView fx:id="common_prize_1" fitHeight="86.0" fitWidth="90.0" layoutX="531.0" layoutY="487.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="common_prize_2" fitHeight="86.0" fitWidth="90.0" layoutX="656.0" layoutY="487.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="common_score_1" fitHeight="49.0" fitWidth="48.0" layoutX="568.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" />
       <ImageView fx:id="common_score_2" fitHeight="49.0" fitWidth="48.0" layoutX="740.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="519.0" layoutY="875.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="bookshelf_c" fitHeight="282.0" fitWidth="271.0" layoutX="521.0" layoutY="700.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="central_text" layoutX="592.0" layoutY="687.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Central" />
+      <ImageView fx:id="shelf_00_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="718.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_10_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="756.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_20_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="793.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_30_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="831.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_40_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="868.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_50_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="906.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_01_c" fitHeight="32.0" fitWidth="32.0" layoutX="598.0" layoutY="718.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_02_c" fitHeight="32.0" fitWidth="32.0" layoutX="641.0" layoutY="718.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_03_c" fitHeight="32.0" fitWidth="32.0" layoutX="684.0" layoutY="718.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_04_c" fitHeight="32.0" fitWidth="32.0" layoutX="728.0" layoutY="718.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_11_c" fitHeight="32.0" fitWidth="32.0" layoutX="598.0" layoutY="756.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_12_c" fitHeight="32.0" fitWidth="32.0" layoutX="641.0" layoutY="756.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_13_c" fitHeight="32.0" fitWidth="32.0" layoutX="684.0" layoutY="756.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_14_c" fitHeight="32.0" fitWidth="32.0" layoutX="728.0" layoutY="756.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_21_c" fitHeight="32.0" fitWidth="32.0" layoutX="598.0" layoutY="793.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_22_c" fitHeight="32.0" fitWidth="32.0" layoutX="640.0" layoutY="793.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_23_c" fitHeight="32.0" fitWidth="32.0" layoutX="684.0" layoutY="793.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_24_c" fitHeight="32.0" fitWidth="32.0" layoutX="728.0" layoutY="793.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_31_c" fitHeight="32.0" fitWidth="32.0" layoutX="598.0" layoutY="831.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_32_c" fitHeight="32.0" fitWidth="32.0" layoutX="640.0" layoutY="831.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_33_c" fitHeight="32.0" fitWidth="32.0" layoutX="684.0" layoutY="831.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_34_c" fitHeight="32.0" fitWidth="32.0" layoutX="728.0" layoutY="831.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_41_c" fitHeight="32.0" fitWidth="32.0" layoutX="598.0" layoutY="868.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_42_c" fitHeight="32.0" fitWidth="32.0" layoutX="640.0" layoutY="868.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_43_c" fitHeight="32.0" fitWidth="32.0" layoutX="684.0" layoutY="868.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_44_c" fitHeight="32.0" fitWidth="32.0" layoutX="728.0" layoutY="868.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_51_c" fitHeight="32.0" fitWidth="32.0" layoutX="598.0" layoutY="906.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_52_c" fitHeight="32.0" fitWidth="32.0" layoutX="640.0" layoutY="906.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_53_c" fitHeight="32.0" fitWidth="32.0" layoutX="684.0" layoutY="906.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_54_c" fitHeight="32.0" fitWidth="32.0" layoutX="728.0" layoutY="906.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="bookshelf_s" fitHeight="282.0" fitWidth="271.0" layoutX="43.0" layoutY="699.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="sx_text" layoutX="244.0" layoutY="687.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sx" />
+      <ImageView fx:id="shelf_00_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="717.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_10_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_20_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="792.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_30_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="830.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_40_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="867.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_50_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_01_s" fitHeight="32.0" fitWidth="32.0" layoutX="120.0" layoutY="717.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_02_s" fitHeight="32.0" fitWidth="32.0" layoutX="162.0" layoutY="717.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_03_s" fitHeight="32.0" fitWidth="32.0" layoutX="206.0" layoutY="717.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_04_s" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="717.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_11_s" fitHeight="32.0" fitWidth="32.0" layoutX="120.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_12_s" fitHeight="32.0" fitWidth="32.0" layoutX="163.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_13_s" fitHeight="32.0" fitWidth="32.0" layoutX="206.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_14_s" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_21_s" fitHeight="32.0" fitWidth="32.0" layoutX="120.0" layoutY="792.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_22_s" fitHeight="32.0" fitWidth="32.0" layoutX="163.0" layoutY="792.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_23_s" fitHeight="32.0" fitWidth="32.0" layoutX="206.0" layoutY="792.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_24_s" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="792.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_31_s" fitHeight="32.0" fitWidth="32.0" layoutX="120.0" layoutY="830.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_32_s" fitHeight="32.0" fitWidth="32.0" layoutX="162.0" layoutY="830.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_33_s" fitHeight="32.0" fitWidth="32.0" layoutX="206.0" layoutY="830.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_34_s" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="830.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_41_s" fitHeight="32.0" fitWidth="32.0" layoutX="120.0" layoutY="867.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_42_s" fitHeight="32.0" fitWidth="32.0" layoutX="162.0" layoutY="867.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_43_s" fitHeight="32.0" fitWidth="32.0" layoutX="206.0" layoutY="867.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_44_s" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="867.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_51_s" fitHeight="32.0" fitWidth="32.0" layoutX="120.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_52_s" fitHeight="32.0" fitWidth="32.0" layoutX="162.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_53_s" fitHeight="32.0" fitWidth="32.0" layoutX="206.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_54_s" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="bookshelf_d" fitHeight="282.0" fitWidth="271.0" layoutX="985.0" layoutY="698.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="dx_text" layoutX="1114.0" layoutY="687.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dx" />
+      <ImageView fx:id="shelf_00_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="716.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_10_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="754.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_20_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="791.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_30_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="829.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_40_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="866.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_50_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_01_d" fitHeight="32.0" fitWidth="32.0" layoutX="1062.0" layoutY="716.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_02_d" fitHeight="32.0" fitWidth="32.0" layoutX="1105.0" layoutY="716.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_03_d" fitHeight="32.0" fitWidth="32.0" layoutX="1148.0" layoutY="716.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_04_d" fitHeight="32.0" fitWidth="32.0" layoutX="1192.0" layoutY="716.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_11_d" fitHeight="32.0" fitWidth="32.0" layoutX="1062.0" layoutY="754.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_12_d" fitHeight="32.0" fitWidth="32.0" layoutX="1105.0" layoutY="754.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_13_d" fitHeight="32.0" fitWidth="32.0" layoutX="1148.0" layoutY="754.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_14_d" fitHeight="32.0" fitWidth="32.0" layoutX="1192.0" layoutY="754.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_21_d" fitHeight="32.0" fitWidth="32.0" layoutX="1062.0" layoutY="791.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_22_d" fitHeight="32.0" fitWidth="32.0" layoutX="1104.0" layoutY="791.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_23_d" fitHeight="32.0" fitWidth="32.0" layoutX="1148.0" layoutY="791.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_24_d" fitHeight="32.0" fitWidth="32.0" layoutX="1192.0" layoutY="791.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_31_d" fitHeight="32.0" fitWidth="32.0" layoutX="1062.0" layoutY="829.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_32_d" fitHeight="32.0" fitWidth="32.0" layoutX="1104.0" layoutY="829.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_33_d" fitHeight="32.0" fitWidth="32.0" layoutX="1148.0" layoutY="829.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_34_d" fitHeight="32.0" fitWidth="32.0" layoutX="1192.0" layoutY="829.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_41_d" fitHeight="32.0" fitWidth="32.0" layoutX="1062.0" layoutY="866.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_42_d" fitHeight="32.0" fitWidth="32.0" layoutX="1104.0" layoutY="866.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_43_d" fitHeight="32.0" fitWidth="32.0" layoutX="1148.0" layoutY="866.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_44_d" fitHeight="32.0" fitWidth="32.0" layoutX="1192.0" layoutY="866.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_51_d" fitHeight="32.0" fitWidth="32.0" layoutX="1062.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_52_d" fitHeight="32.0" fitWidth="32.0" layoutX="1104.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_53_d" fitHeight="32.0" fitWidth="32.0" layoutX="1148.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shelf_54_d" fitHeight="32.0" fitWidth="32.0" layoutX="1192.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="owner_nickname_text" layoutX="43.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="player_nickname" />
    </children>
 </Pane>

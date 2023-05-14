@@ -216,6 +216,201 @@ public class GameControllerScene extends ViewObservable implements Controller {
     ImageView common_prize_1;
     @FXML
     ImageView common_prize_2;
+    @FXML
+    ImageView shelf_00_c;
+    @FXML
+    ImageView shelf_01_c;
+    @FXML
+    ImageView shelf_02_c;
+    @FXML
+    ImageView shelf_03_c;
+    @FXML
+    ImageView shelf_04_c;
+    @FXML
+    ImageView shelf_10_c;
+    @FXML
+    ImageView shelf_11_c;
+    @FXML
+    ImageView shelf_12_c;
+    @FXML
+    ImageView shelf_13_c;
+    @FXML
+    ImageView shelf_14_c;
+    @FXML
+    ImageView shelf_20_c;
+    @FXML
+    ImageView shelf_21_c;
+    @FXML
+    ImageView shelf_22_c;
+    @FXML
+    ImageView shelf_23_c;
+    @FXML
+    ImageView shelf_24_c;
+    @FXML
+    ImageView shelf_30_c;
+    @FXML
+    ImageView shelf_31_c;
+    @FXML
+    ImageView shelf_32_c;
+    @FXML
+    ImageView shelf_33_c;
+    @FXML
+    ImageView shelf_34_c;
+    @FXML
+    ImageView shelf_40_c;
+    @FXML
+    ImageView shelf_41_c;
+    @FXML
+    ImageView shelf_42_c;
+    @FXML
+    ImageView shelf_43_c;
+    @FXML
+    ImageView shelf_44_c;
+    @FXML
+    ImageView shelf_50_c;
+    @FXML
+    ImageView shelf_51_c;
+    @FXML
+    ImageView shelf_52_c;
+    @FXML
+    ImageView shelf_53_c;
+    @FXML
+    ImageView shelf_54_c;
+    @FXML
+    ImageView shelf_00_s;
+    @FXML
+    ImageView shelf_01_s;
+    @FXML
+    ImageView shelf_02_s;
+    @FXML
+    ImageView shelf_03_s;
+    @FXML
+    ImageView shelf_04_s;
+    @FXML
+    ImageView shelf_10_s;
+    @FXML
+    ImageView shelf_11_s;
+    @FXML
+    ImageView shelf_12_s;
+    @FXML
+    ImageView shelf_13_s;
+    @FXML
+    ImageView shelf_14_s;
+    @FXML
+    ImageView shelf_20_s;
+    @FXML
+    ImageView shelf_21_s;
+    @FXML
+    ImageView shelf_22_s;
+    @FXML
+    ImageView shelf_23_s;
+    @FXML
+    ImageView shelf_24_s;
+    @FXML
+    ImageView shelf_30_s;
+    @FXML
+    ImageView shelf_31_s;
+    @FXML
+    ImageView shelf_32_s;
+    @FXML
+    ImageView shelf_33_s;
+    @FXML
+    ImageView shelf_34_s;
+    @FXML
+    ImageView shelf_40_s;
+    @FXML
+    ImageView shelf_41_s;
+    @FXML
+    ImageView shelf_42_s;
+    @FXML
+    ImageView shelf_43_s;
+    @FXML
+    ImageView shelf_44_s;
+    @FXML
+    ImageView shelf_50_s;
+    @FXML
+    ImageView shelf_51_s;
+    @FXML
+    ImageView shelf_52_s;
+    @FXML
+    ImageView shelf_53_s;
+    @FXML
+    ImageView shelf_54_s;
+    @FXML
+    ImageView shelf_00_d;
+    @FXML
+    ImageView shelf_01_d;
+    @FXML
+    ImageView shelf_02_d;
+    @FXML
+    ImageView shelf_03_d;
+    @FXML
+    ImageView shelf_04_d;
+    @FXML
+    ImageView shelf_10_d;
+    @FXML
+    ImageView shelf_11_d;
+    @FXML
+    ImageView shelf_12_d;
+    @FXML
+    ImageView shelf_13_d;
+    @FXML
+    ImageView shelf_14_d;
+    @FXML
+    ImageView shelf_20_d;
+    @FXML
+    ImageView shelf_21_d;
+    @FXML
+    ImageView shelf_22_d;
+    @FXML
+    ImageView shelf_23_d;
+    @FXML
+    ImageView shelf_24_d;
+    @FXML
+    ImageView shelf_30_d;
+    @FXML
+    ImageView shelf_31_d;
+    @FXML
+    ImageView shelf_32_d;
+    @FXML
+    ImageView shelf_33_d;
+    @FXML
+    ImageView shelf_34_d;
+    @FXML
+    ImageView shelf_40_d;
+    @FXML
+    ImageView shelf_41_d;
+    @FXML
+    ImageView shelf_42_d;
+    @FXML
+    ImageView shelf_43_d;
+    @FXML
+    ImageView shelf_44_d;
+    @FXML
+    ImageView shelf_50_d;
+    @FXML
+    ImageView shelf_51_d;
+    @FXML
+    ImageView shelf_52_d;
+    @FXML
+    ImageView shelf_53_d;
+    @FXML
+    ImageView shelf_54_d;
+    @FXML
+    Text owner_nickname_text;
+    @FXML
+    ImageView bookshelf_s;
+    @FXML
+    ImageView bookshelf_c;
+    @FXML
+    ImageView bookshelf_d;
+    @FXML
+    Text sx_text;
+    @FXML
+    Text dx_text;
+    @FXML
+    Text central_text;
+
 
 
     public Board board;
@@ -442,8 +637,31 @@ public class GameControllerScene extends ViewObservable implements Controller {
         }
     }
     public void initShelf(){
-        System.out.println(numberPlayers + " player: " + playersList + " and the owner is " + owner);
+        while (playersList.get(0) != owner)
+            Collections.rotate(playersList, -1);
+        owner_nickname_text.setText(owner.getNickname());
+        switch (numberPlayers){
+            case 2 ->{
+                bookshelf_c.setImage(new Image("/boards/bookshelf_orth.png"));
+                central_text.setText(playersList.get(1).getNickname());
+            }
+            case 3 -> {
+                bookshelf_s.setImage(new Image("/boards/bookshelf_orth.png"));
+                bookshelf_d.setImage(new Image("/boards/bookshelf_orth.png"));
+                sx_text.setText(playersList.get(1).getNickname());
+                dx_text.setText(playersList.get(2).getNickname());
+            }
+            case 4 -> {
+                bookshelf_s.setImage(new Image("/boards/bookshelf_orth.png"));
+                bookshelf_d.setImage(new Image("/boards/bookshelf_orth.png"));
+                bookshelf_c.setImage(new Image("/boards/bookshelf_orth.png"));
+                sx_text.setText(playersList.get(1).getNickname());
+                central_text.setText(playersList.get(2).getNickname());
+                dx_text.setText(playersList.get(3).getNickname());
+            }
+        }
     }
+
     private void tryInsert(int col){
         ImageView img;
         for (int x=0; x<finalTiles.size(); x++){

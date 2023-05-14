@@ -225,7 +225,7 @@ public class Gui extends ViewObservable implements View {
         } catch (ClassCastException e) {
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1280d);
-            stage.setHeight(720d);
+            stage.setHeight(900d);
             SceneController.changeRootPane(observers, SceneController.getActiveScene(),"gamePanel.fxml");
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
             game_ctrl.setNumberPlayers(this.players_number);
