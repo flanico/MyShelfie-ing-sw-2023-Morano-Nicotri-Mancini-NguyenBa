@@ -1,6 +1,7 @@
 package it.polimi.ingsw.network.client;
 
 import it.polimi.ingsw.network.message.Message;
+import it.polimi.ingsw.network.message.serverSide.PingMessage;
 import it.polimi.ingsw.network.server.RMIClientHandler;
 import it.polimi.ingsw.network.server.RMIInterface;
 
@@ -10,6 +11,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class RMIClient extends Client implements Serializable {
     @Serial
@@ -17,13 +20,13 @@ public class RMIClient extends Client implements Serializable {
     private final Registry registry;
     private final RMIInterface remote;
 
+
     public RMIClient(String ip, int port) throws RemoteException, NotBoundException {
         this.registry = LocateRegistry.getRegistry(ip, port);
         this.remote = (RMIInterface) this.registry.lookup("SERVER");
     }
 
     public void sendMessage(Message message) {
-
         try {
             remote.onMessage(message, this);
         } catch (RemoteException e) {
@@ -34,7 +37,8 @@ public class RMIClient extends Client implements Serializable {
     public void readMessage() {}
 
     public void readMessage(Message message) {
-        notifyObserver(message);
+            System.out.println(message.toString());
+            notifyObserver(message);
     }
 
     public void disconnect() {}

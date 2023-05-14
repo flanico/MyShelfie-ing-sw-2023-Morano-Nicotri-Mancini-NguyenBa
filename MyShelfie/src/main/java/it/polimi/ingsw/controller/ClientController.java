@@ -74,6 +74,7 @@ public class ClientController implements Observer, ViewObserver {
      */
     @Override
     public void update(Message message) {
+        System.out.println("ciao");
         switch (message.getMessageType()) {
             case LOGIN_REPLY -> {
                 LoginReplyMessage loginReplyMessage = (LoginReplyMessage) message;

@@ -189,7 +189,6 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showLoginResult(boolean isNicknameAccepted, String nickname) {
-        out.println("ciaone");
         if(isNicknameAccepted) {
             out.println(ColorCli.YELLOW_BOLD + "Welcome "+ nickname +", you are connected to the game!" + ColorCli.RESET);
         }
