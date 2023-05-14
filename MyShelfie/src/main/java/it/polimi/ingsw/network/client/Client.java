@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * abstract class used to communicate with the server, every type of connection must implement this class
  */
-public abstract class Client extends Observable {
+public abstract class Client extends Observable{
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     /**
      * sends a message to the server
