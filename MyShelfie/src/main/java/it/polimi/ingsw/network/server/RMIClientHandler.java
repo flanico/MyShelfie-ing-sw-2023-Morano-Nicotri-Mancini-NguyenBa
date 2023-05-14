@@ -11,6 +11,7 @@ public class RMIClientHandler extends UnicastRemoteObject implements RMIInterfac
     private final Server server;
     private Client client = null;
     private Message currentMessage = null;
+    private boolean read = false;
 
     protected RMIClientHandler(Server server) throws RemoteException {
         this.server = server;
@@ -31,13 +32,18 @@ public class RMIClientHandler extends UnicastRemoteObject implements RMIInterfac
     }
 
     public Message takeMessage() throws RemoteException {
+        this.read = false;
         return this.currentMessage;
     }
 
     public void sendMessageToClient(Message message) {
         this.currentMessage = message;
-        this.client.readMessage();
+        this.read = true;
     }
 
     public void disconnectClient() {}
+
+    public Boolean isReadable() {
+        return this.read;
+    }
 }

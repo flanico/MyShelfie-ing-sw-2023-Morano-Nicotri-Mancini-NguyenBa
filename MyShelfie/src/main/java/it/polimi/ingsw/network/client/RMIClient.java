@@ -2,6 +2,9 @@ package it.polimi.ingsw.network.client;
 
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.network.message.clientSide.LoginRequestMessage;
+import it.polimi.ingsw.network.message.clientSide.TilesReplyMessage;
+import it.polimi.ingsw.network.message.serverSide.LoginReplyMessage;
 import it.polimi.ingsw.network.server.RMIInterface;
 import it.polimi.ingsw.network.server.Server;
 
@@ -17,7 +20,7 @@ public class RMIClient extends Client implements Serializable, Runnable {
     private final static long serialVersionUID = 3182670738296208821L;
     private final Registry registry;
     private final RMIInterface remote;
-    private Message currentMessage;
+    private Message currentMessage = new LoginReplyMessage(true);
     private boolean connected;
 
 
@@ -29,18 +32,23 @@ public class RMIClient extends Client implements Serializable, Runnable {
 
     @Override
     public void run () {
-        synchronized (this.currentMessage) {
-            while (!Thread.currentThread().isInterrupted()) {
-                this.readMessage();
+        while (!Thread.currentThread().isInterrupted()) {
+            try {
+                if (remote.isReadable())
+                    this.readMessage();
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
             }
         }
     }
 
     public void sendMessage(Message message) {
-        try {
-            remote.sendMessageToServer(message, this);
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+        if (connected == true) {
+            try {
+                remote.sendMessageToServer(message, this);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

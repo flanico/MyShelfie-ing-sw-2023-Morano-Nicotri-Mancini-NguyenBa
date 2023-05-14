@@ -10,4 +10,6 @@ public interface RMIInterface extends  Remote {
     void sendMessageToServer(Message message, Client client) throws RemoteException;
 
     Message takeMessage() throws RemoteException;
+
+    Boolean isReadable() throws RemoteException;
 }
