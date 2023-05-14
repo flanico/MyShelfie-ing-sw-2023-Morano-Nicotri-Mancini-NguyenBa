@@ -17,6 +17,7 @@ public class RMIClient extends Client implements Serializable, Runnable {
     private final static long serialVersionUID = 3182670738296208821L;
     private final Registry registry;
     private final RMIInterface remote;
+    private Message currentMessage;
     private boolean connected;
 
 
@@ -28,8 +29,10 @@ public class RMIClient extends Client implements Serializable, Runnable {
 
     @Override
     public void run () {
-        while (!Thread.currentThread().isInterrupted()) {
-            this.readMessage();
+        synchronized (this.currentMessage) {
+            while (!Thread.currentThread().isInterrupted()) {
+                this.readMessage();
+            }
         }
     }
 
@@ -39,22 +42,15 @@ public class RMIClient extends Client implements Serializable, Runnable {
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void readMessage() {
         try {
-            Client.LOGGER.info("AVUTO:"+ this.remote.takeMessage());
+            this.currentMessage = this.remote.takeMessage();
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
-
-        try {
-            notifyObserver(this.remote.takeMessage());
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-
+        notifyObserver(this.currentMessage);
     }
 
     public void disconnect() {
