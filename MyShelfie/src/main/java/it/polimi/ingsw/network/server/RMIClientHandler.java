@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class RMIClientHandler extends UnicastRemoteObject implements RMIInterface, ClientHandler {
     private final Server server;
     private Client client = null;
-    private Message message = null;
+    private Message currentMessage = null;
 
     protected RMIClientHandler(Server server) throws RemoteException {
         this.server = server;
@@ -31,11 +31,11 @@ public class RMIClientHandler extends UnicastRemoteObject implements RMIInterfac
     }
 
     public Message takeMessage() throws RemoteException {
-        return this.message;
+        return this.currentMessage;
     }
 
     public void sendMessageToClient(Message message) {
-        this.message = message;
+        this.currentMessage = message;
         this.client.readMessage();
     }
 
