@@ -5,7 +5,7 @@ package it.polimi.ingsw.model;
  * @author Stefano Morano
  */
 public class CommonEightSameType extends CommonGoalCard {
-    public final int number = 8;
+    public final int number = 9;
     /**
      *Eight tiles of the same type. There’s no restriction about the position of these tiles.
      * @param bookshelf RoundPlayer

@@ -13,6 +13,12 @@ import java.util.Map;
 import static it.polimi.ingsw.view.GUI.ErrorType.WRONG_CHOICE;
 
 public class Gui extends ViewObservable implements View {
+
+    private int players_number;
+    private List<Player> players_in_game;
+
+    private Player owner;
+
     @Override
     public void askNickname(){
         Platform.runLater(() -> SceneController.changeRootPane(observers, "NamePanel.fxml"));
@@ -43,12 +49,16 @@ public class Gui extends ViewObservable implements View {
             lobby_ctrl = (LobbyController) SceneController.getActiveController();
             lobby_ctrl.setNicknames(players);
             lobby_ctrl.setNum_players(numberPlayers);
+            this.players_in_game = players;
             Platform.runLater(lobby_ctrl::update);
         } catch (ClassCastException e) {
             lobby_ctrl = new LobbyController();
             lobby_ctrl.addAllObservers(observers);
             lobby_ctrl.setNicknames(players);
+            this.players_in_game=players;
             lobby_ctrl.setNum_players(numberPlayers);
+            this.players_number=numberPlayers;
+            this.owner=players.get(players.size()-1);
             LobbyController new_ctrl = lobby_ctrl;
             Platform.runLater(() -> SceneController.changeRootPane(new_ctrl, "lobbyPanel.fxml"));
         }
@@ -153,6 +163,7 @@ public class Gui extends ViewObservable implements View {
     public void showBookshelf(Player player){
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setShelf(player.getBookshelf());
+        game_ctrl.setCurrentPlayer(player);
         Platform.runLater(game_ctrl::updateBookShelf);
     }
 
@@ -217,6 +228,10 @@ public class Gui extends ViewObservable implements View {
             stage.setHeight(720d);
             SceneController.changeRootPane(observers, SceneController.getActiveScene(),"gamePanel.fxml");
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
+            game_ctrl.setNumberPlayers(this.players_number);
+            game_ctrl.setPlayersList(this.players_in_game);
+            game_ctrl.setOwner(this.owner);
+            Platform.runLater(game_ctrl::initShelf);
         }
         return game_ctrl;
     }

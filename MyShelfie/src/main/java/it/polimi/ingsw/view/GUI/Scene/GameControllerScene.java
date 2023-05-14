@@ -230,9 +230,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
     List<CommonGoalCardScore> commonGoalCardScores = new ArrayList<>();
     public CommonGoalCard win_card;
 
-
-
+    public Player currentPlayer;
     public int common_score;
+
+    public Player owner;
+    public List<Player> playersList;
+
+    public int numberPlayers;
 
     public void initialize(){
        turn_text.setText("");
@@ -288,8 +292,18 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public void setCommon_score(int common_score) {
         this.common_score = common_score;
     }
-
-
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+    public void setNumberPlayers(int numberPlayers) {
+        this.numberPlayers = numberPlayers;
+    }
+    public void setPlayersList(List<Player> playersList) {
+        this.playersList = playersList;
+    }
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
     public void activeSelection(){
         updateBoard();
         SelectedTiles.clear();
@@ -303,7 +317,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
         cancel_button.setDisable(false);
         confirm_button.setDisable(false);
     }
-
     public void updateScores(){
         String path = null;
         for (int i = 0; i < 2; i++) {
@@ -326,12 +339,12 @@ public class GameControllerScene extends ViewObservable implements Controller {
             Collections.swap(finalTiles,0,1);
         else if (finalTiles.size()==3)
             if (direction.equals("down"))
-                Collections.rotate(finalTiles, -1);
+                Collections.swap(finalTiles, 0, 1);
             else if (direction.equals("up"))
-                Collections.rotate(finalTiles, 1);
+                Collections.swap(finalTiles, 1, 2);
     }
     public void activeShelf(){
-        shelf_text.setText("Please select the column where to insert the tiles and decide their orders with the lateral arrows");
+        shelf_text.setText("Please select the column where to insert the tiles and decide their orders swapping them with the lateral arrows");
         column0.setDisable(false);
         column1.setDisable(false);
         column2.setDisable(false);
@@ -393,7 +406,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
                         setImage(ref_but, board.getMatrix()[x][y].getType());
             }
     }
-
     public void winCard(){
         String path = null;
         switch (common_score){
@@ -429,39 +441,24 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
+    public void initShelf(){
+        System.out.println(numberPlayers + " player: " + playersList + " and the owner is " + owner);
+    }
     private void tryInsert(int col){
         ImageView img;
-        int size = finalTiles.size();
-        switch (size) {
-            case 1 -> {
-                img = getShelf(free_cells(col) - 1, col);
-                setImage(img, finalTiles.get(0).getType());
-                img.setOpacity(0.5);
-            }
-            case 2 -> {
-                for (int x=0; x<2; x++) {
-                    img = getShelf(free_cells(col) - x - 3, col);
-                    setImage(img, finalTiles.get(x).getType());
-                    img.setOpacity(0.5);
-                }
-            }
-            case 3 -> {
-                for (int x=0; x<3; x++) {
-                    img = getShelf(free_cells(col) - x - 4, col);
-                    setImage(img, finalTiles.get(x).getType());
-                    img.setOpacity(0.5);
-                }
-            }
-            }
+        for (int x=0; x<finalTiles.size(); x++){
+            img = getShelf(free_cells(col) - 1 - x, col);
+            setImage(img, finalTiles.get(x).getType());
+            img.setOpacity(0.5);
         }
-
-    private int free_cells(int col){
-        int row = 0;
-        while (shelf.getMatrix()[row][col].getType().equals(TileType.NULL))
-            if (row==5)
-                return 6;
-            else row++;
-        return row;
+    }
+    private int free_cells(int col) {
+        int empty=0;
+        for (int i = 0; i < 6; i++) {
+            if (shelf.getMatrix()[i][col].getType().equals(TileType.NULL))
+                empty++;
+        }
+        return empty;
     }
     public void updatePersonalCard(){
         String path = null;

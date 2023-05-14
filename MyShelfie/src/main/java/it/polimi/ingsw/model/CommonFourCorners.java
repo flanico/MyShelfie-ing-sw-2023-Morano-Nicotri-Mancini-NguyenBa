@@ -5,7 +5,7 @@ package it.polimi.ingsw.model;
  * @author Stefano Morano
  */
 public class CommonFourCorners extends CommonGoalCard {
-    public final int number = 9;
+    public final int number = 8;
     /**
      *Four tiles of the same type in the four corners of the bookshelf.
      *@param bookshelf RoundPlayer
