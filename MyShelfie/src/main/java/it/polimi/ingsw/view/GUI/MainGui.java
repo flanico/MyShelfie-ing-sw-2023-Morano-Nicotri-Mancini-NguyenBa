@@ -31,7 +31,7 @@ public class MainGui extends Application {
 
         Scene scene = new Scene(rootLayout);
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.setResizable(false);
         //stage.setFullScreenExitHint("");
         //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setTitle("My Shelfie");
