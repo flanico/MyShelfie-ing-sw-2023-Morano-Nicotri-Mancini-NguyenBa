@@ -93,6 +93,7 @@ public class ClientController implements Observer, ViewObserver {
                     executorService.execute(() -> view.showGenericMessage(genericMessage.getMessage()));
                 }
                 case INFO_GAME -> {
+                    System.out.println("ciao");
                     InfoGameMessage infoGameMessage = (InfoGameMessage) message;
                     executorService.execute(() -> view.showGameInfo(infoGameMessage.getPlayers(), infoGameMessage.getNum()));
                 }
