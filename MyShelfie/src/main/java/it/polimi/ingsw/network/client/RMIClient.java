@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class RMIClient extends Client implements Runnable {
+public class RMIClient extends Client {
     private final Registry registry;
     private final RMIInterface remote;
     private Message currentMessage = new LoginReplyMessage(true);
@@ -23,18 +23,8 @@ public class RMIClient extends Client implements Runnable {
         this.connected = true;
     }
 
-    @Override
-    public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
-            synchronized (key) {
-                try {
-                    if (remote.isReadable())
-                        this.readMessage();
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+    public void listenToRMIServer (Message message) {
+
     }
 
     public void sendMessage(Message message) {
