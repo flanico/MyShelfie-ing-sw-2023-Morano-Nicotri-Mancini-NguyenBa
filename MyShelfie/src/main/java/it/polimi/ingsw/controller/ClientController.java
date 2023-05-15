@@ -7,7 +7,6 @@ import it.polimi.ingsw.network.client.SocketClient;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.clientSide.*;
 import it.polimi.ingsw.network.message.serverSide.*;
-import it.polimi.ingsw.network.server.RMIServer;
 import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.observer.ViewObserver;
 import it.polimi.ingsw.view.View;
@@ -22,7 +21,6 @@ import java.util.concurrent.Executors;
  * class used from client side, it is the mediator between the network and a generic view (cli or gui)
  */
 public class ClientController implements Observer, ViewObserver {
-    //abstract class both for cli and gui
     private final View view;
     private Client client;
     private String nickname;

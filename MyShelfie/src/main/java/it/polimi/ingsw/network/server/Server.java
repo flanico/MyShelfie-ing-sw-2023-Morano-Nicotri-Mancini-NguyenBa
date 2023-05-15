@@ -90,7 +90,7 @@ public class Server {
                     removeClient(nickname, false);
                     gameController.broadcastingDisconnection(nickname, false);
                     gameController.endGame();
-                    LOGGER.warning(() -> "Game is finished");
+                    LOGGER.warning(() -> "Game finishes in Login");
                 }
                 //If is in game phase continue for the disconnection resilience
                 else {

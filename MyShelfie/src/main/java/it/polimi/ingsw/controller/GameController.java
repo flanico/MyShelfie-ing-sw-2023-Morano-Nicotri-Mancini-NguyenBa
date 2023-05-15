@@ -228,7 +228,6 @@ public class GameController implements Serializable {
         }
         //If there are two or three player connected continue the game
         else {
-            System.out.println(turnController.getNicknames());
             broadcastingMessage("\nThe game round is: " + turnController.getNicknames());
             turnController.nextPlayer(index, true);
             Thread threadTurnManager = new Thread(() -> turnController.turnManager());
@@ -355,8 +354,6 @@ public class GameController implements Serializable {
         Map<String, Integer> playerScore = gameController.game.getPlayerScore();
         for (Player p : players) {
             p.setBookshelf(gameController.game.getPlayerByNickname(p.getNickname()).getBookshelf());
-        }
-        for (Player p : players) {
             p.setPersonalGoalCard(gameController.game.getPlayerByNickname(p.getNickname()).getPersonalGoalCard());
         }
 

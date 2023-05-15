@@ -345,9 +345,9 @@ public class Game extends Observable implements Serializable {
         this.playerScore = playerScore;
         for (Player p : players) {
             p.setBookshelf(getPlayerByNickname(p.getNickname()).getBookshelf());
-        }
-        for (Player p : players) {
             p.setPersonalGoalCard(getPlayerByNickname(p.getNickname()).getPersonalGoalCard());
+            p.setDoneFirstCommon(getPlayerByNickname(p.getNickname()).isDoneFirstCommon());
+            p.setDoneSecondCommon(getPlayerByNickname(p.getNickname()).isDoneSecondCommon());
         }
     }
 }

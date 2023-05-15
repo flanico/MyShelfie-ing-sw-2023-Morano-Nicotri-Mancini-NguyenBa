@@ -453,7 +453,7 @@ public class Cli extends ViewObservable implements View {
         int index = 1;
         for (int i = 0; i < 2; i++)
         {
-            out.println(ColorCli.BLUE_INFO + "\nSCORES OF THE COMMON GOAL CARDS " + index + ": " + ColorCli.RESET);
+            out.println(ColorCli.BLUE_INFO + "\nSCORES OF THE COMMON GOAL CARD " + index + ": " + ColorCli.RESET);
             for (Integer score : commonGoalCardScores.get(i).getStack()) {
                 out.print(ColorCli.BLUE_INFO + score + " " + ColorCli.RESET);
             }
