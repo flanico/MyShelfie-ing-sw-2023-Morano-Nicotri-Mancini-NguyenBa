@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.GameControllerScene">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.GameControllerScene">
    <children>
-      <ImageView fx:id="background" fitHeight="908.0" fitWidth="1288.0" layoutX="-5.0" layoutY="-2.0" pickOnBounds="true">
+      <ImageView fx:id="background" fitHeight="1008.0" fitWidth="1288.0" layoutX="-5.0" layoutY="-2.0" pickOnBounds="true">
        <Image url="@/misc/sfondo.jpg" />
       </ImageView>
       <ImageView fitHeight="380.0" fitWidth="400.0" layoutX="39.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
@@ -78,7 +78,7 @@
       <Button fx:id="column2" layoutX="1045.0" layoutY="26.0" mnemonicParsing="false" onAction="#column2Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
       <Button fx:id="column3" layoutX="1109.0" layoutY="26.0" mnemonicParsing="false" onAction="#column3Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
       <Button fx:id="column4" layoutX="1171.0" layoutY="26.0" mnemonicParsing="false" onAction="#column4Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
-      <Text fx:id="boardError" fill="RED" layoutX="43.0" layoutY="688.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MESSAGGIO DI ERRORE">
+      <Text fx:id="boardError" fill="RED" layoutX="189.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MESSAGGIO DI ERRORE">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
@@ -121,7 +121,7 @@
       <ImageView fx:id="common_score_1" fitHeight="49.0" fitWidth="48.0" layoutX="568.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" />
       <ImageView fx:id="common_score_2" fitHeight="49.0" fitWidth="48.0" layoutX="740.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" />
       <ImageView fx:id="bookshelf_c" fitHeight="282.0" fitWidth="271.0" layoutX="521.0" layoutY="700.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="central_text" layoutX="592.0" layoutY="687.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Central" />
+      <Text fx:id="central_text" layoutX="637.0" layoutY="684.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <ImageView fx:id="shelf_00_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="718.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_10_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="756.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_20_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="793.0" pickOnBounds="true" preserveRatio="true" />
@@ -153,7 +153,7 @@
       <ImageView fx:id="shelf_53_c" fitHeight="32.0" fitWidth="32.0" layoutX="684.0" layoutY="906.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_54_c" fitHeight="32.0" fitWidth="32.0" layoutX="728.0" layoutY="906.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bookshelf_s" fitHeight="282.0" fitWidth="271.0" layoutX="43.0" layoutY="699.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="sx_text" layoutX="244.0" layoutY="687.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sx" />
+      <Text fx:id="sx_text" layoutX="165.0" layoutY="685.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <ImageView fx:id="shelf_00_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="717.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_10_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_20_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="792.0" pickOnBounds="true" preserveRatio="true" />
@@ -185,7 +185,7 @@
       <ImageView fx:id="shelf_53_s" fitHeight="32.0" fitWidth="32.0" layoutX="206.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_54_s" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bookshelf_d" fitHeight="282.0" fitWidth="271.0" layoutX="985.0" layoutY="698.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="dx_text" layoutX="1114.0" layoutY="687.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dx" />
+      <Text fx:id="dx_text" layoutX="1114.0" layoutY="684.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <ImageView fx:id="shelf_00_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="716.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_10_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="754.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_20_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="791.0" pickOnBounds="true" preserveRatio="true" />
@@ -216,6 +216,6 @@
       <ImageView fx:id="shelf_52_d" fitHeight="32.0" fitWidth="32.0" layoutX="1104.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_53_d" fitHeight="32.0" fitWidth="32.0" layoutX="1148.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_54_d" fitHeight="32.0" fitWidth="32.0" layoutX="1192.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="owner_nickname_text" layoutX="43.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="player_nickname" />
+      <Text fx:id="owner_nickname_text" layoutX="43.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </Pane>

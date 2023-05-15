@@ -424,13 +424,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
     private int selected_column = -1;
     List<CommonGoalCardScore> commonGoalCardScores = new ArrayList<>();
     public CommonGoalCard win_card;
-
-    public Player currentPlayer;
+    public Player currentPlayer = null;
     public int common_score;
-
     public Player owner;
     public List<Player> playersList;
-
     public int numberPlayers;
 
     public void initialize(){
@@ -560,6 +557,8 @@ public class GameControllerScene extends ViewObservable implements Controller {
             downButton.setDisable(false);
         }
     }
+
+    //TODO verifica che non si possa inserire due volte la stessa carta
     private void insertSelected(ImageView button, int x, int y) {
         boardError.setText("");
         Image img = button.getImage();
@@ -584,9 +583,21 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
     public void updateBookShelf(){
         ImageView ref_shelf;
+        String selector = null;
+
+        if (currentPlayer.getNickname().equals(owner_nickname_text.getText()))
+                selector = "main";
+        else if (currentPlayer.getNickname().equals(sx_text.getText()))
+                selector = "sx";
+            else if (currentPlayer.getNickname().equals(dx_text.getText()))
+                selector = "dx";
+                else if (currentPlayer.getNickname().equals(central_text.getText()))
+                selector = "central";
+
         for (int x=0; x<6; x++){
             for (int y=0; y<5; y++){
-                ref_shelf = getShelf(x, y);
+                assert selector != null;
+                ref_shelf = getShelf(x, y, selector);
                 if (ref_shelf != null)
                     setImage(ref_shelf, shelf.getMatrix()[x][y].getType());
             }
@@ -636,8 +647,8 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
-    public void initShelf(){
-        while (playersList.get(0) != owner)
+    public void initGame(){
+        while (!playersList.get(0).getNickname().equals(owner.getNickname()))
             Collections.rotate(playersList, -1);
         owner_nickname_text.setText(owner.getNickname());
         switch (numberPlayers){
@@ -660,12 +671,12 @@ public class GameControllerScene extends ViewObservable implements Controller {
                 dx_text.setText(playersList.get(3).getNickname());
             }
         }
+        System.out.println(owner);
     }
-
     private void tryInsert(int col){
         ImageView img;
         for (int x=0; x<finalTiles.size(); x++){
-            img = getShelf(free_cells(col) - 1 - x, col);
+            img = getShelf(free_cells(col) - 1 - x, col, "main");
             setImage(img, finalTiles.get(x).getType());
             img.setOpacity(0.5);
         }
@@ -748,41 +759,143 @@ public class GameControllerScene extends ViewObservable implements Controller {
             default -> null;
         };
     }
-    private ImageView getShelf(int x, int y){
+    private ImageView getShelf(int x, int y, String shelf_name){
         String concat = x + "," + y;
-        return switch (concat){
-            case "0,0" -> shelf_00;
-            case "0,1" -> shelf_01;
-            case "0,2" -> shelf_02;
-            case "0,3" -> shelf_03;
-            case "0,4" -> shelf_04;
-            case "1,0" -> shelf_10;
-            case "1,1" -> shelf_11;
-            case "1,2" -> shelf_12;
-            case "1,3" -> shelf_13;
-            case "1,4" -> shelf_14;
-            case "2,0" -> shelf_20;
-            case "2,1" -> shelf_21;
-            case "2,2" -> shelf_22;
-            case "2,3" -> shelf_23;
-            case "2,4" -> shelf_24;
-            case "3,0" -> shelf_30;
-            case "3,1" -> shelf_31;
-            case "3,2" -> shelf_32;
-            case "3,3" -> shelf_33;
-            case "3,4" -> shelf_34;
-            case "4,0" -> shelf_40;
-            case "4,1" -> shelf_41;
-            case "4,2" -> shelf_42;
-            case "4,3" -> shelf_43;
-            case "4,4" -> shelf_44;
-            case "5,0" -> shelf_50;
-            case "5,1" -> shelf_51;
-            case "5,2" -> shelf_52;
-            case "5,3" -> shelf_53;
-            case "5,4" -> shelf_54;
+        return switch (shelf_name){
+            case "main" -> switch (concat) {
+                case "0,0" -> shelf_00;
+                case "0,1" -> shelf_01;
+                case "0,2" -> shelf_02;
+                case "0,3" -> shelf_03;
+                case "0,4" -> shelf_04;
+                case "1,0" -> shelf_10;
+                case "1,1" -> shelf_11;
+                case "1,2" -> shelf_12;
+                case "1,3" -> shelf_13;
+                case "1,4" -> shelf_14;
+                case "2,0" -> shelf_20;
+                case "2,1" -> shelf_21;
+                case "2,2" -> shelf_22;
+                case "2,3" -> shelf_23;
+                case "2,4" -> shelf_24;
+                case "3,0" -> shelf_30;
+                case "3,1" -> shelf_31;
+                case "3,2" -> shelf_32;
+                case "3,3" -> shelf_33;
+                case "3,4" -> shelf_34;
+                case "4,0" -> shelf_40;
+                case "4,1" -> shelf_41;
+                case "4,2" -> shelf_42;
+                case "4,3" -> shelf_43;
+                case "4,4" -> shelf_44;
+                case "5,0" -> shelf_50;
+                case "5,1" -> shelf_51;
+                case "5,2" -> shelf_52;
+                case "5,3" -> shelf_53;
+                case "5,4" -> shelf_54;
+                default -> null;
+            };
+            case "dx" -> switch (concat) {
+                case "0,0" -> shelf_00_d;
+                case "0,1" -> shelf_01_d;
+                case "0,2" -> shelf_02_d;
+                case "0,3" -> shelf_03_d;
+                case "0,4" -> shelf_04_d;
+                case "1,0" -> shelf_10_d;
+                case "1,1" -> shelf_11_d;
+                case "1,2" -> shelf_12_d;
+                case "1,3" -> shelf_13_d;
+                case "1,4" -> shelf_14_d;
+                case "2,0" -> shelf_20_d;
+                case "2,1" -> shelf_21_d;
+                case "2,2" -> shelf_22_d;
+                case "2,3" -> shelf_23_d;
+                case "2,4" -> shelf_24_d;
+                case "3,0" -> shelf_30_d;
+                case "3,1" -> shelf_31_d;
+                case "3,2" -> shelf_32_d;
+                case "3,3" -> shelf_33_d;
+                case "3,4" -> shelf_34_d;
+                case "4,0" -> shelf_40_d;
+                case "4,1" -> shelf_41_d;
+                case "4,2" -> shelf_42_d;
+                case "4,3" -> shelf_43_d;
+                case "4,4" -> shelf_44_d;
+                case "5,0" -> shelf_50_d;
+                case "5,1" -> shelf_51_d;
+                case "5,2" -> shelf_52_d;
+                case "5,3" -> shelf_53_d;
+                case "5,4" -> shelf_54_d;
+                default -> null;
+            };
+            case "sx" -> switch (concat) {
+                case "0,0" -> shelf_00_s;
+                case "0,1" -> shelf_01_s;
+                case "0,2" -> shelf_02_s;
+                case "0,3" -> shelf_03_s;
+                case "0,4" -> shelf_04_s;
+                case "1,0" -> shelf_10_s;
+                case "1,1" -> shelf_11_s;
+                case "1,2" -> shelf_12_s;
+                case "1,3" -> shelf_13_s;
+                case "1,4" -> shelf_14_s;
+                case "2,0" -> shelf_20_s;
+                case "2,1" -> shelf_21_s;
+                case "2,2" -> shelf_22_s;
+                case "2,3" -> shelf_23_s;
+                case "2,4" -> shelf_24_s;
+                case "3,0" -> shelf_30_s;
+                case "3,1" -> shelf_31_s;
+                case "3,2" -> shelf_32_s;
+                case "3,3" -> shelf_33_s;
+                case "3,4" -> shelf_34_s;
+                case "4,0" -> shelf_40_s;
+                case "4,1" -> shelf_41_s;
+                case "4,2" -> shelf_42_s;
+                case "4,3" -> shelf_43_s;
+                case "4,4" -> shelf_44_s;
+                case "5,0" -> shelf_50_s;
+                case "5,1" -> shelf_51_s;
+                case "5,2" -> shelf_52_s;
+                case "5,3" -> shelf_53_s;
+                case "5,4" -> shelf_54_s;
+                default -> null;
+            };
+            case "central" -> switch (concat) {
+                case "0,0" -> shelf_00_c;
+                case "0,1" -> shelf_01_c;
+                case "0,2" -> shelf_02_c;
+                case "0,3" -> shelf_03_c;
+                case "0,4" -> shelf_04_c;
+                case "1,0" -> shelf_10_c;
+                case "1,1" -> shelf_11_c;
+                case "1,2" -> shelf_12_c;
+                case "1,3" -> shelf_13_c;
+                case "1,4" -> shelf_14_c;
+                case "2,0" -> shelf_20_c;
+                case "2,1" -> shelf_21_c;
+                case "2,2" -> shelf_22_c;
+                case "2,3" -> shelf_23_c;
+                case "2,4" -> shelf_24_c;
+                case "3,0" -> shelf_30_c;
+                case "3,1" -> shelf_31_c;
+                case "3,2" -> shelf_32_c;
+                case "3,3" -> shelf_33_c;
+                case "3,4" -> shelf_34_c;
+                case "4,0" -> shelf_40_c;
+                case "4,1" -> shelf_41_c;
+                case "4,2" -> shelf_42_c;
+                case "4,3" -> shelf_43_c;
+                case "4,4" -> shelf_44_c;
+                case "5,0" -> shelf_50_c;
+                case "5,1" -> shelf_51_c;
+                case "5,2" -> shelf_52_c;
+                case "5,3" -> shelf_53_c;
+                case "5,4" -> shelf_54_c;
+                default -> null;
+            };
             default -> null;
-        };
+       };
     }
     private void setImage(ImageView ref_button, TileType type) {
         if (type.equals(TileType.NULL)){
@@ -1168,7 +1281,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
             selected_column=-1;
         }
     }
-
     public void sendFinalTiles() {
         notifyObserver(obs -> obs.sendOrderTiles(finalTiles));
     }
