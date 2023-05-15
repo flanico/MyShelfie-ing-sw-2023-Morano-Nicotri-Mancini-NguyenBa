@@ -4,7 +4,6 @@ import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.serverSide.LoginReplyMessage;
 import it.polimi.ingsw.network.server.RMIInterface;
 
-import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
