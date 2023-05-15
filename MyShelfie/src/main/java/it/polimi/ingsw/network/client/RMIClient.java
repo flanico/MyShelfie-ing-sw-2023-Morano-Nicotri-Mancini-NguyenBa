@@ -9,22 +9,31 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class RMIClient extends Client {
+public class RMIClient extends Client implements Runnable {
     private final Registry registry;
     private final RMIInterface remote;
     private Message currentMessage = new LoginReplyMessage(true);
     private boolean connected;
     private static Object key = new Object();
 
+    @Override
+    public void run () {
+        while (!Thread.currentThread().isInterrupted()) {
+            synchronized (key) {
+                try {
+                    if (remote.isReadable())
+                        this.readMessage();
+                } catch (RemoteException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
 
     public RMIClient(String ip, int port) throws RemoteException, NotBoundException {
         this.registry = LocateRegistry.getRegistry(ip, port);
         this.remote = (RMIInterface) this.registry.lookup("SERVER");
         this.connected = true;
-    }
-
-    public void listenToRMIServer (Message message) {
-
     }
 
     public void sendMessage(Message message) {
@@ -40,7 +49,7 @@ public class RMIClient extends Client {
     public void readMessage() {
         try {
             this.currentMessage = this.remote.takeMessage();
-            Client.LOGGER.info("message = "+ this.currentMessage);
+            Client.LOGGER.info("message = " + this.currentMessage);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

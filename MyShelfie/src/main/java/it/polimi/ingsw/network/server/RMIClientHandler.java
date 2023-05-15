@@ -6,12 +6,12 @@ import it.polimi.ingsw.network.message.MessageType;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RMIImplementation extends UnicastRemoteObject implements RMIInterface, ClientHandler {
+public class RMIClientHandler extends UnicastRemoteObject implements RMIInterface, ClientHandler {
     private final Server server;
     private Message currentMessage = null;
     private boolean read = false;
 
-    protected RMIImplementation(Server server) throws RemoteException {
+    protected RMIClientHandler(Server server) throws RemoteException {
         this.server = server;
     }
 
