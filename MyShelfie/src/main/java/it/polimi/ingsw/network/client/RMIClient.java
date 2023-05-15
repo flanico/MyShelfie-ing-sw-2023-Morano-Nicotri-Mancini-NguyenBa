@@ -51,6 +51,7 @@ public class RMIClient extends Client implements Runnable {
     public void readMessage() {
         try {
             this.currentMessage = this.remote.takeMessage();
+            Client.LOGGER.info("message = "+ this.currentMessage);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
