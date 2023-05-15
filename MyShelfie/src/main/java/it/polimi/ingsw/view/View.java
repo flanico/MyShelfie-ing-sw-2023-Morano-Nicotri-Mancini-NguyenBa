@@ -117,5 +117,5 @@ public interface View {
     /**
      * notify to all the client a player disconnection
      */
-    void disconnection(String nickname);
+    void disconnection(String nickname, boolean isStarted);
 }

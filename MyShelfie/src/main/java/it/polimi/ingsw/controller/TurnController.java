@@ -85,7 +85,7 @@ public class TurnController implements Serializable {
      * main method that handles all the phases of the turn
      */
     protected void turnManager() {
-        while (turnState != TurnState.END) {
+        while (turnState != TurnState.END && turnState != TurnState.DISCONNECT) {
             //If is the first turn, select the first player and give him the seat
             if (!isStarted) {
                 selectFirstPlayer();
@@ -159,31 +159,37 @@ public class TurnController implements Serializable {
                 //Total
                 endGame();
             }
-            //Save info in a file
+            //At the end of each turn save the new info in the file disk
             Persistence persistence = new Persistence(gameController);
             persistence.storeGame(gameController);
             //New turn player
-            if (turnState != TurnState.END) nextPlayer();
+            if (turnState != TurnState.END) nextPlayer(nicknames.indexOf(currentPlayer), false);
         }
     }
 
     /**
      * sets the next current player to play the turn
      */
-    private void nextPlayer() {
-        turnState = TurnState.SELECT;
-        int currentIndex = nicknames.indexOf(currentPlayer);
-        if(currentIndex + 1 < game.getCurrentNum()) {
-            currentIndex = currentIndex + 1;
+    protected void nextPlayer(int index, boolean isDisconnected) {
+        if (nicknames.size() == 1) {
+            turnState = TurnState.DISCONNECT;
         }
         else {
-            currentIndex = 0;
+            turnState = TurnState.SELECT;
+            if (isDisconnected) {
+                index--;
+            }
+            if (index + 1 < game.getCurrentNum()) {
+                index = index + 1;
+            } else {
+                index = 0;
+            }
+            currentPlayer = nicknames.get(index);
+            currentBookshelf = game.getPlayerByNickname(currentPlayer).getBookshelf();
+            notifyOtherPlayers(ColorCli.YELLOW_BOLD + "It's " + currentPlayer + " turn!" + ColorCli.RESET, currentPlayer);
+            VirtualView virtualView = virtualViewMap.get(currentPlayer);
+            virtualView.showGenericMessage(ColorCli.YELLOW_BOLD + "It's your turn " + currentPlayer + "!" + ColorCli.RESET);
         }
-        currentPlayer = nicknames.get(currentIndex);
-        currentBookshelf = game.getPlayerByNickname(currentPlayer).getBookshelf();
-        notifyOtherPlayers(ColorCli.YELLOW_BOLD + "It's "+ currentPlayer + " turn!" + ColorCli.RESET, currentPlayer);
-        VirtualView virtualView = virtualViewMap.get(currentPlayer);
-        virtualView.showGenericMessage(ColorCli.YELLOW_BOLD + "It's your turn " + currentPlayer + "!" + ColorCli.RESET);
     }
 
     /**
@@ -298,7 +304,7 @@ public class TurnController implements Serializable {
             if(score!= 0)
             {
                 if(game.getPlayerByNickname(currentPlayer).isDoneFirstCommon()){
-                    virtualView.showCommonGoalComplete( commonGoalCards.get(0), score);
+                    virtualView.showCommonGoalComplete(commonGoalCards.get(0), score);
                     notifyOtherPlayers(ColorCli.YELLOW_BOLD + currentPlayer+" has completed the common Goal Card 1!" + ColorCli.RESET, currentPlayer);
                     for (VirtualView v : virtualViewMap.values()) {
                         v.showCommonScores(game.getCommongoalcardscores());
@@ -396,6 +402,14 @@ public class TurnController implements Serializable {
 
     protected void setGame(Game game) {
         this.game = game;
+    }
+
+    protected List<String> getNicknames() {
+        return nicknames;
+    }
+
+    protected Map<String, VirtualView> getVirtualViewMap() {
+        return virtualViewMap;
     }
 
     /**

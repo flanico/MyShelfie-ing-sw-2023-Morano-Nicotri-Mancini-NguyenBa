@@ -214,7 +214,7 @@ public class Gui extends ViewObservable implements View {
      * notify to all the client a player disconnection
      */
     @Override
-    public void disconnection(String nickname){
+    public void disconnection(String nickname, boolean isStarted){
 
     }
 

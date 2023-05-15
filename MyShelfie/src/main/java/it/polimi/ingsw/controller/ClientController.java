@@ -130,7 +130,7 @@ public class ClientController implements Observer, ViewObserver {
                 }
                 case DISCONNECTION -> {
                     DisconnectionMessage disconnectionMessage = (DisconnectionMessage) message;
-                    executorService.execute(() -> view.disconnection(disconnectionMessage.getNickname()));
+                    executorService.execute(() -> view.disconnection(disconnectionMessage.getNickname(), disconnectionMessage.isStarted()));
                 }
                 case SCORES -> {
                     ScoresMessage scoresMessage = (ScoresMessage) message;

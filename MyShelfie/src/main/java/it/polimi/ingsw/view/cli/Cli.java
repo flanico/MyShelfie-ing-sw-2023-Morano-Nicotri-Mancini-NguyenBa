@@ -241,7 +241,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showPersonalCard(Player player) {
-        out.println(ColorCli.BLUE_INFO + "\nYOU'RE PERSONAL GOAL CARD IS: " + ColorCli.RESET);
+        out.println(ColorCli.BLUE_INFO + "\nPERSONAL GOAL CARD: " + ColorCli.RESET);
         PersonalGoalCard personalGoalCard = player.getPersonalGoalCard();
 
         out.print("   ");
@@ -453,7 +453,7 @@ public class Cli extends ViewObservable implements View {
         int index = 1;
         for (int i = 0; i < 2; i++)
         {
-            out.println(ColorCli.BLUE_INFO + "\nScores of the Common Goal Card " + index + ": " + ColorCli.RESET);
+            out.println(ColorCli.BLUE_INFO + "\nSCORES OF THE COMMON GOAL CARDS " + index + ": " + ColorCli.RESET);
             for (Integer score : commonGoalCardScores.get(i).getStack()) {
                 out.print(ColorCli.BLUE_INFO + score + " " + ColorCli.RESET);
             }
@@ -468,9 +468,12 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void disconnection(String nickname) {
-        out.print(nickname + "has been disconnecting from the game");
-        System.exit(1);
+    public void disconnection(String nickname, boolean isStarted) {
+        out.print("\n" +  nickname + " has been disconnecting from the game!");
+        if(!isStarted) {
+            out.println("\nGame ended...");
+            System.exit(1);
+        }
     }
 
     @Override
