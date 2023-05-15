@@ -22,9 +22,10 @@ public class GameController implements Serializable {
     private Game game;
     private GameState gameState;
     private transient Map<String, VirtualView> virtualViewMap;
-    private final List<String> nicknames;
+    private final List<String> nicknames; //All nicknames also disconnected players
     private TurnController turnController;
     private InputController inputController;
+    private transient Timer timer;
     private static final String STR_INVALID_STATE = "Invalid game state";
 
     /**
@@ -128,6 +129,20 @@ public class GameController implements Serializable {
     }
 
     /**
+     * checks the nickname of the reconnected client through the InputController
+     * @param nickname the nickname to be checked of reconnected client
+     * @param view the view of the reconnected player who is logging in
+     * @return true is the nickname is valid, false otherwise
+     */
+    public boolean checkLoginNicknameReconnect(String nickname, View view) {
+        return inputController.checkReconnectNickname(nickname, view);
+    }
+
+    public List<String> getNicknames() {
+        return nicknames;
+    }
+
+    /**
      * handles the login to the game when a new player joins to the game
      * if he's the first player it asks the max number of players
      * @param nickname of the client
@@ -136,14 +151,14 @@ public class GameController implements Serializable {
     public void loginHandler(String nickname, VirtualView virtualView) {
         //If the player is the first to connect he must choose the max number of players
         if(virtualViewMap.isEmpty()) {
-            addVirtualViewMap(nickname, virtualView);
+            addVirtualView(nickname, virtualView);
             nicknames.add(nickname);
             virtualView.showLoginResult(true, "SERVER");
             virtualView.askPlayersNumber();
         }
         //If the player is not the first player to connect to the game, he joins in the game
-        else if (virtualViewMap.size() < game.getNum()) {
-            addVirtualViewMap(nickname, virtualView);
+        else if (virtualViewMap.size() < game.getNum() && !isGameStarted()) {
+            addVirtualView(nickname, virtualView);
             game.addPlayer(nickname);
             nicknames.add(nickname);
             virtualView.showLoginResult(true, "SERVER");
@@ -152,17 +167,32 @@ public class GameController implements Serializable {
             if(game.getCurrentNum() == game.getNum()) {
                 Persistence persistence = new Persistence(this);
                 GameController gameControllerPrevious = persistence.restoreGame();
-                //If the game is restoring
+                //Game restoring: checks if the nicknames of the players are the same of the previous game
                 if(gameControllerPrevious != null && new HashSet<>(gameControllerPrevious.nicknames).containsAll(game.getAllPlayers())) {
                     broadcastingMessage("\nServer went down, the game is restoring!");
                     replace(gameControllerPrevious);
                 }
-                //If is a new game
+                //New game: starts a new game
                 else {
                     gameState = GameState.IN_GAME;
-                    startGame(game.getNum(), nicknames);
+                    startGame();
                 }
             }
+        }
+        //If the player is reconnecting to the game
+        else if (virtualViewMap.size() < game.getNum() && isGameStarted()) {
+            addVirtualView(nickname, virtualView);
+            int index = nicknames.indexOf(nickname);
+            turnController.getNicknames().add(index, nickname);
+            game.addReconnectedPlayer(nickname);
+            broadcastingMessage("\n" + nickname + " is reconnected to the game!");
+            onDisconnectGame(true);
+            //Set the previous data of the disconnected player (personal, bookshelf, score, done common)
+            Persistence persistence = new Persistence(this);
+            GameController gameControllerPrevious = persistence.restoreGame();
+            replacePlayer(gameControllerPrevious, nickname);
+            Thread threadTurnManager = new Thread(() -> turnController.turnManager());
+            threadTurnManager.start();
         }
     }
 
@@ -171,7 +201,7 @@ public class GameController implements Serializable {
      * @param nickname of the player to add
      * @param virtualView of the player to add
      */
-    private void addVirtualViewMap(String nickname, VirtualView virtualView) {
+    private void addVirtualView(String nickname, VirtualView virtualView) {
         virtualViewMap.put(nickname, virtualView);
         game.addObserver(virtualView);
     }
@@ -180,21 +210,36 @@ public class GameController implements Serializable {
      * remove a player virtual view from the controller
      * @param nickname of the player to remove
      */
-    public void removeVirtualView(String nickname, boolean notifyEnabled) {
+    public void removeVirtualView(String nickname) {
         VirtualView virtualView = virtualViewMap.remove(nickname);
-        game.removeObserver(virtualView);
-        game.removePlayerByNickname(nickname, notifyEnabled);
         //Shows the nickname of the disconnected player
-        for (VirtualView v : virtualViewMap.values()) {
-            v.showGenericMessage(nickname + " has been disconnected from the game");
+        broadcastingDisconnection(nickname, true);
+        game.removeObserver(virtualView);
+        game.removePlayerByNickname(nickname);
+        int index = turnController.getNicknames().indexOf(nickname);
+        turnController.getNicknames().remove(nickname);
+        turnController.getVirtualViewMap().remove(nickname);
+        //If there is only one player connected stops the game
+        if (virtualViewMap.size() == 1) {
+            VirtualView vv = virtualViewMap.entrySet().iterator().next().getValue();
+            vv.showGenericMessage("\nYou're the only player connected... If no one try to reconnect, game will finish. " +
+                    "\nTimer of tot seconds starts now! If the timer expires you're are the winner");
+            onDisconnectGame(false);
+        }
+        //If there are two or three player connected continue the game
+        else {
+            broadcastingMessage("\nThe game round is: " + turnController.getNicknames());
+            turnController.nextPlayer(index, true);
+            Thread threadTurnManager = new Thread(() -> turnController.turnManager());
+            threadTurnManager.start();
         }
     }
 
     /**
      * starts of the game with the initialization of the settings
      */
-    private void startGame(int numPlayers, List<String> nicknames) {
-        game.initGame(numPlayers);
+    private void startGame() {
+        game.initGame(game.getNum());
         broadcastingMessage("\nGame is starting, all players are connected!");
         //Shows the two common goal cards selected for the match
         for (VirtualView v : virtualViewMap.values()) {
@@ -208,6 +253,9 @@ public class GameController implements Serializable {
                 vv.showPersonalCard(game.getPlayerByNickname(nick));
             }
         }
+        //At the beginning of the match save the new info in the file disk
+        Persistence persistence = new Persistence(this);
+        persistence.storeGame(this);
         //Shows the selected game round
         broadcastingMessage("\nThe game round is: " + nicknames);
         this.turnController = new TurnController(game, this, virtualViewMap);
@@ -216,11 +264,44 @@ public class GameController implements Serializable {
     }
 
     /**
+     * set a timer if only one player is in the game, or cancel the timer if someone reconnect to the game
+     * @param isReconnected true if someone is reconnected to the game, false otherwise
+     */
+    private synchronized void onDisconnectGame(boolean isReconnected) {
+        VirtualView vv = virtualViewMap.entrySet().iterator().next().getValue();
+        //If in the game there is only one player, a timer is setting
+        if (!isReconnected) {
+            timer = new Timer();
+            //If the timer expires, it ends the game with current player victory
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                        vv.showWinner(virtualViewMap.entrySet().iterator().next().getKey());
+                        endGame();
+                        System.exit(0);
+                    }
+            }, 30000); //30 seconds timer
+        }
+        //If someone reconnect to the game, the timer is cancelled
+        if (isReconnected && timer != null) {
+            timer.cancel();
+        }
+    }
+
+    /**
      * delete the file game of the finished current game at the end
      */
-    protected void endGame() {
-        Persistence persistence = new Persistence(this);
-        persistence.deleteGame();
+    public void endGame() {
+        if(isGameStarted()) {
+            Persistence persistence = new Persistence(this);
+            persistence.deleteGame();
+        }
+        //If is login phase, delete all settings
+        else {
+            nicknames.clear();
+            virtualViewMap.clear();
+            game.clear();
+        }
     }
 
     /**
@@ -231,6 +312,32 @@ public class GameController implements Serializable {
         for (VirtualView v : virtualViewMap.values()) {
             v.showGenericMessage(message);
         }
+    }
+
+    /**
+     * sends a message to all connected players to notify a disconnection of a player
+     * @param nickname of the disconnected player
+     * @param isStarted true if the game is already started, false otherwise
+     */
+    public void broadcastingDisconnection(String nickname, boolean isStarted){
+        for(VirtualView v : virtualViewMap.values()){
+            v.disconnection(nickname, isStarted);
+        }
+    }
+
+    /**
+     * replace the settings of a disconnected player
+     * @param gameController game controller of the game
+     * @param nickname of the reconnected player
+     */
+    private void replacePlayer(GameController gameController, String nickname) {
+        Player player = gameController.game.getPlayerByNickname(nickname);
+        Player player1 = game.getPlayerByNickname(nickname);
+        player1.setPersonalGoalCard(player.getPersonalGoalCard());
+        player1.setBookshelf(player.getBookshelf());
+        player1.setScore(player.getScore());
+        player1.setDoneFirstCommon(player.isDoneFirstCommon());
+        player1.setDoneSecondCommon(player.isDoneSecondCommon());
     }
 
     /**
@@ -246,11 +353,11 @@ public class GameController implements Serializable {
         Stack<Tile> bag = gameController.game.getBag();
         Map<String, Integer> playerScore = gameController.game.getPlayerScore();
         for (Player p : players) {
+            p.setBookshelf(gameController.game.getPlayerByNickname(p.getNickname()).getBookshelf());
             p.setPersonalGoalCard(gameController.game.getPlayerByNickname(p.getNickname()).getPersonalGoalCard());
         }
 
         this.game.replaceGame(players, num, board, commonGoalCards, commonGoalCardScores, bag, playerScore);
-
         this.gameState = gameController.gameState;
         this.turnController = gameController.turnController;
         this.turnController.setGame(this.game);

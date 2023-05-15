@@ -37,21 +37,36 @@ public class Server {
                 gameController.loginHandler(nickname, virtualView);
             }
         }
+        //Case of reconnected client
+        else if (gameController.isGameStarted() && gameController.getGame().getPlayers().size() < gameController.getGame().getNum()) {
+            if(gameController.checkLoginNicknameReconnect(nickname, virtualView)) {
+                clientHandlerMap.put(nickname, clientHandler);
+                gameController.loginHandler(nickname, virtualView);
+                LOGGER.info(() -> "A player is reconnected to the game");
+            }
+        }
+        //Case of already started game to review!
         else {
             virtualView.showLoginResult(false, null);
             LOGGER.info(() -> "Game is already started");
-                clientHandler.disconnectClient();
+            clientHandler.disconnectClient();
         }
     }
 
     /**
      * removes a client given his nickname
      * @param nickname of the client to remove
+     * @param isStarted true if the game is already started, false otherwise
      */
-    public void removeClient(String nickname, boolean notifyEnabled) {
-        clientHandlerMap.remove(nickname);
-        gameController.removeVirtualView(nickname, true);
-        LOGGER.info(() -> "Removed " + nickname + " from the list");
+    public void removeClient(String nickname, boolean isStarted) {
+        if(isStarted) {
+            clientHandlerMap.remove(nickname);
+            gameController.removeVirtualView(nickname);
+            LOGGER.info(() -> "Removed " + nickname + " from the list of connected players");
+        }
+        else {
+            clientHandlerMap.clear();
+        }
     }
 
     /**
@@ -62,21 +77,28 @@ public class Server {
         gameController.onMessageReceived(message);
     }
 
+    /**
+     * disconnects a client from the server
+     * @param clientHandler the client handler to be disconnected
+     */
     public void onDisconnect(ClientHandler clientHandler) {
         synchronized (lock) {
             String nickname = getNicknameFromClientHandler(clientHandler);
             if(nickname != null) {
-                boolean isGameStarted = gameController.isGameStarted();
-                removeClient(nickname, !isGameStarted);
-
-                if(isGameStarted) {
-                    //sends a disconnection message
-                    //Rimuovo il client disconesso
-                    //continuo il gioco passando al giocatore successivo
+                //If is login phase ends the game
+                if(!gameController.isGameStarted()) {
+                    removeClient(nickname, false);
+                    gameController.broadcastingDisconnection(nickname, false);
+                    gameController.endGame();
+                    LOGGER.warning(() -> "Game finishes in Login");
+                }
+                //If is in game phase continue for the disconnection resilience
+                else {
+                    removeClient(nickname, true);
                     clientHandlerMap.remove(nickname);
+                    LOGGER.info(() -> "Game continue for resilience");
                 }
             }
-
         }
     }
 

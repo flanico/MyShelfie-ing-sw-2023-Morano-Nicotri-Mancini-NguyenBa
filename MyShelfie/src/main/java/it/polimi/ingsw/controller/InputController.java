@@ -50,6 +50,20 @@ public class InputController implements Serializable {
     }
 
     /**
+     * checks if a nickname is valid or not in the reconnection
+     * @param nickname of the reconnected client
+     * @param view the view for the reconnected client
+     * @return true if the nickname is valid, false otherwise
+     */
+    protected boolean checkReconnectNickname(String nickname, View view){
+        if(nickname.isEmpty() || game.isNicknameTaken(nickname) || !gameController.getNicknames().contains(nickname)) {
+            view.showLoginResult(false, nickname);
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * checks the player number reply message
      * @param message the message from the client
      * @return true if it's a valid number, false otherwise

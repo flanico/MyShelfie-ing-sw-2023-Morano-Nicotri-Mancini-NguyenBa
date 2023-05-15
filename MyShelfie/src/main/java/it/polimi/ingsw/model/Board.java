@@ -229,6 +229,10 @@ public class Board implements Serializable {
         }
     }
 
+    /**
+     * this method is used to return the number of consecutive tiles that can be removed from the board
+     * @return max number of tiles that can be removed from the board
+     */
     public int maxTilesBoard(){
         int max = 1;
         List<Tile> tiles = new ArrayList<>();

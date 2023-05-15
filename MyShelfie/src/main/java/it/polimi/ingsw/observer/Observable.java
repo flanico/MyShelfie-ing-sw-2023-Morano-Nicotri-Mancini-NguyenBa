@@ -27,6 +27,13 @@ public class Observable {
     }
 
     /**
+     * remove all observers from the list of observers
+     */
+    public void removeAllObservers() {
+        observers.clear();
+    }
+
+    /**
      * notify all observer in the list of observers
      * @param message of updating
      */

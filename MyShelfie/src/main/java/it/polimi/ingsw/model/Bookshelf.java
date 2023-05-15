@@ -183,6 +183,11 @@ public class Bookshelf implements Serializable {
         return num <= x + 1;
     }
 
+    /**
+     * this method is used to return the number of empty space max in the same column
+     * @return int to represent the number of empty space max in the same column
+     */
+
     public int maxTilesBookshelf(){
         int count = 0;
         int max = 0;

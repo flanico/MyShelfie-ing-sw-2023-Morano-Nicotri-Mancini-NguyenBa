@@ -1,6 +1,5 @@
 package it.polimi.ingsw.network.server;
 
-import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
 
@@ -9,7 +8,6 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class RMIClientHandler extends UnicastRemoteObject implements RMIInterface, ClientHandler {
     private final Server server;
-    private Client client = null;
     private Message currentMessage = null;
     private boolean read = false;
 
@@ -17,15 +15,14 @@ public class RMIClientHandler extends UnicastRemoteObject implements RMIInterfac
         this.server = server;
     }
 
-    public void sendMessageToServer(Message message, Client client) throws RemoteException {
-        this.client = client;
+    public void sendMessageToServer(Message message) throws RemoteException {
         if (message != null && message.getMessageType() != MessageType.PING) {
             if (message.getMessageType() == MessageType.LOGIN_REQ) {
-                Server.LOGGER.info(() -> "Message LoginRequest received from " + message.getNickname() + ": " + message);
+                Server.LOGGER.info(() -> "Message LoginRequest from " + message.getNickname() + ": " + message);
                 this.server.addClient(message.getNickname(), this);
             }
             else {
-                Server.LOGGER.info(() -> "Message received from: " + message.getNickname() + ": " + message);
+                Server.LOGGER.info(() -> "Message from: " + message.getNickname() + ": " + message);
                 this.server.forwardsMessage(message);
             }
         }
@@ -37,6 +34,7 @@ public class RMIClientHandler extends UnicastRemoteObject implements RMIInterfac
     }
 
     public void sendMessageToClient(Message message) {
+        Server.LOGGER.info(() -> "Message to " + message.getNickname() + ": " + message);
         this.currentMessage = message;
         this.read = true;
     }

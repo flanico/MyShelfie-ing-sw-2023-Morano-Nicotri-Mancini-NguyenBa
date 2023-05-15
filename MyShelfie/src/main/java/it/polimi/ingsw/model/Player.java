@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Player implements Serializable {
     @Serial
     private static final long serialVersionUID = -7872881646495796556L;
-    private final Bookshelf bookshelf;
+    private Bookshelf bookshelf;
     private int score;
     private final String nickname;
     private PersonalGoalCard personalGoalCard;
@@ -32,6 +32,10 @@ public class Player implements Serializable {
 
     public int getScore() {
         return score;
+    }
+
+    public void setBookshelf(Bookshelf bookshelf) {
+        this.bookshelf = bookshelf;
     }
 
     public void setScore(int score) {

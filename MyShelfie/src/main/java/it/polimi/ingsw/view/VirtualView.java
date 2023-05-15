@@ -40,6 +40,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void showGameInfo(List<Player> players, int num) {
+        System.out.println("eccoci");
         clientHandler.sendMessageToClient(new InfoGameMessage(players, num));
     }
 
@@ -108,10 +109,9 @@ public class VirtualView implements View, Observer {
         clientHandler.sendMessageToClient(new CommonGoalCompleteMessage(commonGoalCard, score));
     }
 
-    //TODO : disconnection part uncompleted in cli-view-virtualview-clientcontroller-turncontroller
     @Override
-    public void disconnection(String nickname) {
-        clientHandler.sendMessageToClient(new DisconnectionMessage(nickname));
+    public void disconnection(String nickname, boolean isStarted) {
+        clientHandler.sendMessageToClient(new DisconnectionMessage(nickname, isStarted));
     }
 
     @Override

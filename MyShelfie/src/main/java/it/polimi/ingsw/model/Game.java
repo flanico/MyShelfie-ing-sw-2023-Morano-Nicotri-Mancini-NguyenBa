@@ -95,6 +95,13 @@ public class Game extends Observable implements Serializable {
         notifyObserver(new InfoGameMessage(players, num));
     }
 
+
+    public void addReconnectedPlayer(String nickname) {
+        Player player = new Player(nickname);
+        players.add(player);
+        notifyObserver(new InfoGameMessage(players, num));
+    }
+
     /**
      * returns a player given his nickname
      * @param nickname of player to be found
@@ -121,18 +128,11 @@ public class Game extends Observable implements Serializable {
 
     /**
      * removes a player from the game
-     * notifies all the views if the notifyEnabled is true
      * @param nickname of the player to remove from the game
-     * @param notifyEnabled set to true to enable a lobby disconnection message, false otherwise
-     * @return true if the player is removed, false otherwise
      */
-    public boolean removePlayerByNickname(String nickname, boolean notifyEnabled) {
-        boolean result = players.remove(getPlayerByNickname(nickname));
-
-        if (notifyEnabled) {
-            notifyObserver(new InfoGameMessage(players, num));
-        }
-        return result;
+    public void removePlayerByNickname(String nickname) {
+        players.remove(getPlayerByNickname(nickname));
+        notifyObserver(new InfoGameMessage(players, players.size()));
     }
 
 
@@ -314,6 +314,18 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
+     * clear all the game settings
+     */
+    public void clear() {
+        removeAllObservers();
+        players.clear();
+        playerScore.clear();
+        personalgoalcards.clear();
+        commongoalcardscores.clear();
+        commongoalcards.clear();
+    }
+
+    /**
      * replace the game for the implementation of the persistence
      * @param players
      * @param num
@@ -332,7 +344,10 @@ public class Game extends Observable implements Serializable {
         this.bag = bag;
         this.playerScore = playerScore;
         for (Player p : players) {
+            p.setBookshelf(getPlayerByNickname(p.getNickname()).getBookshelf());
             p.setPersonalGoalCard(getPlayerByNickname(p.getNickname()).getPersonalGoalCard());
+            p.setDoneFirstCommon(getPlayerByNickname(p.getNickname()).isDoneFirstCommon());
+            p.setDoneSecondCommon(getPlayerByNickname(p.getNickname()).isDoneSecondCommon());
         }
     }
 }
