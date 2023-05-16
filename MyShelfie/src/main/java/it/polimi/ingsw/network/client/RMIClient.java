@@ -1,7 +1,6 @@
 package it.polimi.ingsw.network.client;
 
 import it.polimi.ingsw.network.message.Message;
-import it.polimi.ingsw.network.message.serverSide.LoginReplyMessage;
 import it.polimi.ingsw.network.server.RMIInterface;
 
 import java.rmi.NotBoundException;
@@ -12,23 +11,8 @@ import java.rmi.registry.Registry;
 public class RMIClient extends Client implements Runnable {
     private final Registry registry;
     private final RMIInterface remote;
-    private Message currentMessage = new LoginReplyMessage(true);
+    private Message currentMessage;
     private boolean connected;
-    private static Object key = new Object();
-
-    @Override
-    public void run () {
-        while (!Thread.currentThread().isInterrupted()) {
-            synchronized (key) {
-                try {
-                    if (remote.isReadable())
-                        this.readMessage();
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-    }
 
     public RMIClient(String ip, int port) throws RemoteException, NotBoundException {
         this.registry = LocateRegistry.getRegistry(ip, port);
@@ -37,9 +21,22 @@ public class RMIClient extends Client implements Runnable {
     }
 
     public void sendMessage(Message message) {
-        if (connected == true) {
+        if (connected) {
             try {
+                Client.LOGGER.info("Sent = " + message);
                 remote.sendMessageToServer(message);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    @Override
+    public void run () {
+        while (!Thread.currentThread().isInterrupted()) {
+            try {
+                if (remote.isReadable())
+                    this.readMessage();
             } catch (RemoteException e) {
                 throw new RuntimeException(e);
             }
@@ -48,8 +45,8 @@ public class RMIClient extends Client implements Runnable {
 
     public void readMessage() {
         try {
-            this.currentMessage = this.remote.takeMessage();
-            Client.LOGGER.info("message = " + this.currentMessage);
+            this.currentMessage = this.remote.getCurrentMessage();
+            Client.LOGGER.info("Recived = " + this.currentMessage);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

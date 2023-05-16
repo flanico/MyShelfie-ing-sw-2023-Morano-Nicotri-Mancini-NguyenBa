@@ -28,20 +28,20 @@ public class RMIClientHandler extends UnicastRemoteObject implements RMIInterfac
         }
     }
 
-    public Message takeMessage() throws RemoteException {
-        this.read = false;
-        return this.currentMessage;
-    }
-
     public void sendMessageToClient(Message message) {
         Server.LOGGER.info(() -> "Message to " + message.getNickname() + ": " + message);
         this.currentMessage = message;
         this.read = true;
     }
 
-    public void disconnectClient() {}
+    public Message getCurrentMessage() throws RemoteException {
+        this.read = false;
+        return this.currentMessage;
+    }
 
     public Boolean isReadable() {
         return this.read;
     }
+
+    public void disconnectClient() {}
 }

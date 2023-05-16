@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 public interface RMIInterface extends  Remote {
     void sendMessageToServer(Message message) throws RemoteException;
 
-    Message takeMessage() throws RemoteException;
+    Message getCurrentMessage() throws RemoteException;
 
     Boolean isReadable() throws RemoteException;
 }
