@@ -67,25 +67,58 @@
       <ImageView fx:id="button_50" fitHeight="38.0" fitWidth="40.0" layoutX="54.0" layoutY="268.0" onMouseClicked="#button_50_click" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="common_goal1" fitHeight="109.0" fitWidth="167.0" layoutX="471.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="common_goal2" fitHeight="109.0" fitWidth="167.0" layoutX="643.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="turn_text" layoutX="39.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="It's your turn! Select your tiles:" />
+      <Text fx:id="turn_text" layoutX="39.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="It's your turn! Select your tiles:">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Text>
       <ImageView fx:id="sel_tile_1" fitHeight="86.0" fitWidth="90.0" layoutX="39.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="sel_tile_2" fitHeight="86.0" fitWidth="90.0" layoutX="154.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="sel_tile_3" fitHeight="86.0" fitWidth="90.0" layoutX="279.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="cancel_button" layoutX="58.0" layoutY="613.0" mnemonicParsing="false" onAction="#cancelPressed" text="Cancel" />
-      <Button fx:id="confirm_button" layoutX="298.0" layoutY="613.0" mnemonicParsing="false" onAction="#confirmPressed" text="Confirm" />
-      <Button fx:id="column0" layoutX="919.0" layoutY="26.0" mnemonicParsing="false" onAction="#column0Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
-      <Button fx:id="column1" layoutX="983.0" layoutY="26.0" mnemonicParsing="false" onAction="#column1Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
-      <Button fx:id="column2" layoutX="1045.0" layoutY="26.0" mnemonicParsing="false" onAction="#column2Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
-      <Button fx:id="column3" layoutX="1109.0" layoutY="26.0" mnemonicParsing="false" onAction="#column3Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
-      <Button fx:id="column4" layoutX="1171.0" layoutY="26.0" mnemonicParsing="false" onAction="#column4Pressed" prefHeight="25.0" prefWidth="0.0" text="V" />
+      <Button fx:id="cancel_button" layoutX="58.0" layoutY="613.0" mnemonicParsing="false" onAction="#cancelPressed" text="Cancel">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="confirm_button" layoutX="298.0" layoutY="613.0" mnemonicParsing="false" onAction="#confirmPressed" text="Confirm">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="column0" layoutX="919.0" layoutY="26.0" mnemonicParsing="false" onAction="#column0Pressed" prefHeight="25.0" prefWidth="0.0" text="V">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="column1" layoutX="983.0" layoutY="26.0" mnemonicParsing="false" onAction="#column1Pressed" prefHeight="25.0" prefWidth="0.0" text="V">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="column2" layoutX="1045.0" layoutY="26.0" mnemonicParsing="false" onAction="#column2Pressed" prefHeight="25.0" prefWidth="0.0" text="V">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="column3" layoutX="1109.0" layoutY="26.0" mnemonicParsing="false" onAction="#column3Pressed" prefHeight="25.0" prefWidth="0.0" text="V">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="column4" layoutX="1171.0" layoutY="26.0" mnemonicParsing="false" onAction="#column4Pressed" prefHeight="25.0" prefWidth="0.0" text="V">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
       <Text fx:id="boardError" fill="RED" layoutX="189.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MESSAGGIO DI ERRORE">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Text>
-      <Button fx:id="downButton" layoutX="839.0" layoutY="275.0" mnemonicParsing="false" onAction="#downPressed" prefHeight="25.0" prefWidth="0.0" text="V" />
-      <Button fx:id="upButton" layoutX="839.0" layoutY="216.0" mnemonicParsing="false" onAction="#upPressed" prefHeight="25.0" prefWidth="0.0" rotate="180.0" text="V" />
-      <Text fx:id="shelf_text" layoutX="863.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select the column where to insert the tiles and decide their orders swapping them with the lateral arrows" wrappingWidth="389.0" />
+      <Button fx:id="downButton" layoutX="839.0" layoutY="275.0" mnemonicParsing="false" onAction="#downPressed" prefHeight="25.0" prefWidth="0.0" text="V">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Button fx:id="upButton" layoutX="839.0" layoutY="216.0" mnemonicParsing="false" onAction="#upPressed" prefHeight="25.0" prefWidth="0.0" rotate="180.0" text="V">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
+      <Text fx:id="shelf_text" layoutX="863.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select the column where to insert the tiles and decide their orders swapping them with the lateral arrows" wrappingWidth="389.0">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Text>
       <ImageView fx:id="shelf_00" fitHeight="46.0" fitWidth="46.0" layoutX="909.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_10" fitHeight="46.0" fitWidth="46.0" layoutX="909.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_20" fitHeight="46.0" fitWidth="46.0" layoutX="909.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" />
@@ -115,13 +148,19 @@
       <ImageView fx:id="shelf_51" fitHeight="46.0" fitWidth="46.0" layoutX="972.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_52" fitHeight="46.0" fitWidth="46.0" layoutX="1034.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_53" fitHeight="46.0" fitWidth="46.0" layoutX="1097.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="okButton" layoutX="1043.0" layoutY="505.0" mnemonicParsing="false" onAction="#okPressed" text="OK" />
+      <Button fx:id="okButton" layoutX="1043.0" layoutY="505.0" mnemonicParsing="false" onAction="#okPressed" text="OK">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Button>
       <ImageView fx:id="common_prize_1" fitHeight="86.0" fitWidth="90.0" layoutX="531.0" layoutY="487.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="common_prize_2" fitHeight="86.0" fitWidth="90.0" layoutX="656.0" layoutY="487.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="common_score_1" fitHeight="49.0" fitWidth="48.0" layoutX="568.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" />
       <ImageView fx:id="common_score_2" fitHeight="49.0" fitWidth="48.0" layoutX="740.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" />
       <ImageView fx:id="bookshelf_c" fitHeight="282.0" fitWidth="271.0" layoutX="521.0" layoutY="700.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="central_text" layoutX="637.0" layoutY="684.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="central_text" layoutX="637.0" layoutY="684.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Text>
       <ImageView fx:id="shelf_00_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="718.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_10_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="756.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_20_c" fitHeight="32.0" fitWidth="32.0" layoutX="554.0" layoutY="793.0" pickOnBounds="true" preserveRatio="true" />
@@ -153,7 +192,10 @@
       <ImageView fx:id="shelf_53_c" fitHeight="32.0" fitWidth="32.0" layoutX="684.0" layoutY="906.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_54_c" fitHeight="32.0" fitWidth="32.0" layoutX="728.0" layoutY="906.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bookshelf_s" fitHeight="282.0" fitWidth="271.0" layoutX="43.0" layoutY="699.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="sx_text" layoutX="165.0" layoutY="685.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="sx_text" layoutX="165.0" layoutY="685.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Text>
       <ImageView fx:id="shelf_00_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="717.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_10_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="755.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_20_s" fitHeight="32.0" fitWidth="32.0" layoutX="76.0" layoutY="792.0" pickOnBounds="true" preserveRatio="true" />
@@ -185,7 +227,10 @@
       <ImageView fx:id="shelf_53_s" fitHeight="32.0" fitWidth="32.0" layoutX="206.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_54_s" fitHeight="32.0" fitWidth="32.0" layoutX="250.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bookshelf_d" fitHeight="282.0" fitWidth="271.0" layoutX="985.0" layoutY="698.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="dx_text" layoutX="1114.0" layoutY="684.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="dx_text" layoutX="1114.0" layoutY="684.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Text>
       <ImageView fx:id="shelf_00_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="716.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_10_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="754.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_20_d" fitHeight="32.0" fitWidth="32.0" layoutX="1018.0" layoutY="791.0" pickOnBounds="true" preserveRatio="true" />
@@ -216,6 +261,9 @@
       <ImageView fx:id="shelf_52_d" fitHeight="32.0" fitWidth="32.0" layoutX="1104.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_53_d" fitHeight="32.0" fitWidth="32.0" layoutX="1148.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shelf_54_d" fitHeight="32.0" fitWidth="32.0" layoutX="1192.0" layoutY="904.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="owner_nickname_text" layoutX="43.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="owner_nickname_text" layoutX="43.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Times New Roman" size="12.0" />
+         </font></Text>
    </children>
 </Pane>
