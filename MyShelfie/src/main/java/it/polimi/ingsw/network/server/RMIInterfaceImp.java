@@ -1,5 +1,6 @@
 package it.polimi.ingsw.network.server;
 
+import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.client.RMIClient;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
@@ -9,14 +10,13 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class RMIInterfaceImp extends UnicastRemoteObject implements RMIInterface {
     private final Server server;
-    private RMIClient client;
 
     protected RMIInterfaceImp(Server server) throws RemoteException {
         this.server = server;
     }
 
     @Override
-    public void sendMessageToServer(Message message, RMIInterface skeleton) throws RemoteException {
+    public void toServer(Message message, RMIInterface skeleton) throws RemoteException {
         if (message != null && message.getMessageType() != MessageType.PING) {
             if (message.getMessageType() == MessageType.LOGIN_REQ) {
                 ClientHandler handler = new RMIClientHandler(skeleton);
@@ -31,11 +31,8 @@ public class RMIInterfaceImp extends UnicastRemoteObject implements RMIInterface
     }
 
     @Override
-    public void sendMessageToClient(Message message) throws RemoteException {
-        this.client.readMessage(message);
-    }
+    public void toClient(Message message) throws RemoteException {}
+
     @Override
-    public void setClient(RMIClient client) {
-        this.client = client;
-    }
+    public void disconnectRMI() throws RemoteException {}
 }

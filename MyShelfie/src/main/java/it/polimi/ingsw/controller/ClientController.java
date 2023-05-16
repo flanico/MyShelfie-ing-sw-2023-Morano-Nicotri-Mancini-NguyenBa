@@ -154,10 +154,9 @@ public class ClientController implements Observer, ViewObserver {
     @Override
     public void createConnection(String ip, String port, int type) {
         try {
-            if (type == 1)
-                this.client = new SocketClient(ip, Integer.parseInt(port));
-            if (type == 2)
-                this.client = new RMIClient(ip, Integer.parseInt(port));
+
+            if (type == 1) this.client = new SocketClient(ip, Integer.parseInt(port));
+            if (type == 2) this.client = new RMIClient(ip, Integer.parseInt(port));
             this.client.addObserver(this);
             this.client.readMessage();
             this.client.sendPingMessage(true);

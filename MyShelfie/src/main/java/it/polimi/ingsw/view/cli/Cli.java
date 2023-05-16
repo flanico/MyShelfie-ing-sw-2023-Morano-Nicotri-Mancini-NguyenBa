@@ -92,10 +92,10 @@ public class Cli extends ViewObservable implements View {
             defaultPort = "1099";   //RMI default port value
         boolean isValid = false;
 
-        out.println("The value between the brackets is the default value.");
+        out.println("The value between the brackets is the default value");
 
         do {
-            out.print("Enter the server address (Default address: '" + defaultIp + "') : ");
+            out.print("Enter the server address (default: '" + defaultIp + "'): ");
             inputIp = readLine.nextLine();
 
             if (inputIp.isEmpty()) {
@@ -118,7 +118,7 @@ public class Cli extends ViewObservable implements View {
 
         isValid = false;
         do {
-            out.print("Enter the server port (Default port: '" + defaultPort + "') : ");
+            out.print("Enter the server port (default: '" + defaultPort + "'): ");
             inputPort = readLine.nextLine();
 
             if (inputPort.isEmpty()) {
@@ -138,6 +138,7 @@ public class Cli extends ViewObservable implements View {
         else {
             correctPort = inputPort;
         }
+
         notifyObserver(obs -> obs.createConnection(correctIp, correctPort, type));
     }
 

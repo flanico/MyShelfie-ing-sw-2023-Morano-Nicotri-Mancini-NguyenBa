@@ -10,11 +10,12 @@ public class RMIClientHandler implements ClientHandler {
     protected RMIClientHandler(RMIInterface skeleton) {
         this.skeleton = skeleton;
     }
+
     @Override
     public void sendMessageToClient(Message message) {
         try {
             Server.LOGGER.info(() -> "Message to " + message.getNickname() + ": " + message);
-            this.skeleton.sendMessageToClient(message);
+            this.skeleton.toClient(message);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
@@ -22,5 +23,10 @@ public class RMIClientHandler implements ClientHandler {
 
     @Override
     public void disconnectClient() {
+        try {
+            this.skeleton.disconnectRMI();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
