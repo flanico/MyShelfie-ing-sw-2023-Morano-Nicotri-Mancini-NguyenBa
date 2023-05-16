@@ -2,9 +2,9 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.network.server.Server;
-import it.polimi.ingsw.network.server.SocketServer;
+import it.polimi.ingsw.network.server.socket.SocketServer;
 
-import it.polimi.ingsw.network.server.RMIServer;
+import it.polimi.ingsw.network.server.rmi.RMIServer;
 
 import java.rmi.RemoteException;
 import java.util.Scanner;

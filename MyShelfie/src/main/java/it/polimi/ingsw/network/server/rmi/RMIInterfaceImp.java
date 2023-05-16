@@ -1,7 +1,9 @@
-package it.polimi.ingsw.network.server;
+package it.polimi.ingsw.network.server.rmi;
 
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.network.server.ClientHandler;
+import it.polimi.ingsw.network.server.Server;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

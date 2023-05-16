@@ -1,9 +1,10 @@
-package it.polimi.ingsw.network.server;
+package it.polimi.ingsw.network.server.socket;
 
 import it.polimi.ingsw.network.message.Message;
+import it.polimi.ingsw.network.server.ClientHandler;
+import it.polimi.ingsw.network.server.Server;
 
 import java.io.IOException;
-import java.io.Serial;
 import java.net.ServerSocket;
 import java.net.Socket;
 

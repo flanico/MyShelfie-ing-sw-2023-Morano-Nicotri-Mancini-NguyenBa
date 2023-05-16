@@ -2,8 +2,8 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.network.client.RMIClient;
-import it.polimi.ingsw.network.client.SocketClient;
+import it.polimi.ingsw.network.client.rmi.RMIClient;
+import it.polimi.ingsw.network.client.socket.SocketClient;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.clientSide.*;
 import it.polimi.ingsw.network.message.serverSide.*;

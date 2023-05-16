@@ -1,4 +1,6 @@
-package it.polimi.ingsw.network.server;
+package it.polimi.ingsw.network.server.rmi;
+
+import it.polimi.ingsw.network.server.Server;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
