@@ -3,8 +3,6 @@ package it.polimi.ingsw.view.GUI.Scene;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.ErrorType;
-import it.polimi.ingsw.view.GUI.SceneController;
-import it.polimi.ingsw.view.cli.ColorCli;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -519,10 +517,14 @@ public class GameControllerScene extends ViewObservable implements Controller {
                     case 6 -> path = "/scoring tokens/scoring_6.jpg";
                     case 8 -> path = "/scoring tokens/scoring_8.jpg";
                 }
-                if (i==0)
+                if (i==0) {
+                    assert path != null;
                     common_score_1.setImage(new Image(path));
-                else
+                }
+                else {
+                    assert path != null;
                     common_score_2.setImage(new Image(path));
+                }
             }
         }
     }
@@ -603,6 +605,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
+
     public void updateBoard(){
         ImageView ref_but;
         for (int x=0; x<9; x++)
