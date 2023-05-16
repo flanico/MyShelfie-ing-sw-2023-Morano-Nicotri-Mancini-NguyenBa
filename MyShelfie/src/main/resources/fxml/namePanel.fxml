@@ -14,7 +14,7 @@
       </ImageView>
       <TextField fx:id="usernameField" layoutX="202.0" layoutY="322.0" prefHeight="35.0" prefWidth="396.0">
          <font>
-            <Font size="21.0" />
+            <Font name="Times New Roman" size="21.0" />
          </font>
       </TextField>
       <Text layoutX="357.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert Username">
