@@ -85,22 +85,19 @@ public class Game extends Observable implements Serializable {
     /**
      * adds a new player to the game
      * @param nickname of the player to add to the game
+     * @param isReconnected true if the player is reconnected, false otherwise
      * @author Alessandro Mancini
      */
-    public void addPlayer(String nickname) {
-        Player player = new Player(nickname);
-        players.add(player);
-        initPersonalgoalcard(player);
-        playerScore.put(nickname, 0);
+    public void addPlayer(String nickname, boolean isReconnected) {
+        if (!isReconnected) {
+            Player player = new Player(nickname);
+            players.add(player);
+            initPersonalgoalcard(player);
+            playerScore.put(nickname, 0);
+        }
         notifyObserver(new InfoGameMessage(players, num));
     }
 
-
-    public void addReconnectedPlayer(String nickname) {
-        Player player = new Player(nickname);
-        players.add(player);
-        notifyObserver(new InfoGameMessage(players, num));
-    }
 
     /**
      * returns a player given his nickname
@@ -129,10 +126,20 @@ public class Game extends Observable implements Serializable {
     /**
      * removes a player from the game
      * @param nickname of the player to remove from the game
+     * @param isDisconnected true if the player is disconnected, false otherwise
      */
-    public void removePlayerByNickname(String nickname) {
-        players.remove(getPlayerByNickname(nickname));
-        notifyObserver(new InfoGameMessage(players, players.size()));
+    public void removePlayerByNickname(String nickname, boolean isDisconnected) {
+        if(!isDisconnected) {
+            players.remove(getPlayerByNickname(nickname));
+            notifyObserver(new InfoGameMessage(players, num));
+        }
+        else
+        {
+            List<Player> playersWithoutDisconnected = players.stream()
+                    .filter(player -> !nickname.equals(player.getNickname()))
+                    .toList();
+            notifyObserver(new InfoGameMessage(playersWithoutDisconnected, num));
+        }
     }
 
 

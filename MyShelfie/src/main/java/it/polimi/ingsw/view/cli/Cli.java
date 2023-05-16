@@ -189,13 +189,21 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showLoginResult(boolean isNicknameAccepted, String nickname) {
-        if(isNicknameAccepted) {
+    public void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname) {
+        if(isNicknameAccepted && isConnectionSuccessful) {
             out.println(ColorCli.YELLOW_BOLD + "Welcome "+ nickname +", you are connected to the game!" + ColorCli.RESET);
         }
-        else {
-            out.println("Sorry, this nickname is already taken!");
+        else if (!isNicknameAccepted && isConnectionSuccessful) {
+            out.println("Sorry, this nickname is not valid!");
             askNickname();
+        }
+        else if (isNicknameAccepted) {
+            out.println("Sorry, the game lobby is full! \nEXIT");
+            System.exit(0);
+        }
+        else {
+            out.println("Server impossible to reach! \nEXIT");
+            System.exit(1);
         }
     }
 

@@ -22,9 +22,9 @@ class GameTest{
     void setUp() {
         game = new Game();
         game.initGame(3);
-        game.addPlayer("Gino");
-        game.addPlayer("Anna");
-        game.addPlayer("Leo");
+        game.addPlayer("Gino", false);
+        game.addPlayer("Anna", false);
+        game.addPlayer("Leo", false);
     }
 
     @AfterEach
@@ -39,7 +39,7 @@ class GameTest{
 
     @Test
     void getCurrentNumTest() {
-        game.addPlayer("Bubu");
+        game.addPlayer("Bubu", false);
         assertEquals(4, game.getCurrentNum());
     }
 
@@ -66,7 +66,7 @@ class GameTest{
 
     @Test
     void addPlayerTest() {
-        game.addPlayer("Tina");
+        game.addPlayer("Tina", false);
         assertEquals(4, game.getCurrentNum());
     }
 

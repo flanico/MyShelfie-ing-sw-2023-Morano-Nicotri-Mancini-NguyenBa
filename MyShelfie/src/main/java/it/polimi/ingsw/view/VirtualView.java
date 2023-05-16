@@ -6,8 +6,6 @@ import it.polimi.ingsw.network.message.serverSide.*;
 import it.polimi.ingsw.network.server.ClientHandler;
 import it.polimi.ingsw.observer.Observer;
 
-import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +25,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void askNickname() {
-        clientHandler.sendMessageToClient(new LoginReplyMessage(false));
+        clientHandler.sendMessageToClient(new LoginReplyMessage(false, true));
     }
 
     @Override
@@ -36,13 +34,12 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showLoginResult(boolean isNicknameAccepted, String nickname) {
-        clientHandler.sendMessageToClient(new LoginReplyMessage(isNicknameAccepted));
+    public void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname) {
+        clientHandler.sendMessageToClient(new LoginReplyMessage(isNicknameAccepted, isConnectionSuccessful));
     }
 
     @Override
     public void showGameInfo(List<Player> players, int num) {
-        System.out.println("eccoci");
         clientHandler.sendMessageToClient(new InfoGameMessage(players, num));
     }
 

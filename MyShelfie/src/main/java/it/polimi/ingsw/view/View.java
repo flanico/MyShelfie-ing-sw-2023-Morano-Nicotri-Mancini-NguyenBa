@@ -2,8 +2,6 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.*;
 
-import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +23,10 @@ public interface View {
     /**
      * shows to the client the login response
      * @param isNicknameAccepted if the nickname selected is accepted or not
+     * @param isConnectionSuccessful if the connection is successful or not
      * @param nickname of player
      */
-    void showLoginResult(boolean isNicknameAccepted, String nickname);
+    void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname);
 
     /**
      * shows to the client the information about the game
@@ -75,6 +74,7 @@ public interface View {
     /**
      * asks the client to select the tiles from the board
      * @param board the board of the game
+     * @param bookshelf of the player
      */
     void askSelectTiles(Board board, Bookshelf bookshelf);
 
@@ -118,6 +118,8 @@ public interface View {
 
     /**
      * notify to all the client a player disconnection
+     * @param nickname of the player disconnected
+     * @param isStarted if the game is started or not
      */
     void disconnection(String nickname, boolean isStarted);
 }

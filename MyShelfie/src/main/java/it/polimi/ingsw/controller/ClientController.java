@@ -77,7 +77,7 @@ public class ClientController implements Observer, ViewObserver {
             switch (message.getMessageType()) {
                 case LOGIN_REPLY -> {
                     LoginReplyMessage loginReplyMessage = (LoginReplyMessage) message;
-                    executorService.execute(() -> view.showLoginResult(loginReplyMessage.isNicknameAccepted(), nickname));
+                    executorService.execute(() -> view.showLoginResult(loginReplyMessage.isNicknameAccepted(), loginReplyMessage.isConnectionSuccessful(), nickname));
                 }
                 case NUM_PLAYERS_REQ -> {
                     executorService.execute(view::askPlayersNumber);
@@ -150,6 +150,7 @@ public class ClientController implements Observer, ViewObserver {
      * create a new connection between server and client
      * @param ip the ip address
      * @param port the port number
+     * @param type the type of connection (1 for socket, 2 for rmi)
      */
     @Override
     public void createConnection(String ip, String port, int type) {
@@ -162,7 +163,7 @@ public class ClientController implements Observer, ViewObserver {
             this.client.sendPingMessage(true);
             this.executorService.execute(this.view::askNickname);
         } catch (IOException e) {
-            this.executorService.execute(() -> this.view.showLoginResult(false, null));
+            this.executorService.execute(() -> this.view.showLoginResult(false, false,null));
         } catch (NotBoundException e) {
             throw new RuntimeException(e);
         }

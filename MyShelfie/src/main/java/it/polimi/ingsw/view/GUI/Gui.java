@@ -30,7 +30,7 @@ public class Gui extends ViewObservable implements View {
     }
 
     @Override
-    public void showLoginResult(boolean isNicknameAccepted, String nickname){
+    public void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname){
         if(!isNicknameAccepted) {
             Platform.runLater(() -> SceneController.showAlert("This nickname is already taken!"));
             askNickname();

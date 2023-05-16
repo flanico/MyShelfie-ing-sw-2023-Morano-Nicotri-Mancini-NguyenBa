@@ -31,24 +31,26 @@ public class Server {
      */
     public void addClient(String nickname, ClientHandler clientHandler) {
         VirtualView virtualView = new VirtualView(clientHandler);
+        //Case of new client
         if(!gameController.isGameStarted()) {
             if(gameController.checkLoginNickname(nickname, virtualView)) {
                 clientHandlerMap.put(nickname, clientHandler);
                 gameController.loginHandler(nickname, virtualView);
+                LOGGER.info(() -> nickname + "is connected to the game");
             }
         }
         //Case of reconnected client
-        else if (gameController.isGameStarted() && gameController.getGame().getPlayers().size() < gameController.getGame().getNum()) {
+        else if (gameController.isGameStarted() && gameController.getTurnController().getNicknames().size() < gameController.getNicknames().size()) {
             if(gameController.checkLoginNicknameReconnect(nickname, virtualView)) {
                 clientHandlerMap.put(nickname, clientHandler);
                 gameController.loginHandler(nickname, virtualView);
-                LOGGER.info(() -> "A player is reconnected to the game");
+                LOGGER.info(() -> nickname + "is reconnected to the game");
             }
         }
-        //Case of already started game to review!
+        //Case of already started game
         else {
-            virtualView.showLoginResult(false, null);
-            LOGGER.info(() -> "Game is already started");
+            virtualView.showLoginResult(true, false,null);
+            LOGGER.info(() -> "Game is already started. Player " + nickname + " cannot join the game");
             clientHandler.disconnectClient();
         }
     }
