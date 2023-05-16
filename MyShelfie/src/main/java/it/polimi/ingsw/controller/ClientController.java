@@ -159,19 +159,13 @@ public class ClientController implements Observer, ViewObserver {
             if (type == 2)
                 this.client = new RMIClient(ip, Integer.parseInt(port));
             this.client.addObserver(this);
-            if (type == 1)
-                this.client.readMessage();
-            if (type == 1)
-                this.client.sendPingMessage(true);
+            this.client.readMessage();
+            this.client.sendPingMessage(true);
             this.executorService.execute(this.view::askNickname);
         } catch (IOException e) {
             this.executorService.execute(() -> this.view.showLoginResult(false, null));
         } catch (NotBoundException e) {
             throw new RuntimeException(e);
-        }
-        if (type == 2) {
-            Thread clientThread = new Thread((Runnable) this.client, "rmiclient_");
-            clientThread.start();
         }
     }
 

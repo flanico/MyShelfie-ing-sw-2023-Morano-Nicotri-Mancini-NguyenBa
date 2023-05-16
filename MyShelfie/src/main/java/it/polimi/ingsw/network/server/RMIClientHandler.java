@@ -1,47 +1,26 @@
 package it.polimi.ingsw.network.server;
 
 import it.polimi.ingsw.network.message.Message;
-import it.polimi.ingsw.network.message.MessageType;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 
-public class RMIClientHandler extends UnicastRemoteObject implements RMIInterface, ClientHandler {
-    private final Server server;
-    private Message currentMessage = null;
-    private boolean read = false;
+public class RMIClientHandler implements ClientHandler {
+    private RMIInterface skeleton;
 
-    protected RMIClientHandler(Server server) throws RemoteException {
-        this.server = server;
+    protected RMIClientHandler(RMIInterface skeleton) {
+        this.skeleton = skeleton;
     }
-
-    public void sendMessageToServer(Message message) throws RemoteException {
-        if (message != null && message.getMessageType() != MessageType.PING) {
-            if (message.getMessageType() == MessageType.LOGIN_REQ) {
-                Server.LOGGER.info(() -> "Message LoginRequest from " + message.getNickname() + ": " + message);
-                this.server.addClient(message.getNickname(), this);
-            }
-            else {
-                Server.LOGGER.info(() -> "Message from: " + message.getNickname() + ": " + message);
-                this.server.forwardsMessage(message);
-            }
+    @Override
+    public void sendMessageToClient(Message message) {
+        try {
+            Server.LOGGER.info(() -> "Message to " + message.getNickname() + ": " + message);
+            this.skeleton.sendMessageToClient(message);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public void sendMessageToClient(Message message) {
-        Server.LOGGER.info(() -> "Message to " + message.getNickname() + ": " + message);
-        this.currentMessage = message;
-        this.read = true;
+    @Override
+    public void disconnectClient() {
     }
-
-    public Message getCurrentMessage() throws RemoteException {
-        this.read = false;
-        return this.currentMessage;
-    }
-
-    public Boolean isReadable() {
-        return this.read;
-    }
-
-    public void disconnectClient() {}
 }
