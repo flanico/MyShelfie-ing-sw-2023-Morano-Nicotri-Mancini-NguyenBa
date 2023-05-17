@@ -44,7 +44,7 @@ public class Server {
             if(gameController.checkLoginNicknameReconnect(nickname, virtualView)) {
                 clientHandlerMap.put(nickname, clientHandler);
                 gameController.loginHandler(nickname, virtualView);
-                LOGGER.info(() -> nickname + "is reconnected to the game");
+                LOGGER.info(() -> nickname + " is reconnected to the game");
             }
         }
         //Case of already started game

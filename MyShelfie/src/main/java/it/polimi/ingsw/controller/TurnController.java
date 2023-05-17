@@ -177,7 +177,7 @@ public class TurnController implements Serializable {
             if (isDisconnected) {
                 index--;
             }
-            if (index + 1 < game.getCurrentNum()) {
+            if (index + 1 < nicknames.size()) {
                 index = index + 1;
             } else {
                 index = 0;

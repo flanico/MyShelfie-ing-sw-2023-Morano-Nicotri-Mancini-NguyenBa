@@ -124,22 +124,13 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
-     * removes a player from the game
-     * @param nickname of the player to remove from the game
-     * @param isDisconnected true if the player is disconnected, false otherwise
+     * notify the observer with the connected players
      */
-    public void removePlayerByNickname(String nickname, boolean isDisconnected) {
-        if(!isDisconnected) {
-            players.remove(getPlayerByNickname(nickname));
-            notifyObserver(new InfoGameMessage(players, num));
-        }
-        else
-        {
-            List<Player> playersWithoutDisconnected = players.stream()
-                    .filter(player -> !nickname.equals(player.getNickname()))
-                    .toList();
-            notifyObserver(new InfoGameMessage(playersWithoutDisconnected, num));
-        }
+    public void disconnectionOfPlayer() {
+        List<Player> playersWithoutDisconnected = players.stream()
+                .filter(player -> !player.isDisconnected())
+                .collect(Collectors.toList());
+        notifyObserver(new InfoGameMessage(playersWithoutDisconnected, num));
     }
 
 
@@ -334,13 +325,13 @@ public class Game extends Observable implements Serializable {
 
     /**
      * replace the game for the implementation of the persistence
-     * @param players
-     * @param num
-     * @param board
-     * @param commonGoalCards
-     * @param commonGoalCardScores
-     * @param bag
-     * @param playerScore
+     * @param players list of players
+     * @param num number of players
+     * @param board board
+     * @param commonGoalCards list of common goal cards
+     * @param commonGoalCardScores list of common goal card scores
+     * @param bag bag of tiles
+     * @param playerScore map of player scores
      */
     public void replaceGame(List<Player> players, int num, Board board, List<CommonGoalCard> commonGoalCards, List<CommonGoalCardScore> commonGoalCardScores, Stack<Tile> bag, Map<String, Integer> playerScore) {
         this.players = players;

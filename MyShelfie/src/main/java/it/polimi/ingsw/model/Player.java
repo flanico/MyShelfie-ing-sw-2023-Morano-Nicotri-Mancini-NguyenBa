@@ -16,6 +16,7 @@ public class Player implements Serializable {
     private PersonalGoalCard personalGoalCard;
     private boolean isDoneFirstCommon;
     private boolean isDoneSecondCommon;
+    private boolean isDisconnected;
 
 
     public Player(String nickname) {
@@ -24,6 +25,7 @@ public class Player implements Serializable {
         this.score = 0;
         this.isDoneFirstCommon = false;
         this.isDoneSecondCommon = false;
+        this.isDisconnected = false;
     }
 
     public Bookshelf getBookshelf() {
@@ -68,6 +70,14 @@ public class Player implements Serializable {
 
     public void setDoneSecondCommon(boolean doneSecondCommon) {
         isDoneSecondCommon = doneSecondCommon;
+    }
+
+    public boolean isDisconnected() {
+        return isDisconnected;
+    }
+
+    public void setDisconnected(boolean disconnected) {
+        isDisconnected = disconnected;
     }
 
     @Override

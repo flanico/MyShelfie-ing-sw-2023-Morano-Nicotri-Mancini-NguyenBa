@@ -186,6 +186,7 @@ public class GameController implements Serializable {
             virtualView.showGenericMessage("\nYou are reconnected to the game!");
             int index = nicknames.indexOf(nickname);
             turnController.getNicknames().add(index, nickname);
+            game.getPlayerByNickname(nickname).setDisconnected(false);
             game.addPlayer(nickname, true);
             replacePlayer(nickname);
             onDisconnectGame(true, nickname);
@@ -210,8 +211,9 @@ public class GameController implements Serializable {
         VirtualView virtualView = virtualViewMap.remove(nickname);
         //Shows the nickname of the disconnected player
         broadcastingDisconnection(nickname, true);
+        game.getPlayerByNickname(nickname).setDisconnected(true);
         game.removeObserver(virtualView);
-        game.removePlayerByNickname(nickname, true);
+        game.disconnectionOfPlayer();
         int index = turnController.getNicknames().indexOf(nickname);
         turnController.getNicknames().remove(nickname);
         turnController.getVirtualViewMap().remove(nickname);
@@ -225,7 +227,7 @@ public class GameController implements Serializable {
         //If there are two or three player connected continue the game
         else {
             broadcastingMessage("\nThe game round is: " + turnController.getNicknames());
-            turnController.nextPlayer(index, true);
+//            turnController.nextPlayer(index, true);
         }
     }
 
