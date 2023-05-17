@@ -2,8 +2,8 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.network.client.Client;
-import it.polimi.ingsw.network.client.RMIClient;
-import it.polimi.ingsw.network.client.SocketClient;
+import it.polimi.ingsw.network.client.rmi.RMIClient;
+import it.polimi.ingsw.network.client.socket.SocketClient;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.clientSide.*;
 import it.polimi.ingsw.network.message.serverSide.*;
@@ -77,7 +77,7 @@ public class ClientController implements Observer, ViewObserver {
             switch (message.getMessageType()) {
                 case LOGIN_REPLY -> {
                     LoginReplyMessage loginReplyMessage = (LoginReplyMessage) message;
-                    executorService.execute(() -> view.showLoginResult(loginReplyMessage.isNicknameAccepted(), nickname));
+                    executorService.execute(() -> view.showLoginResult(loginReplyMessage.isNicknameAccepted(), loginReplyMessage.isConnectionSuccessful(), nickname));
                 }
                 case NUM_PLAYERS_REQ -> {
                     executorService.execute(view::askPlayersNumber);
@@ -150,28 +150,22 @@ public class ClientController implements Observer, ViewObserver {
      * create a new connection between server and client
      * @param ip the ip address
      * @param port the port number
+     * @param type the type of connection (1 for socket, 2 for rmi)
      */
     @Override
     public void createConnection(String ip, String port, int type) {
         try {
-            if (type == 1)
-                this.client = new SocketClient(ip, Integer.parseInt(port));
-            if (type == 2)
-                this.client = new RMIClient(ip, Integer.parseInt(port));
+
+            if (type == 1) this.client = new SocketClient(ip, Integer.parseInt(port));
+            if (type == 2) this.client = new RMIClient(ip, Integer.parseInt(port));
             this.client.addObserver(this);
-            if (type == 1)
-                this.client.readMessage();
-            if (type == 1)
-                this.client.sendPingMessage(true);
+            this.client.readMessage();
+            this.client.sendPingMessage(true);
             this.executorService.execute(this.view::askNickname);
         } catch (IOException e) {
-            this.executorService.execute(() -> this.view.showLoginResult(false, null));
+            this.executorService.execute(() -> this.view.showLoginResult(false, false,null));
         } catch (NotBoundException e) {
             throw new RuntimeException(e);
-        }
-        if (type == 2) {
-            Thread clientThread = new Thread((Runnable) this.client, "rmiclient_");
-            clientThread.start();
         }
     }
 

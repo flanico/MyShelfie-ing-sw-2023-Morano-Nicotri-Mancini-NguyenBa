@@ -1,7 +1,9 @@
-package it.polimi.ingsw.network.server;
+package it.polimi.ingsw.network.server.socket;
 
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.network.server.ClientHandler;
+import it.polimi.ingsw.network.server.Server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -45,7 +47,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
         try {
             this.handleClientConnection();
         } catch (IOException e) {
-            Server.LOGGER.severe("Client " + clientSocket.getInetAddress() + " connection dropped");
+            Server.LOGGER.severe("SOCKET Client " + clientSocket.getInetAddress() + " connection dropped");
             disconnectClient();
         }
     }
@@ -55,8 +57,8 @@ public class SocketClientHandler implements ClientHandler, Runnable {
      * @throws IOException for Input/Output exceptions
      */
     private void handleClientConnection() throws IOException {
-        Server.LOGGER.info("Client connected from address " + clientSocket.getInetAddress());
-        Server.LOGGER.info("Client connected from port " + clientSocket.getLocalPort());
+        Server.LOGGER.info("SOCKET Client connected from address " + clientSocket.getInetAddress());
+        Server.LOGGER.info("SOCKET Client connected from port " + clientSocket.getLocalPort());
 
         try {
             while (!Thread.currentThread().isInterrupted()) {
@@ -65,10 +67,10 @@ public class SocketClientHandler implements ClientHandler, Runnable {
                     if(message != null && message.getMessageType() != MessageType.PING) {
                         //if is a LOGIN message
                         if (message.getMessageType() == MessageType.LOGIN_REQ) {
-                            Server.LOGGER.info(() -> "Message LoginRequest received from " + message.getNickname() + ": " + message);
+                            Server.LOGGER.info(() -> "SOCKET Message LoginRequest received from " + message.getNickname() + ": " + message);
                             socketServer.addClient(message.getNickname(), this);
                         } else {
-                            Server.LOGGER.info(() -> "Message received from: " + message.getNickname() + ": " + message);
+                            Server.LOGGER.info(() -> "SOCKET Message received from: " + message.getNickname() + ": " + message);
                             //forwards the message to the server that sends it to the main controller
                             socketServer.forwardsMessage(message);
                         }
@@ -76,7 +78,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
                 }
             }
         } catch (ClassCastException | ClassNotFoundException e) {
-            Server.LOGGER.severe("Invalid stream from client");
+            Server.LOGGER.severe("SOCKET Invalid stream from client");
         }
         clientSocket.close();
     }
@@ -110,7 +112,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
             synchronized (outputLock) {
                 outputStream.writeObject(message);
                 outputStream.reset();
-                Server.LOGGER.info( () -> "Message sent : " + message);
+                Server.LOGGER.info( () -> "SOCKET Message sent : " + message);
             }
         } catch (IOException e) {
             Server.LOGGER.severe(e.getMessage());

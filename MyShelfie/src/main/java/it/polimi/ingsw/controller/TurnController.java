@@ -57,7 +57,6 @@ public class TurnController implements Serializable {
 
     /**
      * handles all messages received from the game controller
-     * (must write all messages sent by the client (reply messages))
      * @param message received
      */
     protected void messageFromGameController(Message message) {
@@ -119,7 +118,6 @@ public class TurnController implements Serializable {
             }
             //Shows the current player bookshelf
             virtualView.showBookshelf(game.getPlayerByNickname(currentPlayer));
-
             //Inserts the tiles in the bookshelf
             insertTiles();
             //Shows bookshelf of the current player
@@ -179,7 +177,7 @@ public class TurnController implements Serializable {
             if (isDisconnected) {
                 index--;
             }
-            if (index + 1 < game.getCurrentNum()) {
+            if (index + 1 < nicknames.size()) {
                 index = index + 1;
             } else {
                 index = 0;
@@ -404,7 +402,7 @@ public class TurnController implements Serializable {
         this.game = game;
     }
 
-    protected List<String> getNicknames() {
+    public List<String> getNicknames() {
         return nicknames;
     }
 

@@ -85,22 +85,19 @@ public class Game extends Observable implements Serializable {
     /**
      * adds a new player to the game
      * @param nickname of the player to add to the game
+     * @param isReconnected true if the player is reconnected, false otherwise
      * @author Alessandro Mancini
      */
-    public void addPlayer(String nickname) {
-        Player player = new Player(nickname);
-        players.add(player);
-        initPersonalgoalcard(player);
-        playerScore.put(nickname, 0);
+    public void addPlayer(String nickname, boolean isReconnected) {
+        if (!isReconnected) {
+            Player player = new Player(nickname);
+            players.add(player);
+            initPersonalgoalcard(player);
+            playerScore.put(nickname, 0);
+        }
         notifyObserver(new InfoGameMessage(players, num));
     }
 
-
-    public void addReconnectedPlayer(String nickname) {
-        Player player = new Player(nickname);
-        players.add(player);
-        notifyObserver(new InfoGameMessage(players, num));
-    }
 
     /**
      * returns a player given his nickname
@@ -127,12 +124,13 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
-     * removes a player from the game
-     * @param nickname of the player to remove from the game
+     * notify the observer with the connected players
      */
-    public void removePlayerByNickname(String nickname) {
-        players.remove(getPlayerByNickname(nickname));
-        notifyObserver(new InfoGameMessage(players, players.size()));
+    public void disconnectionOfPlayer() {
+        List<Player> playersWithoutDisconnected = players.stream()
+                .filter(player -> !player.isDisconnected())
+                .collect(Collectors.toList());
+        notifyObserver(new InfoGameMessage(playersWithoutDisconnected, num));
     }
 
 
@@ -327,13 +325,13 @@ public class Game extends Observable implements Serializable {
 
     /**
      * replace the game for the implementation of the persistence
-     * @param players
-     * @param num
-     * @param board
-     * @param commonGoalCards
-     * @param commonGoalCardScores
-     * @param bag
-     * @param playerScore
+     * @param players list of players
+     * @param num number of players
+     * @param board board
+     * @param commonGoalCards list of common goal cards
+     * @param commonGoalCardScores list of common goal card scores
+     * @param bag bag of tiles
+     * @param playerScore map of player scores
      */
     public void replaceGame(List<Player> players, int num, Board board, List<CommonGoalCard> commonGoalCards, List<CommonGoalCardScore> commonGoalCardScores, Stack<Tile> bag, Map<String, Integer> playerScore) {
         this.players = players;

@@ -92,10 +92,10 @@ public class Cli extends ViewObservable implements View {
             defaultPort = "1099";   //RMI default port value
         boolean isValid = false;
 
-        out.println("The value between the brackets is the default value.");
+        out.println("The value between the brackets is the default value");
 
         do {
-            out.print("Enter the server address (Default address: '" + defaultIp + "') : ");
+            out.print("Enter the server address (default: '" + defaultIp + "'): ");
             inputIp = readLine.nextLine();
 
             if (inputIp.isEmpty()) {
@@ -118,7 +118,7 @@ public class Cli extends ViewObservable implements View {
 
         isValid = false;
         do {
-            out.print("Enter the server port (Default port: '" + defaultPort + "') : ");
+            out.print("Enter the server port (default: '" + defaultPort + "'): ");
             inputPort = readLine.nextLine();
 
             if (inputPort.isEmpty()) {
@@ -138,6 +138,7 @@ public class Cli extends ViewObservable implements View {
         else {
             correctPort = inputPort;
         }
+
         notifyObserver(obs -> obs.createConnection(correctIp, correctPort, type));
     }
 
@@ -188,13 +189,21 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void showLoginResult(boolean isNicknameAccepted, String nickname) {
-        if(isNicknameAccepted) {
+    public void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname) {
+        if(isNicknameAccepted && isConnectionSuccessful) {
             out.println(ColorCli.YELLOW_BOLD + "Welcome "+ nickname +", you are connected to the game!" + ColorCli.RESET);
         }
-        else {
-            out.println("Sorry, this nickname is already taken!");
+        else if (!isNicknameAccepted && isConnectionSuccessful) {
+            out.println("Sorry, this nickname is not valid!");
             askNickname();
+        }
+        else if (isNicknameAccepted) {
+            out.println("Sorry, the game lobby is full! \nEXIT");
+            System.exit(0);
+        }
+        else {
+            out.println("Server impossible to reach! \nEXIT");
+            System.exit(1);
         }
     }
 

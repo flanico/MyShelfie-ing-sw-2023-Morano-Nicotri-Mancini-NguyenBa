@@ -25,7 +25,7 @@ public class VirtualView implements View, Observer {
 
     @Override
     public void askNickname() {
-        clientHandler.sendMessageToClient(new LoginReplyMessage(false));
+        clientHandler.sendMessageToClient(new LoginReplyMessage(false, true));
     }
 
     @Override
@@ -34,13 +34,12 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void showLoginResult(boolean isNicknameAccepted, String nickname) {
-        clientHandler.sendMessageToClient(new LoginReplyMessage(isNicknameAccepted));
+    public void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname) {
+        clientHandler.sendMessageToClient(new LoginReplyMessage(isNicknameAccepted, isConnectionSuccessful));
     }
 
     @Override
     public void showGameInfo(List<Player> players, int num) {
-        System.out.println("eccoci");
         clientHandler.sendMessageToClient(new InfoGameMessage(players, num));
     }
 

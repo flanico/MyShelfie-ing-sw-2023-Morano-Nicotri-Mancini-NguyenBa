@@ -43,7 +43,7 @@ public class InputController implements Serializable {
      */
     protected boolean checkNickname(String nickname, View view){
         if(nickname.isEmpty() || game.isNicknameTaken(nickname)) {
-            view.showLoginResult(false, nickname);
+            view.showLoginResult(false, true, nickname);
             return false;
         }
         return true;
@@ -56,8 +56,8 @@ public class InputController implements Serializable {
      * @return true if the nickname is valid, false otherwise
      */
     protected boolean checkReconnectNickname(String nickname, View view){
-        if(nickname.isEmpty() || game.isNicknameTaken(nickname) || !gameController.getNicknames().contains(nickname)) {
-            view.showLoginResult(false, nickname);
+        if(nickname.isEmpty() || !gameController.getNicknames().contains(nickname) || gameController.getTurnController().getNicknames().contains(nickname)) {
+            view.showLoginResult(false, true, nickname);
             return false;
         }
         return true;
