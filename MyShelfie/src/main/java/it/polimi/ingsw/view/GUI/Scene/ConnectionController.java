@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.input.MouseEvent;
 
 /**
  * class that controls the connectionPanel.fxml for the client connection
@@ -23,54 +24,53 @@ public class ConnectionController extends ViewObservable implements Controller {
 
     private String address;
     private String port;
-
+    private String defaultAddress_socket = "localhost";
+    private String defaultPort_socket = "12345";
+    private String defaultPort_rmi = "1099";
+    private int type;
     int error;
-    public void ContinuePressed(ActionEvent actionEvent) {
+
+
+    public void continue_pressed(MouseEvent mouseEvent) {
         address = addressField.getText();
         port = serverPortField.getText();
         final String correctAddress;
         final String correctPort;
 
         if (serverType.getValue()!=null) {
-            if (serverType.getValue().equals("Socket")) {
-                error = 0;
-
-                if (port.compareTo("") == 0)
-                    correctPort = "12345";
-                else if (ClientController.isValidPort(port)) {
-                    correctPort = port;
+            error = 0;
+            if (port.compareTo("") == 0) {
+                if (serverType.getValue().equals("Socket")){
+                    type=1;
+                    correctPort = defaultPort_socket;
                 } else {
-                    error = 1;
-                    correctPort = null;
+                    correctPort = defaultPort_rmi;
+                    type=2;
                 }
-
-                if (address.compareTo("") == 0)
-                    correctAddress = "localhost";
-                else if (ClientController.isValidAddress(address)) {
-                    correctAddress = address;
-                } else {
-                    correctAddress = null;
-                    if (error == 0)
-                        error = 2;
-                    else error = 3;
-                }
-
-                switch (error) {
-                    case 0:
-                        new Thread(() -> notifyObserver(obs -> obs.createConnection(correctAddress, correctPort, 1))).start();
-                        break;
-                    case 1:
-                        SceneController.showAlert("Invalid Port");
-                        break;
-                    case 2:
-                        SceneController.showAlert("Invalid Address");
-                        break;
-                    case 3:
-                        SceneController.showAlert("Invalid Port and Address");
-                        break;
-                }
+            }
+            else if (ClientController.isValidPort(port)) {
+                correctPort = port;
             } else {
-                //ACTIVE RMI
+                error = 1;
+                correctPort = null;
+            }
+
+            if (address.compareTo("") == 0)
+                correctAddress = "localhost";
+            else if (ClientController.isValidAddress(address)) {
+                correctAddress = address;
+            } else {
+                correctAddress = null;
+                if (error == 0)
+                    error = 2;
+                else error = 3;
+            }
+
+            switch (error) {
+                case 0 -> new Thread(() -> notifyObserver(obs -> obs.createConnection(correctAddress, correctPort, type))).start();
+                case 1 -> SceneController.showAlert("Invalid Port");
+                case 2 -> SceneController.showAlert("Invalid Address");
+                case 3 -> SceneController.showAlert("Invalid Port and Address");
             }
         } else SceneController.showAlert("Please select a server type!");
     }

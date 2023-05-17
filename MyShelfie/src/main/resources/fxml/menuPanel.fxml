@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.MenuController">
    <children>
       <ImageView fitHeight="606.0" fitWidth="800.0" layoutY="-1.0" pickOnBounds="true">
          <image>
-            <Image url="@/misc/sfondo.jpg" />
+            <Image url="@/Graphics/menu_image.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="304.0" fitWidth="491.0" layoutX="155.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="190.0" fitWidth="574.0" layoutX="113.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Publisher Material/Title 2000x618px.png" />
          </image>
       </ImageView>
-      <Button fx:id="playButton" layoutX="290.0" layoutY="384.0" mnemonicParsing="false" onAction="#playPressed" prefHeight="69.0" prefWidth="220.0" text="Play">
-         <font>
-            <Font name="Times New Roman Bold" size="25.0" />
-         </font>
-      </Button>
+      <ImageView fitHeight="65.0" fitWidth="165.0" layoutX="320.0" layoutY="465.0" onMouseClicked="#playButton_click" opacity="0.9" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/playButton.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
