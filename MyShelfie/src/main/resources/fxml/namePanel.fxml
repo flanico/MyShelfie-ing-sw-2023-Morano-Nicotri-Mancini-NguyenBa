@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="609.0" fitWidth="806.0" layoutX="-3.0" layoutY="-4.0" pickOnBounds="true">
          <image>
-            <Image url="@/misc/sfondo.jpg" />
+            <Image url="@/Graphics/name_sfondo.png" />
          </image>
       </ImageView>
       <TextField fx:id="usernameField" layoutX="202.0" layoutY="322.0" prefHeight="35.0" prefWidth="396.0">

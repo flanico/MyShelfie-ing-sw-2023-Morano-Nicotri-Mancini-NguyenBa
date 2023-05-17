@@ -13,15 +13,15 @@
             <Image url="@/Graphics/connection_image.png" />
          </image>
       </ImageView>
-      <TextField fx:id="serverPortField" layoutX="123.0" layoutY="388.0" promptText="Default">
+      <TextField fx:id="serverPortField" layoutX="72.0" layoutY="417.0" prefHeight="22.0" prefWidth="206.0" promptText="Default">
          <font>
             <Font name="Times New Roman" size="12.0" />
          </font></TextField>
-      <TextField fx:id="addressField" layoutX="542.0" layoutY="388.0" promptText="Default">
+      <TextField fx:id="addressField" layoutX="525.0" layoutY="417.0" prefHeight="22.0" prefWidth="206.0" promptText="Default">
          <font>
             <Font name="Times New Roman" size="12.0" />
          </font></TextField>
-      <ChoiceBox fx:id="serverType" layoutX="272.0" layoutY="270.0" prefHeight="22.0" prefWidth="245.0" style="-fx-font-family: 'Times New Roman'; -fx-background-color: white;">
+      <ChoiceBox fx:id="serverType" layoutX="278.0" layoutY="270.0" prefHeight="22.0" prefWidth="245.0" style="-fx-font-family: 'Times New Roman'; -fx-background-color: white;">
          <String fx:value="Socket" />
          <String fx:value="RMI" />
       </ChoiceBox>
@@ -35,15 +35,18 @@
             <Image url="@/Graphics/continueButton.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="295.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="95.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/Graphics/Server%20Port.png" />
+            <Image url="@/Graphics/Server type.png" />
+         </image></ImageView>
+      <ImageView fitHeight="40.0" fitWidth="139.0" layoutX="106.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/Server Port.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="526.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="33.0" fitWidth="139.0" layoutX="558.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/Graphics/IP%20address.png" />
+            <Image url="@/Graphics/IP address.png" />
          </image>
       </ImageView>
    </children>
