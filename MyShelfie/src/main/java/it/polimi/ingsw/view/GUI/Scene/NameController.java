@@ -2,7 +2,6 @@ package it.polimi.ingsw.view.GUI.Scene;
 
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.SceneController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;

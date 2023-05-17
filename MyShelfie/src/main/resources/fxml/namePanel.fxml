@@ -17,7 +17,7 @@
             <Font name="Times New Roman" size="21.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="38.0" fitWidth="187.0" layoutX="326.0" layoutY="427.0" onMouseClicked="#continueButtonPressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="continueButton" fitHeight="38.0" fitWidth="187.0" layoutX="326.0" layoutY="427.0" onMouseClicked="#continueButtonPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/continueButton.png" />
          </image></ImageView>

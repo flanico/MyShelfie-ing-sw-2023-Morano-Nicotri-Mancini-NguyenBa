@@ -559,7 +559,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
             downButton.setDisable(false);
         }
     }
-
     //TODO verifica che non si possa inserire due volte la stessa carta
     private void insertSelected(ImageView button, int x, int y) {
         boardError.setText("");
@@ -605,7 +604,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
-
     public void updateBoard(){
         ImageView ref_but;
         for (int x=0; x<9; x++)
