@@ -17,13 +17,13 @@
             <Font name="Times New Roman" size="21.0" />
          </font>
       </TextField>
-      <Text layoutX="357.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert Username">
-         <font>
-            <Font name="Times New Roman" size="12.0" />
-         </font></Text>
-      <Button fx:id="continueButton" layoutX="368.0" layoutY="454.0" mnemonicParsing="false" onAction="#continuePressed" text="Continue">
-         <font>
-            <Font name="Times New Roman" size="12.0" />
-         </font></Button>
+      <ImageView fitHeight="38.0" fitWidth="187.0" layoutX="326.0" layoutY="427.0" onMouseClicked="#continueButtonPressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/continueButton.png" />
+         </image></ImageView>
+      <ImageView fitHeight="62.0" fitWidth="266.0" layoutX="267.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/insert_username.png" />
+         </image></ImageView>
    </children>
 </Pane>
