@@ -8,6 +8,10 @@ import it.polimi.ingsw.network.server.Server;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * class that implements the remote interface, to communicate from the client to the server
+ * @author Alessandro Mancini
+ */
 public class RMIStub extends UnicastRemoteObject implements RMIInterface {
     private final Server server;
 
