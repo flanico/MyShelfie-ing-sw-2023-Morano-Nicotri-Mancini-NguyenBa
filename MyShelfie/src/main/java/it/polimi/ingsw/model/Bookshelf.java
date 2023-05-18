@@ -28,10 +28,6 @@ public class Bookshelf implements Serializable {
         }
     }
 
-    /**
-     * getter of matrix
-     * @author Alessandro Mancini
-     */
     public Tile[][] getMatrix() {
         return matrix;
     }

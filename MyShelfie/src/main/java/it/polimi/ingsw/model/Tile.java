@@ -49,102 +49,50 @@ public class Tile implements Serializable {
         this.counted = false;
     }
 
-    /**
-     * getter of type
-     * @author Alessandro Mancini
-     */
     public TileType getType() {
         return type;
     }
 
-    /**
-     * setter of type
-     * @author Alessandro Mancini
-     */
     public void setType(TileType type) {
         this.type = type;
     }
 
-
-    /**
-     * getter of x
-     * @author Alessandro Mancini
-     */
     public int getX() {
         return x;
     }
 
-    /**
-     * setter of x
-     * @author Alessandro Mancini
-     */
     public void setX(int x) {
         this.x = x;
     }
 
-    /**
-     * getter of y
-     * @author Alessandro Mancini
-     */
     public int getY() {
         return y;
     }
 
-    /**
-     * setter of y
-     * @author Alessandro Mancini
-     */
     public void setY(int y) {
         this.y = y;
     }
 
-    /**
-     * getter of blocked
-     * @author Alessandro Mancini
-     */
     public boolean isBlocked() {
         return blocked;
     }
 
-
-    /**
-     * setter of blocked
-     * @author Alessandro Mancini
-     */
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
 
-
-    /**
-     * getter of counted
-     * @author Alessandro Mancini
-     */
     public boolean isCounted() {
         return counted;
     }
 
-
-    /**
-     * setter of counted
-     * @author Alessandro Mancini
-     */
     public void setCounted(boolean counted) {
         this.counted = counted;
     }
 
-    /**
-     * getter of colortype
-     * @author Alessandro Mancini
-     */
     public int getColortype() {
         return colortype;
     }
 
-    /**
-     * setter of colortype
-     * @author Alessandro Mancini
-     */
     public void setColortype(int colortype) {
         this.colortype = colortype;
     }

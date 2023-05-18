@@ -141,10 +141,6 @@ public class Game extends Observable implements Serializable {
         notifyObserver(new InfoGameMessage(playersWithoutDisconnected, num));
     }
 
-    /**
-     * getter of players
-     * @author Alessandro Mancini
-     */
     public List<Player> getPlayers() {
         return players;
     }
@@ -164,10 +160,6 @@ public class Game extends Observable implements Serializable {
         player.setPersonalGoalCard(new PersonalGoalCard(type));
     }
 
-    /**
-     * getter of personalgoalcards
-     * @author Alessandro Mancini
-     */
     public List<PersonalGoalCardType> getPersonalgoalcards() {
         return personalgoalcards;
     }

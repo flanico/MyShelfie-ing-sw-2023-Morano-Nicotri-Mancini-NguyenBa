@@ -72,26 +72,14 @@ public class Board implements Serializable {
         }
     }
 
-    /**
-     * getter of matrix
-     * @author Alessandro Mancini
-     */
     public Tile[][] getMatrix() {
         return matrix;
     }
 
-    /**
-     * constructor of ROW
-     * @author Alessandro Mancini
-     */
     public int getROW() {
         return ROW;
     }
 
-    /**
-     * constructor of COL
-     * @author Alessandro Mancini
-     */
     public int getCOL() {
         return COL;
     }
