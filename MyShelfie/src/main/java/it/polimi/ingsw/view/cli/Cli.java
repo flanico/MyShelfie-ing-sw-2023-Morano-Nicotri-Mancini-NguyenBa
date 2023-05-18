@@ -394,7 +394,7 @@ public class Cli extends ViewObservable implements View {
                     }
                 }
             } while (!isValid);
-            Tile tile = new Tile(board.getMatrix()[row][col].getType(), row, col);
+            Tile tile = new Tile(board.getMatrix()[row][col].getType(), board.getMatrix()[row][col].getColortype(), row, col);
             tiles.add(tile);
         }
         notifyObserver(obs -> obs.sendSelectTiles(tiles));
@@ -426,7 +426,7 @@ public class Cli extends ViewObservable implements View {
         List<Tile> finalTiles = new ArrayList<>();
 
         for (int i = 0; i < tiles.size(); i++) {
-            finalTiles.add(new Tile(TileType.NULL));
+            finalTiles.add(new Tile(TileType.NULL, 1));
         }
         if(tiles.size() !=1 ){
             out.println(ColorCli.YELLOW_BOLD + "Hey you have to select the order of the tiles!" + ColorCli.RESET);

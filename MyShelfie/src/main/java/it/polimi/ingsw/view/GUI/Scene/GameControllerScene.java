@@ -607,7 +607,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
                 assert selector != null;
                 ref_shelf = getShelf(x, y, selector);
                 if (ref_shelf != null)
-                    setImage(ref_shelf, pl.getBookshelf().getMatrix()[x][y].getType());
+                    setImage(ref_shelf, pl.getBookshelf().getMatrix()[x][y].getType(), pl.getBookshelf().getMatrix()[x][y].getColortype());
             }
         }
     }
@@ -617,7 +617,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             for (int y = 0; y < 9; y++) {
                 ref_but = getButton(x,y);
                 if (ref_but != null && !board.getMatrix()[x][y].isBlocked())
-                        setImage(ref_but, board.getMatrix()[x][y].getType());
+                        setImage(ref_but, board.getMatrix()[x][y].getType(), board.getMatrix()[x][y].getColortype());
             }
     }
     public void winCard(){
@@ -688,7 +688,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
         ImageView img;
         for (int x=0; x<finalTiles.size(); x++){
             img = getShelf(free_cells(col) - 1 - x, col, "main");
-            setImage(img, finalTiles.get(x).getType());
+            setImage(img, finalTiles.get(x).getType(), finalTiles.get(x).getColortype());
             img.setOpacity(0.5);
         }
     }
@@ -908,26 +908,29 @@ public class GameControllerScene extends ViewObservable implements Controller {
             default -> null;
        };
     }
-    private void setImage(ImageView ref_button, TileType type) {
+    private void setImage(ImageView ref_button, TileType type, int colortype) {
         if (type.equals(TileType.NULL)){
             ref_button.setImage(null);
         } else {
-            String path = "";
-
+            String path ="/item tiles/";
             switch (type) {
-                case CAT -> path = "/item tiles/Gatti1.1.png";
-                case PLANT -> path = "/item tiles/Piante1.1.png";
-                case BOOK -> path = "/item tiles/Libri1.1.png";
-                case FRAME -> path = "/item tiles/Cornici1.1.png";
-                case GAME -> path = "/item tiles/Giochi1.1.png";
-                case TROPHY -> path = "/item tiles/Trofei1.1.png";
+                case CAT -> path += "Gatti1.";
+                case PLANT -> path += "Piante1.";
+                case BOOK -> path += "Libri1.";
+                case FRAME -> path += "Cornici1.";
+                case GAME -> path += "Giochi1.";
+                case TROPHY -> path += "Trofei1.";
+                default -> path = "";
             }
-
+            switch (colortype){
+                case 1 -> path += "1.png";
+                case 2 -> path += "2.png";
+                case 3 -> path += "3.png";
+            }
             Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream(path)));
             ref_button.setImage(img);
             ref_button.setOpacity(1.0);
         }
-
     }
     public void confirmPressed(ActionEvent actionEvent){
         select_card_phase = false;
