@@ -6,6 +6,7 @@ package it.polimi.ingsw.model;
  */
 public class CommonXSameType extends CommonGoalCard {   //the algorithm works, the method of the matrix must be modified
     public final int number = 10;
+
     /**
      * five tiles of the same type forming an X
      *@param bookshelf RoundPlayer
@@ -36,6 +37,7 @@ public class CommonXSameType extends CommonGoalCard {   //the algorithm works, t
     public String toString() {
         return "Common Goal Card: Five tiles of the same type forming an X.";
     }
+
     @Override
     public int getNumber() {
         return number;

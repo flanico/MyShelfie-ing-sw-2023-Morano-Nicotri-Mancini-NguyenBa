@@ -6,13 +6,13 @@ package it.polimi.ingsw.model;
  */
 public class CommonSameDiagonal extends CommonGoalCard {
     public final int number = 11;
+
     /**
      * five tiles of the same type forming a diagonal
      *@param bookshelf RoundPlayer
      *@return true if the Player has satisfied every parameter of the Same Diagonal Type Common Card
      * @author Stefano Morano
      */
-
     public boolean check(Bookshelf bookshelf) {
         TileType ref;
         boolean flag=false;
@@ -72,6 +72,7 @@ public class CommonSameDiagonal extends CommonGoalCard {
     public String toString() {
         return "Common Goal Card: Five tiles of the same type forming a diagonal";
     }
+
     @Override
     public int getNumber() {
         return number;

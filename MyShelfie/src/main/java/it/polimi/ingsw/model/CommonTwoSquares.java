@@ -5,8 +5,8 @@ package it.polimi.ingsw.model;
  * @author Stefano Morano
  */
 public class CommonTwoSquares extends CommonGoalCard {
-
     public final int number = 1;
+
     /**
      * two groups of four tiles in a square shape, that can contains two different type of tiles
      *@param bookshelf RoundPlayer
@@ -36,7 +36,6 @@ public class CommonTwoSquares extends CommonGoalCard {
                     counter++;
             }
         }
-
         return (counter>=2);
     }
 
@@ -44,6 +43,7 @@ public class CommonTwoSquares extends CommonGoalCard {
     public String toString() {
         return "Common Goal Card: Two groups each containing 4 tiles of the same type in a 2x2 square. \nThe tiles of one square can be different from those of the other square.";
     }
+
     @Override
     public int getNumber() {
         return number;

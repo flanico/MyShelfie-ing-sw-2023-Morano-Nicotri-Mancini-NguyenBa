@@ -6,8 +6,8 @@ import java.util.HashSet;
  * @author Stefano Morano
  */
 public class CommonMaxThreeColumns extends CommonGoalCard {
-
     public final int number = 5;
+
     /**
      *Three columns full-filled with 3 maximum type of tiles.
      *@param bookshelf RoundPlayer
@@ -38,6 +38,7 @@ public class CommonMaxThreeColumns extends CommonGoalCard {
         return "Common Goal Card: Three columns each formed by 6 tiles " +
                 "of maximum three different types. \nOne column can show the same or a different combination of another column.";
     }
+
     @Override
     public int getNumber() {
         return number;
