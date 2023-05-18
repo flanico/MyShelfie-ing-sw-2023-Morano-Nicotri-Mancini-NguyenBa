@@ -254,14 +254,13 @@ public class Board implements Serializable {
                         tiles.removeAll(tiles);
                         tiles.add(this.getMatrix()[i][j]);
                         tiles.add(this.getMatrix()[i+1][j]);
-                        if(isRemovable(tiles)){
-                            if (max == 1){
+                        if(isRemovable(tiles)) {
+                            if (max == 1) {
                                 max= 2;
                             }
                         }
                     }
                 }
-
                 if (j< COL-2) {
                     tiles.removeAll(tiles);
                     tiles.add(this.getMatrix()[i][j]);
@@ -274,7 +273,7 @@ public class Board implements Serializable {
                         tiles.add(this.getMatrix()[i][j]);
                         tiles.add(this.getMatrix()[i][j+1]);
                         if(isRemovable(tiles)) {
-                            if (max == 1){
+                            if (max == 1) {
                                 max= 2;
                             }
                         }
