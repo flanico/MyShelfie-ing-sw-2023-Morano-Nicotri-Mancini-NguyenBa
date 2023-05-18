@@ -11,7 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
  * @author Alessandro Mancini
  */
 public class RMISkeleton extends UnicastRemoteObject implements RMIInterface {
-    private RMIClient client;
+    private final RMIClient client;
 
     /**
      * constructor of RMISkeleton
