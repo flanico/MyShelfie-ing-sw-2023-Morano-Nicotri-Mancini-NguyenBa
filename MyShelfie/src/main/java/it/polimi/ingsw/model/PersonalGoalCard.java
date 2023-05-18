@@ -26,11 +26,9 @@ public class PersonalGoalCard implements Serializable {
         this.assignType();
     }
 
-
     public Tile[][] getMatrix() {
         return matrix;
     }
-
 
     public PersonalGoalCardType getType() {
         return type;

@@ -14,7 +14,6 @@ public class Bookshelf implements Serializable {
     private static final int ROW = 6;
     private static final int COL = 5;
 
-
     /**
      * constructor of Bookshelf
      * @author Alessandro Mancini
