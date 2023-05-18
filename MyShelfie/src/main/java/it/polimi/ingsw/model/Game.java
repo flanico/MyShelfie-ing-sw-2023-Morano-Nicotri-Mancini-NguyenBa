@@ -237,28 +237,76 @@ public class Game extends Observable implements Serializable {
      */
     private void initBag() {
         this.bag = new Stack<>();
-        for (int i = 0; i < 22; i++) {
-            Tile t = new Tile(TileType.CAT);
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.CAT, 1);
             this.bag.add(t);
         }
-        for (int i = 0; i < 22; i++) {
-            Tile t = new Tile(TileType.GAME);
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.CAT, 2);
             this.bag.add(t);
         }
-        for (int i = 0; i < 22; i++) {
-            Tile t = new Tile(TileType.BOOK);
+        for (int i = 0; i < 8; i++) {
+            Tile t = new Tile(TileType.CAT, 3);
             this.bag.add(t);
         }
-        for (int i = 0; i < 22; i++) {
-            Tile t = new Tile(TileType.PLANT);
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.PLANT, 1);
             this.bag.add(t);
         }
-        for (int i = 0; i < 22; i++) {
-            Tile t = new Tile(TileType.TROPHY);
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.PLANT, 2);
             this.bag.add(t);
         }
-        for (int i = 0; i < 22; i++) {
-            Tile t = new Tile(TileType.FRAME);
+        for (int i = 0; i < 8; i++) {
+            Tile t = new Tile(TileType.PLANT, 3);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.GAME, 1);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.GAME, 2);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 8; i++) {
+            Tile t = new Tile(TileType.GAME, 3);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.BOOK, 1);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.BOOK, 2);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 8; i++) {
+            Tile t = new Tile(TileType.BOOK, 3);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.TROPHY, 1);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.TROPHY, 2);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 8; i++) {
+            Tile t = new Tile(TileType.TROPHY, 3);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.FRAME, 1);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 7; i++) {
+            Tile t = new Tile(TileType.FRAME, 2);
+            this.bag.add(t);
+        }
+        for (int i = 0; i < 8; i++) {
+            Tile t = new Tile(TileType.FRAME, 3);
             this.bag.add(t);
         }
         Collections.shuffle(this.bag);

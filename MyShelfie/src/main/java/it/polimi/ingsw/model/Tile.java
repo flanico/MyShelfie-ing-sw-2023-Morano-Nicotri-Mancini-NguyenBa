@@ -15,6 +15,7 @@ public class Tile implements Serializable {
     private TileType type;
     private int x;
     private int y;
+    private int colortype;
     private boolean blocked;
     private boolean counted;
 
@@ -23,14 +24,14 @@ public class Tile implements Serializable {
      * @param type of the tile
      * @author Alessandro Mancini
      */
-    public Tile(TileType type) {
+    public Tile(TileType type, int colortype) {
         this.type = type;
         this.x = -1;
         this.y = -1;
+        this.colortype = colortype;
         this.blocked = false;
         this.counted = false;
     }
-
 
     /**
      * remote interface used by RMIStub and RMISkeleton to handle the RMI connection
@@ -39,10 +40,11 @@ public class Tile implements Serializable {
      * @param y coordinate
      * @author Alessandro Mancini
      */
-    public Tile(TileType type, int x, int y) {
+    public Tile(TileType type, int colortype, int x, int y) {
         this.type = type;
         this.x = x;
         this.y = y;
+        this.colortype = colortype;
         this.blocked = false;
         this.counted = false;
     }
@@ -129,6 +131,22 @@ public class Tile implements Serializable {
      */
     public void setCounted(boolean counted) {
         this.counted = counted;
+    }
+
+    /**
+     * getter of colortype
+     * @author Alessandro Mancini
+     */
+    public int getColortype() {
+        return colortype;
+    }
+
+    /**
+     * setter of colortype
+     * @author Alessandro Mancini
+     */
+    public void setColortype(int colortype) {
+        this.colortype = colortype;
     }
 
     /**

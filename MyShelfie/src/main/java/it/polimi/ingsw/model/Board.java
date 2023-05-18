@@ -24,7 +24,7 @@ public class Board implements Serializable {
         //initialization board
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                this.matrix[i][j] = new Tile(TileType.NULL, i, j);
+                this.matrix[i][j] = new Tile(TileType.NULL, 0, i, j);
             }
         }
         //block unavailable tiles
@@ -92,7 +92,9 @@ public class Board implements Serializable {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 if (!this.matrix[i][j].isBlocked() && this.matrix[i][j].getType() == TileType.NULL) {
-                    this.matrix[i][j].setType(bag.pop().getType());
+                    Tile tile = bag.pop();
+                    this.matrix[i][j].setType(tile.getType());
+                    this.matrix[i][j].setColortype(tile.getColortype());
                 }
             }
         }
@@ -144,7 +146,6 @@ public class Board implements Serializable {
         //check if the tiles are not NULL and not blocked
         for (Tile tile : tiles) {
             if (tile.isBlocked() || tile.getType().equals(TileType.NULL)) {
-//                System.out.println("Tiles are NULL or blocked");
                 return false;
             }
         }
@@ -154,7 +155,6 @@ public class Board implements Serializable {
         int row = tiles.get(0).getX();
         for (int i = 1; i < tiles.size(); i++) {
             if (tiles.get(i).getX() != row) {
-//                System.out.println("Tiles are not in the same row");
                 samerow = false;
                 break;
             }
@@ -163,25 +163,21 @@ public class Board implements Serializable {
         int column = tiles.get(0).getY();
         for (int i = 1; i < tiles.size(); i++) {
             if (tiles.get(i).getY() != column) {
-//                System.out.println("Tiles are not in the same column");
                 samecolumn = false;
                 break;
             }
         }
 
         if (!samecolumn && !samerow) {
-//            System.out.println("Tiles are not aligned");
             return false;
         }
 
         //Reorder the tiles in the list based on x or y for easy checking
         if (samerow) {
             tiles.sort(Comparator.comparingInt(Tile::getY));
-//            System.out.println(tiles.toString());
         }
         if (samecolumn) {
             tiles.sort(Comparator.comparingInt(Tile::getX));
-//            System.out.println(tiles.toString());
         }
 
         //check if the tiles have a free side
@@ -192,7 +188,6 @@ public class Board implements Serializable {
                     (rowtile <= 7 && matrix[rowtile + 1][columntile].getType() != TileType.NULL) &&
                     (columntile >= 1 && matrix[rowtile][columntile - 1].getType() != TileType.NULL) &&
                     (columntile <= 7 && matrix[rowtile][columntile + 1].getType() != TileType.NULL)) {
-//                System.out.println("Tiles haven't a free side");
                 return false;
             }
         }
@@ -201,13 +196,11 @@ public class Board implements Serializable {
         if (tiles.size() >= 2) {
             if ((Math.abs(tiles.get(0).getY() - tiles.get(1).getY()) != 1)
                     && (Math.abs(tiles.get(0).getX() - tiles.get(1).getX()) != 1)) {
-                //System.out.println("The two tiles are not near");
                 return false;
             }
             if (tiles.size() == 3) {
                 if ((Math.abs(tiles.get(1).getY() - tiles.get(2).getY()) != 1)
                         && (Math.abs(tiles.get(1).getX() - tiles.get(2).getX()) != 1)) {
-                    //System.out.println("The three tiles are not near");
                     return false;
                 }
             }
@@ -223,7 +216,6 @@ public class Board implements Serializable {
     public void removeTiles(List<Tile> tiles) {
         if (isRemovable(tiles)) {
             for (Tile t : tiles) {
-//                System.out.println("Tile " + tiles.indexOf(t) + " removed of type " + tiles.get(tiles.indexOf(t)).getType() + " in position x: " + tiles.get(tiles.indexOf(t)).getX() + " y: " + tiles.get(tiles.indexOf(t)).getY());
                 this.getMatrix()[t.getX()][t.getY()].setType(TileType.NULL);
             }
         }
@@ -233,49 +225,39 @@ public class Board implements Serializable {
      * this method is used to return the number of consecutive tiles that can be removed from the board
      * @return max number of tiles that can be removed from the board
      */
-    public int maxTilesBoard(){
+    public int maxTilesBoard() {
         int max = 1;
         List<Tile> tiles = new ArrayList<>();
 
-        for (int i=0; i<ROW; i++){
-            for (int j=0; j<COL; j++)
-            {
-
-                if (i< ROW-2)
-                {
+        for (int i=0; i<ROW; i++) {
+            for (int j=0; j<COL; j++) {
+                if (i< ROW-2) {
                     tiles.removeAll(tiles);
                     tiles.add(this.getMatrix()[i][j]);
                     tiles.add(this.getMatrix()[i+1][j]);
                     tiles.add(this.getMatrix()[i+2][j]);
-                    if(isRemovable(tiles)){
+                    if(isRemovable(tiles)) {
                         max=3;
                     }
-                    else{
+                    else {
                         tiles.removeAll(tiles);
-                        //System.out.println("\ncontrollo 2 row : i= "+ i + "j=" +j);
                         tiles.add(this.getMatrix()[i][j]);
                         tiles.add(this.getMatrix()[i+1][j]);
-                        if(isRemovable(tiles)){
+                        if(isRemovable(tiles)) {
                             if (max == 1){
                                 max= 2;
                             }
-                            //System.out.println("max:" + max);
-
                         }
                     }
-                }else {
-                    if (i < ROW-1)
-                    {
+                } else {
+                    if (i < ROW-1) {
                         tiles.removeAll(tiles);
-                        //System.out.println("\ncontrollo 2 row : i= "+ i + "j=" +j);
                         tiles.add(this.getMatrix()[i][j]);
                         tiles.add(this.getMatrix()[i+1][j]);
                         if(isRemovable(tiles)){
                             if (max == 1){
                                 max= 2;
                             }
-                            //System.out.println("max:" + max);
-
                         }
                     }
                 }
@@ -286,37 +268,29 @@ public class Board implements Serializable {
                     tiles.add(this.getMatrix()[i][j + 1]);
                     tiles.add(this.getMatrix()[i][j + 2]);
                     if (isRemovable(tiles)) {
-                        max= 3;
-                    }else {
+                        max = 3;
+                    } else {
                         tiles.removeAll(tiles);
-                        //System.out.println("\ncontrollo 2 col : i= "+ i + "j=" +j);
                         tiles.add(this.getMatrix()[i][j]);
                         tiles.add(this.getMatrix()[i][j+1]);
-                        if(isRemovable(tiles)){
+                        if(isRemovable(tiles)) {
                             if (max == 1){
                                 max= 2;
                             }
-                            //System.out.println("max:" + max);
                         }
                     }
-                }else{
-                    if (j < COL-1)
-                    {
+                } else {
+                    if (j < COL-1) {
                         tiles.removeAll(tiles);
-                        //System.out.println("\ncontrollo 2 col : i= "+ i + "j=" +j);
                         tiles.add(this.getMatrix()[i][j]);
                         tiles.add(this.getMatrix()[i][j+1]);
-                        if(isRemovable(tiles)){
-                            if (max == 1){
+                        if(isRemovable(tiles)) {
+                            if (max == 1) {
                                 max= 2;
                             }
-                            //System.out.println("max:" + max);
                         }
                     }
                 }
-
-
-
             }
         }
         return max;
