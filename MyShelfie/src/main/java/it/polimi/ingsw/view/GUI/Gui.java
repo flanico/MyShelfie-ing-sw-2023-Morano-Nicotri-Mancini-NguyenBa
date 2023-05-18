@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.util.List;
 import java.util.Map;
 
-import static it.polimi.ingsw.view.GUI.ErrorType.WRONG_CHOICE;
+import static it.polimi.ingsw.view.GUI.ErrorType.*;
 
 public class Gui extends ViewObservable implements View {
 
@@ -33,7 +33,7 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname){
         if(!isNicknameAccepted) {
-            Platform.runLater(() -> SceneController.showAlert("This nickname is already taken!"));
+            Platform.runLater(() -> SceneController.popUp(WRONG_NICKNAME));
             askNickname();
         }
     }

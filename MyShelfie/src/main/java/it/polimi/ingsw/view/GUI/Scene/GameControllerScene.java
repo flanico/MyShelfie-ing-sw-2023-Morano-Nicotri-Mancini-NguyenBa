@@ -3,19 +3,27 @@ package it.polimi.ingsw.view.GUI.Scene;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.ErrorType;
+import it.polimi.ingsw.view.GUI.SceneController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import javafx.scene.input.KeyCombination;
 
 
+/**
+ * This class is the controller of the game scene
+ * It contains all the methods that are called by the view to update the scene
+ * @author Stefano Morano
+ */
 public class GameControllerScene extends ViewObservable implements Controller {
 
     @FXML
@@ -431,6 +439,12 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public List<Player> playersList;                                            //the list of the players
     public int numberPlayers;                                                   //the number of the players in the game
     public void initialize(){
+        KeyCombination keyCombination = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
+       SceneController.getActiveScene().setOnKeyPressed((event -> {
+           if (keyCombination.match(event))
+               Platform.runLater(() -> SceneController.popUp(ErrorType.EASTER_EGG));
+
+       }));
        turn_text.setText("");
        boardError.setText("");
        shelf_text.setText("");
@@ -499,6 +513,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public void setOwner(Player owner) {
         this.owner = owner;
     }
+
+    /**
+     * this method is called when the player has to select the tiles in the board to place in the bookshelf
+     */
     public void activeSelection(){
         updateBoard();
         SelectedTiles.clear();
@@ -512,16 +530,19 @@ public class GameControllerScene extends ViewObservable implements Controller {
         cancel_button.setDisable(false);
         confirm_button.setDisable(false);
     }
+
+    /**
+     * this method is called when the score of the common goal cards has to be updated
+     */
     public void updateScores(){
         String path;
         for (int i = 0; i < 2; i++) {
-            for (Integer score : commonGoalCardScores.get(i).getStack()) {
-                if (score == 0)
-                    switch (i) {
-                        case 0 -> common_score_1.setImage(null);
-                        case 1 -> common_score_2.setImage(null);
-                    }
-                else {
+            if (commonGoalCardScores.get(i).getStack().isEmpty())
+                switch (i) {
+                    case 0 -> common_score_1.setImage(null);
+                    case 1 -> common_score_2.setImage(null);
+                }
+            else for (Integer score : commonGoalCardScores.get(i).getStack()) {
                         switch (score) {
                             case 2 -> path = "/scoring tokens/scoring_2.jpg";
                             case 4 -> path = "/scoring tokens/scoring_4.jpg";
@@ -533,9 +554,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
                             common_score_1.setImage(new Image(path));
                         else common_score_2.setImage(new Image(path));
                 }
-            }
         }
     }
+
     private void rotate(String direction){
         if (finalTiles.size()==2)
             Collections.swap(finalTiles,0,1);
@@ -545,6 +566,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             else if (direction.equals("up"))
                 Collections.swap(finalTiles, 1, 2);
     }
+
     public void activeShelf(){
         shelf_text.setText("Please select the column where to insert the tiles and decide their orders swapping them with the lateral arrows");
         column0.setDisable(false);
@@ -567,6 +589,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             downButton.setDisable(false);
         }
     }
+
     private void insertSelected(ImageView button, int x, int y) {
         boardError.setText("");
         Image img = button.getImage();
@@ -692,6 +715,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
             img.setOpacity(0.5);
         }
     }
+    /**
+     * @param col is the column of the shelf
+     * @return the number of free cells in the column
+     */
     private int free_cells(int col) {
         int empty=0;
         for (int i = 0; i < 6; i++) {
@@ -700,6 +727,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
         }
         return empty;
     }
+
     public void updatePersonalCard(){
         String path = null;
         switch (personalCard.getType()){
@@ -933,16 +961,18 @@ public class GameControllerScene extends ViewObservable implements Controller {
         }
     }
     public void confirmPressed(ActionEvent actionEvent){
-        select_card_phase = false;
-        cancel_button.setVisible(false);
-        confirm_button.setVisible(false);
-        cancel_button.setDisable(true);
-        confirm_button.setDisable(true);
-        sel_tile_1.setImage(null);
-        sel_tile_2.setImage(null);
-        sel_tile_3.setImage(null);
-        turn_text.setText("");
-        notifyObserver(obs -> obs.sendSelectTiles(SelectedTiles));
+        if (SelectedTiles.size() != 0) {
+            select_card_phase = false;
+            cancel_button.setVisible(false);
+            confirm_button.setVisible(false);
+            cancel_button.setDisable(true);
+            confirm_button.setDisable(true);
+            sel_tile_1.setImage(null);
+            sel_tile_2.setImage(null);
+            sel_tile_3.setImage(null);
+            turn_text.setText("");
+            notifyObserver(obs -> obs.sendSelectTiles(SelectedTiles));
+        }
     }
     public void cancelPressed(ActionEvent actionEvent){
         int size = SelectedTiles.size();

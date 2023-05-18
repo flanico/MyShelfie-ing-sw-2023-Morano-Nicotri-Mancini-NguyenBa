@@ -12,6 +12,10 @@ import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.event.Event;
 import javafx.scene.control.Alert;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * Class that controls every change of scenes, panels and observers
@@ -79,11 +83,51 @@ public class SceneController extends ViewObservable {
         changeRootPane(controller, activeScene, fxml);
     }
 
-     public static void showAlert(String message) {
-         Alert alert = new Alert(Alert.AlertType.ERROR);
-         alert.setTitle("Error");
-         alert.setContentText(message);
-         alert.showAndWait();
+    public static void popUp(ErrorType errorType) {
+        String path = "";
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(activeScene.getWindow());
+        Pane popupContent = new Pane();
+        popupContent.setPrefSize(400, 300);
+        switch (errorType){
+            case WRONG_NICKNAME -> {
+                path = "Graphics/nicknameTaken.png";
+                popupStage.setTitle("Nickname already taken");
+            }
+            case WRONG_ADDRESS -> {
+                path = "Graphics/wrongServerAddress.png";
+                popupStage.setTitle("Wrong server address");
+            }
+            case EMPTY_NICKNAME -> {
+                path = "Graphics/nicknameEmpty.png";
+                popupStage.setTitle("Empty nickname");
+            }
+            case WRONG_PORT -> {
+                path = "Graphics/WrongIPPort.png";
+                popupStage.setTitle("Wrong IP port");
+            }
+            case WRONG_PORT_ADDRESS -> {
+                path = "Graphics/twoWrong.png";
+                popupStage.setTitle("Wrong IP port and Server address");
+            }
+            case WRONG_TYPE -> {
+                path = "Graphics/selectServerType.png";
+                popupStage.setTitle("Select server type");
+            }
+            case EASTER_EGG -> {
+                path = "Graphics/easter.png";
+                popupStage.setTitle("Forza Napoli!");
+            }
+        }
+        ImageView imageView = new ImageView(path);
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(400);
+        imageView.setFitHeight(300);
+        popupContent.getChildren().add(imageView);
+        Scene popupScene = new Scene(popupContent);
+        popupStage.setScene(popupScene);
+        popupStage.showAndWait();
     }
 
 }

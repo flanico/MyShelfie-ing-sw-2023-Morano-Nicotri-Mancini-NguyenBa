@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI.Scene;
 
 import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.observer.ViewObservable;
+import it.polimi.ingsw.view.GUI.ErrorType;
 import it.polimi.ingsw.view.GUI.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,10 +69,10 @@ public class ConnectionController extends ViewObservable implements Controller {
 
             switch (error) {
                 case 0 -> new Thread(() -> notifyObserver(obs -> obs.createConnection(correctAddress, correctPort, type))).start();
-                case 1 -> SceneController.showAlert("Invalid Port");
-                case 2 -> SceneController.showAlert("Invalid Address");
-                case 3 -> SceneController.showAlert("Invalid Port and Address");
+                case 1 -> SceneController.popUp(ErrorType.WRONG_PORT);
+                case 2 -> SceneController.popUp(ErrorType.WRONG_ADDRESS);
+                case 3 -> SceneController.popUp(ErrorType.WRONG_PORT_ADDRESS);
             }
-        } else SceneController.showAlert("Please select a server type!");
+        } else SceneController.popUp(ErrorType.WRONG_TYPE);
     }
 }

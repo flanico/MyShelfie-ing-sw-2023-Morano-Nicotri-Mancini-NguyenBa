@@ -267,5 +267,6 @@
          </font></Text>
       <ImageView fx:id="shelf_54" fitHeight="46.0" fitWidth="46.0" layoutX="1159.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="seat" fitHeight="96.0" fitWidth="99.0" layoutX="357.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="easter" layoutX="572.0" layoutY="6.0" />
    </children>
 </Pane>
