@@ -9,11 +9,11 @@ import java.rmi.registry.Registry;
 
 public class RMIServer implements Runnable {
     private final Registry registry;
-    private final RMIInterfaceImp remote;
+    private final RMIStub remote;
 
     public RMIServer(int port, Server server) throws RemoteException {
         this.registry = LocateRegistry.createRegistry(port);
-        this.remote = new RMIInterfaceImp(server);
+        this.remote = new RMIStub(server);
     }
 
     @Override
