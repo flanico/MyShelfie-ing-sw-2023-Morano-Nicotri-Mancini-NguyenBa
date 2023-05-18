@@ -6,6 +6,7 @@ package it.polimi.ingsw.model;
  */
 public class CommonEightSameType extends CommonGoalCard {
     public final int number = 9;
+
     /**
      *Eight tiles of the same type. There’s no restriction about the position of these tiles.
      * @param bookshelf RoundPlayer
@@ -50,6 +51,7 @@ public class CommonEightSameType extends CommonGoalCard {
     public String toString() {
         return "Common Goal Card: Eight tiles of the same type. \nThere’s no restriction about the position of these tiles.";
     }
+
     @Override
     public int getNumber() {
         return number;

@@ -7,6 +7,7 @@ import java.util.HashSet;
  */
 public class CommonMaxThreeRows extends CommonGoalCard {
     public final int number = 7;
+
     /**
      *Four tiles of the same type in the four corners of the bookshelf.
      *@param bookshelf RoundPlayer
@@ -38,6 +39,7 @@ public class CommonMaxThreeRows extends CommonGoalCard {
     public String toString() {
         return "Common Goal Card: Four lines each formed by 5 tiles of maximum three different types. \nOne line can show the same or a different combination of another line.";
     }
+
     @Override
     public int getNumber() {
         return number;

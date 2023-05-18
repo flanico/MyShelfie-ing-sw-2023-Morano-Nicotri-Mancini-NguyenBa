@@ -15,23 +15,20 @@ public class PersonalGoalCard implements Serializable {
     private static final int ROW = 6;
     private static final int COL = 5;
 
-
     public PersonalGoalCard(PersonalGoalCardType type) {
         this.matrix = new Tile[ROW][COL];
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
-                this.matrix[i][j] = new Tile(TileType.NULL);
+                this.matrix[i][j] = new Tile(TileType.NULL, 1);
             }
         }
         this.type = type;
         this.assignType();
     }
 
-
     public Tile[][] getMatrix() {
         return matrix;
     }
-
 
     public PersonalGoalCardType getType() {
         return type;

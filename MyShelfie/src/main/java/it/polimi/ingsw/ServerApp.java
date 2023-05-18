@@ -42,7 +42,7 @@ public class ServerApp {
             Server.LOGGER.warning("Invalid port inserted! Using default port");
         }
 
-        RMIServer rmiServer = null;
+        RMIServer rmiServer;
         rmiServer = new RMIServer(serverRMIPort, server);
         Thread rmiThread = new Thread(rmiServer, "rmiserver_");
         rmiThread.start();

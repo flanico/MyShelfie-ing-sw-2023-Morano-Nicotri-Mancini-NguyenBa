@@ -4,8 +4,8 @@ package it.polimi.ingsw.model;
  * @author Stefano Morano
  */
 public class CommonSixGroups extends CommonGoalCard {
-
     public final int number = 4;
+
     /**
      *Six Groups of couples of tiles with same types.
      *@param bookshelf RoundPlayer
@@ -93,6 +93,7 @@ public class CommonSixGroups extends CommonGoalCard {
                 "2 tiles of the same type.\n" +
                 "The tiles of one group can be different from those of another group";
     }
+
     @Override
     public int getNumber() {
         return number;

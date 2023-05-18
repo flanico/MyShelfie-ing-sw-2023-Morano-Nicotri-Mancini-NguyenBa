@@ -31,7 +31,7 @@ public class Server {
      */
     public void addClient(String nickname, ClientHandler clientHandler) {
         VirtualView virtualView = new VirtualView(clientHandler);
-        //Case of new client
+        //case of new client
         if(!gameController.isGameStarted()) {
             if(gameController.checkLoginNickname(nickname, virtualView)) {
                 clientHandlerMap.put(nickname, clientHandler);
@@ -39,7 +39,7 @@ public class Server {
                 LOGGER.info(() -> nickname + "is connected to the game");
             }
         }
-        //Case of reconnected client
+        //case of reconnected client
         else if (gameController.isGameStarted() && gameController.getTurnController().getNicknames().size() < gameController.getNicknames().size()) {
             if(gameController.checkLoginNicknameReconnect(nickname, virtualView)) {
                 clientHandlerMap.put(nickname, clientHandler);
@@ -47,7 +47,7 @@ public class Server {
                 LOGGER.info(() -> nickname + " is reconnected to the game");
             }
         }
-        //Case of already started game
+        //case of already started game
         else {
             virtualView.showLoginResult(true, false,null);
             LOGGER.info(() -> "Game is already started. Player " + nickname + " cannot join the game");
@@ -87,14 +87,14 @@ public class Server {
         synchronized (lock) {
             String nickname = getNicknameFromClientHandler(clientHandler);
             if(nickname != null) {
-                //If is login phase ends the game
+                //if is login phase ends the game
                 if(!gameController.isGameStarted()) {
                     removeClient(nickname, false);
                     gameController.broadcastingDisconnection(nickname, false);
                     gameController.endGame();
                     LOGGER.warning(() -> "Game finishes in Login");
                 }
-                //If is in game phase continue for the disconnection resilience
+                //if is in game phase continue for the disconnection resilience
                 else {
                     removeClient(nickname, true);
                     clientHandlerMap.remove(nickname);

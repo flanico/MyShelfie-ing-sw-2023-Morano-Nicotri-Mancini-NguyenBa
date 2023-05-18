@@ -15,47 +15,55 @@ public class Tile implements Serializable {
     private TileType type;
     private int x;
     private int y;
+    private int colortype;
     private boolean blocked;
     private boolean counted;
 
-
-    public Tile(TileType type) {
+    /**
+     * constructor of Tile
+     * @param type of the tile
+     * @author Alessandro Mancini
+     */
+    public Tile(TileType type, int colortype) {
         this.type = type;
         this.x = -1;
         this.y = -1;
+        this.colortype = colortype;
         this.blocked = false;
         this.counted = false;
     }
 
-
-    public Tile(TileType type, int x, int y) {
+    /**
+     * remote interface used by RMIStub and RMISkeleton to handle the RMI connection
+     * @param type of the tile
+     * @param x coordinate
+     * @param y coordinate
+     * @author Alessandro Mancini
+     */
+    public Tile(TileType type, int colortype, int x, int y) {
         this.type = type;
         this.x = x;
         this.y = y;
+        this.colortype = colortype;
         this.blocked = false;
         this.counted = false;
     }
-
 
     public TileType getType() {
         return type;
     }
 
-
     public void setType(TileType type) {
         this.type = type;
     }
-
 
     public int getX() {
         return x;
     }
 
-
     public void setX(int x) {
         this.x = x;
     }
-
 
     public int getY() {
         return y;
@@ -69,25 +77,33 @@ public class Tile implements Serializable {
         return blocked;
     }
 
-
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
-
 
     public boolean isCounted() {
         return counted;
     }
 
-
     public void setCounted(boolean counted) {
         this.counted = counted;
     }
 
+    public int getColortype() {
+        return colortype;
+    }
+
+    public void setColortype(int colortype) {
+        this.colortype = colortype;
+    }
+
+    /**
+     * return a string of info of the tile
+     * @author Chiara Nguyen Ba
+     */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-
         switch (type) {
             case CAT -> builder.append(ColorCli.BACK_GREEN + " C " + ColorCli.RESET);
             case BOOK -> builder.append(ColorCli.BACK_WHITE + " B " + ColorCli.RESET);

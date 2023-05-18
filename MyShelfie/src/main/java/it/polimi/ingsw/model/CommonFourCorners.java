@@ -6,6 +6,7 @@ package it.polimi.ingsw.model;
  */
 public class CommonFourCorners extends CommonGoalCard {
     public final int number = 8;
+
     /**
      *Four tiles of the same type in the four corners of the bookshelf.
      *@param bookshelf RoundPlayer
@@ -26,6 +27,7 @@ public class CommonFourCorners extends CommonGoalCard {
     public String toString() {
         return "Common Goal Card:  Four tiles of the same type in the four corners of the bookshelf.";
     }
+
     @Override
     public int getNumber() {
         return number;
