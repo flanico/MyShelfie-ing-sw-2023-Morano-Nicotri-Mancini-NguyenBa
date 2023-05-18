@@ -408,26 +408,28 @@ public class GameControllerScene extends ViewObservable implements Controller {
     Text dx_text;
     @FXML
     Text central_text;
+    @FXML
+    ImageView seat;
 
 
 
-    public Board board;
-    List<Tile> SelectedTiles = new ArrayList<>();
-    List<Tile> finalTiles = new ArrayList<>();
-    private boolean select_card_phase;
-    PersonalGoalCard personalCard;
-    List<CommonGoalCard> commonGoalCards;
+    public Board board;                             //the board of the game
+    List<Tile> SelectedTiles = new ArrayList<>();   //the list of the tiles selected by the player
+    List<Tile> finalTiles = new ArrayList<>();      //the list of the tiles that will be placed in the bookshelf
+    private boolean select_card_phase;              //true if the player is in the select card phase
+    PersonalGoalCard personalCard;                  //the personal goal card of the player
+    List<CommonGoalCard> commonGoalCards;           //the list of the common goal cards of the game
     public Bookshelf shelf;
     public ErrorType error;
-    private int selected_column = -1;
-    List<CommonGoalCardScore> commonGoalCardScores = new ArrayList<>();
-    public CommonGoalCard win_card;
+    public boolean isFirst = false;
+    private int selected_column = -1;               //the column selected by the player
+    List<CommonGoalCardScore> commonGoalCardScores = new ArrayList<>();         //the list of the common goal cards scores
+    public CommonGoalCard win_card;                                             //
     public Player currentPlayer = null;
-    public int common_score;
-    public Player owner;
-    public List<Player> playersList;
-    public int numberPlayers;
-
+    public int common_score;                                                    //the score of the common goal cards
+    public Player owner;                                                        //the owner of the bookshelf
+    public List<Player> playersList;                                            //the list of the players
+    public int numberPlayers;                                                   //the number of the players in the game
     public void initialize(){
        turn_text.setText("");
        boardError.setText("");
@@ -491,6 +493,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public void setPlayersList(List<Player> playersList) {
         this.playersList = playersList;
     }
+    public void setFirst(boolean first) {
+        isFirst = first;
+    }
     public void setOwner(Player owner) {
         this.owner = owner;
     }
@@ -508,22 +513,25 @@ public class GameControllerScene extends ViewObservable implements Controller {
         confirm_button.setDisable(false);
     }
     public void updateScores(){
-        String path = null;
+        String path;
         for (int i = 0; i < 2; i++) {
             for (Integer score : commonGoalCardScores.get(i).getStack()) {
-                switch (score){
-                    case 2 -> path = "/scoring tokens/scoring_2.jpg";
-                    case 4 -> path = "/scoring tokens/scoring_4.jpg";
-                    case 6 -> path = "/scoring tokens/scoring_6.jpg";
-                    case 8 -> path = "/scoring tokens/scoring_8.jpg";
-                }
-                if (i==0) {
-                    assert path != null;
-                    common_score_1.setImage(new Image(path));
-                }
+                if (score == 0)
+                    switch (i) {
+                        case 0 -> common_score_1.setImage(null);
+                        case 1 -> common_score_2.setImage(null);
+                    }
                 else {
-                    assert path != null;
-                    common_score_2.setImage(new Image(path));
+                        switch (score) {
+                            case 2 -> path = "/scoring tokens/scoring_2.jpg";
+                            case 4 -> path = "/scoring tokens/scoring_4.jpg";
+                            case 6 -> path = "/scoring tokens/scoring_6.jpg";
+                            case 8 -> path = "/scoring tokens/scoring_8.jpg";
+                            default -> path = "";
+                        }
+                        if (i == 0)
+                            common_score_1.setImage(new Image(path));
+                        else common_score_2.setImage(new Image(path));
                 }
             }
         }
@@ -559,14 +567,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
             downButton.setDisable(false);
         }
     }
-    //TODO verifica che non si possa inserire due volte la stessa carta
     private void insertSelected(ImageView button, int x, int y) {
         boardError.setText("");
         Image img = button.getImage();
         ImageView sel = getButton(x, y);
         sel.setOpacity(0.5);
-        Tile tile = new Tile(board.getMatrix()[x][y].getType(), x, y);
-        if (!SelectedTiles.contains(tile)){
+        Tile tile = board.getMatrix()[x][y];
+        if (!SelectedTiles.contains(tile) && !tile.getType().equals(TileType.NULL)){
             SelectedTiles.add(tile);
             switch (SelectedTiles.size()) {
                 case 1 -> sel_tile_1.setImage(img);
@@ -582,25 +589,25 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
-    public void updateBookShelf(){
+    public void updateBookShelf(Player pl){
         ImageView ref_shelf;
         String selector = null;
-
-        if (currentPlayer.getNickname().equals(owner_nickname_text.getText()))
+        System.out.println(pl.getNickname());
+        if (pl.getNickname().equals(owner_nickname_text.getText()))
                 selector = "main";
-        else if (currentPlayer.getNickname().equals(sx_text.getText()))
+        else if (pl.getNickname().equals(sx_text.getText()))
                 selector = "sx";
-            else if (currentPlayer.getNickname().equals(dx_text.getText()))
-                selector = "dx";
-                else if (currentPlayer.getNickname().equals(central_text.getText()))
-                selector = "central";
+            else if (pl.getNickname().equals(dx_text.getText()))
+                    selector = "dx";
+                 else if (pl.getNickname().equals(central_text.getText()))
+                    selector = "central";
 
         for (int x=0; x<6; x++){
             for (int y=0; y<5; y++){
                 assert selector != null;
                 ref_shelf = getShelf(x, y, selector);
                 if (ref_shelf != null)
-                    setImage(ref_shelf, shelf.getMatrix()[x][y].getType());
+                    setImage(ref_shelf, pl.getBookshelf().getMatrix()[x][y].getType());
             }
         }
     }
@@ -614,19 +621,20 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
     }
     public void winCard(){
-        String path = null;
+        String path;
         switch (common_score){
             case 2 -> path = "/scoring tokens/scoring_2.jpg";
             case 4 -> path = "/scoring tokens/scoring_4.jpg";
             case 6 -> path = "/scoring tokens/scoring_6.jpg";
             case 8 -> path = "/scoring tokens/scoring_8.jpg";
+            default -> path = "";
         }
         if ( commonGoalCards.get(0).getNumber() == win_card.getNumber() )
             common_prize_1.setImage(new Image(path));
         else common_prize_2.setImage(new Image(path));
     }
     public void updateCommonGoalCards(){
-        String path = null;
+        String path;
         for (int x=1; x<3; x++) {
             switch (commonGoalCards.get(x-1).getNumber()) {
                 case 1 -> path = "/common goal cards/1.jpg";
@@ -641,6 +649,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
                 case 10 -> path = "/common goal cards/10.jpg";
                 case 11 -> path = "/common goal cards/11.jpg";
                 case 12 -> path = "/common goal cards/12.jpg";
+                default -> path = "";
             }
             switch (x){
                 case 1 -> common_goal1.setImage(new Image(path));
@@ -652,6 +661,8 @@ public class GameControllerScene extends ViewObservable implements Controller {
         while (!playersList.get(0).getNickname().equals(owner.getNickname()))
             Collections.rotate(playersList, -1);
         owner_nickname_text.setText(owner.getNickname());
+        if (isFirst)
+            seat.setImage(new Image("/misc/firstplayertoken.png"));
         switch (numberPlayers){
             case 2 ->{
                 bookshelf_c.setImage(new Image("/boards/bookshelf_orth.png"));
@@ -672,7 +683,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
                 dx_text.setText(playersList.get(3).getNickname());
             }
         }
-        System.out.println(owner);
     }
     private void tryInsert(int col){
         ImageView img;
@@ -913,13 +923,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
                 case TROPHY -> path = "/item tiles/Trofei1.1.png";
             }
 
-            Image img = new Image(getClass().getResourceAsStream(path));
+            Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream(path)));
             ref_button.setImage(img);
             ref_button.setOpacity(1.0);
         }
 
     }
-    public void confirmPressed(ActionEvent actionEvent) throws Exception{
+    public void confirmPressed(ActionEvent actionEvent){
         select_card_phase = false;
         cancel_button.setVisible(false);
         confirm_button.setVisible(false);
@@ -931,11 +941,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
         turn_text.setText("");
         notifyObserver(obs -> obs.sendSelectTiles(SelectedTiles));
     }
-    public void cancelPressed(ActionEvent actionEvent) throws Exception{
+    public void cancelPressed(ActionEvent actionEvent){
         int size = SelectedTiles.size();
         ImageView button;
         if (size>0) {
-
             switch (SelectedTiles.size()) {
                 case 1 -> sel_tile_1.setImage(null);
                 case 2 -> sel_tile_2.setImage(null);
@@ -950,271 +959,226 @@ public class GameControllerScene extends ViewObservable implements Controller {
         if (select_card_phase && !board.getMatrix()[0][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(0,3), 0 , 3);
         }
-        System.out.println("Button_03 clicked");
     }
     public void button_04_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[0][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(0,4), 0 , 4);
         }
-        System.out.println("Button_04 clicked");
     }
     public void button_13_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[1][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(1,3), 1 , 3);
         }
-        System.out.println("Button_13 clicked");
     }
     public void button_14_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[1][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(1,4), 1 , 4);
         }
-        System.out.println("Button_14 clicked");
     }
     public void button_15_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[1][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(1,5), 1 , 5);
         }
-        System.out.println("Button_03 clicked");
     }
     public void button_22_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[2][2].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(2,2), 2 , 2);
         }
-        System.out.println("Button_22 clicked");
     }
     public void button_23_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[2][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(2,3), 2 , 3);
         }
-        System.out.println("Button_23 clicked");
     }
     public void button_24_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[2][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(2,4), 2 , 4);
         }
-        System.out.println("Button_24 clicked");
     }
     public void button_25_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[2][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(2,5), 2 , 5);
         }
-        System.out.println("Button_25 clicked");
     }
     public void button_26_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[2][6].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(2,6), 2 , 6);
         }
-        System.out.println("Button_26 clicked");
     }
     public void button_31_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][1].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,1), 3 , 1);
         }
-        System.out.println("Button_31 clicked");
     }
     public void button_32_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][2].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,2), 3 , 2);
         }
-        System.out.println("Button_32 clicked");
     }
     public void button_33_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,3), 3 , 3);
         }
-        System.out.println("Button_33 clicked");
     }
     public void button_34_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,4), 3 , 4);
         }
-        System.out.println("Button_34 clicked");
     }
     public void button_35_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,5), 3 , 5);
         }
-        System.out.println("Button_35 clicked");
     }
     public void button_36_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][6].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,6), 3 , 6);
         }
-        System.out.println("Button_36 clicked");
     }
     public void button_37_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][7].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,7), 3 , 7);
         }
-        System.out.println("Button_37 clicked");
     }
     public void button_38_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][8].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,8), 3 , 8);
         }
-        System.out.println("Button_38 clicked");
     }
     public void button_40_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[0][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,0), 4 , 0);
         }
-        System.out.println("Button_40 clicked");
     }
     public void button_41_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][1].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4, 1), 4 , 1);
         }
-        System.out.println("Button_41 clicked");
     }
     public void button_42_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][2].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,2), 4 , 2);
         }
-        System.out.println("Button_42 clicked");
     }
     public void button_43_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,3), 4 , 3);
         }
-        System.out.println("Button_43 clicked");
     }
     public void button_44_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,4), 4 , 4);
         }
-        System.out.println("Button_44 clicked");
     }
     public void button_45_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,5), 4 , 5);
         }
-        System.out.println("Button_45 clicked");
     }
     public void button_46_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][6].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,6), 4 , 6);
         }
-        System.out.println("Button_46 clicked");
     }
     public void button_47_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][7].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,7), 4, 7);
         }
-        System.out.println("Button_47 clicked");
     }
     public void button_48_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][8].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,8), 4 , 8);
         }
-        System.out.println("Button_48 clicked");
     }
     public void button_50_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][0].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,0), 5 , 0);
         }
-        System.out.println("Button_50 clicked");
     }
     public void button_51_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][1].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,1), 5 , 1);
         }
-        System.out.println("Button_51 clicked");
     }
     public void button_52_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][2].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,2), 5 , 2);
         }
-        System.out.println("Button_52 clicked");
     }
     public void button_53_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,3), 5 , 3);
         }
-        System.out.println("Button_53 clicked");
     }
     public void button_54_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,4), 5 , 4);
         }
-        System.out.println("Button_54 clicked");
     }
     public void button_55_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,5), 5 , 5);
         }
-        System.out.println("Button_55 clicked");
     }
     public void button_56_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][6].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,6), 5 , 6);
         }
-        System.out.println("Button_56 clicked");
     }
     public void button_57_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][7].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,7), 5 , 7);
         }
-        System.out.println("Button_57 clicked");
     }
     public void button_62_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[6][2].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(6,2), 6 , 2);
         }
-        System.out.println("Button_62 clicked");
     }
     public void button_63_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[6][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(6,3), 6 , 3);
         }
-        System.out.println("Button_63 clicked");
     }
     public void button_64_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[6][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(6,4), 6 , 4);
         }
-        System.out.println("Button_64 clicked");
     }
     public void button_65_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[6][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(6,5), 6 , 5);
         }
-        System.out.println("Button_65 clicked");
     }
     public void button_66_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[6][6].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(6,6), 6 , 6);
         }
-        System.out.println("Button_66 clicked");
     }
     public void button_73_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[7][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(7,3), 7 , 3);
         }
-        System.out.println("Button_73 clicked");
     }
     public void button_74_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[7][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(7,4), 7 , 4);
         }
-        System.out.println("Button_74 clicked");
     }
     public void button_75_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[7][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(7,5), 7 , 5);
         }
-        System.out.println("Button_75 clicked");
     }
     public void button_84_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[8][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(8,4), 8 , 4);
         }
-        System.out.println("Button_84 clicked");
     }
     public void button_85_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[8][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(8,5), 8 , 5);
         }
-        System.out.println("Button_85 clicked");
     }
     public void downPressed(ActionEvent actionEvent) {
         rotate("down");
@@ -1226,35 +1190,35 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
     public void column0Pressed(ActionEvent actionEvent) {
         if (finalTiles.size()<=free_cells(0) && selected_column!=0) {
-            updateBookShelf();
+            updateBookShelf(currentPlayer);
             selected_column = 0;
             tryInsert(0);
         }
     }
     public void column1Pressed(ActionEvent actionEvent) {
         if (finalTiles.size()<=free_cells(1) && selected_column!=1) {
-            updateBookShelf();
+            updateBookShelf(currentPlayer);
             selected_column = 1;
             tryInsert(1);
         }
     }
     public void column2Pressed(ActionEvent actionEvent) {
         if (finalTiles.size()<=free_cells(2) && selected_column!=2) {
-            updateBookShelf();
+            updateBookShelf(currentPlayer);
             selected_column = 2;
             tryInsert(2);
         }
     }
     public void column3Pressed(ActionEvent actionEvent) {
         if (finalTiles.size()<=free_cells(3) && selected_column!=3) {
-            updateBookShelf();
+            updateBookShelf(currentPlayer);
             selected_column = 3;
             tryInsert(3);
         }
     }
     public void column4Pressed(ActionEvent actionEvent) {
         if (finalTiles.size()<=free_cells(4) && selected_column!=4) {
-            updateBookShelf();
+            updateBookShelf(currentPlayer);
             selected_column = 4;
             tryInsert(4);
         }

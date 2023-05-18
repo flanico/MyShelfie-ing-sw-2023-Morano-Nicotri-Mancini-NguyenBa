@@ -16,8 +16,8 @@ public class Gui extends ViewObservable implements View {
 
     private int players_number;
     private List<Player> players_in_game;
-
     private Player owner;
+    private boolean isFirst = false;
 
     @Override
     public void askNickname(){
@@ -26,6 +26,7 @@ public class Gui extends ViewObservable implements View {
 
     @Override
     public void askPlayersNumber(){
+        this.isFirst = true;
         Platform.runLater(() -> SceneController.changeRootPane(observers, "SelectPlayersPanel.fxml"));
     }
 
@@ -164,7 +165,7 @@ public class Gui extends ViewObservable implements View {
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setShelf(player.getBookshelf());
         game_ctrl.setCurrentPlayer(player);
-        Platform.runLater(game_ctrl::updateBookShelf);
+        Platform.runLater(() -> game_ctrl.updateBookShelf(player));
     }
 
     /**
@@ -231,6 +232,8 @@ public class Gui extends ViewObservable implements View {
             game_ctrl.setNumberPlayers(this.players_number);
             game_ctrl.setPlayersList(this.players_in_game);
             game_ctrl.setOwner(this.owner);
+            if (this.isFirst)
+                game_ctrl.setFirst(true);
             Platform.runLater(game_ctrl::initGame);
         }
         return game_ctrl;
