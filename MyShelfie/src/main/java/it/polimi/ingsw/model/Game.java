@@ -24,7 +24,10 @@ public class Game extends Observable implements Serializable {
     private Stack<Tile> bag;
     private Map<String, Integer> playerScore;
 
-
+    /**
+     * constructor of Game
+     * @author Alessandro Mancini
+     */
     public Game() {
         this.players = new ArrayList<>();
         this.commongoalcards = new ArrayList<>();
@@ -38,6 +41,7 @@ public class Game extends Observable implements Serializable {
     /**
      * initialization of the game
      * @param numMax number of players chosen by the first player joined in the game
+     * @author Alessandro Mancini
      */
     public void initGame(int numMax) {
         if(numMax >= 2 && numMax <= MAX_PLAYERS) {
@@ -58,6 +62,7 @@ public class Game extends Observable implements Serializable {
 
     /**
      * getter of the max number of players chosen by the first player
+     * @author Alessandro Mancini
      */
     public int getNum() {
         return num;
@@ -66,6 +71,7 @@ public class Game extends Observable implements Serializable {
     /**
      * setter of the max number of players chosen by the first player
      * @param num max number of players
+     * @author Alessandro Mancini
      */
     public void setNum(int num) {
         this.num = num;
@@ -103,6 +109,7 @@ public class Game extends Observable implements Serializable {
      * returns a player given his nickname
      * @param nickname of player to be found
      * @return the player of given nickname, null otherwise
+     * @author Chiara Nguyen Ba
      */
     public Player getPlayerByNickname(String nickname) {
         return players.stream()
@@ -114,6 +121,7 @@ public class Game extends Observable implements Serializable {
     /**
      * return a list of player nicknames that are already in the game
      * @return a list with all nicknames in the game
+     * @author Alessandro Mancini
      */
     public List<String> getAllPlayers() {
         List<String> playersNicknames = new ArrayList<>();
@@ -133,7 +141,10 @@ public class Game extends Observable implements Serializable {
         notifyObserver(new InfoGameMessage(playersWithoutDisconnected, num));
     }
 
-
+    /**
+     * getter of players
+     * @author Alessandro Mancini
+     */
     public List<Player> getPlayers() {
         return players;
     }
@@ -153,7 +164,10 @@ public class Game extends Observable implements Serializable {
         player.setPersonalGoalCard(new PersonalGoalCard(type));
     }
 
-
+    /**
+     * getter of personalgoalcards
+     * @author Alessandro Mancini
+     */
     public List<PersonalGoalCardType> getPersonalgoalcards() {
         return personalgoalcards;
     }
@@ -200,7 +214,10 @@ public class Game extends Observable implements Serializable {
         };
     }
 
-
+    /**
+     * initializer of commongoalcards
+     * @author Alessandro Mancini
+     */
     public List<CommonGoalCard> getCommongoalcards() {
         return commongoalcards;
     }
@@ -214,7 +231,10 @@ public class Game extends Observable implements Serializable {
         this.commongoalcardscores.add(new CommonGoalCardScore(this.num));
     }
 
-
+    /**
+     * getter of commongoalcardscores
+     * @author Alessandro Mancini
+     */
     public List<CommonGoalCardScore> getCommongoalcardscores() {
         return commongoalcardscores;
     }
@@ -227,13 +247,17 @@ public class Game extends Observable implements Serializable {
         this.board = new Board(this.num);
     }
 
-
+    /**
+     * getter of board
+     * @author Alessandro Mancini
+     */
     public Board getBoard() {
         return board;
     }
 
     /**
      * initializer of the bag
+     * @author Alessandro Mancini
      */
     private void initBag() {
         this.bag = new Stack<>();
@@ -312,6 +336,10 @@ public class Game extends Observable implements Serializable {
         Collections.shuffle(this.bag);
     }
 
+    /**
+     * getter of bag
+     * @author Alessandro Mancini
+     */
     public Stack<Tile> getBag() {
         return bag;
     }
