@@ -428,7 +428,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
     PersonalGoalCard personalCard;                  //the personal goal card of the player
     List<CommonGoalCard> commonGoalCards;           //the list of the common goal cards of the game
     public Bookshelf shelf;
-    public ErrorType error;
     public boolean isFirst = false;
     private int selected_column = -1;               //the column selected by the player
     List<CommonGoalCardScore> commonGoalCardScores = new ArrayList<>();         //the list of the common goal cards scores
@@ -438,8 +437,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public Player owner;                                                        //the owner of the bookshelf
     public List<Player> playersList;                                            //the list of the players
     public int numberPlayers;                                                   //the number of the players in the game
+
+
     public void initialize(){
-        KeyCombination keyCombination = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
+       KeyCombination keyCombination = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
        SceneController.getActiveScene().setOnKeyPressed((event -> {
            if (keyCombination.match(event))
                Platform.runLater(() -> SceneController.popUp(ErrorType.EASTER_EGG));
@@ -482,9 +483,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
     public void setShelf(Bookshelf shelf) {
         this.shelf = shelf;
-    }
-    public void setError(ErrorType error) {
-        this.error = error;
     }
     public void setFinalTiles(List<Tile> finalTiles) {
         this.finalTiles = finalTiles;
@@ -602,13 +600,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
                 case 1 -> sel_tile_1.setImage(img);
                 case 2 -> sel_tile_2.setImage(img);
                 case 3 -> sel_tile_3.setImage(img);
-            }
-        }
-    }
-    public void showMessage() {
-        switch (error) {
-            case WRONG_CHOICE -> {
-                boardError.setText("You can't choose this tiles!");
             }
         }
     }
@@ -961,7 +952,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
         }
     }
     public void confirmPressed(ActionEvent actionEvent){
-        if (SelectedTiles.size() != 0) {
+        if (SelectedTiles.size()!=0 && SelectedTiles.size()>shelf.maxTilesBookshelf()) {
+            Platform.runLater(() -> SceneController.popUp(ErrorType.NOT_SPACE));
+            activeSelection();
+        } else if (SelectedTiles.size() != 0) {
             select_card_phase = false;
             cancel_button.setVisible(false);
             confirm_button.setVisible(false);

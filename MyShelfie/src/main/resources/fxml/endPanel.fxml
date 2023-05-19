@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.EndPanel"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="348.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are the winner!" />
+      <Text layoutX="257.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1° place: Ste with 10 points">
+         <font>
+            <Font name="Comic Sans MS" size="24.0" />
+         </font></Text>
+      <Text layoutX="257.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2° place: Ste with 10 points">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <Text layoutX="257.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3° place: Ste with 10 points">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="257.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4° place: Ste with 10 points">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

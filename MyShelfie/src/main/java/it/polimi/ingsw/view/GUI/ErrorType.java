@@ -11,6 +11,9 @@ public enum ErrorType {
     WRONG_PORT_ADDRESS,
     EMPTY_NICKNAME,
     WRONG_TYPE,
+    NOT_SPACE,
+    NOT_REMOVABLE_TILES,
     EASTER_EGG;
+
 
 }

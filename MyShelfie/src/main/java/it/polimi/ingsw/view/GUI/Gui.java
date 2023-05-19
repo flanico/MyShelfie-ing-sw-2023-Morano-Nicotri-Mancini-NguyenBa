@@ -12,6 +12,12 @@ import java.util.Map;
 
 import static it.polimi.ingsw.view.GUI.ErrorType.*;
 
+/**
+ * Override of the View class for the GUI
+ * Every methods of the View are implemented in this class for the GUI
+ * @author Stefano Morano
+ */
+
 public class Gui extends ViewObservable implements View {
 
     private int players_number;
@@ -82,11 +88,8 @@ public class Gui extends ViewObservable implements View {
     public void showGenericMessage(String genericMessage){
 
         if (genericMessage.equals("Sorry, tiles selected are NOT removable from the board! Retry.")){
-            GameControllerScene game_ctrl = new GameControllerScene();
-            game_ctrl.setError(WRONG_CHOICE);
-            Platform.runLater(game_ctrl::showMessage);
+            Platform.runLater(() -> SceneController.popUp(NOT_REMOVABLE_TILES));
         }
-
     }
 
     /**

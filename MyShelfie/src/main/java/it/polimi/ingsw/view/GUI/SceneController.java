@@ -12,6 +12,7 @@ import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.event.Event;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -93,31 +94,48 @@ public class SceneController extends ViewObservable {
         switch (errorType){
             case WRONG_NICKNAME -> {
                 path = "Graphics/nicknameTaken.png";
-                popupStage.setTitle("Nickname already taken");
+                popupStage.setTitle("Nickname already taken!");
+                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case WRONG_ADDRESS -> {
                 path = "Graphics/wrongServerAddress.png";
-                popupStage.setTitle("Wrong server address");
+                popupStage.setTitle("Wrong server address!");
+                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case EMPTY_NICKNAME -> {
                 path = "Graphics/nicknameEmpty.png";
-                popupStage.setTitle("Empty nickname");
+                popupStage.setTitle("Empty nickname!");
+                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case WRONG_PORT -> {
                 path = "Graphics/WrongIPPort.png";
-                popupStage.setTitle("Wrong IP port");
+                popupStage.setTitle("Wrong IP port!");
+                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case WRONG_PORT_ADDRESS -> {
                 path = "Graphics/twoWrong.png";
-                popupStage.setTitle("Wrong IP port and Server address");
+                popupStage.setTitle("Wrong IP port and Server address!");
+                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case WRONG_TYPE -> {
                 path = "Graphics/selectServerType.png";
-                popupStage.setTitle("Select server type");
+                popupStage.setTitle("Select server type!");
+                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case EASTER_EGG -> {
                 path = "Graphics/easter.png";
                 popupStage.setTitle("Forza Napoli!");
+                popupStage.getIcons().add(new Image("/Graphics/Napoli-Logo.png"));
+            }
+            case NOT_REMOVABLE_TILES -> {
+                path = "Graphics/tilesWrong.png";
+                popupStage.setTitle("Not removable tiles!");
+                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
+            }
+            case NOT_SPACE -> {
+                path = "Graphics/spaceBookshelf.png";
+                popupStage.setTitle("Not enough space!");
+                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
         }
         ImageView imageView = new ImageView(path);
@@ -127,6 +145,7 @@ public class SceneController extends ViewObservable {
         popupContent.getChildren().add(imageView);
         Scene popupScene = new Scene(popupContent);
         popupStage.setScene(popupScene);
+
         popupStage.showAndWait();
     }
 
