@@ -26,104 +26,12 @@ import javafx.scene.input.KeyCombination;
  */
 public class GameControllerScene extends ViewObservable implements Controller {
 
-    @FXML
-    ImageView button_03;
-    @FXML
-    ImageView button_04;
-    @FXML
-    ImageView button_13;
-    @FXML
-    ImageView button_14;
-    @FXML
-    ImageView button_15;
-    @FXML
-    ImageView button_22;
-    @FXML
-    ImageView button_23;
-    @FXML
-    ImageView button_24;
-    @FXML
-    ImageView button_25;
-    @FXML
-    ImageView button_26;
-    @FXML
-    ImageView button_31;
-    @FXML
-    ImageView button_32;
-    @FXML
-    ImageView button_33;
-    @FXML
-    ImageView button_34;
-    @FXML
-    ImageView button_35;
-    @FXML
-    ImageView button_36;
-    @FXML
-    ImageView button_37;
-    @FXML
-    ImageView button_38;
-    @FXML
-    ImageView button_40;
-    @FXML
-    ImageView button_41;
-    @FXML
-    ImageView button_42;
-    @FXML
-    ImageView button_43;
-    @FXML
-    ImageView button_44;
-    @FXML
-    ImageView button_45;
-    @FXML
-    ImageView button_46;
-    @FXML
-    ImageView button_47;
-    @FXML
-    ImageView button_48;
-    @FXML
-    ImageView button_50;
-    @FXML
-    ImageView button_51;
-    @FXML
-    ImageView button_52;
-    @FXML
-    ImageView button_53;
-    @FXML
-    ImageView button_54;
-    @FXML
-    ImageView button_55;
-    @FXML
-    ImageView button_56;
-    @FXML
-    ImageView button_57;
-    @FXML
-    ImageView button_62;
-    @FXML
-    ImageView button_63;
-    @FXML
-    ImageView button_64;
-    @FXML
-    ImageView button_65;
-    @FXML
-    ImageView button_66;
-    @FXML
-    ImageView button_73;
-    @FXML
-    ImageView button_74;
-    @FXML
-    ImageView button_75;
-    @FXML
-    ImageView button_84;
-    @FXML
-    ImageView button_85;
-    @FXML
+    @FXML   //initialize all the buttons of the board
+    ImageView button_03, button_04, button_13, button_14, button_15, button_22, button_23, button_24, button_25, button_26, button_31, button_32, button_33, button_34, button_35, button_36, button_37, button_38, button_40, button_41, button_42, button_43, button_44, button_45, button_46, button_47, button_48, button_50, button_51, button_52, button_53, button_54, button_55, button_56, button_57, button_62, button_63, button_64, button_65, button_66, button_73, button_74, button_75, button_84, button_85;
+    @FXML   //initialize the personal card image
     ImageView personalCardImage;
-    @FXML
-    ImageView sel_tile_1;
-    @FXML
-    ImageView sel_tile_2;
-    @FXML
-    ImageView sel_tile_3;
+    @FXML   //initialize the selected card image
+    ImageView sel_tile_1, sel_tile_2, sel_tile_3;
     @FXML
     Text turn_text;
     @FXML

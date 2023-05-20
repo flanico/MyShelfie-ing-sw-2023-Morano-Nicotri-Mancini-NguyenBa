@@ -1,49 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.LobbyController">
    <children>
       <ImageView fitHeight="616.0" fitWidth="812.0" layoutX="-6.0" layoutY="-9.0" pickOnBounds="true">
          <image>
-            <Image url="@/misc/sfondo.jpg" />
+            <Image url="@/Graphics/lobby_image.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="80.0" layoutX="377.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="40.0" fitWidth="80.0" layoutX="238.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/Effects/loading-gif.gif" />
+            <Image url="@/Graphics/gif.gif" />
          </image></ImageView>
-      <Label layoutX="347.0" layoutY="67.0" prefHeight="62.0" prefWidth="106.0" text="Lobby">
+      <ImageView fx:id="pl1" fitHeight="60.0" fitWidth="191.0" layoutX="39.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/Player1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pl2" fitHeight="60.0" fitWidth="200.0" layoutX="38.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/Player2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pl3" fitHeight="60.0" fitWidth="200.0" layoutX="38.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/Player3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="pl4" fitHeight="150.0" fitWidth="200.0" layoutX="38.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/Player4.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="number" layoutX="361.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1/2">
          <font>
-            <Font name="Times New Roman" size="36.0" />
+            <Font name="Comic Sans MS Bold" size="45.0" />
          </font>
-      </Label>
-      <Label layoutX="332.0" layoutY="179.0" text="Waiting for others players">
+      </Text>
+      <ImageView fx:id="white1" fitHeight="90.0" fitWidth="296.0" layoutX="271.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/bianco.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="white2" fitHeight="90.0" fitWidth="296.0" layoutX="271.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/bianco.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="white3" fitHeight="90.0" fitWidth="296.0" layoutX="271.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/bianco.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="white4" fitHeight="90.0" fitWidth="296.0" layoutX="271.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/bianco.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="pl1Text" layoutX="280.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1">
          <font>
-            <Font name="Times New Roman" size="12.0" />
-         </font></Label>
-      <Label fx:id="player_1" layoutX="376.0" layoutY="299.0" text="Player 1">
+            <Font name="Comic Sans MS Bold Italic" size="27.0" />
+         </font>
+      </Text>
+      <Text fx:id="pl2Text" layoutX="280.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2">
          <font>
-            <Font name="Times New Roman" size="12.0" />
-         </font></Label>
-      <Label fx:id="player_2" layoutX="376.0" layoutY="372.0" text="Player 2">
+            <Font name="Comic Sans MS Bold Italic" size="27.0" />
+         </font>
+      </Text>
+      <Text fx:id="pl3Text" layoutX="280.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3">
          <font>
-            <Font name="Times New Roman" size="12.0" />
-         </font></Label>
-      <Label fx:id="player_3" layoutX="376.0" layoutY="445.0" text="Player 3">
+            <Font name="Comic Sans MS Bold Italic" size="27.0" />
+         </font>
+      </Text>
+      <Text fx:id="pl4Text" layoutX="280.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4">
          <font>
-            <Font name="Times New Roman" size="12.0" />
-         </font></Label>
-      <Label fx:id="player_4" layoutX="379.0" layoutY="519.0" text="Player 4">
-         <font>
-            <Font name="Times New Roman" size="12.0" />
-         </font></Label>
-      <Label fx:id="number" layoutX="376.0" layoutY="239.0" text="number">
-         <font>
-            <Font name="Times New Roman" size="12.0" />
-         </font></Label>
+            <Font name="Comic Sans MS Bold Italic" size="27.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="40.0" fitWidth="80.0" layoutX="523.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/gif.gif" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

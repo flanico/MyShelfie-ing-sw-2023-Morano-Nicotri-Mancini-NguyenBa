@@ -54,7 +54,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showGameInfo(List<Player> players, int numberPlayers){
-        LobbyController lobby_ctrl;
+        /*LobbyController lobby_ctrl;
         try {
             lobby_ctrl = (LobbyController) SceneController.getActiveController();
             lobby_ctrl.setNicknames(players);
@@ -65,13 +65,32 @@ public class Gui extends ViewObservable implements View {
             lobby_ctrl = new LobbyController();
             lobby_ctrl.addAllObservers(observers);
             lobby_ctrl.setNicknames(players);
-            this.players_in_game=players;
+
             lobby_ctrl.setNum_players(numberPlayers);
-            this.players_number=numberPlayers;
-            this.owner=players.get(players.size()-1);
+
+
             LobbyController new_ctrl = lobby_ctrl;
             Platform.runLater(() -> SceneController.changeRootPane(new_ctrl, "lobbyPanel.fxml"));
+        }*/
+        this.players_in_game=players;
+        this.players_number=numberPlayers;
+        this.owner=players.get(players.size()-1);
+        LobbyController lobby_ctrl;
+        LobbyController new_ctrl;
+        final LobbyController new_ctrl2;
+        try {
+            lobby_ctrl = (LobbyController) SceneController.getActiveController();
+            new_ctrl2 = lobby_ctrl;
+            Platform.runLater(() -> new_ctrl2.update(players, numberPlayers));
+
+        } catch (ClassCastException e) {
+            SceneController.changeRootPane(observers, SceneController.getActiveScene(),"lobbyPanel.fxml");
+            lobby_ctrl = (LobbyController) SceneController.getActiveController();
+            new_ctrl = lobby_ctrl;
+            Platform.runLater(() -> new_ctrl.init(players, numberPlayers));
         }
+
+
     }
 
     /**
@@ -244,4 +263,5 @@ public class Gui extends ViewObservable implements View {
         }
         return game_ctrl;
     }
+
 }
