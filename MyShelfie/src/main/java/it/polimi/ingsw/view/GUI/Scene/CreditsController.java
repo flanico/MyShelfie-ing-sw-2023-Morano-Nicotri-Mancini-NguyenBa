@@ -1,4 +1,6 @@
 package it.polimi.ingsw.view.GUI.Scene;
 
-public class CreditsController {
+import it.polimi.ingsw.observer.ViewObservable;
+
+public class CreditsController extends ViewObservable implements Controller{
 }

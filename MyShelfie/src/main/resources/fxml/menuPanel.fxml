@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
@@ -20,5 +21,6 @@
             <Image url="@/Graphics/playButton.png" />
          </image>
       </ImageView>
+      <Button fx:id="creditButton" layoutX="660.0" layoutY="549.0" mnemonicParsing="false" onAction="#goCredits" text="Credits" />
    </children>
 </Pane>

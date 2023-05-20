@@ -191,8 +191,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
     @FXML
     ImageView shelf_54;
     @FXML
-    Text boardError;
-    @FXML
     Button column0;
     @FXML
     Button column1;
@@ -440,14 +438,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
 
 
     public void initialize(){
-       KeyCombination keyCombination = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
+      KeyCombination keyCombination = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
        SceneController.getActiveScene().setOnKeyPressed((event -> {
            if (keyCombination.match(event))
                Platform.runLater(() -> SceneController.popUp(ErrorType.EASTER_EGG));
 
        }));
        turn_text.setText("");
-       boardError.setText("");
        shelf_text.setText("");
        cancel_button.setVisible(false);
        confirm_button.setVisible(false);
@@ -589,7 +586,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
 
     private void insertSelected(ImageView button, int x, int y) {
-        boardError.setText("");
         Image img = button.getImage();
         ImageView sel = getButton(x, y);
         sel.setOpacity(0.5);
@@ -606,7 +602,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public void updateBookShelf(Player pl){
         ImageView ref_shelf;
         String selector = null;
-        System.out.println(pl.getNickname());
         if (pl.getNickname().equals(owner_nickname_text.getText()))
                 selector = "main";
         else if (pl.getNickname().equals(sx_text.getText()))

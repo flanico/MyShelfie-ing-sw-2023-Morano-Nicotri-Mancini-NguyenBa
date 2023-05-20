@@ -225,7 +225,7 @@ public class Gui extends ViewObservable implements View {
 
     }
 
-   private GameControllerScene getGameControllerScene() {
+    private GameControllerScene getGameControllerScene(){
         GameControllerScene game_ctrl;
         try {
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
@@ -233,7 +233,7 @@ public class Gui extends ViewObservable implements View {
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1280d);
             stage.setHeight(1000d);
-            SceneController.changeRootPane(observers,"gamePanel.fxml");
+            SceneController.changeRootPane(observers, SceneController.getActiveScene(),"gamePanel.fxml");
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
             game_ctrl.setNumberPlayers(this.players_number);
             game_ctrl.setPlayersList(this.players_in_game);
@@ -244,5 +244,4 @@ public class Gui extends ViewObservable implements View {
         }
         return game_ctrl;
     }
-
 }
