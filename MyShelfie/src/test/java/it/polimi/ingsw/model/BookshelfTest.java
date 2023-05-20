@@ -18,7 +18,7 @@ class BookshelfTest {
     private static final int ROW = 6;
     private static final int COL = 5;
 
-    private int[][] shelf = {
+    private final int[][] shelf = {
             {1,1,0,5,1},
             {2,4,2,2,4},
             {1,2,2,2,4},
@@ -46,9 +46,9 @@ class BookshelfTest {
     void insertTileTest() {
         Bookshelf bookshelfcheck = new Bookshelf();
         ArrayList<Tile> tiles = new ArrayList<>();
-        tiles.add(new Tile(TileType.BOOK));
-        tiles.add(new Tile(TileType.PLANT));
-        tiles.add(new Tile(TileType.CAT));
+        tiles.add(new Tile(TileType.BOOK, 1));
+        tiles.add(new Tile(TileType.PLANT, 1));
+        tiles.add(new Tile(TileType.CAT, 1));
 
         bookshelfcheck.getMatrix()[5][4].setType(TileType.BOOK);
         bookshelfcheck.getMatrix()[4][4].setType(TileType.PLANT);
@@ -56,8 +56,8 @@ class BookshelfTest {
         bookshelf.insertTile(tiles, 4);
 
         ArrayList<Tile> tiles2 = new ArrayList<>();
-        tiles2.add(new Tile(TileType.TROPHY));
-        tiles2.add(new Tile(TileType.FRAME));
+        tiles2.add(new Tile(TileType.TROPHY, 1));
+        tiles2.add(new Tile(TileType.FRAME, 1));
         bookshelfcheck.getMatrix()[2][4].setType(TileType.TROPHY);
         bookshelfcheck.getMatrix()[1][4].setType(TileType.FRAME);
         bookshelf.insertTile(tiles2, 4);

@@ -16,8 +16,8 @@ class TileTest {
 
     @BeforeEach
     void setUp() {
-        tile = new Tile(TileType.BOOK);
-        tile2 = new Tile(TileType.GAME, 2, 3);
+        tile = new Tile(TileType.BOOK, 1);
+        tile2 = new Tile(TileType.GAME, 1,2, 3);
     }
 
     @AfterEach
