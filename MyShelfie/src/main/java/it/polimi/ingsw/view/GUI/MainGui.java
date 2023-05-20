@@ -37,7 +37,7 @@ public class MainGui extends Application {
         //stage.setFullScreenExitHint("");
         //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setTitle("My Shelfie");
-        stage.getIcons().add(new Image("/item tiles/Gatti1.1.png"));
+        //stage.getIcons().add(new Image("/item tiles/Gatti1.1.png"));
         stage.show();
 
     }

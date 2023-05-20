@@ -6,11 +6,14 @@ import it.polimi.ingsw.view.GUI.Scene.GameControllerScene;
 import it.polimi.ingsw.view.GUI.Scene.LobbyController;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.util.List;
 import java.util.Map;
 
-import static it.polimi.ingsw.view.GUI.ErrorType.*;
+import static it.polimi.ingsw.view.GUI.ErrorType.NOT_REMOVABLE_TILES;
+import static it.polimi.ingsw.view.GUI.ErrorType.WRONG_NICKNAME;
 
 /**
  * Override of the View class for the GUI
@@ -139,7 +142,7 @@ public class Gui extends ViewObservable implements View {
      * @param board the board of the game
      */
     @Override
-    public void askSelectTiles(Board board, Bookshelf bookshelf){
+    public void askSelectTiles(Board board, Bookshelf bookshelf) {
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setBoard(board);
         game_ctrl.setShelf(bookshelf);
@@ -222,7 +225,7 @@ public class Gui extends ViewObservable implements View {
 
     }
 
-   private GameControllerScene getGameControllerScene(){
+   private GameControllerScene getGameControllerScene() {
         GameControllerScene game_ctrl;
         try {
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
@@ -230,7 +233,7 @@ public class Gui extends ViewObservable implements View {
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1280d);
             stage.setHeight(1000d);
-            SceneController.changeRootPane(observers, SceneController.getActiveScene(),"gamePanel.fxml");
+            SceneController.changeRootPane(observers,"gamePanel.fxml");
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
             game_ctrl.setNumberPlayers(this.players_number);
             game_ctrl.setPlayersList(this.players_in_game);
