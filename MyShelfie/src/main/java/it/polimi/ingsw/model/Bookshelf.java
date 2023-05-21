@@ -165,6 +165,7 @@ public class Bookshelf implements Serializable {
     /**
      * this method is used to return the number of empty space max in the same column
      * @return int to represent the number of empty space max in the same column
+     * @author FLavia Nicotri
      */
     public int maxTilesBookshelf() {
         int count = 0;

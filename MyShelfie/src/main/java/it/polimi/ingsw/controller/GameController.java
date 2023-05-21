@@ -7,6 +7,7 @@ import it.polimi.ingsw.network.server.Server;
 import it.polimi.ingsw.persistence.Persistence;
 import it.polimi.ingsw.view.View;
 import it.polimi.ingsw.view.VirtualView;
+import it.polimi.ingsw.view.cli.ColorCli;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -169,7 +170,7 @@ public class GameController implements Serializable {
                 GameController gameControllerPrevious = persistence.restoreGame();
                 //Game restoring: checks if the nicknames of the players are the same of the previous game
                 if(gameControllerPrevious != null && new HashSet<>(gameControllerPrevious.nicknames).containsAll(game.getAllPlayers())) {
-                    broadcastingMessage("\nServer went down, the game is restoring!");
+                    broadcastingMessage(ColorCli.CYAN_BOLD + "\nServer went down, the game is restoring!" + ColorCli.RESET);
                     replace(gameControllerPrevious);
                 }
                 //New game: starts a new game
@@ -181,9 +182,9 @@ public class GameController implements Serializable {
         }
         //If the player is reconnecting to the game
         else if (isGameStarted()) {
-            broadcastingMessage("\n" + nickname + " is reconnected to the game!");
+            broadcastingMessage(ColorCli.CYAN_BOLD+ "\n" + nickname + " is reconnected to the game!" + ColorCli.RESET);
             addVirtualView(nickname, virtualView);
-            virtualView.showGenericMessage("\nYou are reconnected to the game!");
+            virtualView.showGenericMessage(ColorCli.CYAN_BOLD + "\nYou are reconnected to the game!" + ColorCli.RESET);
             int index = nicknames.indexOf(nickname);
             turnController.getNicknames().add(index, nickname);
             game.getPlayerByNickname(nickname).setDisconnected(false);
@@ -198,7 +199,7 @@ public class GameController implements Serializable {
      * @param nickname of the player to add
      * @param virtualView of the player to add
      */
-    private void addVirtualView(String nickname, VirtualView virtualView) {
+    void addVirtualView(String nickname, VirtualView virtualView) {
         virtualViewMap.put(nickname, virtualView);
         game.addObserver(virtualView);
     }
@@ -224,10 +225,11 @@ public class GameController implements Serializable {
                     "\nTimer of tot seconds starts now! If the timer expires you're are the winner of the game!");
             onDisconnectGame(false, nickname);
         }
-        //If there are two or three player connected continue the game
+        //If there are two or three players connected continue the game
         else {
             broadcastingMessage("\nThe game round is: " + turnController.getNicknames());
-//            turnController.nextPlayer(index, true);
+//            turnController.setDisconnected(true);
+            turnController.nextPlayer(index, true);
         }
     }
 
@@ -236,19 +238,7 @@ public class GameController implements Serializable {
      */
     private void startGame() {
         game.initGame(game.getNum());
-        broadcastingMessage("\nGame is starting, all players are connected!");
-        //Shows the two common goal cards selected for the match
-        for (VirtualView v : virtualViewMap.values()) {
-            v.showCommonCards(game.getCommongoalcards());
-            v.showCommonScores(game.getCommongoalcardscores());
-        }
-        //Shows the personal goal card selected for the match
-        for(String nick : nicknames) {
-            if(!Objects.equals(nick, nicknames.get(0))) {
-                VirtualView vv = virtualViewMap.get(nick);
-                vv.showPersonalCard(game.getPlayerByNickname(nick));
-            }
-        }
+        broadcastingMessage(ColorCli.YELLOW_BOLD+"\n\nGame is starting, all players are connected!" + ColorCli.RESET);
         //At the beginning of the match save the new info in the file disk
         Persistence persistence = new Persistence(this);
         persistence.storeGame(this);
@@ -264,27 +254,39 @@ public class GameController implements Serializable {
      * @param isReconnected true if someone is reconnected to the game, false otherwise
      */
     private void onDisconnectGame(boolean isReconnected, String nickname) {
-        VirtualView vv = virtualViewMap.entrySet().iterator().next().getValue();
         //If in the game there is only one player, a timer is setting
         if (!isReconnected) {
+            turnController.setDisconnected(true);
             timer = new Timer();
             //If the timer expires, it ends the game with current player victory
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                        vv.showWinner(virtualViewMap.entrySet().iterator().next().getKey());
+                    VirtualView vv = virtualViewMap.entrySet().iterator().next().getValue();
+                    vv.showWinner(virtualViewMap.entrySet().iterator().next().getKey());
                         endGame();
                         System.exit(0);
                     }
             }, 30000); //30 seconds timer
         }
-        //If someone reconnect to the game, the timer is cancelled
+        //If someone reconnects to the game, the timer is cancelled
         if (isReconnected && timer != null) {
+            turnController.setDisconnected(false);
             timer.cancel();
-            int index = turnController.getNicknames().indexOf(nickname);
-            Thread threadTurnManager = new Thread(() -> turnController.turnManager());
-            threadTurnManager.start();
-//            turnController.nextPlayer(index, true);
+            //it is the turn of the player connected
+            if(gameState == GameState.DISCONNECTED) {
+//                System.out.println("Caso del player che sta giocando");
+                Thread threadTurnManager = new Thread(() -> turnController.turnManager());
+                threadTurnManager.start();
+                gameState = GameState.IN_GAME;
+            }
+            //it is the turn of the player who has reconnected
+            else {
+                int index = turnController.getNicknames().indexOf(nickname);
+                turnController.nextPlayer(index, true);
+                Thread threadTurnManager = new Thread(() -> turnController.turnManager());
+                threadTurnManager.start();
+            }
         }
     }
 
@@ -327,6 +329,18 @@ public class GameController implements Serializable {
 
     public TurnController getTurnController() {
         return turnController;
+    }
+
+    public InputController getInputController() {
+        return inputController;
+    }
+
+    Map<String, VirtualView> getVirtualViewMap() {
+        return virtualViewMap;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     /**

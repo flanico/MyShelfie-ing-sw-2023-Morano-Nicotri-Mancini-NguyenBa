@@ -191,18 +191,18 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname) {
         if(isNicknameAccepted && isConnectionSuccessful) {
-            out.println(ColorCli.YELLOW_BOLD + "Welcome "+ nickname +", you are connected to the game!" + ColorCli.RESET);
+            out.println(ColorCli.YELLOW_BOLD + "\nWelcome "+ nickname +", you are connected to the game!" + ColorCli.RESET);
         }
         else if (!isNicknameAccepted && isConnectionSuccessful) {
-            out.println("Sorry, this nickname is not valid!");
+            out.println(ColorCli.RED + "Sorry, this nickname is not valid!" + ColorCli.RESET);
             askNickname();
         }
         else if (isNicknameAccepted) {
-            out.println("Sorry, the game lobby is full! \nEXIT");
+            out.println(ColorCli.RED + "Sorry, the game lobby is full! \nEXIT" + ColorCli.RESET);
             System.exit(0);
         }
         else {
-            out.println("Server impossible to reach! \nEXIT");
+            out.println(ColorCli.RED + "Server impossible to reach! \nEXIT" + ColorCli.RESET);
             System.exit(1);
         }
     }
@@ -228,7 +228,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showWinner(String winner) {
-        out.println(ColorCli.GREEN  +"Congratulations to " + winner + "! You have won the match!"+ColorCli.RESET);
+        out.println(ColorCli.YELLOW_BOLD  +"Congratulations to " + winner + "! You have won the match!"+ColorCli.RESET);
         out.println(ColorCli.YELLOW_BOLD  +"Game finished..."+ ColorCli.RESET  );
         System.exit(0);
     }
@@ -241,10 +241,10 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void showCommonCards(List<CommonGoalCard> commonGoalCards) {
         out.println();
-        out.println(ColorCli.BLUE_INFO  + "COMMON GOAL CARDS OF THE MATCH ARE: " + ColorCli.RESET);
+        out.println(ColorCli.BLUE_INFO  + "COMMON GOAL CARDS OF THE MATCH: " + ColorCli.RESET);
         for(CommonGoalCard c : commonGoalCards) {
             int index = commonGoalCards.indexOf(c) + 1;
-            out.println(ColorCli.BLUE_INFO + "*" + index + ": "+ColorCli.RESET + c);
+            out.println(ColorCli.BLUE_INFO + "*" + index + " " + ColorCli.RESET + c);
         }
     }
 
@@ -478,7 +478,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void disconnection(String nickname, boolean isStarted) {
-        out.print("\n" +  nickname + " has been disconnecting from the game!");
+        out.print(ColorCli.CYAN_BOLD + "\n" +  nickname + " has been disconnecting from the game!" + ColorCli.RESET);
         if(!isStarted) {
             out.println("\nGame ended...");
             System.exit(1);
@@ -487,7 +487,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showScores(Map<String, Integer> playerScore) {
-        out.println(ColorCli.GREEN + "\nRANK SCORES OF THE GAME: " + ColorCli.RESET);
+        out.println(ColorCli.BLUE_INFO + "\nRANK SCORES OF THE GAME: " + ColorCli.RESET);
         int position = 1;
         for (String player : playerScore.keySet()) {
             out.println(position + "- " + player + ": " + playerScore.get(player));
