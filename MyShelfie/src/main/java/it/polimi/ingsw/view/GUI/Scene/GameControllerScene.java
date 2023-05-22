@@ -26,7 +26,7 @@ import javafx.scene.input.KeyCombination;
  */
 public class GameControllerScene extends ViewObservable implements Controller {
 
-    @FXML   //initialize all the buttons of the board
+    @FXML   //initialize the buttons of the board
     ImageView button_03, button_04, button_13, button_14, button_15, button_22, button_23, button_24, button_25, button_26, button_31, button_32, button_33, button_34, button_35, button_36, button_37, button_38, button_40, button_41, button_42, button_43, button_44, button_45, button_46, button_47, button_48, button_50, button_51, button_52, button_53, button_54, button_55, button_56, button_57, button_62, button_63, button_64, button_65, button_66, button_73, button_74, button_75, button_84, button_85;
     @FXML   //initialize the personal card image
     ImageView personalCardImage;
@@ -38,294 +38,36 @@ public class GameControllerScene extends ViewObservable implements Controller {
     Button cancel_button;
     @FXML
     Button confirm_button;
-    @FXML
-    ImageView shelf_00;
-    @FXML
-    ImageView shelf_01;
-    @FXML
-    ImageView shelf_02;
-    @FXML
-    ImageView shelf_03;
-    @FXML
-    ImageView shelf_04;
-    @FXML
-    ImageView shelf_10;
-    @FXML
-    ImageView shelf_11;
-    @FXML
-    ImageView shelf_12;
-    @FXML
-    ImageView shelf_13;
-    @FXML
-    ImageView shelf_14;
-    @FXML
-    ImageView shelf_20;
-    @FXML
-    ImageView shelf_21;
-    @FXML
-    ImageView shelf_22;
-    @FXML
-    ImageView shelf_23;
-    @FXML
-    ImageView shelf_24;
-    @FXML
-    ImageView shelf_30;
-    @FXML
-    ImageView shelf_31;
-    @FXML
-    ImageView shelf_32;
-    @FXML
-    ImageView shelf_33;
-    @FXML
-    ImageView shelf_34;
-    @FXML
-    ImageView shelf_40;
-    @FXML
-    ImageView shelf_41;
-    @FXML
-    ImageView shelf_42;
-    @FXML
-    ImageView shelf_43;
-    @FXML
-    ImageView shelf_44;
-    @FXML
-    ImageView shelf_50;
-    @FXML
-    ImageView shelf_51;
-    @FXML
-    ImageView shelf_52;
-    @FXML
-    ImageView shelf_53;
-    @FXML
-    ImageView shelf_54;
-    @FXML
-    Button column0;
-    @FXML
-    Button column1;
-    @FXML
-    Button column2;
-    @FXML
-    Button column3;
-    @FXML
-    Button column4;
+    @FXML   //initialize the shelf image
+    ImageView shelf_00, shelf_01, shelf_02, shelf_03, shelf_04, shelf_10, shelf_11, shelf_12, shelf_13, shelf_14, shelf_20, shelf_21, shelf_22, shelf_23, shelf_24, shelf_30, shelf_31, shelf_32, shelf_33, shelf_34, shelf_40, shelf_41, shelf_42, shelf_43, shelf_44, shelf_50, shelf_51, shelf_52, shelf_53, shelf_54;
+    @FXML   //initialize the button of the column in the bookshelf
+    Button column0, column1, column2, column3, column4;
     @FXML
     Button upButton;
     @FXML
     Button downButton;
     @FXML
     Text shelf_text;
-    @FXML
-    ImageView common_goal1;
-    @FXML
-    ImageView common_goal2;
+    @FXML   //initialize the common goal cards images
+    ImageView common_goal1, common_goal2;
     @FXML
     Button okButton;
-    @FXML
-    ImageView common_score_1;
-    @FXML
-    ImageView common_score_2;
-    @FXML
-    ImageView common_prize_1;
-    @FXML
-    ImageView common_prize_2;
-    @FXML
-    ImageView shelf_00_c;
-    @FXML
-    ImageView shelf_01_c;
-    @FXML
-    ImageView shelf_02_c;
-    @FXML
-    ImageView shelf_03_c;
-    @FXML
-    ImageView shelf_04_c;
-    @FXML
-    ImageView shelf_10_c;
-    @FXML
-    ImageView shelf_11_c;
-    @FXML
-    ImageView shelf_12_c;
-    @FXML
-    ImageView shelf_13_c;
-    @FXML
-    ImageView shelf_14_c;
-    @FXML
-    ImageView shelf_20_c;
-    @FXML
-    ImageView shelf_21_c;
-    @FXML
-    ImageView shelf_22_c;
-    @FXML
-    ImageView shelf_23_c;
-    @FXML
-    ImageView shelf_24_c;
-    @FXML
-    ImageView shelf_30_c;
-    @FXML
-    ImageView shelf_31_c;
-    @FXML
-    ImageView shelf_32_c;
-    @FXML
-    ImageView shelf_33_c;
-    @FXML
-    ImageView shelf_34_c;
-    @FXML
-    ImageView shelf_40_c;
-    @FXML
-    ImageView shelf_41_c;
-    @FXML
-    ImageView shelf_42_c;
-    @FXML
-    ImageView shelf_43_c;
-    @FXML
-    ImageView shelf_44_c;
-    @FXML
-    ImageView shelf_50_c;
-    @FXML
-    ImageView shelf_51_c;
-    @FXML
-    ImageView shelf_52_c;
-    @FXML
-    ImageView shelf_53_c;
-    @FXML
-    ImageView shelf_54_c;
-    @FXML
-    ImageView shelf_00_s;
-    @FXML
-    ImageView shelf_01_s;
-    @FXML
-    ImageView shelf_02_s;
-    @FXML
-    ImageView shelf_03_s;
-    @FXML
-    ImageView shelf_04_s;
-    @FXML
-    ImageView shelf_10_s;
-    @FXML
-    ImageView shelf_11_s;
-    @FXML
-    ImageView shelf_12_s;
-    @FXML
-    ImageView shelf_13_s;
-    @FXML
-    ImageView shelf_14_s;
-    @FXML
-    ImageView shelf_20_s;
-    @FXML
-    ImageView shelf_21_s;
-    @FXML
-    ImageView shelf_22_s;
-    @FXML
-    ImageView shelf_23_s;
-    @FXML
-    ImageView shelf_24_s;
-    @FXML
-    ImageView shelf_30_s;
-    @FXML
-    ImageView shelf_31_s;
-    @FXML
-    ImageView shelf_32_s;
-    @FXML
-    ImageView shelf_33_s;
-    @FXML
-    ImageView shelf_34_s;
-    @FXML
-    ImageView shelf_40_s;
-    @FXML
-    ImageView shelf_41_s;
-    @FXML
-    ImageView shelf_42_s;
-    @FXML
-    ImageView shelf_43_s;
-    @FXML
-    ImageView shelf_44_s;
-    @FXML
-    ImageView shelf_50_s;
-    @FXML
-    ImageView shelf_51_s;
-    @FXML
-    ImageView shelf_52_s;
-    @FXML
-    ImageView shelf_53_s;
-    @FXML
-    ImageView shelf_54_s;
-    @FXML
-    ImageView shelf_00_d;
-    @FXML
-    ImageView shelf_01_d;
-    @FXML
-    ImageView shelf_02_d;
-    @FXML
-    ImageView shelf_03_d;
-    @FXML
-    ImageView shelf_04_d;
-    @FXML
-    ImageView shelf_10_d;
-    @FXML
-    ImageView shelf_11_d;
-    @FXML
-    ImageView shelf_12_d;
-    @FXML
-    ImageView shelf_13_d;
-    @FXML
-    ImageView shelf_14_d;
-    @FXML
-    ImageView shelf_20_d;
-    @FXML
-    ImageView shelf_21_d;
-    @FXML
-    ImageView shelf_22_d;
-    @FXML
-    ImageView shelf_23_d;
-    @FXML
-    ImageView shelf_24_d;
-    @FXML
-    ImageView shelf_30_d;
-    @FXML
-    ImageView shelf_31_d;
-    @FXML
-    ImageView shelf_32_d;
-    @FXML
-    ImageView shelf_33_d;
-    @FXML
-    ImageView shelf_34_d;
-    @FXML
-    ImageView shelf_40_d;
-    @FXML
-    ImageView shelf_41_d;
-    @FXML
-    ImageView shelf_42_d;
-    @FXML
-    ImageView shelf_43_d;
-    @FXML
-    ImageView shelf_44_d;
-    @FXML
-    ImageView shelf_50_d;
-    @FXML
-    ImageView shelf_51_d;
-    @FXML
-    ImageView shelf_52_d;
-    @FXML
-    ImageView shelf_53_d;
-    @FXML
-    ImageView shelf_54_d;
-    @FXML
-    Text owner_nickname_text;
-    @FXML
-    ImageView bookshelf_s;
-    @FXML
-    ImageView bookshelf_c;
-    @FXML
-    ImageView bookshelf_d;
-    @FXML
-    Text sx_text;
-    @FXML
-    Text dx_text;
-    @FXML
-    Text central_text;
-    @FXML
+    @FXML   //initialize the common score images
+    ImageView common_score_1, common_score_2;
+    @FXML   //initialize the common prize images
+    ImageView common_prize_1, common_prize_2;
+    @FXML   //initialize the central bookshelf images
+    ImageView shelf_00_c, shelf_01_c, shelf_02_c, shelf_03_c, shelf_04_c, shelf_10_c, shelf_11_c, shelf_12_c, shelf_13_c, shelf_14_c, shelf_20_c, shelf_21_c, shelf_22_c, shelf_23_c, shelf_24_c, shelf_30_c, shelf_31_c, shelf_32_c, shelf_33_c, shelf_34_c, shelf_40_c, shelf_41_c, shelf_42_c, shelf_43_c, shelf_44_c, shelf_50_c, shelf_51_c, shelf_52_c, shelf_53_c, shelf_54_c;
+    @FXML   //initialize the upper bookshelf images
+    ImageView shelf_00_s, shelf_01_s, shelf_02_s, shelf_03_s, shelf_04_s, shelf_10_s, shelf_11_s, shelf_12_s, shelf_13_s, shelf_14_s, shelf_20_s, shelf_21_s, shelf_22_s, shelf_23_s, shelf_24_s, shelf_30_s, shelf_31_s, shelf_32_s, shelf_33_s, shelf_34_s, shelf_40_s, shelf_41_s, shelf_42_s, shelf_43_s, shelf_44_s, shelf_50_s, shelf_51_s, shelf_52_s, shelf_53_s, shelf_54_s;
+    @FXML   //initialize the down bookshelf images
+    ImageView shelf_00_d, shelf_01_d, shelf_02_d, shelf_03_d, shelf_04_d, shelf_10_d, shelf_11_d, shelf_12_d, shelf_13_d, shelf_14_d, shelf_20_d, shelf_21_d, shelf_22_d, shelf_23_d, shelf_24_d, shelf_30_d, shelf_31_d, shelf_32_d, shelf_33_d, shelf_34_d, shelf_40_d, shelf_41_d, shelf_42_d, shelf_43_d, shelf_44_d, shelf_50_d, shelf_51_d, shelf_52_d, shelf_53_d, shelf_54_d;
+    @FXML   //initialize the text of the names of the owner of the bookshelves
+    Text owner_nickname_text, sx_text, dx_text, central_text;
+    @FXML   //initialize the enemies' bookshelves
+    ImageView bookshelf_s, bookshelf_c, bookshelf_d;
+    @FXML   //initialize the seat image
     ImageView seat;
-
-
 
     public Board board;                             //the board of the game
     List<Tile> SelectedTiles = new ArrayList<>();   //the list of the tiles selected by the player
@@ -460,6 +202,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
         }
     }
 
+    /**
+     *  this methods swaps the tiles in the bookshelf when the players clicks on the up or down button
+     * @param direction to indicate if the player wants to swap the tiles 1/2 or 2/3
+     */
     private void rotate(String direction){
         if (finalTiles.size()==2)
             Collections.swap(finalTiles,0,1);
@@ -622,6 +368,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
         return empty;
     }
 
+    /**
+     * This method is used to update the personal goal card image
+     */
     public void updatePersonalCard(){
         String path = null;
         switch (personalCard.getType()){
@@ -641,6 +390,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
         Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream(path)));
         personalCardImage.setImage(img);
     }
+
+    /**
+     * This method returns the ImageView of the tiles in the position (x,y) in the board
+     * @param x row of the tile in the board
+     * @param y column of the tile in the board
+     * @return the ImageView of the tile in the position (x,y) in the board
+     */
     private ImageView getButton(int x, int y){
         String concat = x + "," + y;
         return switch (concat) {
@@ -692,6 +448,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
             default -> null;
         };
     }
+    /**
+     * This method returns the ImageView of the tiles in the position (x,y) in the bookshelf called shelf_name
+     * @param x row of the tile in the bookshelf
+     * @param y column of the tile in the bookshelf
+     * @param shelf_name name of the bookshelf (main, sx, dx)
+     * @return the ImageView of the tile in the position (x,y) in the bookshelf called shelf_name
+     */
     private ImageView getShelf(int x, int y, String shelf_name){
         String concat = x + "," + y;
         return switch (shelf_name){

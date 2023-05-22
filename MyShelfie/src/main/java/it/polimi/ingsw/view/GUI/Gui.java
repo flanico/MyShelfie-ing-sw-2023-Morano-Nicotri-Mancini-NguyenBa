@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
+import it.polimi.ingsw.view.GUI.Scene.EndController;
 import it.polimi.ingsw.view.GUI.Scene.GameControllerScene;
 import it.polimi.ingsw.view.GUI.Scene.LobbyController;
 import it.polimi.ingsw.view.View;
@@ -27,6 +28,7 @@ public class Gui extends ViewObservable implements View {
     private List<Player> players_in_game;
     private Player owner;
     private boolean isFirst = false;
+    private Map<String, Integer> score;
 
     @Override
     public void askNickname(){
@@ -38,7 +40,7 @@ public class Gui extends ViewObservable implements View {
         this.isFirst = true;
         Platform.runLater(() -> SceneController.changeRootPane(observers, "SelectPlayersPanel.fxml"));
     }
-
+    //TODO: add the isConnectionSuccessful parameter
     @Override
     public void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname){
         if(!isNicknameAccepted) {
@@ -54,27 +56,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showGameInfo(List<Player> players, int numberPlayers){
-        /*LobbyController lobby_ctrl;
-        try {
-            lobby_ctrl = (LobbyController) SceneController.getActiveController();
-            lobby_ctrl.setNicknames(players);
-            lobby_ctrl.setNum_players(numberPlayers);
-            this.players_in_game = players;
-            Platform.runLater(lobby_ctrl::update);
-        } catch (ClassCastException e) {
-            lobby_ctrl = new LobbyController();
-            lobby_ctrl.addAllObservers(observers);
-            lobby_ctrl.setNicknames(players);
-
-            lobby_ctrl.setNum_players(numberPlayers);
-
-
-            LobbyController new_ctrl = lobby_ctrl;
-            Platform.runLater(() -> SceneController.changeRootPane(new_ctrl, "lobbyPanel.fxml"));
-        }*/
-        this.players_in_game=players;
-        this.players_number=numberPlayers;
-        this.owner=players.get(players.size()-1);
         LobbyController lobby_ctrl;
         LobbyController new_ctrl;
         final LobbyController new_ctrl2;
@@ -82,15 +63,15 @@ public class Gui extends ViewObservable implements View {
             lobby_ctrl = (LobbyController) SceneController.getActiveController();
             new_ctrl2 = lobby_ctrl;
             Platform.runLater(() -> new_ctrl2.update(players, numberPlayers));
-
         } catch (ClassCastException e) {
+            this.players_in_game=players;
+            this.players_number=numberPlayers;
+            this.owner=players.get(players.size()-1);
             SceneController.changeRootPane(observers, SceneController.getActiveScene(),"lobbyPanel.fxml");
             lobby_ctrl = (LobbyController) SceneController.getActiveController();
             new_ctrl = lobby_ctrl;
             Platform.runLater(() -> new_ctrl.init(players, numberPlayers));
         }
-
-
     }
 
     /**
@@ -120,7 +101,19 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showWinner(String winner){
-
+        boolean win = false;
+        final boolean win2;
+        if (winner.equals(owner.getNickname())){
+            win=true;
+        }
+        win2=win;
+        EndController end_ctrl;
+        Stage stage = (Stage) SceneController.getActiveScene().getWindow();
+        stage.setWidth(800d);
+        stage.setHeight(600d);
+        SceneController.changeRootPane(observers, SceneController.getActiveScene(),"endPanel.fxml");
+        end_ctrl = (EndController) SceneController.getActiveController();
+        Platform.runLater(() -> end_ctrl.init(win2, score, winner));
     }
 
     /**
@@ -233,7 +226,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showScores(Map<String, Integer> playerScore){
-
+        this.score = playerScore;
     }
 
     /**
@@ -250,8 +243,9 @@ public class Gui extends ViewObservable implements View {
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
         } catch (ClassCastException e) {
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
-            stage.setWidth(1280d);
-            stage.setHeight(1000d);
+            stage.setWidth(1500d);
+            stage.setHeight(770d);
+            stage.centerOnScreen();
             SceneController.changeRootPane(observers, SceneController.getActiveScene(),"gamePanel.fxml");
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
             game_ctrl.setNumberPlayers(this.players_number);

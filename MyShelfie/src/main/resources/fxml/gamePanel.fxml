@@ -5,18 +5,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.GameControllerScene">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.GameControllerScene">
    <children>
       <ImageView fx:id="background" fitHeight="1008.0" fitWidth="1288.0" layoutX="-5.0" layoutY="-2.0" pickOnBounds="true">
        <Image url="@/misc/sfondo.jpg" />
       </ImageView>
-      <ImageView fitHeight="380.0" fitWidth="400.0" layoutX="39.0" layoutY="58.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="@/boards/livingroom.png"/>
+      <ImageView fitHeight="380.0" fitWidth="400.0" layoutX="39.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@/boards/livingroom.png" />
       </ImageView>
-      <ImageView fx:id="bookshelf" fitHeight="401.0" fitWidth="389.0" layoutX="863.0" layoutY="58.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="@/boards/bookshelf_orth.png"/>
+      <ImageView fx:id="bookshelf" fitHeight="401.0" fitWidth="389.0" layoutX="863.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@/boards/bookshelf_orth.png" />
       </ImageView>
       <ImageView fx:id="personalCardImage" fitHeight="190.0" fitWidth="163.0" layoutX="577.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="button_03" fitHeight="38.0" fitWidth="40.0" layoutX="170.0" layoutY="76.0" onMouseClicked="#button_03_click" pickOnBounds="true" preserveRatio="true" />
