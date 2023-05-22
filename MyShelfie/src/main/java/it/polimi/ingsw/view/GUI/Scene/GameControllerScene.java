@@ -33,29 +33,27 @@ public class GameControllerScene extends ViewObservable implements Controller {
     @FXML   //initialize the selected card image
     ImageView sel_tile_1, sel_tile_2, sel_tile_3;
     @FXML
-    Text turn_text;
+    ImageView turn_text;
     @FXML
-    Button cancel_button;
+    ImageView cancel_button;
     @FXML
-    Button confirm_button;
+    ImageView confirm_button;
     @FXML   //initialize the shelf image
     ImageView shelf_00, shelf_01, shelf_02, shelf_03, shelf_04, shelf_10, shelf_11, shelf_12, shelf_13, shelf_14, shelf_20, shelf_21, shelf_22, shelf_23, shelf_24, shelf_30, shelf_31, shelf_32, shelf_33, shelf_34, shelf_40, shelf_41, shelf_42, shelf_43, shelf_44, shelf_50, shelf_51, shelf_52, shelf_53, shelf_54;
     @FXML   //initialize the button of the column in the bookshelf
-    Button column0, column1, column2, column3, column4;
+    ImageView column0, column1, column2, column3, column4;
     @FXML
-    Button upButton;
+    ImageView upButton, downButton, swap_button;
     @FXML
-    Button downButton;
-    @FXML
-    Text shelf_text;
+    ImageView shelf_text;
     @FXML   //initialize the common goal cards images
     ImageView common_goal1, common_goal2;
     @FXML
-    Button okButton;
+    ImageView okButton;
     @FXML   //initialize the common score images
     ImageView common_score_1, common_score_2;
     @FXML   //initialize the common prize images
-    ImageView common_prize_1, common_prize_2;
+    ImageView common_prize_1, common_prize_2, first_won, second_won, won_frame1, won_frame2;
     @FXML   //initialize the central bookshelf images
     ImageView shelf_00_c, shelf_01_c, shelf_02_c, shelf_03_c, shelf_04_c, shelf_10_c, shelf_11_c, shelf_12_c, shelf_13_c, shelf_14_c, shelf_20_c, shelf_21_c, shelf_22_c, shelf_23_c, shelf_24_c, shelf_30_c, shelf_31_c, shelf_32_c, shelf_33_c, shelf_34_c, shelf_40_c, shelf_41_c, shelf_42_c, shelf_43_c, shelf_44_c, shelf_50_c, shelf_51_c, shelf_52_c, shelf_53_c, shelf_54_c;
     @FXML   //initialize the upper bookshelf images
@@ -69,10 +67,14 @@ public class GameControllerScene extends ViewObservable implements Controller {
     @FXML   //initialize the seat image
     ImageView seat;
 
+    @FXML
+    ImageView frame1, frame2, frame3;
+
     public Board board;                             //the board of the game
     List<Tile> SelectedTiles = new ArrayList<>();   //the list of the tiles selected by the player
     List<Tile> finalTiles = new ArrayList<>();      //the list of the tiles that will be placed in the bookshelf
     private boolean select_card_phase;              //true if the player is in the select card phase
+    private boolean shelf_phase;                    //true if the player is in the shelf phase
     PersonalGoalCard personalCard;                  //the personal goal card of the player
     List<CommonGoalCard> commonGoalCards;           //the list of the common goal cards of the game
     public Bookshelf shelf;
@@ -94,30 +96,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
                Platform.runLater(() -> SceneController.popUp(ErrorType.EASTER_EGG));
 
        }));
-       turn_text.setText("");
-       shelf_text.setText("");
-       cancel_button.setVisible(false);
-       confirm_button.setVisible(false);
-       column0.setVisible(false);
-       column1.setVisible(false);
-       column2.setVisible(false);
-       column3.setVisible(false);
-       column4.setVisible(false);
-       upButton.setVisible(false);
-       downButton.setVisible(false);
-       okButton.setVisible(false);
-       cancel_button.setDisable(true);
-       confirm_button.setDisable(true);
-       column0.setDisable(true);
-       column1.setDisable(true);
-       column2.setDisable(true);
-       column3.setDisable(true);
-       column4.setDisable(true);
-       upButton.setDisable(true);
-       downButton.setDisable(true);
-       okButton.setDisable(true);
+       activeSelection(false);
+       activeShelf(false);
        SelectedTiles.clear();
-       select_card_phase=false;
     }
     public void setBoard(Board board) {
         this.board = board;
@@ -162,18 +143,32 @@ public class GameControllerScene extends ViewObservable implements Controller {
     /**
      * this method is called when the player has to select the tiles in the board to place in the bookshelf
      */
-    public void activeSelection(){
-        updateBoard();
-        SelectedTiles.clear();
-        sel_tile_1.setImage(null);
-        sel_tile_2.setImage(null);
-        sel_tile_3.setImage(null);
-        turn_text.setText("It's your turn! Select your tiles:");
-        select_card_phase=true;
-        cancel_button.setVisible(true);
-        confirm_button.setVisible(true);
-        cancel_button.setDisable(false);
-        confirm_button.setDisable(false);
+    public void activeSelection(boolean activate){
+        if (activate) {
+            updateBoard();
+            SelectedTiles.clear();
+            frame1.setVisible(true);
+            frame2.setVisible(true);
+            frame3.setVisible(true);
+            sel_tile_1.setImage(null);
+            sel_tile_2.setImage(null);
+            sel_tile_3.setImage(null);
+            turn_text.setVisible(true);
+            select_card_phase = true;
+            cancel_button.setVisible(true);
+            confirm_button.setVisible(true);
+        } else {
+            frame1.setVisible(false);
+            frame2.setVisible(false);
+            frame3.setVisible(false);
+            select_card_phase = false;
+            sel_tile_1.setImage(null);
+            sel_tile_2.setImage(null);
+            sel_tile_3.setImage(null);
+            turn_text.setVisible(false);
+            cancel_button.setVisible(false);
+            confirm_button.setVisible(false);
+        }
     }
 
     /**
@@ -203,7 +198,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
 
     /**
-     *  this methods swaps the tiles in the bookshelf when the players clicks on the up or down button
+     *  this method swaps the tiles in the bookshelf when the players click on the up or down button
      * @param direction to indicate if the player wants to swap the tiles 1/2 or 2/3
      */
     private void rotate(String direction){
@@ -215,30 +210,37 @@ public class GameControllerScene extends ViewObservable implements Controller {
             else if (direction.equals("up"))
                 Collections.swap(finalTiles, 1, 2);
     }
-
-    public void activeShelf(){
-        shelf_text.setText("Please select the column where to insert the tiles and decide their orders swapping them with the lateral arrows");
-        column0.setDisable(false);
-        column1.setDisable(false);
-        column2.setDisable(false);
-        column3.setDisable(false);
-        column4.setDisable(false);
-        okButton.setDisable(false);
-        column0.setVisible(true);
-        column1.setVisible(true);
-        column2.setVisible(true);
-        column3.setVisible(true);
-        column4.setVisible(true);
-        okButton.setVisible(true);
-
-        if (SelectedTiles.size()>1){
-            upButton.setVisible(true);
-            downButton.setVisible(true);
-            upButton.setDisable(false);
-            downButton.setDisable(false);
+    public void activeShelf(boolean activate){
+        if (activate){
+            shelf_phase=true;
+            shelf_text.setVisible(true);
+            column0.setVisible(true);
+            column1.setVisible(true);
+            column2.setVisible(true);
+            column3.setVisible(true);
+            column4.setVisible(true);
+            okButton.setVisible(true);
+            if (SelectedTiles.size()==2){
+                swap_button.setVisible(true);
+            } else if (SelectedTiles.size()==3){
+                upButton.setVisible(true);
+                downButton.setVisible(true);
+            }
+        } else {
+            shelf_phase=false;
+            shelf_text.setVisible(false);
+            column0.setVisible(false);
+            column1.setVisible(false);
+            column2.setVisible(false);
+            column3.setVisible(false);
+            column4.setVisible(false);
+            okButton.setVisible(false);
+            upButton.setVisible(false);
+            downButton.setVisible(false);
+            swap_button.setVisible(false);
         }
-    }
 
+    }
     private void insertSelected(ImageView button, int x, int y) {
         Image img = button.getImage();
         ImageView sel = getButton(x, y);
@@ -292,9 +294,15 @@ public class GameControllerScene extends ViewObservable implements Controller {
             case 8 -> path = "/scoring tokens/scoring_8.jpg";
             default -> path = "";
         }
-        if ( commonGoalCards.get(0).getNumber() == win_card.getNumber() )
-            common_prize_1.setImage(new Image(path));
-        else common_prize_2.setImage(new Image(path));
+        if ( commonGoalCards.get(0).getNumber() == win_card.getNumber() ){
+            first_won.setImage(new Image(path));
+            common_prize_1.setImage(new Image("Graphics/common1_won.png"));
+            won_frame1.setImage(new Image("/Graphics/won_frame.png"));
+        } else {
+            common_prize_2.setImage(new Image(path));
+            common_prize_1.setImage(new Image("Graphics/common2_won.png"));
+            won_frame1.setImage(new Image("/Graphics/won_frame.png"));
+        }
     }
     public void updateCommonGoalCards(){
         String path;
@@ -328,19 +336,22 @@ public class GameControllerScene extends ViewObservable implements Controller {
             seat.setImage(new Image("/misc/firstplayertoken.png"));
         switch (numberPlayers){
             case 2 ->{
-                bookshelf_c.setImage(new Image("/boards/bookshelf_orth.png"));
+                bookshelf_c.setImage(new Image("/boards/bookshelf.png"));
                 central_text.setText(playersList.get(1).getNickname());
+                sx_text.setText("");
+                dx_text.setText("");
             }
             case 3 -> {
-                bookshelf_s.setImage(new Image("/boards/bookshelf_orth.png"));
-                bookshelf_d.setImage(new Image("/boards/bookshelf_orth.png"));
+                bookshelf_s.setImage(new Image("/boards/bookshelf.png"));
+                bookshelf_d.setImage(new Image("/boards/bookshelf.png"));
                 sx_text.setText(playersList.get(1).getNickname());
                 dx_text.setText(playersList.get(2).getNickname());
+                central_text.setText("");
             }
             case 4 -> {
-                bookshelf_s.setImage(new Image("/boards/bookshelf_orth.png"));
-                bookshelf_d.setImage(new Image("/boards/bookshelf_orth.png"));
-                bookshelf_c.setImage(new Image("/boards/bookshelf_orth.png"));
+                bookshelf_s.setImage(new Image("/boards/bookshelf.png"));
+                bookshelf_d.setImage(new Image("/boards/bookshelf.png"));
+                bookshelf_c.setImage(new Image("/boards/bookshelf.png"));
                 sx_text.setText(playersList.get(1).getNickname());
                 central_text.setText(playersList.get(2).getNickname());
                 dx_text.setText(playersList.get(3).getNickname());
@@ -617,35 +628,31 @@ public class GameControllerScene extends ViewObservable implements Controller {
             ref_button.setOpacity(1.0);
         }
     }
-    public void confirmPressed(ActionEvent actionEvent){
-        if (SelectedTiles.size()!=0 && SelectedTiles.size()>shelf.maxTilesBookshelf()) {
-            Platform.runLater(() -> SceneController.popUp(ErrorType.NOT_SPACE));
-            activeSelection();
-        } else if (SelectedTiles.size() != 0) {
-            select_card_phase = false;
-            cancel_button.setVisible(false);
-            confirm_button.setVisible(false);
-            cancel_button.setDisable(true);
-            confirm_button.setDisable(true);
-            sel_tile_1.setImage(null);
-            sel_tile_2.setImage(null);
-            sel_tile_3.setImage(null);
-            turn_text.setText("");
-            notifyObserver(obs -> obs.sendSelectTiles(SelectedTiles));
+    public void confirmPressed(MouseEvent mouseEvent){
+        if (select_card_phase) {
+            if (SelectedTiles.size() != 0 && SelectedTiles.size() > shelf.maxTilesBookshelf()) {
+                Platform.runLater(() -> SceneController.popUp(ErrorType.NOT_SPACE));
+                activeSelection(true);
+            } else if (SelectedTiles.size() != 0) {
+                notifyObserver(obs -> obs.sendSelectTiles(SelectedTiles));
+                activeSelection(false);
+            }
         }
     }
-    public void cancelPressed(ActionEvent actionEvent){
-        int size = SelectedTiles.size();
-        ImageView button;
-        if (size>0) {
-            switch (SelectedTiles.size()) {
-                case 1 -> sel_tile_1.setImage(null);
-                case 2 -> sel_tile_2.setImage(null);
-                case 3 -> sel_tile_3.setImage(null);
+    public void cancelPressed(MouseEvent mouseEvent){
+        if (select_card_phase) {
+            int size = SelectedTiles.size();
+            ImageView button;
+            if (size > 0) {
+                switch (SelectedTiles.size()) {
+                    case 1 -> sel_tile_1.setImage(null);
+                    case 2 -> sel_tile_2.setImage(null);
+                    case 3 -> sel_tile_3.setImage(null);
+                }
+                button = getButton(SelectedTiles.get(size - 1).getX(), SelectedTiles.get(size - 1).getY());
+                button.setOpacity(1.0);
+                SelectedTiles.remove(size - 1);
             }
-            button = getButton(SelectedTiles.get(size-1).getX(), SelectedTiles.get(size-1).getY());
-            button.setOpacity(1.0);
-            SelectedTiles.remove(size - 1);
         }
     }
     public void button_03_click(MouseEvent mouseEvent) {
@@ -873,68 +880,56 @@ public class GameControllerScene extends ViewObservable implements Controller {
             insertSelected(getButton(8,5), 8 , 5);
         }
     }
-    public void downPressed(ActionEvent actionEvent) {
-        rotate("down");
-        tryInsert(selected_column);
+    public void downPressed(MouseEvent mouseEvent) {
+        if (shelf_phase) {
+            rotate("down");
+            tryInsert(selected_column);
+        }
     }
-    public void upPressed(ActionEvent actionEvent) {
-        rotate("up");
-        tryInsert(selected_column);
+    public void upPressed(MouseEvent mouseEvent) {
+        if (shelf_phase) {
+            rotate("up");
+            tryInsert(selected_column);
+        }
     }
-    public void column0Pressed(ActionEvent actionEvent) {
-        if (finalTiles.size()<=free_cells(0) && selected_column!=0) {
+    public void column0Pressed(MouseEvent mouseEvent) {
+        if (shelf_phase && finalTiles.size()<=free_cells(0) && selected_column!=0) {
             updateBookShelf(currentPlayer);
             selected_column = 0;
             tryInsert(0);
         }
     }
-    public void column1Pressed(ActionEvent actionEvent) {
-        if (finalTiles.size()<=free_cells(1) && selected_column!=1) {
+    public void column1Pressed(MouseEvent mouseEvent) {
+        if (shelf_phase && finalTiles.size()<=free_cells(1) && selected_column!=1) {
             updateBookShelf(currentPlayer);
             selected_column = 1;
             tryInsert(1);
         }
     }
-    public void column2Pressed(ActionEvent actionEvent) {
-        if (finalTiles.size()<=free_cells(2) && selected_column!=2) {
+    public void column2Pressed(MouseEvent mouseEvent) {
+        if (shelf_phase && finalTiles.size()<=free_cells(2) && selected_column!=2) {
             updateBookShelf(currentPlayer);
             selected_column = 2;
             tryInsert(2);
         }
     }
-    public void column3Pressed(ActionEvent actionEvent) {
-        if (finalTiles.size()<=free_cells(3) && selected_column!=3) {
+    public void column3Pressed(MouseEvent mouseEvent) {
+        if (shelf_phase && finalTiles.size()<=free_cells(3) && selected_column!=3) {
             updateBookShelf(currentPlayer);
             selected_column = 3;
             tryInsert(3);
         }
     }
-    public void column4Pressed(ActionEvent actionEvent) {
-        if (finalTiles.size()<=free_cells(4) && selected_column!=4) {
+    public void column4Pressed(MouseEvent mouseEvent) {
+        if (shelf_phase && finalTiles.size()<=free_cells(4) && selected_column!=4) {
             updateBookShelf(currentPlayer);
             selected_column = 4;
             tryInsert(4);
         }
     }
-    public void okPressed(ActionEvent actionEvent) {
+    public void okPressed(MouseEvent mouseEvent) {
         if (selected_column!=-1){
-            shelf_text.setText("");
-            column0.setVisible(false);
-            column1.setVisible(false);
-            column2.setVisible(false);
-            column3.setVisible(false);
-            column4.setVisible(false);
-            upButton.setVisible(false);
-            downButton.setVisible(false);
-            okButton.setVisible(false);
-            column0.setDisable(true);
-            column1.setDisable(true);
-            column2.setDisable(true);
-            column3.setDisable(true);
-            column4.setDisable(true);
-            upButton.setDisable(true);
-            downButton.setDisable(true);
-            okButton.setDisable(true);
+            activeShelf(false);
             notifyObserver(obs -> obs.sendInsertTiles(selected_column, finalTiles));
             selected_column=-1;
         }

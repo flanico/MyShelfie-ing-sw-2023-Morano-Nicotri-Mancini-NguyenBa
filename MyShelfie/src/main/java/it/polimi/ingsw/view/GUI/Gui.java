@@ -7,7 +7,6 @@ import it.polimi.ingsw.view.GUI.Scene.GameControllerScene;
 import it.polimi.ingsw.view.GUI.Scene.LobbyController;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -18,7 +17,7 @@ import static it.polimi.ingsw.view.GUI.ErrorType.WRONG_NICKNAME;
 
 /**
  * Override of the View class for the GUI
- * Every methods of the View are implemented in this class for the GUI
+ * Every method of the View are implemented in this class for the GUI
  * @author Stefano Morano
  */
 
@@ -60,6 +59,7 @@ public class Gui extends ViewObservable implements View {
         LobbyController new_ctrl;
         final LobbyController new_ctrl2;
         try {
+            this.players_in_game=players;
             lobby_ctrl = (LobbyController) SceneController.getActiveController();
             new_ctrl2 = lobby_ctrl;
             Platform.runLater(() -> new_ctrl2.update(players, numberPlayers));
@@ -158,7 +158,7 @@ public class Gui extends ViewObservable implements View {
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setBoard(board);
         game_ctrl.setShelf(bookshelf);
-        Platform.runLater(game_ctrl::activeSelection);
+        Platform.runLater(() -> game_ctrl.activeSelection(true));
     }
 
     /**
@@ -171,7 +171,7 @@ public class Gui extends ViewObservable implements View {
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setShelf(bookshelf);
         game_ctrl.setFinalTiles(tiles);
-        Platform.runLater(game_ctrl::activeShelf);
+        Platform.runLater(() -> game_ctrl.activeShelf(true));
     }
 
     /**
@@ -244,7 +244,7 @@ public class Gui extends ViewObservable implements View {
         } catch (ClassCastException e) {
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1500d);
-            stage.setHeight(770d);
+            stage.setHeight(800d);
             stage.centerOnScreen();
             SceneController.changeRootPane(observers, SceneController.getActiveScene(),"gamePanel.fxml");
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
