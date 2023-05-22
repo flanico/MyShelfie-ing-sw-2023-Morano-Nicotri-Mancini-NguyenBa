@@ -24,6 +24,8 @@ import javafx.stage.Stage;
  */
 
 public class SceneController extends ViewObservable {
+
+
     private static Scene activeScene;
     private static Controller activeController;
     public static Scene getActiveScene() {
@@ -32,7 +34,9 @@ public class SceneController extends ViewObservable {
     public static Controller getActiveController() {
         return activeController;
     }
-
+    public static void setActiveScene(Scene activeScene) {
+        SceneController.activeScene = activeScene;
+    }
     public static <T> T changeRootPane(List<ViewObserver> observerList, Scene scene, String fxml) {
         T controller = null;
 
@@ -51,37 +55,8 @@ public class SceneController extends ViewObservable {
         return controller;
     }
 
-    public static <T> T changeRootPane(List<ViewObserver> observerList, Event event, String fxml) {
-        Scene scene = ((Node) event.getSource()).getScene();
-        return changeRootPane(observerList, scene, fxml);
-    }
-
     public static <T> T changeRootPane(List<ViewObserver> observerList, String fxml) {
         return changeRootPane(observerList, activeScene, fxml);
-    }
-
-    public static void changeRootPane(Controller controller, Scene scene, String fxml) {
-        try {
-            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/fxml/" + fxml));
-
-            loader.setController(controller);
-            activeController = controller;
-            Parent root = loader.load();
-
-            activeScene = scene;
-            activeScene.setRoot(root);
-        } catch (IOException e) {
-            Client.LOGGER.severe(e.getMessage());
-        }
-    }
-
-    public static void changeRootPane(Controller controller, Event event, String fxml) {
-        Scene scene = ((Node) event.getSource()).getScene();
-        changeRootPane(controller, scene, fxml);
-    }
-
-    public static void changeRootPane(Controller controller, String fxml) {
-        changeRootPane(controller, activeScene, fxml);
     }
 
     public static void popUp(ErrorType errorType) {
