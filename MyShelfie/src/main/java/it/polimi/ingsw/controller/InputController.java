@@ -9,6 +9,7 @@ import it.polimi.ingsw.network.message.clientSide.PositionReplyMessage;
 import it.polimi.ingsw.network.message.clientSide.TilesReplyMessage;
 import it.polimi.ingsw.view.View;
 import it.polimi.ingsw.view.VirtualView;
+import it.polimi.ingsw.view.cli.ColorCli;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -95,7 +96,7 @@ public class InputController implements Serializable {
             return true;
         }
         else {
-            virtualView.showGenericMessage("Sorry, tiles selected are NOT removable from the board! Retry.");
+            virtualView.showGenericMessage(ColorCli.RED + "Sorry, tiles selected are NOT removable from the board! Retry." + ColorCli.RESET);
             virtualView.askSelectTiles(game.getBoard(), bookshelfOfTheRoundPlayer);
             return false;
         }
@@ -115,7 +116,7 @@ public class InputController implements Serializable {
             return true;
         }
         else {
-            virtualView.showGenericMessage("Sorry, you didn't provide a correct select of the column! Retry.");
+            virtualView.showGenericMessage(ColorCli.RED + "Sorry, you didn't provide a correct select of the column! Retry." + ColorCli.RESET);
             virtualView.askInsertTiles(game.getPlayerByNickname(positionReplyMessage.getNickname()).getBookshelf(), positionReplyMessage.getTiles());
             return false;
         }
@@ -133,7 +134,7 @@ public class InputController implements Serializable {
             return true;
         }
         else {
-            virtualView.showGenericMessage("Sorry, you didn't provide a correct select of the order of the tiles! Retry");
+            virtualView.showGenericMessage(ColorCli.RED + "Sorry, you didn't provide a correct select of the order of the tiles! Retry" + ColorCli.RESET);
             virtualView.askOrderTiles(orderReplyMessage.getTiles());
             return false;
         }
