@@ -62,22 +62,22 @@
       </ImageView>
       <Text fx:id="pl1Text" layoutX="280.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1">
          <font>
-            <Font name="Comic Sans MS Bold Italic" size="27.0" />
+            <Font name="Comic Sans MS Bold" size="27.0" />
          </font>
       </Text>
       <Text fx:id="pl2Text" layoutX="280.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2">
          <font>
-            <Font name="Comic Sans MS Bold Italic" size="27.0" />
+            <Font name="Comic Sans MS Bold" size="27.0" />
          </font>
       </Text>
       <Text fx:id="pl3Text" layoutX="280.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3">
          <font>
-            <Font name="Comic Sans MS Bold Italic" size="27.0" />
+            <Font name="Comic Sans MS Bold" size="27.0" />
          </font>
       </Text>
       <Text fx:id="pl4Text" layoutX="280.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 4">
          <font>
-            <Font name="Comic Sans MS Bold Italic" size="27.0" />
+            <Font name="Comic Sans MS Bold" size="27.0" />
          </font>
       </Text>
       <ImageView fitHeight="40.0" fitWidth="80.0" layoutX="523.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
