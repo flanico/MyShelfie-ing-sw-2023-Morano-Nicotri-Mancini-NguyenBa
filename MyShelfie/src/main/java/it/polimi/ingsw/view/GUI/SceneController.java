@@ -64,7 +64,7 @@ public class SceneController extends ViewObservable {
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.initOwner(activeScene.getWindow());
-        popupStage.centerOnScreen();
+        //popupStage.centerOnScreen();
         Pane popupContent = new Pane();
         popupContent.setPrefSize(400, 300);
         switch (errorType){
@@ -121,7 +121,6 @@ public class SceneController extends ViewObservable {
         popupContent.getChildren().add(imageView);
         Scene popupScene = new Scene(popupContent);
         popupStage.setScene(popupScene);
-
         popupStage.showAndWait();
     }
 

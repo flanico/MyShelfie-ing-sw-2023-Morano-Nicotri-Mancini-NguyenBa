@@ -67,7 +67,7 @@ public class Gui extends ViewObservable implements View {
             this.players_in_game=players;
             this.players_number=numberPlayers;
             this.owner=players.get(players.size()-1);
-            SceneController.changeRootPane(observers, SceneController.getActiveScene(),"lobbyPanel.fxml");
+            SceneController.changeRootPane(observers,"lobbyPanel.fxml");
             lobby_ctrl = (LobbyController) SceneController.getActiveController();
             new_ctrl = lobby_ctrl;
             Platform.runLater(() -> new_ctrl.init(players, numberPlayers));
@@ -111,7 +111,7 @@ public class Gui extends ViewObservable implements View {
         Stage stage = (Stage) SceneController.getActiveScene().getWindow();
         stage.setWidth(800d);
         stage.setHeight(600d);
-        SceneController.changeRootPane(observers, SceneController.getActiveScene(),"endPanel.fxml");
+        SceneController.changeRootPane(observers,"endPanel.fxml");
         end_ctrl = (EndController) SceneController.getActiveController();
         Platform.runLater(() -> end_ctrl.init(win2, score, winner));
     }
@@ -245,8 +245,8 @@ public class Gui extends ViewObservable implements View {
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1500d);
             stage.setHeight(800d);
-            stage.centerOnScreen();
-            SceneController.changeRootPane(observers, SceneController.getActiveScene(),"gamePanel.fxml");
+            //stage.centerOnScreen();
+            SceneController.changeRootPane(observers,"gamePanel.fxml");
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
             game_ctrl.setNumberPlayers(this.players_number);
             game_ctrl.setPlayersList(this.players_in_game);

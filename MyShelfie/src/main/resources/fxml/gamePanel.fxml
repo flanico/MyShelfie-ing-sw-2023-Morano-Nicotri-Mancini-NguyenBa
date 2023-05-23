@@ -303,12 +303,24 @@
          </image>
       </ImageView>
       <ImageView fx:id="bookshelf_d" fitHeight="447.0" fitWidth="470.0" layoutX="1155.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" scaleX="0.45" scaleY="0.45" />
-      <ImageView fx:id="first_won" fitHeight="150.0" fitWidth="200.0" layoutX="28.0" layoutY="736.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="second_won" fitHeight="150.0" fitWidth="200.0" layoutX="287.0" layoutY="736.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="first_won" fitHeight="150.0" fitWidth="200.0" layoutX="28.0" layoutY="736.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/common1_won.png" />
+         </image></ImageView>
+      <ImageView fx:id="second_won" fitHeight="150.0" fitWidth="200.0" layoutX="287.0" layoutY="736.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/common2_won.png" />
+         </image></ImageView>
       <ImageView fx:id="common_prize_1" fitHeight="91.0" fitWidth="81.0" layoutX="85.0" layoutY="629.0" onMouseClicked="#button_50_click" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="common_prize_2" fitHeight="91.0" fitWidth="81.0" layoutX="351.0" layoutY="629.0" onMouseClicked="#button_50_click" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="won_frame1" fitHeight="91.0" fitWidth="91.0" layoutX="80.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="won_frame2" fitHeight="93.0" fitWidth="91.0" layoutX="346.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="won_frame1" fitHeight="91.0" fitWidth="91.0" layoutX="80.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/won_frame.png" />
+         </image></ImageView>
+      <ImageView fx:id="won_frame2" fitHeight="93.0" fitWidth="91.0" layoutX="346.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/won_frame.png" />
+         </image></ImageView>
       <ImageView fx:id="common_score_1" fitHeight="53.0" fitWidth="59.0" layoutX="639.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" />
       <ImageView fx:id="common_score_2" fitHeight="53.0" fitWidth="59.0" layoutX="640.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" />
       <ImageView fx:id="frame3" fitHeight="81.0" fitWidth="100.0" layoutX="1104.0" layoutY="579.0" pickOnBounds="true" preserveRatio="true">

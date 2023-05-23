@@ -66,7 +66,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
     ImageView bookshelf_s, bookshelf_c, bookshelf_d;
     @FXML   //initialize the seat image
     ImageView seat;
-
     @FXML
     ImageView frame1, frame2, frame3;
 
@@ -98,6 +97,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
        }));
        activeSelection(false);
        activeShelf(false);
+       won_frame1.setVisible(false);
+       won_frame2.setVisible(false);
+       first_won.setVisible(false);
+       second_won.setVisible(false);
        SelectedTiles.clear();
     }
     public void setBoard(Board board) {
@@ -295,13 +298,14 @@ public class GameControllerScene extends ViewObservable implements Controller {
             default -> path = "";
         }
         if ( commonGoalCards.get(0).getNumber() == win_card.getNumber() ){
-            first_won.setImage(new Image(path));
-            common_prize_1.setImage(new Image("Graphics/common1_won.png"));
-            won_frame1.setImage(new Image("/Graphics/won_frame.png"));
+            common_prize_1.setImage(new Image(path));
+            won_frame1.setVisible(true);
+            first_won.setVisible(true);
+
         } else {
+            won_frame2.setVisible(true);
+            second_won.setVisible(true);
             common_prize_2.setImage(new Image(path));
-            common_prize_1.setImage(new Image("Graphics/common2_won.png"));
-            won_frame1.setImage(new Image("/Graphics/won_frame.png"));
         }
     }
     public void updateCommonGoalCards(){

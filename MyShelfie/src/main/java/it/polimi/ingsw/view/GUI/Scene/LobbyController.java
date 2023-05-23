@@ -3,7 +3,6 @@ package it.polimi.ingsw.view.GUI.Scene;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.observer.ViewObservable;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
