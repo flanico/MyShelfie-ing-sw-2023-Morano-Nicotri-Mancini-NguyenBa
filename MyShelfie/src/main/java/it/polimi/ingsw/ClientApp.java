@@ -14,6 +14,7 @@ public class ClientApp {
      * main method in which the client choose between Cli or GUI view
      * @param args input stream
      */
+
     public static void main(String[] args) {
         System.out.print("Choose the modality: 'c' for CLI or 'g' for GUI: ");
         Scanner scanner = new Scanner(System.in);

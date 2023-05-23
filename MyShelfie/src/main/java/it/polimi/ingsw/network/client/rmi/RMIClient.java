@@ -13,7 +13,7 @@ import java.rmi.registry.Registry;
  * class that represents an RMI client implementation
  */
 public class RMIClient extends Client {
-    private final RMIInterface remote;
+    private final RMIInterface stub;
     private final RMIInterface skeleton;
     private boolean connected;
 
@@ -25,7 +25,7 @@ public class RMIClient extends Client {
      */
     public RMIClient(String ip, int port) throws RemoteException, NotBoundException {
         Registry registry = LocateRegistry.getRegistry(ip, port);
-        this.remote = (RMIInterface) registry.lookup("SERVER");
+        this.stub = (RMIInterface) registry.lookup("SERVER");
         this.skeleton = new RMISkeleton(this);
         this.connected = true;
     }
@@ -39,7 +39,7 @@ public class RMIClient extends Client {
     public void sendMessage(Message message) {
         if (connected) {
             try {
-                remote.toServer(message, this.skeleton);
+                stub.toServer(message, this.skeleton);
             } catch (RemoteException e) {
                 throw new RuntimeException(e);
             }
