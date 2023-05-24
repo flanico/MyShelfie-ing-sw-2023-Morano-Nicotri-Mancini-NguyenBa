@@ -82,6 +82,9 @@ public class ClientController implements Observer, ViewObserver {
                 case NUM_PLAYERS_REQ -> {
                     executorService.execute(view::askPlayersNumber);
                 }
+                case CHAT_MESSAGE_REPLY ->{
+                    executorService.execute(() -> view.addChatMessage(((ChatReplyMessage) message).getSender(), ((ChatReplyMessage) message).getDestination(), ((ChatReplyMessage) message).toString()));
+                }
                 case ERROR -> {
                     ErrorMessage errorMessage = (ErrorMessage) message;
                     executorService.execute(() -> view.showError(errorMessage.getMessageError()));
@@ -192,5 +195,10 @@ public class ClientController implements Observer, ViewObserver {
     @Override
     public void sendOrderTiles(List<Tile> tiles) {
         client.sendMessage(new OrderReplyMessage(this.nickname, tiles));
+    }
+
+    @Override
+    public void sendChatMessage(String destination, String message) {
+        client.sendMessage(new ChatRequestMessage(this.nickname, destination, message));
     }
 }

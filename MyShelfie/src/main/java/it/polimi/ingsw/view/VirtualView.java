@@ -59,6 +59,10 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
+    public void addChatMessage(String sender, String destination, String message) {
+        clientHandler.sendMessageToClient(new ChatReplyMessage(sender, destination, message));
+    }
+    @Override
     public void showGenericMessage(String genericMessage) {
         clientHandler.sendMessageToClient(new GenericMessage("SERVER", genericMessage));
     }
@@ -117,4 +121,5 @@ public class VirtualView implements View, Observer {
     public void showScores(Map<String, Integer> playerScore) {
         clientHandler.sendMessageToClient(new ScoresMessage(playerScore));
     }
+
 }

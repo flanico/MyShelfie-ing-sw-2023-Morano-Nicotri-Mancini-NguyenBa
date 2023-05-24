@@ -258,4 +258,11 @@ public class Gui extends ViewObservable implements View {
         return game_ctrl;
     }
 
+    //TODO: chat message graphics
+    @Override
+    public void addChatMessage(String sender, String destination, String message) {
+
+    }
+
+
 }

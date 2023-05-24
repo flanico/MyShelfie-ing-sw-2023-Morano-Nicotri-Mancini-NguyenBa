@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.network.message.Message;
 
 import java.util.List;
 import java.util.Map;
@@ -115,6 +116,12 @@ public interface View {
      * @param playerScore map contains players and their scores
      */
     void showScores(Map<String, Integer> playerScore);
+
+    /**
+     * add a new message into the buffer of the chat
+     * @param message
+     */
+    void addChatMessage(String sender, String destination, String message);
 
     /**
      * notify to all the client a player disconnection

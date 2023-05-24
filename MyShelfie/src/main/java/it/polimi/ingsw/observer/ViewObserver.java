@@ -43,4 +43,9 @@ public interface ViewObserver {
      * @param tiles selected by the client
      */
     void sendOrderTiles(List<Tile> tiles);
+
+    /**
+     * sends a message to the server with the chat request
+     */
+    void sendChatMessage(String destination, String message);
 }

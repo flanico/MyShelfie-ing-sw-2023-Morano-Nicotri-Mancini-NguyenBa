@@ -2,7 +2,9 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.network.message.clientSide.ChatRequestMessage;
 import it.polimi.ingsw.network.message.clientSide.NumPlayersReplyMessage;
+import it.polimi.ingsw.network.message.serverSide.GenericMessage;
 import it.polimi.ingsw.network.server.Server;
 import it.polimi.ingsw.persistence.Persistence;
 import it.polimi.ingsw.view.View;
@@ -78,6 +80,9 @@ public class GameController implements Serializable {
      */
     private void inGameState(Message message) {
         switch (message.getMessageType()) {
+            case CHAT_MESSAGE_REQ -> {
+                broadcastingChat(message);
+            }
             case TILES_REPLY -> {
                 if(inputController.checkTiles(message)) {
                     turnController.messageFromGameController(message);
@@ -304,6 +309,14 @@ public class GameController implements Serializable {
             virtualViewMap.clear();
             game.clear();
         }
+    }
+
+    public void broadcastingChat(Message message){
+        String destination;
+        destination = ((ChatRequestMessage) message).getDestination();
+        for(VirtualView v : virtualViewMap.values()){
+                v.addChatMessage(((ChatRequestMessage) message).getSender(), destination, ((ChatRequestMessage) message).toString());
+            }
     }
 
     /**
