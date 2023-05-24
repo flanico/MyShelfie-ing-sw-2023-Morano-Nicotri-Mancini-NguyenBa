@@ -24,6 +24,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
 
     /**
      * default constructor
+     *
      * @param clientSocket client connecting
      * @param socketServer socket of the server
      */
@@ -54,6 +55,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
 
     /**
      * handles the connection with the new client and keep listening to the socket for new messages
+     *
      * @throws IOException for Input/Output exceptions
      */
     private void handleClientConnection() throws IOException {
@@ -64,7 +66,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
             while (!Thread.currentThread().isInterrupted()) {
                 synchronized (inputLock) {
                     Message message = (Message) inputStream.readObject();
-                    if(message != null && message.getMessageType() != MessageType.PING) {
+                    if (message != null && message.getMessageType() != MessageType.PING) {
                         //if is a LOGIN message
                         if (message.getMessageType() == MessageType.LOGIN_REQ) {
                             Server.LOGGER.info(() -> "SOCKET Message LoginRequest received from " + message.getNickname() + ": " + message);
@@ -88,9 +90,9 @@ public class SocketClientHandler implements ClientHandler, Runnable {
      */
     @Override
     public void disconnectClient() {
-        if(isConnected) {
+        if (isConnected) {
             try {
-                if(!clientSocket.isClosed()) {
+                if (!clientSocket.isClosed()) {
                     clientSocket.close();
                 }
             } catch (IOException e) {
@@ -104,19 +106,24 @@ public class SocketClientHandler implements ClientHandler, Runnable {
 
     /**
      * sends a message to the client
+     *
      * @param message to be sent
      */
     @Override
     public void sendMessageToClient(Message message) {
-        try {
-            synchronized (outputLock) {
-                outputStream.writeObject(message);
-                outputStream.reset();
-                Server.LOGGER.info( () -> "SOCKET Message sent : " + message);
+        if (this.socketServer.getServer().getClientHandlerMap().containsKey(message.getNickname())) {
+            try {
+                synchronized (outputLock) {
+                    outputStream.writeObject(message);
+                    outputStream.reset();
+                    Server.LOGGER.info(() -> "SOCKET Message sent : " + message);
+                }
+            } catch (IOException e) {
+                Server.LOGGER.severe(e.getMessage());
+                disconnectClient();
             }
-        } catch (IOException e) {
-            Server.LOGGER.severe(e.getMessage());
-            disconnectClient();
+        } else {
+            Server.LOGGER.severe("SOCKET Client " + message.getNickname() + " not found");
         }
     }
 }

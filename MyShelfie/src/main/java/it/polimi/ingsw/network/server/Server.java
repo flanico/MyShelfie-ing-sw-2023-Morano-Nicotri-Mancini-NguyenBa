@@ -117,4 +117,8 @@ public class Server {
                 .findFirst()
                 .orElse(null);
     }
+
+    public Map<String, ClientHandler> getClientHandlerMap() {
+        return clientHandlerMap;
+    }
 }
