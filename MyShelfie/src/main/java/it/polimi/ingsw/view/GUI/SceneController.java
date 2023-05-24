@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.Scene.Controller;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -64,7 +66,7 @@ public class SceneController extends ViewObservable {
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.initOwner(activeScene.getWindow());
-        //popupStage.centerOnScreen();
+        popupStage.centerOnScreen();
         Pane popupContent = new Pane();
         popupContent.setPrefSize(400, 300);
         switch (errorType){

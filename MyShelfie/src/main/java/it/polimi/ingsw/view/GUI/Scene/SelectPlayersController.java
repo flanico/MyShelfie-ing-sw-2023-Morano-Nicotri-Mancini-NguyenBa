@@ -3,7 +3,6 @@ package it.polimi.ingsw.view.GUI.Scene;
 import it.polimi.ingsw.observer.ViewObservable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.input.MouseEvent;
 
@@ -23,13 +22,11 @@ public class SelectPlayersController extends ViewObservable implements Controlle
     @FXML
     CheckBox fourCheck;
 
-    @FXML
-    Button okButton;
-
-    private int num;
+    private int num=0;
 
     public void okPressed(MouseEvent actionEvent) {
-        notifyObserver(obs -> obs.sendNumPlayers(num));
+        if (num!=0)
+            notifyObserver(obs -> obs.sendNumPlayers(num));
     }
 
     public void twoPressed(ActionEvent actionEvent) {

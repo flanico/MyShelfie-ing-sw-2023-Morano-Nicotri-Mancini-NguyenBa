@@ -1,28 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.EndController">
    <children>
-      <Text layoutX="348.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are the winner!" />
-      <Text layoutX="257.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1° place: Ste with 10 points">
+      <ImageView fitHeight="609.0" fitWidth="814.0" layoutX="-4.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/menu_image.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="won_text" fitHeight="172.0" fitWidth="485.0" layoutX="159.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/youwon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lost_text" fitHeight="254.0" fitWidth="739.0" layoutX="44.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/lost.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="won_card" fitHeight="108.0" fitWidth="107.0" layoutX="347.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/scoring tokens/end game.jpg" />
+         </image></ImageView>
+      <ImageView fx:id="ranking_text" fitHeight="58.0" fitWidth="350.0" layoutX="21.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/ranking.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="place1_text" fitHeight="42.0" fitWidth="176.0" layoutX="30.0" layoutY="366.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/pl1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="place2_text" fitHeight="42.0" fitWidth="167.0" layoutX="30.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/pl2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="place3_text" fitHeight="42.0" fitWidth="162.0" layoutX="30.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/pl3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="place4_text" fitHeight="42.0" fitWidth="172.0" layoutX="34.0" layoutY="545.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/pl4.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="place1_white" fitHeight="34.0" fitWidth="473.0" layoutX="207.0" layoutY="368.0" pickOnBounds="true">
+         <image>
+            <Image url="@/Graphics/bianco.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="place2_white" fitHeight="34.0" fitWidth="473.0" layoutX="207.0" layoutY="431.0" pickOnBounds="true">
+         <image>
+            <Image url="@/Graphics/bianco.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="place3_white" fitHeight="34.0" fitWidth="473.0" layoutX="207.0" layoutY="489.0" pickOnBounds="true">
+         <image>
+            <Image url="@/Graphics/bianco.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="place4_white" fitHeight="34.0" fitWidth="473.0" layoutX="207.0" layoutY="549.0" pickOnBounds="true">
+         <image>
+            <Image url="@/Graphics/bianco.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="place1_sentence" layoutX="215.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player with XX points">
          <font>
-            <Font name="Comic Sans MS" size="24.0" />
-         </font></Text>
-      <Text layoutX="257.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2° place: Ste with 10 points">
-         <font>
-            <Font size="24.0" />
-         </font></Text>
-      <Text layoutX="257.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3° place: Ste with 10 points">
-         <font>
-            <Font size="24.0" />
+            <Font name="Comic Sans MS Bold" size="25.0" />
          </font>
       </Text>
-      <Text layoutX="257.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4° place: Ste with 10 points">
+      <Text fx:id="place2_sentence" layoutX="215.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player with XX points">
          <font>
-            <Font size="24.0" />
+            <Font name="Comic Sans MS Bold" size="25.0" />
          </font>
       </Text>
+      <Text fx:id="place3_sentence" layoutX="215.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player with XX points">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+      </Text>
+      <Text fx:id="place4_sentence" layoutX="215.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player with XX points">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="53.0" fitWidth="59.0" layoutX="709.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/scoring tokens/end game.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="frame" fitHeight="107.0" fitWidth="107.0" layoutX="347.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/won_frame.png" />
+         </image></ImageView>
    </children>
 </Pane>

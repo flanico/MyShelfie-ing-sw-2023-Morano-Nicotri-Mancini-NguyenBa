@@ -22,10 +22,10 @@ public class CommonXSameType extends CommonGoalCard {   //the algorithm works, t
                                 && bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+2][y].getType())
                                 && bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+2][y+2].getType())
                                 && bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+1][y+1].getType())
-                                && !bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x][y+1].getType())
-                                && !bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+1][y].getType())
-                                && !bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+1][y+2].getType())
-                                && !bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+2][y+1].getType())
+                                && (!bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x][y+1].getType()) || bookshelf.getMatrix()[x][y+1].getType().equals(TileType.NULL) )
+                                && (!bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+1][y].getType()) || bookshelf.getMatrix()[x+1][y].getType().equals(TileType.NULL) )
+                                && (!bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+1][y+2].getType()) || bookshelf.getMatrix()[x+1][y+2].getType().equals(TileType.NULL) )
+                                && (!bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+2][y+1].getType()) || bookshelf.getMatrix()[x+2][y+1].getType().equals(TileType.NULL) )
                 )
                     return true;
             }

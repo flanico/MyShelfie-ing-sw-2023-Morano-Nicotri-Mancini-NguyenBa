@@ -5,9 +5,7 @@ import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.ErrorType;
 import it.polimi.ingsw.view.GUI.SceneController;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -80,9 +78,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public boolean isFirst = false;
     private int selected_column = -1;               //the column selected by the player
     List<CommonGoalCardScore> commonGoalCardScores = new ArrayList<>();         //the list of the common goal cards scores
-    public CommonGoalCard win_card;                                             //
     public Player currentPlayer = null;
-    public int common_score;                                                    //the score of the common goal cards
     public Player owner;                                                        //the owner of the bookshelf
     public List<Player> playersList;                                            //the list of the players
     public int numberPlayers;                                                   //the number of the players in the game
@@ -120,12 +116,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
     public void setCommonGoalCardScores(List<CommonGoalCardScore> commonGoalCardScores){
         this.commonGoalCardScores = commonGoalCardScores;
-    }
-    public void setWin_card(CommonGoalCard win_card) {
-        this.win_card = win_card;
-    }
-    public void setCommon_score(int common_score) {
-        this.common_score = common_score;
     }
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
@@ -288,20 +278,19 @@ public class GameControllerScene extends ViewObservable implements Controller {
                         setImage(ref_but, board.getMatrix()[x][y].getType(), board.getMatrix()[x][y].getColortype());
             }
     }
-    public void winCard(){
+    public void winCard(CommonGoalCard commonGoalCard, int score){
         String path;
-        switch (common_score){
+        switch (score){
             case 2 -> path = "/scoring tokens/scoring_2.jpg";
             case 4 -> path = "/scoring tokens/scoring_4.jpg";
             case 6 -> path = "/scoring tokens/scoring_6.jpg";
             case 8 -> path = "/scoring tokens/scoring_8.jpg";
             default -> path = "";
         }
-        if ( commonGoalCards.get(0).getNumber() == win_card.getNumber() ){
+        if ( commonGoalCards.get(0).getNumber() == commonGoalCard.getNumber() ){
             common_prize_1.setImage(new Image(path));
             won_frame1.setVisible(true);
             first_won.setVisible(true);
-
         } else {
             won_frame2.setVisible(true);
             second_won.setVisible(true);

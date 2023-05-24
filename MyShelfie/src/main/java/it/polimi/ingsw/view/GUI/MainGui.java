@@ -4,6 +4,7 @@ import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.view.GUI.Scene.GameControllerScene;
 import it.polimi.ingsw.view.GUI.Scene.MenuController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
@@ -36,11 +37,16 @@ public class MainGui extends Application {
         SceneController.setActiveScene(scene);
         stage.setScene(scene);
         stage.setResizable(false);
-        //stage.setFullScreenExitHint("");
-        //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
         stage.setTitle("My Shelfie");
         stage.getIcons().add(new Image("/item tiles/Gatti1.1.png"));
-        //stage.centerOnScreen();
+        stage.centerOnScreen();
         stage.show();
+    }
+
+    @Override
+    public void stop() {
+        Platform.exit();
+        System.exit(0);
     }
 }

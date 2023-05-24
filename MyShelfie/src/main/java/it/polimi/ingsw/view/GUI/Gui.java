@@ -110,10 +110,10 @@ public class Gui extends ViewObservable implements View {
         EndController end_ctrl;
         Stage stage = (Stage) SceneController.getActiveScene().getWindow();
         stage.setWidth(800d);
-        stage.setHeight(600d);
+        stage.setHeight(650d);
         SceneController.changeRootPane(observers,"endPanel.fxml");
         end_ctrl = (EndController) SceneController.getActiveController();
-        Platform.runLater(() -> end_ctrl.init(win2, score, winner));
+        Platform.runLater(() -> end_ctrl.init(win2, score, players_number));
     }
 
     /**
@@ -215,9 +215,7 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void showCommonGoalComplete(CommonGoalCard commonGoalCard, int score){
         GameControllerScene game_ctrl = getGameControllerScene();
-        game_ctrl.setWin_card(commonGoalCard);
-        game_ctrl.setCommon_score(score);
-        Platform.runLater(game_ctrl::winCard);
+        Platform.runLater(() -> game_ctrl.winCard(commonGoalCard, score));
     }
 
     /**
@@ -245,7 +243,7 @@ public class Gui extends ViewObservable implements View {
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1500d);
             stage.setHeight(800d);
-            //stage.centerOnScreen();
+            stage.centerOnScreen();
             SceneController.changeRootPane(observers,"gamePanel.fxml");
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
             game_ctrl.setNumberPlayers(this.players_number);
