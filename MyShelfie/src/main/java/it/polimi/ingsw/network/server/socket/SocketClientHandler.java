@@ -111,7 +111,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
      */
     @Override
     public void sendMessageToClient(Message message) {
-        if (this.socketServer.getServer().getClientHandlerMap().containsKey(message.getNickname())) {
+//        if (this.socketServer.getServer().getClientHandlerMap().containsKey(message.getNickname())) {
             try {
                 synchronized (outputLock) {
                     outputStream.writeObject(message);
@@ -122,8 +122,9 @@ public class SocketClientHandler implements ClientHandler, Runnable {
                 Server.LOGGER.severe(e.getMessage());
                 disconnectClient();
             }
-        } else {
-            Server.LOGGER.severe("SOCKET Client " + message.getNickname() + " not found");
-        }
+
+            //        } else {
+//            Server.LOGGER.severe("SOCKET Client " + message.getNickname() + " not found");
+//        }
     }
 }
