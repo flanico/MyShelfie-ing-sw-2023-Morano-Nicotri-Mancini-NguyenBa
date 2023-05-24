@@ -11,15 +11,19 @@ import java.rmi.RemoteException;
  * @author Alessandro Mancini
  */
 public class RMIClientHandler implements ClientHandler {
+    private Server server;
     private RMIInterface skeleton;
 
     /**
      * constructor of RMIClientHandler
+     *
      * @param skeleton RMISkeleton remote implementation received from client
+     * @param server
      * @author Alessandro Mancini
      */
-    protected RMIClientHandler(RMIInterface skeleton) {
+    protected RMIClientHandler(RMIInterface skeleton, Server server) {
         this.skeleton = skeleton;
+        this.server = server;
     }
 
     /**
@@ -44,7 +48,8 @@ public class RMIClientHandler implements ClientHandler {
     @Override
     public void disconnectClient() {
         try {
-            this.skeleton.disconnectRMI();
+            this.server.onDisconnect(this);
+            this.skeleton.disconnect();
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

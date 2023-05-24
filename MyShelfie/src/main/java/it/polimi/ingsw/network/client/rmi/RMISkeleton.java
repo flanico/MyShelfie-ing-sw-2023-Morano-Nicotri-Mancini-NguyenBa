@@ -45,7 +45,7 @@ public class RMISkeleton extends UnicastRemoteObject implements RMIInterface {
      * @author Alessandro Mancini
      */
     @Override
-    public void disconnectRMI() {
+    public void disconnect() {
         this.client.disconnect();
     }
 }

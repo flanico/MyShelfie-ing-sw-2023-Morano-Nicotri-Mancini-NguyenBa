@@ -34,7 +34,7 @@ public class RMIStub extends UnicastRemoteObject implements RMIInterface {
     public void toServer(Message message, RMIInterface skeleton) throws RemoteException {
         if (message != null && message.getMessageType() != MessageType.PING) {
             if (message.getMessageType() == MessageType.LOGIN_REQ) {
-                ClientHandler handler = new RMIClientHandler(skeleton);
+                ClientHandler handler = new RMIClientHandler(skeleton, this.server);
                 Server.LOGGER.info(() -> "Login from " + message.getNickname() + ": " + message);
                 this.server.addClient(message.getNickname(), handler);
             }
@@ -58,5 +58,5 @@ public class RMIStub extends UnicastRemoteObject implements RMIInterface {
      * @author Alessandro Mancini
      */
     @Override
-    public void disconnectRMI() throws RemoteException {}
+    public void disconnect() throws RemoteException {}
 }

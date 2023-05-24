@@ -30,5 +30,5 @@ public interface RMIInterface extends  Remote {
      * method to disconnect the client from the RMI network
      * @author Alessandro Mancini
      */
-    void disconnectRMI() throws RemoteException;
+    void disconnect() throws RemoteException;
 }
