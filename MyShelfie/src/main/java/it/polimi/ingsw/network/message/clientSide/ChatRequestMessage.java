@@ -5,6 +5,10 @@ import it.polimi.ingsw.network.message.MessageType;
 
 import java.io.Serial;
 
+/**
+ * Message sent from the client to the server to request a chat message
+ * @author Flavia Nicotri
+ */
 public class ChatRequestMessage extends Message {
     @Serial
     private static final long serialVersionUID = 4227821647957063772L;

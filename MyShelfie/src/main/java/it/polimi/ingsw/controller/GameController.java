@@ -311,11 +311,15 @@ public class GameController implements Serializable {
         }
     }
 
+    /**
+     * send a chat message from the server to all players in the game
+     * @param message
+     */
     public void broadcastingChat(Message message){
         String destination;
         destination = ((ChatRequestMessage) message).getDestination();
         for(VirtualView v : virtualViewMap.values()){
-                v.addChatMessage(((ChatRequestMessage) message).getSender(), destination, ((ChatRequestMessage) message).toString());
+                v.addChatMessage(((ChatRequestMessage) message).getSender(), destination, ((ChatRequestMessage) message).getMessage());
             }
     }
 

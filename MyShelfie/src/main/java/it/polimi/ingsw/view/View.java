@@ -119,7 +119,9 @@ public interface View {
 
     /**
      * add a new message into the buffer of the chat
-     * @param message
+     * @param sender sender of the message
+     * @param destination destination of the message
+     * @param message message to add
      */
     void addChatMessage(String sender, String destination, String message);
 
