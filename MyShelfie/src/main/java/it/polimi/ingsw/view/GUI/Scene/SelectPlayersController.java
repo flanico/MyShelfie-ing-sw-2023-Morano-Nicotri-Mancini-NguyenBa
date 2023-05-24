@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Controller class for the SelectPlayer panel
@@ -27,7 +28,7 @@ public class SelectPlayersController extends ViewObservable implements Controlle
 
     private int num;
 
-    public void okPressed(ActionEvent actionEvent) {
+    public void okPressed(MouseEvent actionEvent) {
         notifyObserver(obs -> obs.sendNumPlayers(num));
     }
 
