@@ -21,6 +21,9 @@ public class SocketServer implements Runnable {
         this.server = server;
     }
 
+    /**
+     * starts the socket server
+     */
     @Override
     public void run() {
         try {

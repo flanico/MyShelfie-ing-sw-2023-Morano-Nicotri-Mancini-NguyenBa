@@ -22,12 +22,6 @@ public class SocketClientHandler implements ClientHandler, Runnable {
     private final Object inputLock;
     private final Object outputLock;
 
-    /**
-     * default constructor
-     *
-     * @param clientSocket client connecting
-     * @param socketServer socket of the server
-     */
     public SocketClientHandler(Socket clientSocket, SocketServer socketServer) {
         this.clientSocket = clientSocket;
         this.socketServer = socketServer;
@@ -86,7 +80,7 @@ public class SocketClientHandler implements ClientHandler, Runnable {
     }
 
     /**
-     * disconnects the socket
+     * disconnects the socket client
      */
     @Override
     public void disconnectClient() {

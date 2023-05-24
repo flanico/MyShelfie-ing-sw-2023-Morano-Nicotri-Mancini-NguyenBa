@@ -92,7 +92,6 @@ public class InputController implements Serializable {
         VirtualView virtualView = virtualViewMap.get(tilesReplyMessage.getNickname());
         bookshelfOfTheRoundPlayer = game.getPlayerByNickname(tilesReplyMessage.getNickname()).getBookshelf();
         if(game.getBoard().isRemovable(tilesReplyMessage.getTiles())) {
-//            virtualView.showGenericMessage("Tiles selected are removable from the board!");
             return true;
         }
         else {
@@ -112,7 +111,6 @@ public class InputController implements Serializable {
         VirtualView virtualView = virtualViewMap.get(positionReplyMessage.getNickname());
         if(positionReplyMessage.getColumn() >= 0 && positionReplyMessage.getColumn() <= 4 &&
                 game.getPlayerByNickname(positionReplyMessage.getNickname()).getBookshelf().isInsertableTile(positionReplyMessage.getTiles(), positionReplyMessage.getColumn())) {
-//            virtualView.showGenericMessage("The selected column is correct!");
             return true;
         }
         else {

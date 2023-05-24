@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- *  class that represents the server
+ *  class that represents the server of the game and handles the connection of the clients
  */
 public class Server {
     public static final Logger LOGGER =  Logger.getLogger(Server.class.getName());
@@ -25,19 +25,33 @@ public class Server {
     }
 
     /**
-     * adds a client to be managed by the socket server
-     * @param nickname of the added client
-     * @param clientHandler the client handler associated with the client
+     * handles the addition of a new client
+     * @param nickname of the new client
+     * @param clientHandler of the new client
      */
     public void addClient(String nickname, ClientHandler clientHandler) {
         VirtualView virtualView = new VirtualView(clientHandler);
-        //case of new client
-        if(!gameController.isGameStarted()) {
+        //case of first client connection
+        if(!gameController.isGameStarted() && clientHandlerMap.isEmpty()) {
             if(gameController.checkLoginNickname(nickname, virtualView)) {
                 clientHandlerMap.put(nickname, clientHandler);
                 gameController.loginHandler(nickname, virtualView);
-                LOGGER.info(() -> nickname + "is connected to the game");
+                LOGGER.info(() -> nickname + " is the first connected to the game");
             }
+        }
+        //case of new client connection after the number of players is set
+        else if (!gameController.isGameStarted() && gameController.isNumPlayersSet()) {
+            if(gameController.checkLoginNickname(nickname, virtualView)) {
+                clientHandlerMap.put(nickname, clientHandler);
+                gameController.loginHandler(nickname, virtualView);
+                LOGGER.info(() -> nickname + " is the first connected to the game");
+            }
+        }
+        //case of new client connection before the number of players is set
+        else if (!gameController.isGameStarted() && !gameController.isNumPlayersSet()) {
+            virtualView.showLoginResult(false, false, null);
+            LOGGER.info(() -> "Game is not started yet. Player " + nickname + " cannot join the game");
+            clientHandler.disconnectClient();
         }
         //case of reconnected client
         else if (gameController.isGameStarted() && gameController.getTurnController().getNicknames().size() < gameController.getNicknames().size()) {
@@ -92,7 +106,7 @@ public class Server {
                     removeClient(nickname, false);
                     gameController.broadcastingDisconnection(nickname, false);
                     gameController.endGame();
-                    LOGGER.warning(() -> "Game finishes in Login");
+                    LOGGER.warning(() -> "Game finishes in Login phase");
                 }
                 //if is in game phase continue for the disconnection resilience
                 else {
