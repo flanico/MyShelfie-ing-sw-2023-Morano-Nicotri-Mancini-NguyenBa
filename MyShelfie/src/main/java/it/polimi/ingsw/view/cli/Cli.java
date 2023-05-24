@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.View;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.*;
 
@@ -16,12 +19,22 @@ public class Cli extends ViewObservable implements View {
     private static final String STR_INPUT_ERR = ColorCli.RED + "Invalid Input! Please retry." + ColorCli.RESET;
     public Scanner readLine = new Scanner(System.in);
 
+    private boolean gameRunning;
+    private final Object lock;
+    private boolean myTurn;
+    private BufferedReader br;
+    private ArrayList<String> buffer;           //buffer with al
+    private String finalNickname;
+
     /**
      * constructor of the Cli
      */
     public Cli() {
         out = System.out;
+        this.lock = new Object();
+        this.buffer= new ArrayList<>();
     }
+
 
     /**
      * prints the welcome message of the game
@@ -38,6 +51,107 @@ public class Cli extends ViewObservable implements View {
         out.println(ColorCli.YELLOW_BOLD + "Welcome to My Shelfie game!" + ColorCli.RESET);
 
         selectConnection();
+        gameRunning = true;
+        myTurn = false;
+
+        //out.println("init");
+        br = new BufferedReader(new InputStreamReader(System.in));
+        new Thread(() -> {
+            try {
+                Listener();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+    }
+
+    /**
+     * method create a new thread that listen the input of every player
+     */
+
+    public void Listener() throws IOException, InterruptedException {
+        while(gameRunning){
+            synchronized (lock){
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                //if it's my turn I have to give the lock to the other thread
+                //out.println("lock myturn:"+ myTurn);
+                 if(myTurn){
+                    out.println("aaaaaa");
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                 }else {
+                     //if it's not my turn I have to listen the client
+                     while (!br.ready()) {
+                         Thread.sleep(200);
+                     }
+                     String input = br.readLine();
+                     typeInput(input);
+                 }
+                 lock.notify();
+            }
+
+        }
+    }
+
+    /**
+     * method that select the type of input requested
+     */
+    public void typeInput (String input){
+        switch (input){
+            case "-chat" -> {
+                String destination;
+                String message;
+                boolean isValid;
+
+                do {
+                    out.println("Insert the destination of the message (nickname of the player/'all'): ");
+                    destination = readLine.nextLine();
+
+                    if(destination.isEmpty()) {
+                        out.println(STR_INPUT_ERR);
+                        isValid = false;
+                    }
+                    else {
+                        isValid = true;
+                        clearCli();
+                    }
+                } while (!isValid);
+                out.println("Insert the message you want to send: ");
+                message = readLine.nextLine();
+                String finalDestination = destination;
+                notifyObserver(obs -> obs.sendChatMessage(finalDestination, message));
+
+            }
+            case "-show_chat" ->{
+                if (buffer.size() == 0)
+                {
+                    out.println(ColorCli.YELLOW_BOLD+ "No messages in the chat"+ ColorCli.RESET);
+                }
+                else
+                {
+                    for (String s : buffer) {
+                        out.println(ColorCli.PINK + s + ColorCli.RESET);
+                    }
+                }
+            }
+            case "-end" -> {
+                out.println("Are you sure you want to end the game? (y/n)");
+                //TODO: optione end game
+            }
+            default -> {
+                out.println(STR_INPUT_ERR);
+            }
+        }
     }
 
     /**
@@ -160,7 +274,7 @@ public class Cli extends ViewObservable implements View {
             }
         } while (!isValid);
 
-        String finalNickname = nickname;
+        finalNickname = nickname;
         notifyObserver(obs -> obs.sendNickname(finalNickname));
     }
 
@@ -240,6 +354,8 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showCommonCards(List<CommonGoalCard> commonGoalCards) {
+        myTurn = false;
+        //out.println("false:showcommon");
         out.println();
         out.println(ColorCli.BLUE_INFO  + "COMMON GOAL CARDS OF THE MATCH: " + ColorCli.RESET);
         for(CommonGoalCard c : commonGoalCards) {
@@ -336,6 +452,8 @@ public class Cli extends ViewObservable implements View {
         int num = -1;
         List<Tile> tiles = new ArrayList<>();
         int maxTiles = 0;
+        myTurn = true;
+        //out.println("askeSelect:" + myTurn);
 
         out.println(ColorCli.YELLOW_BOLD + "Hey you have to select the tiles from the board!" + ColorCli.RESET);
         do {
@@ -482,6 +600,7 @@ public class Cli extends ViewObservable implements View {
         if(!isStarted) {
             out.println("\nGame ended...");
             System.exit(1);
+            gameRunning = false;
         }
     }
 
@@ -492,6 +611,22 @@ public class Cli extends ViewObservable implements View {
         for (String player : playerScore.keySet()) {
             out.println(position + "- " + player + ": " + playerScore.get(player));
             position++;
+        }
+    }
+
+    /**
+     * add a message to the buffer of the player's chat
+     * @param sender sender of the message
+     * @param destination destination of the message
+     * @param message message
+     */
+    @Override
+    public void addChatMessage(String sender, String destination, String message) {
+        //the message is for me
+
+        if (!sender.equals(finalNickname)&& (destination.equals("all") || destination.equals(finalNickname))) {
+            //out.println("nuovo mex");
+            buffer.add(message);
         }
     }
 }

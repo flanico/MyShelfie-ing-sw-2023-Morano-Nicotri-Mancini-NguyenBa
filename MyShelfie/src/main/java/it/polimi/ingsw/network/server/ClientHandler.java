@@ -3,7 +3,7 @@ package it.polimi.ingsw.network.server;
 import it.polimi.ingsw.network.message.Message;
 
 /**
- * interface used to handle clients: the RMIClientHandler and SocketClientHandler will implement it
+ * interface used to handle clients: the RMIClientHandler and SocketClientHandler implements it
  */
 public interface ClientHandler {
 

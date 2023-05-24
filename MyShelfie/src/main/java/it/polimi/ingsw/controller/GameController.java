@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.network.message.clientSide.ChatRequestMessage;
 import it.polimi.ingsw.network.message.clientSide.NumPlayersReplyMessage;
 import it.polimi.ingsw.network.server.Server;
 import it.polimi.ingsw.persistence.Persistence;
@@ -14,7 +15,7 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * class that represents the evolution of the game
+ * class that represents the controller of the game
  * @author Alessandro Mancini, Chiara Nguyen Ba
  */
 public class GameController implements Serializable {
@@ -27,16 +28,15 @@ public class GameController implements Serializable {
     private TurnController turnController;
     private InputController inputController;
     private transient Timer timer;
+    private boolean isNumPlayersSet;
     private static final String STR_INVALID_STATE = "Invalid game state";
 
-    /**
-     * constructor of the game controller
-     */
     public GameController() {
         this.game = new Game();
         this.virtualViewMap = Collections.synchronizedMap(new HashMap<>());
         this.inputController = new InputController(this, virtualViewMap);
         this.nicknames = new ArrayList<>();
+        this.isNumPlayersSet = false;
         gameState = GameState.LOGIN;
     }
 
@@ -60,6 +60,7 @@ public class GameController implements Serializable {
         if(message.getMessageType() == MessageType.NUM_PLAYERS_REP) {
             if(inputController.checkNumPlayers(message)) {
                 game.setNum(((NumPlayersReplyMessage) message).getNumPlayers());
+                isNumPlayersSet = true;
                 game.addPlayer(nicknames.get(0), false);
                 if(game.getCurrentNum() < game.getNum()) {
                     broadcastingMessage("Waiting other players...");
@@ -78,6 +79,9 @@ public class GameController implements Serializable {
      */
     private void inGameState(Message message) {
         switch (message.getMessageType()) {
+            case CHAT_MESSAGE_REQ -> {
+                broadcastingChat(message);
+            }
             case TILES_REPLY -> {
                 if(inputController.checkTiles(message)) {
                     turnController.messageFromGameController(message);
@@ -156,6 +160,7 @@ public class GameController implements Serializable {
             nicknames.add(nickname);
             virtualView.showLoginResult(true, true, "SERVER");
             virtualView.askPlayersNumber();
+
         }
         //If the player is not the first player to connect to the game, he joins in the game
         else if (virtualViewMap.size() < game.getNum() && !isGameStarted()) {
@@ -307,6 +312,18 @@ public class GameController implements Serializable {
     }
 
     /**
+     * send a chat message from the server to all players in the game
+     * @param message to send
+     */
+    public void broadcastingChat(Message message){
+        String destination;
+        destination = ((ChatRequestMessage) message).getDestination();
+        for(VirtualView v : virtualViewMap.values()){
+                v.addChatMessage(((ChatRequestMessage) message).getSender(), destination, ((ChatRequestMessage) message).getMessage());
+            }
+    }
+
+    /**
      * sends a message contains generic game information to all players in the game
      * @param message to send
      */
@@ -341,6 +358,10 @@ public class GameController implements Serializable {
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
+    }
+
+    public boolean isNumPlayersSet() {
+        return isNumPlayersSet;
     }
 
     /**

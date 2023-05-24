@@ -7,6 +7,8 @@ public enum MessageType {
     //Server side
     INFO_GAME,
     ERROR,
+    CHAT_MESSAGE_REQ,
+    CHAT_MESSAGE_REPLY,
     NUM_PLAYERS_REQ,
     SHOW_BOARD,
     SELECT_TILE_REQ,

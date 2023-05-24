@@ -21,6 +21,9 @@ public class SocketServer implements Runnable {
         this.server = server;
     }
 
+    /**
+     * starts the socket server
+     */
     @Override
     public void run() {
         try {
@@ -68,5 +71,9 @@ public class SocketServer implements Runnable {
      */
     public void onDisconnect(ClientHandler clientHandler) {
         server.onDisconnect(clientHandler);
+    }
+
+    public Server getServer() {
+        return this.server;
     }
 }
