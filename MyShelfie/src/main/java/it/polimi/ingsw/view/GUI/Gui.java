@@ -131,6 +131,7 @@ public class Gui extends ViewObservable implements View {
      * shows to the client his personal goal card
      * @param player of the game
      */
+    //TODO : SIMPLIFY THIS METHOD
     @Override
     public void showPersonalCard(Player player){
         GameControllerScene game_ctrl = getGameControllerScene();

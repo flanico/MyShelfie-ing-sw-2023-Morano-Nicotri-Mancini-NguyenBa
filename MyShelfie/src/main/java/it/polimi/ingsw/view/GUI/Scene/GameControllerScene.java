@@ -632,6 +632,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
+
     public void cancelPressed(MouseEvent mouseEvent){
         if (select_card_phase) {
             int size = SelectedTiles.size();
