@@ -68,7 +68,6 @@ public class ClientController implements Observer, ViewObserver {
 
     /**
      * it updates the client with a specific message based on the message type received from the server
-     * it must handle all message types from SERVER
      * @param message the received message from the server
      */
     @Override
