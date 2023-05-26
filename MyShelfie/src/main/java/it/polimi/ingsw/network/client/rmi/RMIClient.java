@@ -4,6 +4,7 @@ import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.server.rmi.RMIInterface;
 
+import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -13,6 +14,9 @@ import java.rmi.registry.Registry;
  * class that represents an RMI client implementation
  */
 public class RMIClient extends Client {
+    private final String ip;
+    private final int port;
+    private Registry registry;
     private final RMIInterface stub;
     private final RMIInterface skeleton;
     private boolean connected;
@@ -24,10 +28,25 @@ public class RMIClient extends Client {
      * @author Alessandro Mancini
      */
     public RMIClient(String ip, int port) throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(ip, port);
+        this.ip = ip;
+        this.port = port;
+        this.registry = LocateRegistry.getRegistry(ip, port);
         this.stub = (RMIInterface) registry.lookup("SERVER");
         this.skeleton = new RMISkeleton(this);
         this.connected = true;
+    }
+
+    /**
+     * check if the RMIServer is online
+     * @author Alessandro Mancini
+     */
+    private boolean checkConnection() throws RemoteException {
+        try {
+            this.registry = LocateRegistry.getRegistry(this.ip, this.port);
+            return true;
+        } catch (ConnectException e) {
+            return false;
+        }
     }
 
     /**
@@ -37,12 +56,16 @@ public class RMIClient extends Client {
      */
     @Override
     public void sendMessage(Message message) {
-        if (connected) {
-            try {
-                stub.toServer(message, this.skeleton);
-            } catch (RemoteException e) {
-                throw new RuntimeException(e);
+        try {
+            if (connected && this.checkConnection()) {
+                try {
+                    stub.toServer(message, this.skeleton);
+                } catch (RemoteException e) {
+                    Client.LOGGER.severe("Error in sending message to the RMI Server");
+                }
             }
+        } catch (RemoteException e) {
+            Client.LOGGER.severe("Server is offline");
         }
     }
 
@@ -59,8 +82,12 @@ public class RMIClient extends Client {
      * @author Alessandro Mancini
      */
     public void readMessage(Message message) {
-        if (this.connected)
-            notifyObserver(message);
+        try {
+            if (this.connected && this.checkConnection())
+                notifyObserver(message);
+        } catch (RemoteException e) {
+            Client.LOGGER.severe("Server is offline");
+        }
     }
 
     /**
