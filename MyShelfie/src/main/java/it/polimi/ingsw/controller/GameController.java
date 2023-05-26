@@ -235,6 +235,8 @@ public class GameController implements Serializable {
             broadcastingMessage("\nThe game round is: " + turnController.getNicknames());
 //            turnController.setDisconnected(true);
             turnController.nextPlayer(index, true);
+            Thread threadTurnManager = new Thread(() -> turnController.turnManager());
+            threadTurnManager.start();
         }
     }
 
