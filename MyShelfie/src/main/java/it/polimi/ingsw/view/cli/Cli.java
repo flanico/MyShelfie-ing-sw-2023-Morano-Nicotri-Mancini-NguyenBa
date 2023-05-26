@@ -83,7 +83,7 @@ public class Cli extends ViewObservable implements View {
                 //if it's my turn I have to give the lock to the other thread
                 //out.println("lock myturn:"+ myTurn);
                  if(myTurn){
-                    out.println("aaaaaa");
+                    //out.println("aaaaaa");
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
@@ -349,6 +349,15 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showGenericMessage(String genericMessage) {
+        if (genericMessage.contains("It's your turn")) {
+            myTurn = true;
+            //out.println("true:showgeneric");
+        }
+        else {
+            myTurn = false;
+            //out.println("false:showgeneric");
+        }
+
         out.println(genericMessage);
     }
 
