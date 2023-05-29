@@ -18,7 +18,6 @@ public class Cli extends ViewObservable implements View {
     private final PrintStream out;
     private static final String STR_INPUT_ERR = ColorCli.RED + "Invalid Input! Please retry." + ColorCli.RESET;
     public Scanner readLine = new Scanner(System.in);
-
     private boolean gameRunning;
     private final Object lock;
     private boolean myTurn;
@@ -117,7 +116,7 @@ public class Cli extends ViewObservable implements View {
                     out.println("Insert the destination of the message (nickname of the player/'all'): ");
                     destination = readLine.nextLine();
 
-                    if(destination.isEmpty()) {
+                    if(destination.isEmpty() || destination.isBlank()) {
                         out.println(STR_INPUT_ERR);
                         isValid = false;
                     }
@@ -130,7 +129,6 @@ public class Cli extends ViewObservable implements View {
                 message = readLine.nextLine();
                 String finalDestination = destination;
                 notifyObserver(obs -> obs.sendChatMessage(finalDestination, message));
-
             }
             case "-show_chat" ->{
                 if (buffer.size() == 0)
