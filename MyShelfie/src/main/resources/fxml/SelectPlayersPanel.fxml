@@ -12,17 +12,17 @@
             <Image url="@/Graphics/numbers.png" />
          </image>
       </ImageView>
-      <CheckBox fx:id="twoCheck" layoutX="150.0" layoutY="301.0" mnemonicParsing="false" onAction="#twoPressed" prefHeight="17.0" prefWidth="43.0" textFill="WHITE">
+      <CheckBox fx:id="twoCheck" layoutX="124.0" layoutY="301.0" mnemonicParsing="false" onAction="#twoPressed" prefHeight="17.0" prefWidth="43.0" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="24.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="threeCheck" layoutX="369.0" layoutY="298.0" mnemonicParsing="false" onAction="#threePressed">
+      <CheckBox fx:id="threeCheck" layoutX="343.0" layoutY="298.0" mnemonicParsing="false" onAction="#threePressed">
          <font>
             <Font name="Comic Sans MS Bold" size="24.0" />
          </font>
       </CheckBox>
-      <CheckBox fx:id="fourCheck" layoutX="592.0" layoutY="301.0" mnemonicParsing="false" onAction="#fourPressed">
+      <CheckBox fx:id="fourCheck" layoutX="566.0" layoutY="301.0" mnemonicParsing="false" onAction="#fourPressed">
          <font>
             <Font name="Arial Rounded MT Bold" size="24.0" />
          </font>
@@ -32,17 +32,17 @@
             <Image url="@/Graphics/confirm.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="61.0" fitWidth="45.0" layoutX="418.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="61.0" fitWidth="45.0" layoutX="393.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/3.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="61.0" fitWidth="45.0" layoutX="198.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="61.0" fitWidth="45.0" layoutX="174.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="61.0" fitWidth="50.0" layoutX="641.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="61.0" fitWidth="50.0" layoutX="615.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/4.png" />
          </image>

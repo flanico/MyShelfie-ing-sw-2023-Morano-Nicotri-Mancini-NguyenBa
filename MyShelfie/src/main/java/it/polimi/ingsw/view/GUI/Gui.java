@@ -110,7 +110,7 @@ public class Gui extends ViewObservable implements View {
         EndController end_ctrl;
         Stage stage = (Stage) SceneController.getActiveScene().getWindow();
         stage.setWidth(800d);
-        stage.setHeight(650d);
+        stage.setHeight(630d);
         SceneController.changeRootPane(observers,"endPanel.fxml");
         end_ctrl = (EndController) SceneController.getActiveController();
         Platform.runLater(() -> end_ctrl.init(win2, score, players_number));
