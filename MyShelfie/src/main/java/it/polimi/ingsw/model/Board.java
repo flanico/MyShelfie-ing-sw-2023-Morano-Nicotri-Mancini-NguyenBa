@@ -123,13 +123,13 @@ public class Board implements Serializable {
         if(row > 0 && this.matrix[row - 1][column].getType() != TileType.NULL) {
             return false;
         }
-        if(row < ROW && this.matrix[row + 1][column].getType() != TileType.NULL) {
+        if(row < ROW-1 && this.matrix[row + 1][column].getType() != TileType.NULL) {
             return false;
         }
         if(column > 0 && this.matrix[row][column - 1].getType() != TileType.NULL) {
             return false;
         }
-        if(column < COL && this.matrix[row][column + 1].getType() != TileType.NULL) {
+        if(column < COL-1 && this.matrix[row][column + 1].getType() != TileType.NULL) {
             return false;
         }
         return true;
