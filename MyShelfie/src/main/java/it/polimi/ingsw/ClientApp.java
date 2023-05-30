@@ -1,6 +1,6 @@
 package it.polimi.ingsw;
 import it.polimi.ingsw.controller.ClientController;
-import it.polimi.ingsw.view.cli.Cli;
+import it.polimi.ingsw.view.CLI.Cli;
 import it.polimi.ingsw.view.GUI.MainGui;
 import javafx.application.Application;
 import java.util.Scanner;
