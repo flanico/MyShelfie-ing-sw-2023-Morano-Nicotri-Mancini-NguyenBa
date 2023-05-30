@@ -7,7 +7,7 @@ import it.polimi.ingsw.network.message.clientSide.PositionReplyMessage;
 import it.polimi.ingsw.network.message.clientSide.TilesReplyMessage;
 import it.polimi.ingsw.persistence.Persistence;
 import it.polimi.ingsw.view.VirtualView;
-import it.polimi.ingsw.view.cli.ColorCli;
+import it.polimi.ingsw.view.CLI.ColorCli;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -239,6 +239,7 @@ public class TurnController implements Serializable {
         if(turnState == TurnState.SELECT) {
             VirtualView virtualView = virtualViewMap.get(currentPlayer);
             notifyOtherPlayers("\n" + currentPlayer + " is selecting the tiles from the board...", currentPlayer);
+            notifyOtherPlayers(ColorCli.PINK + "\nIf you want to: \n-start a chat write -chat destination message \n-see the chat write -show_chat"+ ColorCli.RESET, currentPlayer);
             virtualView.askSelectTiles(currentBoard, currentBookshelf);
             waitAnswer();
             turnState = TurnState.REMOVE;

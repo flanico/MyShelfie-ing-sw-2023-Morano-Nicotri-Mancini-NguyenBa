@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.view.cli.ColorCli;
+import it.polimi.ingsw.view.CLI.ColorCli;
 
 import java.io.Serial;
 import java.io.Serializable;

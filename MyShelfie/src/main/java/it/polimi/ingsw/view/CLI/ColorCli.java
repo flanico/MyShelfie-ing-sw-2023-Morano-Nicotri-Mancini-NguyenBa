@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.cli;
+package it.polimi.ingsw.view.CLI;
 
 /**
  * enum used for coloring the cli

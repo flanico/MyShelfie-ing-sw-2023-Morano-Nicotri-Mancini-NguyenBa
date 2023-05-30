@@ -8,7 +8,7 @@ import it.polimi.ingsw.network.server.Server;
 import it.polimi.ingsw.persistence.Persistence;
 import it.polimi.ingsw.view.View;
 import it.polimi.ingsw.view.VirtualView;
-import it.polimi.ingsw.view.cli.ColorCli;
+import it.polimi.ingsw.view.CLI.ColorCli;
 
 import java.io.Serial;
 import java.io.Serializable;
