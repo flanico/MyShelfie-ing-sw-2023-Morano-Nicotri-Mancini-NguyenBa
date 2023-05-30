@@ -65,7 +65,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
     @FXML   //initialize the seat image
     ImageView seat;
     @FXML
-    ImageView frame1, frame2, frame3;
+    ImageView frame1, frame2, frame3, firstTokenWon, firstToken_frame, firstToken_image, firstWon_text;
 
     public Board board;                             //the board of the game
     List<Tile> SelectedTiles = new ArrayList<>();   //the list of the tiles selected by the player
@@ -82,7 +82,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public Player owner;                                                        //the owner of the bookshelf
     public List<Player> playersList;                                            //the list of the players
     public int numberPlayers;                                                   //the number of the players in the game
-
+    private boolean firstToken=false;
 
     public void initialize(){
       KeyCombination keyCombination = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
@@ -97,6 +97,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
        won_frame2.setVisible(false);
        first_won.setVisible(false);
        second_won.setVisible(false);
+       firstToken_frame.setVisible(false);
+       firstTokenWon.setVisible(false);
+       firstWon_text.setVisible(false);
        SelectedTiles.clear();
     }
     public void setBoard(Board board) {
@@ -232,8 +235,8 @@ public class GameControllerScene extends ViewObservable implements Controller {
             downButton.setVisible(false);
             swap_button.setVisible(false);
         }
-
     }
+
     private void insertSelected(ImageView button, int x, int y) {
         Image img = button.getImage();
         ImageView sel = getButton(x, y);
@@ -248,6 +251,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
+
+    /**
+     * This method updates the bookshlef of the player pl
+     * @param pl the player of the bookshelf to update
+     */
     public void updateBookShelf(Player pl){
         ImageView ref_shelf;
         String selector = null;
@@ -268,7 +276,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
                     setImage(ref_shelf, pl.getBookshelf().getMatrix()[x][y].getType(), pl.getBookshelf().getMatrix()[x][y].getColortype());
             }
         }
+        if (!firstToken && pl.getBookshelf().isFull())
+            firstToken(pl.getNickname().equals(owner_nickname_text.getText()));
     }
+
+    /**
+     * This method update the tiles of the board during the game
+     */
     public void updateBoard(){
         ImageView ref_but;
         for (int x=0; x<9; x++)
@@ -278,6 +292,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
                         setImage(ref_but, board.getMatrix()[x][y].getType(), board.getMatrix()[x][y].getColortype());
             }
     }
+    //TODO there's a problem with the second win
     public void winCard(CommonGoalCard commonGoalCard, int score){
         String path;
         switch (score){
@@ -321,6 +336,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
+
+    /**
+     * This method is called when the game starts
+     * It sets the players' nicknames and the bookshelves according to the number of players
+     */
     public void initGame(){
         while (!playersList.get(0).getNickname().equals(owner.getNickname()))
             Collections.rotate(playersList, -1);
@@ -351,6 +371,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
+
+    /**
+     * This method is used to show in preview the tiles that the player is going to insert
+     * @param col is the column of the bookshelf where the player wants to insert the tiles
+     */
     private void tryInsert(int col){
         ImageView img;
         for (int x=0; x<finalTiles.size(); x++){
@@ -359,6 +384,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             img.setOpacity(0.5);
         }
     }
+
     /**
      * @param col is the column of the shelf
      * @return the number of free cells in the column
@@ -621,7 +647,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             ref_button.setOpacity(1.0);
         }
     }
-    public void confirmPressed(MouseEvent mouseEvent){
+    public void confirmPressed(MouseEvent mouseEvent) {
         if (select_card_phase) {
             if (SelectedTiles.size() != 0 && SelectedTiles.size() > shelf.maxTilesBookshelf()) {
                 Platform.runLater(() -> SceneController.popUp(ErrorType.NOT_SPACE));
@@ -630,6 +656,16 @@ public class GameControllerScene extends ViewObservable implements Controller {
                 notifyObserver(obs -> obs.sendSelectTiles(SelectedTiles));
                 activeSelection(false);
             }
+        }
+    }
+
+    private void firstToken(boolean bool){
+        firstToken = true;
+        firstToken_image.setVisible(false);
+        if (bool) {
+            firstToken_frame.setVisible(true);
+            firstTokenWon.setVisible(true);
+            firstWon_text.setVisible(true);
         }
     }
     public void cancelPressed(MouseEvent mouseEvent){

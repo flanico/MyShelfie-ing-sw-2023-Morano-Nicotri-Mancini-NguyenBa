@@ -21,7 +21,6 @@ public class Cli extends ViewObservable implements View {
     private final PrintStream out;
     private static final String STR_INPUT_ERR = ColorCli.RED + "Invalid Input! Please retry." + ColorCli.RESET;
     public Scanner readLine = new Scanner(System.in);
-
     private boolean gameRunning;
     private final Object lock;
     private boolean myTurn;

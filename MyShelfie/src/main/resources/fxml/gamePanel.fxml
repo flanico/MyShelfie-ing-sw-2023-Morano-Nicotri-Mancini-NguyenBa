@@ -106,7 +106,7 @@
             <ImageView fx:id="shelf_44" fitHeight="53.0" fitWidth="59.0" layoutX="280.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Group>
-      <Group layoutX="1208.0" layoutY="198.0" scaleX="0.45" scaleY="0.45">
+      <Group layoutX="1206.0" layoutY="198.0" scaleX="0.45" scaleY="0.45">
          <children>
             <ImageView fx:id="shelf_00_c" fitHeight="53.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="shelf_10_c" fitHeight="53.0" fitWidth="59.0" layoutX="1.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
@@ -174,7 +174,7 @@
             <ImageView fx:id="shelf_54_s" fitHeight="53.0" fitWidth="59.0" layoutX="279.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Group>
-      <Group layoutX="1208.0" layoutY="452.0" scaleX="0.45" scaleY="0.45">
+      <Group layoutX="1206.0" layoutY="452.0" scaleX="0.45" scaleY="0.45">
          <children>
             <ImageView fx:id="shelf_00_d" fitHeight="53.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="shelf_10_d" fitHeight="53.0" fitWidth="59.0" layoutX="1.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
@@ -251,7 +251,7 @@
             <Image url="@/Graphics/arrow.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="okButton" fitHeight="24.0" fitWidth="162.0" layoutX="194.0" layoutY="567.0" onMouseClicked="#okPressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="okButton" fitHeight="24.0" fitWidth="162.0" layoutX="198.0" layoutY="567.0" onMouseClicked="#okPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/confirm.png" />
          </image>
@@ -303,11 +303,11 @@
          </image>
       </ImageView>
       <ImageView fx:id="bookshelf_d" fitHeight="447.0" fitWidth="470.0" layoutX="1155.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" scaleX="0.45" scaleY="0.45" />
-      <ImageView fx:id="first_won" fitHeight="150.0" fitWidth="200.0" layoutX="28.0" layoutY="736.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="first_won" fitHeight="15.0" fitWidth="192.0" layoutX="31.0" layoutY="736.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/common1_won.png" />
          </image></ImageView>
-      <ImageView fx:id="second_won" fitHeight="150.0" fitWidth="200.0" layoutX="287.0" layoutY="736.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="second_won" fitHeight="150.0" fitWidth="200.0" layoutX="292.0" layoutY="736.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/common2_won.png" />
          </image></ImageView>
@@ -341,6 +341,26 @@
       <ImageView fx:id="shelf_text" fitHeight="69.0" fitWidth="441.0" layoutX="28.0" layoutY="519.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/insert_tiles.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstTokenWon" fitHeight="89.0" fitWidth="89.0" layoutX="216.0" layoutY="625.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/scoring tokens/end game.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstToken_frame" fitHeight="91.0" fitWidth="108.0" layoutX="215.0" layoutY="624.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/won_frame.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstToken_image" fitHeight="53.0" fitWidth="49.0" layoutX="1150.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" rotate="9.0">
+         <image>
+            <Image url="@/scoring tokens/end game.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="firstWon_text" fitHeight="15.0" fitWidth="177.0" layoutX="188.0" layoutY="601.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/full.png" />
          </image>
       </ImageView>
    </children>

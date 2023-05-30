@@ -14,6 +14,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
+
 /**
  * class that represents the controller of the game
  * @author Alessandro Mancini, Chiara Nguyen Ba
@@ -80,6 +81,7 @@ public class GameController implements Serializable {
     private void inGameState(Message message) {
         switch (message.getMessageType()) {
             case CHAT_MESSAGE_REQ -> {
+                //TODO: check if the destination is valid
                 broadcastingChat(message);
             }
             case TILES_REPLY -> {
@@ -160,7 +162,6 @@ public class GameController implements Serializable {
             nicknames.add(nickname);
             virtualView.showLoginResult(true, true, "SERVER");
             virtualView.askPlayersNumber();
-
         }
         //If the player is not the first player to connect to the game, he joins in the game
         else if (virtualViewMap.size() < game.getNum() && !isGameStarted()) {
@@ -317,7 +318,7 @@ public class GameController implements Serializable {
      * send a chat message from the server to all players in the game
      * @param message to send
      */
-    public void broadcastingChat(Message message){
+    private void broadcastingChat(Message message){
         String destination;
         destination = ((ChatRequestMessage) message).getDestination();
         for(VirtualView v : virtualViewMap.values()){
@@ -348,10 +349,6 @@ public class GameController implements Serializable {
 
     public TurnController getTurnController() {
         return turnController;
-    }
-
-    public InputController getInputController() {
-        return inputController;
     }
 
     Map<String, VirtualView> getVirtualViewMap() {
@@ -399,10 +396,12 @@ public class GameController implements Serializable {
         this.game.replaceGame(players, num, board, commonGoalCards, commonGoalCardScores, bag, playerScore);
         this.gameState = gameController.gameState;
         this.turnController = gameController.turnController;
-        this.turnController.setGame(this.game);
-        this.turnController.setVirtualViewMap(this.virtualViewMap);
-        this.inputController = new InputController(this, this.virtualViewMap);
-        Thread threadTurnManager = new Thread(() -> turnController.turnManager());
-        threadTurnManager.start();
+        if(this.turnController != null) {
+            this.turnController.setGame(this.game);
+            this.turnController.setVirtualViewMap(this.virtualViewMap);
+            this.inputController = new InputController(this, this.virtualViewMap);
+            Thread threadTurnManager = new Thread(() -> turnController.turnManager());
+            threadTurnManager.start();
+        }
     }
 }

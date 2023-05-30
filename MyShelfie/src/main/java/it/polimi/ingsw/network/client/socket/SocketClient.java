@@ -72,7 +72,7 @@ public class SocketClient extends Client {
     }
 
     /**
-     * disconnect the socket from the server
+     * disconnect the socket client
      */
     @Override
     public void disconnect() {

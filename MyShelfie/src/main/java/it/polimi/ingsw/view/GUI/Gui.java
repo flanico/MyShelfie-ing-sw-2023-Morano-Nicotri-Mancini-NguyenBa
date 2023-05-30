@@ -110,7 +110,7 @@ public class Gui extends ViewObservable implements View {
         EndController end_ctrl;
         Stage stage = (Stage) SceneController.getActiveScene().getWindow();
         stage.setWidth(800d);
-        stage.setHeight(650d);
+        stage.setHeight(630d);
         SceneController.changeRootPane(observers,"endPanel.fxml");
         end_ctrl = (EndController) SceneController.getActiveController();
         Platform.runLater(() -> end_ctrl.init(win2, score, players_number));
@@ -131,6 +131,7 @@ public class Gui extends ViewObservable implements View {
      * shows to the client his personal goal card
      * @param player of the game
      */
+    //TODO : SIMPLIFY THIS METHOD
     @Override
     public void showPersonalCard(Player player){
         GameControllerScene game_ctrl = getGameControllerScene();

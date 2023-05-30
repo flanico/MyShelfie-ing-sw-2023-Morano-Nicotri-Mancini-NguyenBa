@@ -44,7 +44,7 @@ public class Server {
             if(gameController.checkLoginNickname(nickname, virtualView)) {
                 clientHandlerMap.put(nickname, clientHandler);
                 gameController.loginHandler(nickname, virtualView);
-                LOGGER.info(() -> nickname + " is the first connected to the game");
+                LOGGER.info(() -> nickname + " is connected to the game");
             }
         }
         //case of new client connection before the number of players is set
@@ -130,9 +130,5 @@ public class Server {
                 .map(Map.Entry::getKey)
                 .findFirst()
                 .orElse(null);
-    }
-
-    public Map<String, ClientHandler> getClientHandlerMap() {
-        return clientHandlerMap;
     }
 }
