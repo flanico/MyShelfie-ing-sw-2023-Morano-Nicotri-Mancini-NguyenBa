@@ -1,24 +1,20 @@
 package it.polimi.ingsw.view.GUI;
 
+import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.observer.ViewObservable;
+import it.polimi.ingsw.observer.ViewObserver;
 import it.polimi.ingsw.view.GUI.Scene.Controller;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import it.polimi.ingsw.observer.ViewObserver;
-import it.polimi.ingsw.network.client.Client;
-import java.io.IOException;
-import java.util.List;
-import javafx.fxml.FXMLLoader;
-import javafx.event.Event;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Class that controls every change of scenes, panels and observers
@@ -66,7 +62,7 @@ public class SceneController extends ViewObservable {
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.initOwner(activeScene.getWindow());
-        popupStage.centerOnScreen();
+        //popupStage.centerOnScreen();
         Pane popupContent = new Pane();
         popupContent.setPrefSize(400, 300);
         switch (errorType){

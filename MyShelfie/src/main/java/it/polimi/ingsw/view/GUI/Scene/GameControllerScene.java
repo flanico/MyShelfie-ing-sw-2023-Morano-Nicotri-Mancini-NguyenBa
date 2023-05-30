@@ -5,7 +5,11 @@ import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.ErrorType;
 import it.polimi.ingsw.view.GUI.SceneController;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -15,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import javafx.scene.input.KeyCombination;
-
+import javafx.stage.Stage;
 
 /**
  * This class is the controller of the game scene
@@ -40,7 +44,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
     ImageView shelf_00, shelf_01, shelf_02, shelf_03, shelf_04, shelf_10, shelf_11, shelf_12, shelf_13, shelf_14, shelf_20, shelf_21, shelf_22, shelf_23, shelf_24, shelf_30, shelf_31, shelf_32, shelf_33, shelf_34, shelf_40, shelf_41, shelf_42, shelf_43, shelf_44, shelf_50, shelf_51, shelf_52, shelf_53, shelf_54;
     @FXML   //initialize the button of the column in the bookshelf
     ImageView column0, column1, column2, column3, column4;
-    @FXML
+    @FXML   //initialize the lateral button of the bookshelf
     ImageView upButton, downButton, swap_button;
     @FXML
     ImageView shelf_text;
@@ -64,18 +68,18 @@ public class GameControllerScene extends ViewObservable implements Controller {
     ImageView bookshelf_s, bookshelf_c, bookshelf_d;
     @FXML   //initialize the seat image
     ImageView seat;
-    @FXML
+    @FXML   //initialize the frames of the won cards
     ImageView frame1, frame2, frame3, firstTokenWon, firstToken_frame, firstToken_image, firstWon_text;
 
     public Board board;                             //the board of the game
     List<Tile> SelectedTiles = new ArrayList<>();   //the list of the tiles selected by the player
     List<Tile> finalTiles = new ArrayList<>();      //the list of the tiles that will be placed in the bookshelf
     private boolean select_card_phase;              //true if the player is in the select card phase
-    private boolean shelf_phase;                    //true if the player is in the shelf phase
+    private boolean shelf_phase;                    //true if the player is playing during the shelf phase
     PersonalGoalCard personalCard;                  //the personal goal card of the player
     List<CommonGoalCard> commonGoalCards;           //the list of the common goal cards of the game
     public Bookshelf shelf;
-    public boolean isFirst = false;
+    public boolean isFirst = false;                 //true if the player is the first player
     private int selected_column = -1;               //the column selected by the player
     List<CommonGoalCardScore> commonGoalCardScores = new ArrayList<>();         //the list of the common goal cards scores
     public Player currentPlayer = null;
@@ -83,6 +87,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public List<Player> playersList;                                            //the list of the players
     public int numberPlayers;                                                   //the number of the players in the game
     private boolean firstToken=false;
+    public ArrayList<String> buffer = new ArrayList<>();
 
     public void initialize(){
       KeyCombination keyCombination = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
@@ -623,6 +628,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
             default -> null;
        };
     }
+
+    /**
+     * This method set the image of the button with his type and colortype
+     * @param ref_button the button where set the image
+     * @param type the type of the image to insert in the button
+     * @param colortype the colortype of the image to insert in the button
+     */
     private void setImage(ImageView ref_button, TileType type, int colortype) {
         if (type.equals(TileType.NULL)){
             ref_button.setImage(null);
@@ -659,6 +671,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
         }
     }
 
+    /**
+     * This method controls the token for the first full bookshelf
+     * @param bool true: the method is called by the winner, false: the method is called by the loser
+     */
     private void firstToken(boolean bool){
         firstToken = true;
         firstToken_image.setVisible(false);
@@ -683,6 +699,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
                 SelectedTiles.remove(size - 1);
             }
         }
+    }
+    public void addBuffer(String message){
+        buffer.add(message);
     }
     public void button_03_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[0][3].isBlocked() && SelectedTiles.size()<3){
@@ -967,4 +986,18 @@ public class GameControllerScene extends ViewObservable implements Controller {
         notifyObserver(obs -> obs.sendOrderTiles(finalTiles));
     }
 
+    public void goChat(ActionEvent actionEvent) throws Exception{
+        Stage chat = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/chat.fxml"));
+        Parent rootLayout = loader.load();
+        ChatController chat_ctrl = loader.getController();
+        Scene scene = new Scene(rootLayout);
+        chat.setScene(scene);
+        chat.setResizable(false);
+        chat.setTitle("Chat");
+        chat.getIcons().add(new Image("/item tiles/Gatti1.1.png"));
+        chat.show();
+        Platform.runLater(() -> chat_ctrl.run(this.buffer));
+    }
 }

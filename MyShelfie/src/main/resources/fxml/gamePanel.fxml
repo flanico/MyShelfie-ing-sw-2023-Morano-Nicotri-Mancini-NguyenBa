@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -279,7 +280,7 @@
             <Image url="@/Graphics/cornice_personal.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="seat" fitHeight="134.0" fitWidth="128.0" layoutX="549.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="seat" fitHeight="75.0" fitWidth="79.0" layoutX="549.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" />
       <Text fx:id="owner_nickname_text" layoutX="533.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Owner">
          <font>
             <Font name="Comic Sans MS Bold" size="26.0" />
@@ -363,5 +364,6 @@
             <Image url="@/Graphics/full.png" />
          </image>
       </ImageView>
+      <Button layoutX="539.0" layoutY="738.0" mnemonicParsing="false" onAction="#goChat" text="chat" />
    </children>
 </Pane>

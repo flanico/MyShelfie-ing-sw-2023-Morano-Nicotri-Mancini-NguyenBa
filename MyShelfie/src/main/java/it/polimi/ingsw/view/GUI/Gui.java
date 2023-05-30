@@ -244,7 +244,7 @@ public class Gui extends ViewObservable implements View {
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1500d);
             stage.setHeight(800d);
-            stage.centerOnScreen();
+            //stage.centerOnScreen();
             SceneController.changeRootPane(observers,"gamePanel.fxml");
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
             game_ctrl.setNumberPlayers(this.players_number);
@@ -257,10 +257,15 @@ public class Gui extends ViewObservable implements View {
         return game_ctrl;
     }
 
-    //TODO: chat message graphics
     @Override
     public void addChatMessage(String sender, String destination, String message) {
+        //the message is for me
 
+        if (!sender.equals(owner.getNickname()) && (destination.equals("all") || destination.equals(owner.getNickname()))) {
+            //out.println("nuovo mex");
+            GameControllerScene game_ctrl = getGameControllerScene();
+            Platform.runLater(() -> game_ctrl.addBuffer(message));
+        }
     }
 
 

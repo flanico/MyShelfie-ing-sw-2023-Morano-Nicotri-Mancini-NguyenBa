@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.ChatController">
+   <children>
+      <ImageView fitHeight="431.0" fitWidth="608.0" layoutX="-4.0" layoutY="-22.0" pickOnBounds="true">
+         <image>
+            <Image url="@/misc/sfondo.jpg" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="text_area" layoutX="78.0" layoutY="75.0" prefHeight="228.0" prefWidth="445.0" text="">
+         <font>
+            <Font name="Comic Sans MS" size="20.0" />
+         </font>
+      </TextArea>
+      <TextField fx:id="text_field" layoutX="78.0" layoutY="322.0" prefHeight="25.0" prefWidth="445.0">
+         <font>
+            <Font name="Comic Sans MS" size="12.0" />
+         </font></TextField>
+      <ComboBox layoutX="225.0" layoutY="34.0" prefWidth="150.0" promptText="All" />
+      <Button fx:id="sendButton" layoutX="279.0" layoutY="361.0" mnemonicParsing="false" onAction="#send" text="Send" />
+   </children>
+</Pane>

@@ -631,7 +631,7 @@ public class Cli extends ViewObservable implements View {
     public void addChatMessage(String sender, String destination, String message) {
         //the message is for me
 
-        if (!sender.equals(finalNickname)&& (destination.equals("all") || destination.equals(finalNickname))) {
+        if (!sender.equals(finalNickname) && (destination.equals("all") || destination.equals(finalNickname))) {
             //out.println("nuovo mex");
             buffer.add(message);
         }

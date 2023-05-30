@@ -40,7 +40,7 @@ public class MainGui extends Application {
 
         stage.setTitle("My Shelfie");
         stage.getIcons().add(new Image("/item tiles/Gatti1.1.png"));
-        stage.centerOnScreen();
+        //stage.centerOnScreen();
         stage.show();
     }
 
