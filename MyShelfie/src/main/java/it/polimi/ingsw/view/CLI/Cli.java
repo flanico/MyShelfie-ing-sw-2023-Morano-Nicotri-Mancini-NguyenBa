@@ -118,18 +118,18 @@ public class Cli extends ViewObservable implements View {
             case "-chat" -> {
                 String destination;
                 String message;
-                destination = input[1];
+                if (input.length != 3) {
+                    out.println(ColorCli.RED+ "Destination or message is empty, please retry."+ ColorCli.RESET);
 
-                Date now = new Date();
-                formattedTime = sdf.format(now);
-                buffer.add("[" + formattedTime + "] Message sent from [you] to [" + destination + "]: " + input[2]);
-
-                if (destination.isEmpty()) {
-                    out.println("Destination is empty, please retry.");
-                    out.println(STR_INPUT_ERR);
                 } else {
+                    destination = input[1];
+                    Date now = new Date();
+                    formattedTime = sdf.format(now);
+                    buffer.add("[" + formattedTime + "] Message sent from [you] to [" + destination + "]: " + input[2]);
+
                     message = input[2];
                     notifyObserver(obs -> obs.sendChatMessage(destination, message));
+                    out.println(ColorCli.YELLOW_BOLD+ "Message sent correctly." + ColorCli.RESET);
                 }
                 clearCli();
 
@@ -467,13 +467,20 @@ public class Cli extends ViewObservable implements View {
                             if (num == (inputSplit.length / 2)) {
                                 //out.println(inputSplit.length / 2);
                                     for (int i = 1; i < inputSplit.length; i++) {
-                                        int cell = Integer.parseInt(inputSplit[i]);
-                                        //out.println("cell:"+ cell);
-                                        if (cell >= 0 && cell < 9) {
-                                            isValid = true;
-                                        } else {
-                                            out.println(ColorCli.RED + "You have to select a cell between 0 and 8. Please retry." + ColorCli.RESET);
+                                        try {
+                                            int cell = Integer.parseInt(inputSplit[i]);
+                                            if (cell >= 0 && cell < 9) {
+                                                isValid = true;
+                                            } else {
+                                                out.println(ColorCli.RED + "You have to select a cell between 0 and 8. Please retry." + ColorCli.RESET);
+                                                isValid = false;
+                                                break;
+                                            }
+                                        }
+                                        catch (NumberFormatException e){
+                                            out.println(STR_INPUT_ERR);
                                             isValid = false;
+                                            clearCli();
                                             break;
                                         }
                                     }
@@ -614,6 +621,11 @@ public class Cli extends ViewObservable implements View {
         //the message is for me
         if (!sender.equals(finalNickname) && (destination.equals("all") || destination.equals(finalNickname))) {
             //out.println("nuovo mex");
+            Date now = new Date();
+            formattedTime = sdf.format(now);
+            //out.println("before buffer message: " + message);
+            message = "[" + formattedTime + "] Message sent from ["+ sender +"] to [" + destination + "]: " + message;
+            //out.println("buffer message: " + message);
             buffer.add(message);
         }
     }
