@@ -23,7 +23,7 @@
       </ImageView>
       <ImageView fx:id="won_card" fitHeight="108.0" fitWidth="107.0" layoutX="347.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/item%20tiles/Trofei1.3.png" />
+            <Image url="@/item tiles/Trofei1.3.png" />
          </image></ImageView>
       <ImageView fx:id="ranking_text" fitHeight="58.0" fitWidth="350.0" layoutX="21.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
