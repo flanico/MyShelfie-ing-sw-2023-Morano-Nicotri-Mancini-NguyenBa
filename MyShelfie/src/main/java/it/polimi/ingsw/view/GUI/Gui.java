@@ -9,6 +9,8 @@ import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +30,8 @@ public class Gui extends ViewObservable implements View {
     private Player owner;
     private boolean isFirst = false;
     private Map<String, Integer> score;
+    private SimpleDateFormat sdf;
+    private String formattedTime;
 
     @Override
     public void askNickname(){
@@ -260,11 +264,15 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void addChatMessage(String sender, String destination, String message) {
         //the message is for me
-
+        final String new_message;
         if (!sender.equals(owner.getNickname()) && (destination.equals("all") || destination.equals(owner.getNickname()))) {
-            //out.println("nuovo mex");
+            System.out.println("nuovo mex");
+            //Date now = new Date();
+            //formattedTime = sdf.format(now);
+            message = " - " + sender + ": " + message + " [" + destination + "]";
+            new_message=message;
             GameControllerScene game_ctrl = getGameControllerScene();
-            Platform.runLater(() -> game_ctrl.addBuffer(message));
+            Platform.runLater(() -> game_ctrl.addBuffer(new_message));
         }
     }
 

@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -264,14 +265,31 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public void updateBookShelf(Player pl){
         ImageView ref_shelf;
         String selector = null;
-        if (pl.getNickname().equals(owner_nickname_text.getText()))
-                selector = "main";
-        else if (pl.getNickname().equals(sx_text.getText()))
-                selector = "sx";
-            else if (pl.getNickname().equals(dx_text.getText()))
-                    selector = "dx";
-                 else if (pl.getNickname().equals(central_text.getText()))
-                    selector = "central";
+        if (pl.getNickname().equals(owner_nickname_text.getText())) {
+            selector = "main";
+            owner_nickname_text.setFill(Color.BLUE);
+            sx_text.setFill(Color.BLACK);
+            central_text.setFill(Color.BLACK);
+            dx_text.setFill(Color.BLACK);
+        } else if (pl.getNickname().equals(sx_text.getText())) {
+            selector = "sx";
+            owner_nickname_text.setFill(Color.BLACK);
+            sx_text.setFill(Color.BLUE);
+            central_text.setFill(Color.BLACK);
+            dx_text.setFill(Color.BLACK);
+        } else if (pl.getNickname().equals(dx_text.getText())) {
+            selector = "dx";
+            owner_nickname_text.setFill(Color.BLACK);
+            sx_text.setFill(Color.BLACK);
+            central_text.setFill(Color.BLACK);
+            dx_text.setFill(Color.BLUE);
+        } else if (pl.getNickname().equals(central_text.getText())) {
+                selector = "central";
+            owner_nickname_text.setFill(Color.BLACK);
+            sx_text.setFill(Color.BLACK);
+            central_text.setFill(Color.BLUE);
+            dx_text.setFill(Color.BLACK);
+        }
 
         for (int x=0; x<6; x++){
             for (int y=0; y<5; y++){
@@ -702,6 +720,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
     public void addBuffer(String message){
         buffer.add(message);
+
     }
     public void button_03_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[0][3].isBlocked() && SelectedTiles.size()<3){
@@ -992,6 +1011,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
         loader.setLocation(getClass().getResource("/fxml/chat.fxml"));
         Parent rootLayout = loader.load();
         ChatController chat_ctrl = loader.getController();
+        ((ViewObservable) chat_ctrl).addAllObservers(observers);
         Scene scene = new Scene(rootLayout);
         chat.setScene(scene);
         chat.setResizable(false);
