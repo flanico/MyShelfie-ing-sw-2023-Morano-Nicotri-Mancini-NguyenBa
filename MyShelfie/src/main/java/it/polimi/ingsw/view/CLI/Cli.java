@@ -48,12 +48,12 @@ public class Cli extends ViewObservable implements View {
     public void init() {
         out.println();
         out.println(ColorCli.YELLOW_BOLD  +
-               " ███╗   ███╗██╗   ██╗    ███████╗██╗  ██╗███████╗██╗     ███████╗██╗███████╗\n" +
-               " ████╗ ████║╚██╗ ██╔╝    ██╔════╝██║  ██║██╔════╝██║     ██╔════╝██║██╔════╝\n" +
-               " ██╔████╔██║ ╚████╔╝     ███████╗███████║█████╗  ██║     █████╗  ██║█████╗\n" +
-               " ██║╚██╔╝██║  ╚██╔╝      ╚════██║██╔══██║██╔══╝  ██║     ██╔══╝  ██║██╔══╝\n" +
-               " ██║ ╚═╝ ██║   ██║       ███████║██║  ██║███████╗███████╗██║     ██║███████╗\n" +
-               " ╚═╝     ╚═╝   ╚═╝       ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝╚══════╝ \n" + ColorCli.RESET);
+                " ███╗   ███╗██╗   ██╗    ███████╗██╗  ██╗███████╗██╗     ███████╗██╗███████╗\n" +
+                " ████╗ ████║╚██╗ ██╔╝    ██╔════╝██║  ██║██╔════╝██║     ██╔════╝██║██╔════╝\n" +
+                " ██╔████╔██║ ╚████╔╝     ███████╗███████║█████╗  ██║     █████╗  ██║█████╗\n" +
+                " ██║╚██╔╝██║  ╚██╔╝      ╚════██║██╔══██║██╔══╝  ██║     ██╔══╝  ██║██╔══╝\n" +
+                " ██║ ╚═╝ ██║   ██║       ███████║██║  ██║███████╗███████╗██║     ██║███████╗\n" +
+                " ╚═╝     ╚═╝   ╚═╝       ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝╚══════╝ \n" + ColorCli.RESET);
         out.println(ColorCli.YELLOW_BOLD + "Welcome to My Shelfie game!" + ColorCli.RESET);
 
         selectConnection();
@@ -88,7 +88,7 @@ public class Cli extends ViewObservable implements View {
 
                 //if it's my turn I have to give the lock to the other thread
                 //out.println("lock myturn:"+ myTurn);
-                 if(myTurn){
+                if(myTurn){
                     //out.println("aaaaaa");
                     try {
                         lock.wait();
@@ -118,18 +118,18 @@ public class Cli extends ViewObservable implements View {
             case "-chat" -> {
                 String destination;
                 String message;
-                destination = input[1];
+                if (input.length != 3) {
+                    out.println(ColorCli.RED+ "Destination or message is empty, please retry."+ ColorCli.RESET);
 
-                Date now = new Date();
-                formattedTime = sdf.format(now);
-                buffer.add("[" + formattedTime + "] Message sent from [you] to [" + destination + "]: " + input[2]);
-
-                if (destination.isEmpty()) {
-                    out.println("Destination is empty, please retry.");
-                    out.println(STR_INPUT_ERR);
                 } else {
+                    destination = input[1];
+                    Date now = new Date();
+                    formattedTime = sdf.format(now);
+                    buffer.add("[" + formattedTime + "] Message sent from [you] to [" + destination + "]: " + input[2]);
+
                     message = input[2];
                     notifyObserver(obs -> obs.sendChatMessage(destination, message));
+                    out.println(ColorCli.YELLOW_BOLD+ "Message sent correctly." + ColorCli.RESET);
                 }
                 clearCli();
 
@@ -443,24 +443,51 @@ public class Cli extends ViewObservable implements View {
     @Override
     public void askSelectTiles(Board board, Bookshelf bookshelf) throws NumberFormatException {
         boolean isValid = false;
+        String input;
+        String[] inputSplit;
         int num = -1;
         List<Tile> tiles = new ArrayList<>();
         int maxTiles = 0;
         myTurn = true;
         //out.println("askeSelect:" + myTurn);
 
-        out.println(ColorCli.YELLOW_BOLD + "Hey you have to select the tiles from the board!" + ColorCli.RESET);
+        out.println(ColorCli.YELLOW_BOLD + "Hey you have to select the tiles from the board! Digit in this order: \n-number of tiles \n-first tile's row \n-first tile's column \n-second tile's row \n-second tile's column \n-third tile's row \n-third tile's column3" + ColorCli.RESET);
         do {
-            out.print("How many tiles do you want to select (1,2 o 3 tiles): ");
+            input = readLine.nextLine();
+            inputSplit = input.split(" ");
+            num = Integer.parseInt(inputSplit[0]);
+            //out.println("num: " + num);
             try {
-                num = Integer.parseInt(readLine.nextLine());
                 if (num >= 1 && num <= 3) {
                     if (num <= board.maxTilesBoard()) {
                         maxTiles = bookshelf.maxTilesBookshelf();
                         if (num > maxTiles) {
                             out.println(ColorCli.RED + "You don't have enough space in your bookshelf. You can select MAX " + maxTiles + " tiles. Please retry." + ColorCli.RESET);
                         } else {
-                            isValid = true;
+                            if (num == (inputSplit.length / 2)) {
+                                //out.println(inputSplit.length / 2);
+                                    for (int i = 1; i < inputSplit.length; i++) {
+                                        try {
+                                            int cell = Integer.parseInt(inputSplit[i]);
+                                            if (cell >= 0 && cell < 9) {
+                                                isValid = true;
+                                            } else {
+                                                out.println(ColorCli.RED + "You have to select a cell between 0 and 8. Please retry." + ColorCli.RESET);
+                                                isValid = false;
+                                                break;
+                                            }
+                                        }
+                                        catch (NumberFormatException e){
+                                            out.println(STR_INPUT_ERR);
+                                            isValid = false;
+                                            clearCli();
+                                            break;
+                                        }
+                                    }
+                            }
+                            else{
+                                out.println(STR_INPUT_ERR);
+                            }
                         }
                     } else {
                         out.println(ColorCli.RED + "There isn't enough removable tiles on the board. You can select MAX " + board.maxTilesBoard() + " tiles. Please retry." + ColorCli.RESET);
@@ -473,38 +500,15 @@ public class Cli extends ViewObservable implements View {
             }
         } while (!isValid);
 
-        for (int i = 0; i < num; i++) {
-            isValid = false;
-            int row = -1;
-            int col = -1;
-            int index = i + 1;
-            do {
-                out.print("Digit the corresponding ROW of the tile number " + index + ": ");
-                try {
-                    row = Integer.parseInt(readLine.nextLine());
-                    if (row >= 0 && row <= 8) isValid = true;
-                    else out.println(STR_INPUT_ERR);
-                } catch (NumberFormatException e) {
-                    row = -1;
-                    isValid = false;
-                    clearCli();
-                }
-                if (isValid) {
-                    out.print("Digit the corresponding COLUMN of the tile number " + index + ": ");
-                    try {
-                        col = Integer.parseInt(readLine.nextLine());
-                        if (col >= 0 && col <= 8) isValid = true;
-                        else {
-                            isValid = false;
-                            out.println(STR_INPUT_ERR);
-                        }
-                    } catch (NumberFormatException e) {
-                        col = -1;
-                        isValid = false;
-                        clearCli();
-                    }
-                }
-            } while (!isValid);
+        //valid input, select tiles
+        int row = -1;
+        int col = -1;
+        for (int i = 1; i < inputSplit.length; i += 2) {
+            //out.println("sono nel ciclo");
+            row = Integer.parseInt(inputSplit[i]);
+            col = Integer.parseInt(inputSplit[i + 1]);
+            //out.println("row: " + row + " col: " + col);
+
             Tile tile = new Tile(board.getMatrix()[row][col].getType(), board.getMatrix()[row][col].getColortype(), row, col);
             tiles.add(tile);
         }
@@ -617,6 +621,11 @@ public class Cli extends ViewObservable implements View {
         //the message is for me
         if (!sender.equals(finalNickname) && (destination.equals("all") || destination.equals(finalNickname))) {
             //out.println("nuovo mex");
+            Date now = new Date();
+            formattedTime = sdf.format(now);
+            //out.println("before buffer message: " + message);
+            message = "[" + formattedTime + "] Message sent from ["+ sender +"] to [" + destination + "]: " + message;
+            //out.println("buffer message: " + message);
             buffer.add(message);
         }
     }

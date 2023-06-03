@@ -82,7 +82,7 @@ public class ClientController implements Observer, ViewObserver {
                     executorService.execute(view::askPlayersNumber);
                 }
                 case CHAT_MESSAGE_REPLY ->{
-                    executorService.execute(() -> view.addChatMessage(((ChatReplyMessage) message).getSender(), ((ChatReplyMessage) message).getDestination(), ((ChatReplyMessage) message).toString()));
+                    executorService.execute(() -> view.addChatMessage(((ChatReplyMessage) message).getSender(), ((ChatReplyMessage) message).getDestination(), ((ChatReplyMessage) message).getMessage()));
                 }
                 case ERROR -> {
                     ErrorMessage errorMessage = (ErrorMessage) message;
