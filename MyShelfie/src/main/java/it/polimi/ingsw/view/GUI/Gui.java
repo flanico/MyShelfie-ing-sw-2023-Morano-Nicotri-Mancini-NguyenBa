@@ -265,7 +265,7 @@ public class Gui extends ViewObservable implements View {
     public void addChatMessage(String sender, String destination, String message) {
         //the message is for me
         final String new_message;
-        if (!sender.equals(owner.getNickname()) && (destination.equals("all") || destination.equals(owner.getNickname()))) {
+        if ((destination.equals("all") || destination.equals(owner.getNickname()))) {
             System.out.println("nuovo mex");
             //Date now = new Date();
             //formattedTime = sdf.format(now);

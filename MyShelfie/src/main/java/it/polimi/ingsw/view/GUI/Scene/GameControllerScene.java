@@ -89,6 +89,8 @@ public class GameControllerScene extends ViewObservable implements Controller {
     public int numberPlayers;                                                   //the number of the players in the game
     private boolean firstToken=false;
     public ArrayList<String> buffer = new ArrayList<>();
+    ChatController chatController;
+    private boolean activeChat;
 
     public void initialize(){
       KeyCombination keyCombination = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
@@ -106,6 +108,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
        firstToken_frame.setVisible(false);
        firstTokenWon.setVisible(false);
        firstWon_text.setVisible(false);
+       activeChat=false;
        SelectedTiles.clear();
     }
     public void setBoard(Board board) {
@@ -720,7 +723,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
     public void addBuffer(String message){
         buffer.add(message);
-
+        if (this.activeChat){
+            Platform.runLater(() -> chatController.append(message));
+        }
     }
     public void button_03_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[0][3].isBlocked() && SelectedTiles.size()<3){
@@ -1006,18 +1011,23 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
 
     public void goChat(ActionEvent actionEvent) throws Exception{
+        this.activeChat=true;
         Stage chat = new Stage();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/chat.fxml"));
         Parent rootLayout = loader.load();
-        ChatController chat_ctrl = loader.getController();
-        ((ViewObservable) chat_ctrl).addAllObservers(observers);
+        chatController = loader.getController();
+        ((ViewObservable) chatController).addAllObservers(observers);
         Scene scene = new Scene(rootLayout);
         chat.setScene(scene);
         chat.setResizable(false);
         chat.setTitle("Chat");
+        chat.setOnCloseRequest(event -> {
+            this.activeChat=false;
+            System.out.println("Chat closed");
+        });
         chat.getIcons().add(new Image("/item tiles/Gatti1.1.png"));
         chat.show();
-        Platform.runLater(() -> chat_ctrl.run(this.buffer));
+        Platform.runLater(() -> chatController.run(this.buffer, this.playersList));
     }
 }
