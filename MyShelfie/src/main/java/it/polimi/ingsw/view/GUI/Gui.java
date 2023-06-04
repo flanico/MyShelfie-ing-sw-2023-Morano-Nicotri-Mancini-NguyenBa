@@ -265,11 +265,15 @@ public class Gui extends ViewObservable implements View {
     public void addChatMessage(String sender, String destination, String message) {
         //the message is for me
         final String new_message;
-        if ((destination.equals("all") || destination.equals(owner.getNickname()))) {
-            System.out.println("nuovo mex");
+        if (destination.equals("all") || destination.equals(owner.getNickname()) || sender.equals(owner.getNickname())){
             //Date now = new Date();
             //formattedTime = sdf.format(now);
-            message = " - " + sender + ": " + message + " [" + destination + "]";
+            if (sender.equals(owner.getNickname()))
+                message = " - " + sender + ": " + message + " [to " + destination + "]";
+            else if (destination.equals(owner.getNickname()))
+                message = " - " + sender + ": " + message + " [to you]";
+            else if (destination.equals("all"))
+                message = " - " + sender + ": " + message + " [all]";
             new_message=message;
             GameControllerScene game_ctrl = getGameControllerScene();
             Platform.runLater(() -> game_ctrl.addBuffer(new_message));

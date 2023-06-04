@@ -4,11 +4,11 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.observer.ViewObservable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class ChatController extends ViewObservable implements Controller{
         text_area.setScrollTop(Double.MAX_VALUE);
     }
 
-    public void send(ActionEvent actionEvent) {
+    public void send(MouseEvent mouseEvent) {
         if (!text_field.getText().equals("")){
             notifyObserver(obs -> obs.sendChatMessage(choiceBox.getValue().toString(), text_field.getText())); //TODO Implementa choicebox
             text_field.setText("");

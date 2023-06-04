@@ -52,7 +52,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
     @FXML   //initialize the common goal cards images
     ImageView common_goal1, common_goal2;
     @FXML
-    ImageView okButton;
+    ImageView okButton, chatButton;
     @FXML   //initialize the common score images
     ImageView common_score_1, common_score_2;
     @FXML   //initialize the common prize images
@@ -725,7 +725,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
         buffer.add(message);
         if (this.activeChat){
             Platform.runLater(() -> chatController.append(message));
-        }
+        } else chatButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/chatButtonNotify.png"))));
     }
     public void button_03_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[0][3].isBlocked() && SelectedTiles.size()<3){
@@ -1010,8 +1010,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
         notifyObserver(obs -> obs.sendOrderTiles(finalTiles));
     }
 
-    public void goChat(ActionEvent actionEvent) throws Exception{
+    public void goChat(MouseEvent mouseEvent) throws Exception{
         this.activeChat=true;
+        chatButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/chatButton.png"))));
         Stage chat = new Stage();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/chat.fxml"));
@@ -1022,10 +1023,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
         chat.setScene(scene);
         chat.setResizable(false);
         chat.setTitle("Chat");
-        chat.setOnCloseRequest(event -> {
-            this.activeChat=false;
-            System.out.println("Chat closed");
-        });
+        chat.setOnCloseRequest(event -> { this.activeChat=false; } );
         chat.getIcons().add(new Image("/item tiles/Gatti1.1.png"));
         chat.show();
         Platform.runLater(() -> chatController.run(this.buffer, this.playersList));
