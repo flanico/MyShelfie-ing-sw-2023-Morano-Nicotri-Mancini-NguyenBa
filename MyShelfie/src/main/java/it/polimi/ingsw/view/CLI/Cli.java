@@ -25,7 +25,7 @@ public class Cli extends ViewObservable implements View {
     private final Object lock;
     private boolean myTurn;
     private BufferedReader br;
-    private ArrayList<String> buffer;           //buffer with al
+    private final ArrayList<String> buffer;
     private String finalNickname;
     private final SimpleDateFormat sdf;
     private String formattedTime;
@@ -38,7 +38,6 @@ public class Cli extends ViewObservable implements View {
         this.lock = new Object();
         this.buffer= new ArrayList<>();
         this.sdf = new SimpleDateFormat("HH:mm:ss");
-
     }
 
 
@@ -65,9 +64,7 @@ public class Cli extends ViewObservable implements View {
         new Thread(() -> {
             try {
                 Listener();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (InterruptedException e) {
+            } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }).start();
@@ -106,7 +103,6 @@ public class Cli extends ViewObservable implements View {
                 }
                 lock.notify();
             }
-
         }
     }
 
@@ -136,7 +132,7 @@ public class Cli extends ViewObservable implements View {
             }
             case "-show_chat" -> {
                 if (buffer.size() == 0) {
-                    out.println(ColorCli.YELLOW_BOLD + "No messages in the chat" + ColorCli.RESET);
+                    out.println(ColorCli.PINK + "No messages in the chat" + ColorCli.RESET);
                 } else {
                     for (String s : buffer) {
                         out.println(ColorCli.PINK + s + ColorCli.RESET);
@@ -455,9 +451,8 @@ public class Cli extends ViewObservable implements View {
         do {
             input = readLine.nextLine();
             inputSplit = input.split(" ");
-            num = Integer.parseInt(inputSplit[0]);
-            //out.println("num: " + num);
             try {
+                num = Integer.parseInt(inputSplit[0]);
                 if (num >= 1 && num <= 3) {
                     if (num <= board.maxTilesBoard()) {
                         maxTiles = bookshelf.maxTilesBookshelf();
@@ -495,7 +490,6 @@ public class Cli extends ViewObservable implements View {
                 } else out.println(STR_INPUT_ERR);
             } catch (NumberFormatException e) {
                 out.println(STR_INPUT_ERR);
-                num = -1;
                 clearCli();
             }
         } while (!isValid);

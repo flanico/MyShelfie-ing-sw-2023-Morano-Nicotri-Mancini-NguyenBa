@@ -23,11 +23,13 @@ class ClientControllerTest {
     void isValidAddress() {
         assertTrue(ClientController.isValidAddress("192.100.2.7"));
         assertFalse(ClientController.isValidAddress("192.100.2.7.8"));
+        assertFalse(ClientController.isValidAddress("192.100000.2.7"));
     }
 
     @Test
     void isValidPort() {
         assertTrue(ClientController.isValidPort("1234"));
         assertFalse(ClientController.isValidPort("123456"));
+        assertFalse(ClientController.isValidPort("a"));
     }
 }

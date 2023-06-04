@@ -30,7 +30,7 @@ public class GameController implements Serializable {
     private InputController inputController;
     private transient Timer timer;
     private boolean isNumPlayersSet;
-    private static final String STR_INVALID_STATE = "Invalid game state";
+    private static final String INVALID_STATE = "Invalid game state";
 
     public GameController() {
         this.game = new Game();
@@ -49,7 +49,7 @@ public class GameController implements Serializable {
         switch (gameState) {
             case LOGIN -> loginState(message);
             case IN_GAME -> inGameState(message);
-            default -> Server.LOGGER.warning(STR_INVALID_STATE);
+            default -> Server.LOGGER.warning(INVALID_STATE);
         }
     }
 
@@ -109,7 +109,7 @@ public class GameController implements Serializable {
                 }
             }
             case GENERIC -> turnController.messageFromGameController(message);
-            default -> Server.LOGGER.warning(STR_INVALID_STATE);
+            default -> Server.LOGGER.warning(INVALID_STATE);
         }
     }
 
@@ -389,6 +389,9 @@ public class GameController implements Serializable {
         Stack<Tile> bag = gameController.game.getBag();
         Map<String, Integer> playerScore = gameController.game.getPlayerScore();
         for (Player p : players) {
+            p.setScore(gameController.game.getPlayerByNickname(p.getNickname()).getScore());
+            p.setDoneFirstCommon(gameController.game.getPlayerByNickname(p.getNickname()).isDoneFirstCommon());
+            p.setDoneSecondCommon(gameController.game.getPlayerByNickname(p.getNickname()).isDoneSecondCommon());
             p.setBookshelf(gameController.game.getPlayerByNickname(p.getNickname()).getBookshelf());
             p.setPersonalGoalCard(gameController.game.getPlayerByNickname(p.getNickname()).getPersonalGoalCard());
         }

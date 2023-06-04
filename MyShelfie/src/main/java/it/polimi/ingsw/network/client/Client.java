@@ -3,14 +3,14 @@ package it.polimi.ingsw.network.client;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.observer.Observable;
 
-import java.io.Serial;
 import java.util.logging.Logger;
 
 /**
- * abstract class used to communicate with the server, every type of connection must implement this class
+ * abstract class represents the generic client used to communicate with the server, every type of connection implements this class
  */
-public abstract class Client extends Observable{
+public abstract class Client extends Observable {
     public static final Logger LOGGER = Logger.getLogger(Client.class.getName());
+
     /**
      * sends a message to the server
      * @param message to be sent
