@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
-
+/**
+ * enum class which contains the types of the personal goal cards
+ */
 public enum PersonalGoalCardType {
     GOAL1,
     GOAL2,

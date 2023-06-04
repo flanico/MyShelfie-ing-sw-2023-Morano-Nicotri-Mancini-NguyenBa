@@ -23,16 +23,10 @@ public abstract class Message implements Serializable {
         this.messageType = messageType;
     }
 
-    /**
-     * @return nickname of the message sender
-     */
     public String getNickname() {
         return nickname;
     }
 
-    /**
-     * @return type of the message
-     */
     public MessageType getMessageType() {
         return messageType;
     }

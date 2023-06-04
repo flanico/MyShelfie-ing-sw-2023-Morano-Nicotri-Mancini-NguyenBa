@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * class that define observable
+ * class that defines observable
  */
 public class Observable {
     private final List<Observer> observers = new ArrayList<>();

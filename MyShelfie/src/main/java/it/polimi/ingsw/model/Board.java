@@ -17,6 +17,7 @@ public class Board implements Serializable {
 
     /**
      * constructor of board
+     * @param num number of players
      * @author Flavia Nicotri
      */
     public Board(int num) {
@@ -86,6 +87,7 @@ public class Board implements Serializable {
 
     /**
      * method to fill the board at the beginning of the game
+     * @param bag the bag of tiles to fill the board
      * @author Alessandro Mancini
      */
     public void fillBoard(Stack<Tile> bag) {
@@ -101,7 +103,8 @@ public class Board implements Serializable {
     }
 
     /**
-     * looks if board is refillable or not
+     * checks if the board is refillable or not
+     * @return true if the board is refillable, false otherwise
      * @author Chiara Nguyen Ba
      */
     public boolean isRefillable() {

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * abstract class extended by the CLI and GUI classes which must be observed by the controller
+ * @see ViewObserver
+ */
 public class ViewObservable {
     protected final List<ViewObserver> observers = new ArrayList<>();
 

@@ -72,6 +72,8 @@ public class Cli extends ViewObservable implements View {
 
     /**
      * method create a new thread that listen the input of every player
+     * @throws IOException if there is an error in the input
+     * @throws InterruptedException if there is an error in the thread
      */
 
     public void Listener() throws IOException, InterruptedException {
