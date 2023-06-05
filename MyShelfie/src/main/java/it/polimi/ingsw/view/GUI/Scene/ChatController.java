@@ -33,8 +33,8 @@ public class ChatController extends ViewObservable implements Controller{
         }
         choiceBox.setItems(parameters);
         choiceBox.setValue("all");
-        for (int x=0; x<buffer.size(); x++){
-            text_area.appendText(buffer.get(x) + "\n");
+        for (String s : buffer) {
+            text_area.appendText(s + "\n");
         }
         text_area.setScrollTop(Double.MAX_VALUE);
     }
@@ -43,10 +43,10 @@ public class ChatController extends ViewObservable implements Controller{
         text_area.appendText(message + "\n");
         text_area.setScrollTop(Double.MAX_VALUE);
     }
-
+    @SuppressWarnings("unused")
     public void send(MouseEvent mouseEvent) {
         if (!text_field.getText().equals("")){
-            notifyObserver(obs -> obs.sendChatMessage(choiceBox.getValue().toString(), text_field.getText())); //TODO Implementa choicebox
+            notifyObserver(obs -> obs.sendChatMessage(choiceBox.getValue().toString(), text_field.getText()));
             text_field.setText("");
         }
     }

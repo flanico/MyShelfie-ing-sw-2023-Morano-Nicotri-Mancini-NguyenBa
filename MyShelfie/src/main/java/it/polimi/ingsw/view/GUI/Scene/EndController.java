@@ -31,6 +31,7 @@ public class EndController extends ViewObservable implements Controller{
         frame.setVisible(false);
         won_card.setVisible(false);
     }
+    @SuppressWarnings("unused")
     public void init(boolean winner, Map<String, Integer> playerScore, int numberOfPlayers){
         switch (numberOfPlayers){
             case 2 -> {

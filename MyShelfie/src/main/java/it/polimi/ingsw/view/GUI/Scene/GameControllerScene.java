@@ -5,7 +5,6 @@ import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.ErrorType;
 import it.polimi.ingsw.view.GUI.SceneController;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -245,7 +244,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
             swap_button.setVisible(false);
         }
     }
-
     private void insertSelected(ImageView button, int x, int y) {
         Image img = button.getImage();
         ImageView sel = getButton(x, y);
@@ -680,6 +678,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             ref_button.setOpacity(1.0);
         }
     }
+    @SuppressWarnings("unused")
     public void confirmPressed(MouseEvent mouseEvent) {
         if (select_card_phase) {
             if (SelectedTiles.size() != 0 && SelectedTiles.size() > shelf.maxTilesBookshelf()) {
@@ -696,6 +695,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
      * This method controls the token for the first full bookshelf
      * @param bool true: the method is called by the winner, false: the method is called by the loser
      */
+    @SuppressWarnings("unused")
     private void firstToken(boolean bool){
         firstToken = true;
         firstToken_image.setVisible(false);
@@ -705,6 +705,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             firstWon_text.setVisible(true);
         }
     }
+    @SuppressWarnings("unused")
     public void cancelPressed(MouseEvent mouseEvent){
         if (select_card_phase) {
             int size = SelectedTiles.size();
@@ -727,111 +728,141 @@ public class GameControllerScene extends ViewObservable implements Controller {
             Platform.runLater(() -> chatController.append(message));
         } else chatButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/chatButtonNotify.png"))));
     }
+
+    @SuppressWarnings("unused")
     public void button_03_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[0][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(0,3), 0 , 3);
         }
     }
+
+    @SuppressWarnings("unused")
     public void button_04_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[0][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(0,4), 0 , 4);
         }
     }
+
+    @SuppressWarnings("unused")
     public void button_13_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[1][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(1,3), 1 , 3);
         }
     }
+
+    @SuppressWarnings("unused")
     public void button_14_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[1][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(1,4), 1 , 4);
         }
     }
+
+    @SuppressWarnings("unused")
     public void button_15_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[1][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(1,5), 1 , 5);
         }
     }
+
+    @SuppressWarnings("unused")
     public void button_22_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[2][2].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(2,2), 2 , 2);
         }
     }
+
+    @SuppressWarnings("unused")
     public void button_23_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[2][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(2,3), 2 , 3);
         }
     }
+
+    @SuppressWarnings("unused")
     public void button_24_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[2][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(2,4), 2 , 4);
         }
     }
+    @SuppressWarnings("unused")
     public void button_25_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[2][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(2,5), 2 , 5);
         }
     }
+    @SuppressWarnings("unused")
     public void button_26_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[2][6].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(2,6), 2 , 6);
         }
     }
+    @SuppressWarnings("unused")
     public void button_31_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][1].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,1), 3 , 1);
         }
     }
+    @SuppressWarnings("unused")
     public void button_32_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][2].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,2), 3 , 2);
         }
     }
+    @SuppressWarnings("unused")
     public void button_33_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,3), 3 , 3);
         }
     }
+    @SuppressWarnings("unused")
     public void button_34_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,4), 3 , 4);
         }
     }
+    @SuppressWarnings("unused")
     public void button_35_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,5), 3 , 5);
         }
     }
+    @SuppressWarnings("unused")
     public void button_36_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][6].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,6), 3 , 6);
         }
     }
+    @SuppressWarnings("unused")
     public void button_37_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][7].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,7), 3 , 7);
         }
     }
+    @SuppressWarnings("unused")
     public void button_38_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[3][8].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(3,8), 3 , 8);
         }
     }
+    @SuppressWarnings("unused")
     public void button_40_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[0][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,0), 4 , 0);
         }
     }
+    @SuppressWarnings("unused")
     public void button_41_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][1].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4, 1), 4 , 1);
         }
     }
+    @SuppressWarnings("unused")
     public void button_42_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][2].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,2), 4 , 2);
         }
     }
+    @SuppressWarnings("unused")
     public void button_43_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,3), 4 , 3);
@@ -942,28 +973,33 @@ public class GameControllerScene extends ViewObservable implements Controller {
             insertSelected(getButton(7,5), 7 , 5);
         }
     }
+    @SuppressWarnings("unused")
     public void button_84_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[8][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(8,4), 8 , 4);
         }
     }
+    @SuppressWarnings("unused")
     public void button_85_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[8][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(8,5), 8 , 5);
         }
     }
+    @SuppressWarnings("unused")
     public void downPressed(MouseEvent mouseEvent) {
         if (shelf_phase) {
             rotate("down");
             tryInsert(selected_column);
         }
     }
+    @SuppressWarnings("unused")
     public void upPressed(MouseEvent mouseEvent) {
         if (shelf_phase) {
             rotate("up");
             tryInsert(selected_column);
         }
     }
+    @SuppressWarnings("unused")
     public void column0Pressed(MouseEvent mouseEvent) {
         if (shelf_phase && finalTiles.size()<=free_cells(0) && selected_column!=0) {
             updateBookShelf(currentPlayer);
@@ -971,6 +1007,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             tryInsert(0);
         }
     }
+    @SuppressWarnings("unused")
     public void column1Pressed(MouseEvent mouseEvent) {
         if (shelf_phase && finalTiles.size()<=free_cells(1) && selected_column!=1) {
             updateBookShelf(currentPlayer);
@@ -978,6 +1015,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             tryInsert(1);
         }
     }
+    @SuppressWarnings("unused")
     public void column2Pressed(MouseEvent mouseEvent) {
         if (shelf_phase && finalTiles.size()<=free_cells(2) && selected_column!=2) {
             updateBookShelf(currentPlayer);
@@ -985,6 +1023,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             tryInsert(2);
         }
     }
+    @SuppressWarnings("unused")
     public void column3Pressed(MouseEvent mouseEvent) {
         if (shelf_phase && finalTiles.size()<=free_cells(3) && selected_column!=3) {
             updateBookShelf(currentPlayer);
@@ -992,6 +1031,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             tryInsert(3);
         }
     }
+    @SuppressWarnings("unused")
     public void column4Pressed(MouseEvent mouseEvent) {
         if (shelf_phase && finalTiles.size()<=free_cells(4) && selected_column!=4) {
             updateBookShelf(currentPlayer);
@@ -999,6 +1039,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             tryInsert(4);
         }
     }
+    @SuppressWarnings("unused")
     public void okPressed(MouseEvent mouseEvent) {
         if (selected_column!=-1){
             activeShelf(false);
@@ -1023,7 +1064,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
         chat.setScene(scene);
         chat.setResizable(false);
         chat.setTitle("Chat");
-        chat.setOnCloseRequest(event -> { this.activeChat=false; } );
+        chat.setOnCloseRequest(event -> this.activeChat=false);
         chat.getIcons().add(new Image("/item tiles/Gatti1.1.png"));
         chat.show();
         Platform.runLater(() -> chatController.run(this.buffer, this.playersList));

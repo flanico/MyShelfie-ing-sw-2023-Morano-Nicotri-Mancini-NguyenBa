@@ -5,6 +5,7 @@ import it.polimi.ingsw.view.GUI.SceneController;
 import javafx.scene.input.MouseEvent;
 
 public class CreditsController extends ViewObservable implements Controller{
+    @SuppressWarnings("unused")
     public void backPressed(MouseEvent mouseEvent) {
         SceneController.changeRootPane(observers,"menuPanel.fxml");
     }

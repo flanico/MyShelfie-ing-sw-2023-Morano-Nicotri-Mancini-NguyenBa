@@ -4,7 +4,6 @@ import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.ErrorType;
 import it.polimi.ingsw.view.GUI.SceneController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
@@ -22,17 +21,15 @@ public class ConnectionController extends ViewObservable implements Controller {
     TextField serverPortField;
     @FXML
     ChoiceBox<String> serverType;
-
-    private String address;
-    private String port;
-    private String defaultAddress_socket = "localhost";
-    private String defaultPort_socket = "12345";
-    private String defaultPort_rmi = "1099";
     private int type;
     int error;
 
-
+    @SuppressWarnings("unused")
     public void continue_pressed(MouseEvent mouseEvent) {
+        String address;
+        String port;
+        String defaultPort_socket = "12345";
+        String defaultPort_rmi = "1099";
         address = addressField.getText();
         port = serverPortField.getText();
         final String correctAddress;
