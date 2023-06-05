@@ -402,7 +402,7 @@ public class TurnController implements Serializable {
     /**
      * notify to all the player that someone has completed his bookshelf
      */
-    private void notifyBookshelfFull (){
+    private void notifyBookshelfFull() {
         VirtualView virtualView = virtualViewMap.get(currentPlayer);
         virtualView.showGenericMessage(ColorCli.YELLOW_BOLD + "You have completed the bookshelf!" + ColorCli.RESET);
         notifyOtherPlayers(ColorCli.YELLOW_BOLD + currentPlayer+ "'s bookshelf is full!" + ColorCli.RESET, currentPlayer);

@@ -4,12 +4,17 @@ import it.polimi.ingsw.model.Tile;
 
 import java.util.List;
 
+/**
+ * interface implemented by the observer ClientController class on the view classes
+ * @see ViewObservable
+ */
 public interface ViewObserver {
 
     /**
      * creates a new connection to the server
      * @param ip the ip address
      * @param port the port number
+     * @param type the type of connection
      */
     void createConnection(String ip, String port, int type);
 

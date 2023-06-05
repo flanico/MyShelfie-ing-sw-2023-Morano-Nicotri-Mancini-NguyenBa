@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- *  class that represents the server of the game and handles the connection of the clients
+ *  class represents the server of the game and handles the connection with the clients
  */
 public class Server {
     public static final Logger LOGGER =  Logger.getLogger(Server.class.getName());

@@ -33,10 +33,6 @@ public class CommonGoalCardScore implements Serializable {
         }
     }
 
-    /**
-     * getter of stack
-     * @author Alessandro Mancini
-     */
     public Stack<Integer> getStack() {
         return stack;
     }

@@ -3,7 +3,7 @@ package it.polimi.ingsw.observer;
 import it.polimi.ingsw.network.message.Message;
 
 /**
- * observer interface that support the method update
+ * observer interface that supports the method update
  */
 public interface Observer {
 

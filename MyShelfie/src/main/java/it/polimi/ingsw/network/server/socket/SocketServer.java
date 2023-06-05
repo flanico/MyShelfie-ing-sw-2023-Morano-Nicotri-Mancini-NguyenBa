@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * class that handles the socket connection with a new client
+ * class that handles the socket connection with a new socket client
  */
 public class SocketServer implements Runnable {
     private final Server server;
@@ -28,7 +28,7 @@ public class SocketServer implements Runnable {
     public void run() {
         try {
             serverSocket = new ServerSocket(port);
-            Server.LOGGER.info(() -> "The socket of the server started on port " + port);
+            Server.LOGGER.info(() -> "The socket server started on port " + port);
         } catch (IOException e) {
             Server.LOGGER.severe("Server impossible to start!");
             return;
@@ -49,7 +49,7 @@ public class SocketServer implements Runnable {
     }
 
     /**
-     * handles the addition of a new client
+     * handles the addition of a new socket client
      * @param nickname of the new client
      * @param clientHandler of the new client
      */
@@ -58,22 +58,18 @@ public class SocketServer implements Runnable {
     }
 
     /**
-     * forwards a received message from the client to the server
-     * @param message received
+     * forwards a received message from the socket client to the server
+     * @param message received from the socket client
      */
     public void forwardsMessage(Message message) {
         server.forwardsMessage(message);
     }
 
     /**
-     * handles the disconnection of a client
+     * handles the disconnection of a socket client
      * @param clientHandler of the disconnecting client
      */
     public void onDisconnect(ClientHandler clientHandler) {
         server.onDisconnect(clientHandler);
-    }
-
-    public Server getServer() {
-        return this.server;
     }
 }
