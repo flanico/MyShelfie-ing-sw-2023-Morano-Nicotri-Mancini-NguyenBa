@@ -9,8 +9,7 @@ import it.polimi.ingsw.persistence.Persistence;
 import it.polimi.ingsw.view.VirtualView;
 import it.polimi.ingsw.view.CLI.ColorCli;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -144,8 +143,7 @@ public class TurnController implements Serializable {
                 else {
                     isLast = true;
                 }
-            }
-            else if (isLast && currentPlayer.equalsIgnoreCase(nicknames.get(nicknames.size() - 1))) {
+            } else if (isLast && currentPlayer.equalsIgnoreCase(nicknames.get(nicknames.size() - 1))) {
                 turnState = TurnState.END;
                 //Show scores
                 scoresPersonal();

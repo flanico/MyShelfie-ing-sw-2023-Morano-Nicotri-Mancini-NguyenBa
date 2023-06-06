@@ -22,9 +22,6 @@
 ## Come eseguire il programma
 
 
-## Test Coverage
-
-
 
 ## Tools
 Per la realizzazione del progetto sono stati utilizzati i seguenti tools:

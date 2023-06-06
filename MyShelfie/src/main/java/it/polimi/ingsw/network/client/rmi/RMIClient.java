@@ -2,6 +2,7 @@ package it.polimi.ingsw.network.client.rmi;
 
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.message.Message;
+import it.polimi.ingsw.network.message.serverSide.ErrorMessage;
 import it.polimi.ingsw.network.server.rmi.RMIInterface;
 
 import java.rmi.ConnectException;
@@ -61,6 +62,9 @@ public class RMIClient extends Client {
                 try {
                     stub.toServer(message, this.skeleton);
                 } catch (RemoteException e) {
+                    Message message1 = new ErrorMessage("Connection lost with the server");
+                    notifyObserver(message1);
+                    disconnect();
                     Client.LOGGER.severe("Error in sending message to the RMI Server");
                 }
             }
@@ -77,7 +81,7 @@ public class RMIClient extends Client {
     public void readMessage() {}
 
     /**
-     * recives messages to read, from RMISkeleton method
+     * receives messages to read, from RMISkeleton method
      * @param message to read
      * @author Alessandro Mancini
      */

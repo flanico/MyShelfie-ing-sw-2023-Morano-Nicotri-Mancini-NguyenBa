@@ -32,5 +32,7 @@ public enum MessageType {
     NUM_PLAYERS_REP,
     POSITION_REPLY,
     TILES_REPLY,
-    ORDER_REPLY, COMMON_SCORES,
+    ORDER_REPLY,
+    COMMON_SCORES,
+    CHAT
 }

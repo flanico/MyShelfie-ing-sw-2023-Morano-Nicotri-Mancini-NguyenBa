@@ -30,9 +30,6 @@ public class Cli extends ViewObservable implements View {
     private final SimpleDateFormat sdf;
     private String formattedTime;
 
-    /**
-     * constructor of the Cli
-     */
     public Cli() {
         out = System.out;
         this.lock = new Object();
@@ -127,7 +124,7 @@ public class Cli extends ViewObservable implements View {
 
                     message = input[2];
                     notifyObserver(obs -> obs.sendChatMessage(destination, message));
-                    out.println(ColorCli.YELLOW_BOLD+ "Message sent correctly." + ColorCli.RESET);
+                    out.println(ColorCli.PINK + "Message sent correctly." + ColorCli.RESET);
                 }
                 clearCli();
 
@@ -195,9 +192,13 @@ public class Cli extends ViewObservable implements View {
         String inputIp;
         String inputPort;
         String defaultIp = "localhost";
-        String defaultPort = "12345";   // Socket default port value
-        if (type == 2)
+        String defaultPort = "0";
+        if (type == 1) {
+            defaultPort = "12345";   // Socket default port value
+        }
+        else if (type == 2) {
             defaultPort = "1099";   //RMI default port value
+        }
         boolean isValid = false;
 
         out.println("The value between the brackets is the default value");
@@ -242,7 +243,6 @@ public class Cli extends ViewObservable implements View {
         } else {
             correctPort = inputPort;
         }
-
         notifyObserver(obs -> obs.createConnection(correctIp, correctPort, type));
     }
 
@@ -309,7 +309,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showGameInfo(List<Player> players, int numberPlayers) {
-        out.println(ColorCli.BLUE_INFO + "\nMATCH INFO: " + ColorCli.RESET);
+        out.println(ColorCli.BLUE_INFO + "\nLOBBY INFO: " + ColorCli.RESET);
         out.print("Players connected: ( ");
         for (int i = 0; i < players.size(); i++) {
             out.print(players.get(i).getNickname());
@@ -322,7 +322,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showError(String errorMessage) {
-        out.println(ColorCli.RED + errorMessage + " EXIT" + ColorCli.RESET);
+        out.println(ColorCli.RED + errorMessage + " EXIT FROM THE GAME" + ColorCli.RESET);
         System.exit(1);
     }
 
@@ -449,7 +449,7 @@ public class Cli extends ViewObservable implements View {
         myTurn = true;
         //out.println("askeSelect:" + myTurn);
 
-        out.println(ColorCli.YELLOW_BOLD + "Hey you have to select the tiles from the board! Digit in this order: \n-number of tiles \n-first tile's row \n-first tile's column \n-second tile's row \n-second tile's column \n-third tile's row \n-third tile's column3" + ColorCli.RESET);
+        out.println(ColorCli.YELLOW_BOLD + "Hey you have to select the tiles from the board! Digit in this order: \n-number of tiles \n-first tile's row \n-first tile's column \n-second tile's row \n-second tile's column \n-third tile's row \n-third tile's column" + ColorCli.RESET);
         do {
             input = readLine.nextLine();
             inputSplit = input.split(" ");
@@ -516,19 +516,22 @@ public class Cli extends ViewObservable implements View {
         boolean isValid = false;
         int col = -1;
 
-        out.println(ColorCli.YELLOW_BOLD + "Hey you have to insert the tiles in the bookshelf!" + ColorCli.RESET);
-        out.print("Please select the column where to insert the tiles: ");
         do {
+            out.println(ColorCli.YELLOW_BOLD + "Hey you have to insert the tiles in the bookshelf!" + ColorCli.RESET);
+            out.print("Please select the column where to insert the tiles: ");
             try {
                 col = Integer.parseInt(readLine.nextLine());
                 isValid = true;
             } catch (NumberFormatException e) {
-                col = -1;
                 clearCli();
             }
+            if(isValid) {
+                int finalCol = col;
+                notifyObserver(obs -> obs.sendInsertTiles(finalCol, tiles));
+            } else {
+                out.println(STR_INPUT_ERR);
+            }
         } while (!isValid);
-        int finalCol = col;
-        notifyObserver(obs -> obs.sendInsertTiles(finalCol, tiles));
     }
 
     @Override
@@ -586,8 +589,9 @@ public class Cli extends ViewObservable implements View {
     }
 
     @Override
-    public void disconnection(String nickname, boolean isStarted) {
+    public void showDisconnection(String nickname, boolean isStarted) {
         out.print(ColorCli.CYAN_BOLD + "\n" + nickname + " has been disconnecting from the game!" + ColorCli.RESET);
+        out.println();
         if (!isStarted) {
             out.println("\nGame ended...");
             System.exit(1);

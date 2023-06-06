@@ -18,8 +18,7 @@ public class ClientApp {
     public static void main(String[] args) {
         System.out.print("Choose the modality: 'c' for CLI or 'g' for GUI: ");
         Scanner scanner = new Scanner(System.in);
-        String response;
-        response = scanner.nextLine();
+        String response = scanner.nextLine();
 
         if(response.equalsIgnoreCase("c")) {
             Cli view = new Cli();

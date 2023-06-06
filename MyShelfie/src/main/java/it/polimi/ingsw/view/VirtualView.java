@@ -113,7 +113,7 @@ public class VirtualView implements View, Observer {
     }
 
     @Override
-    public void disconnection(String nickname, boolean isStarted) {
+    public void showDisconnection(String nickname, boolean isStarted) {
         clientHandler.sendMessageToClient(new DisconnectionMessage(nickname, isStarted));
     }
 

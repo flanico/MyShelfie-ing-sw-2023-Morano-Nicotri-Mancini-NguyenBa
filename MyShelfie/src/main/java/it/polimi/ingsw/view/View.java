@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.network.message.Message;
 
 import java.util.List;
 import java.util.Map;
@@ -130,5 +129,5 @@ public interface View {
      * @param nickname of the player disconnected
      * @param isStarted if the game is started or not
      */
-    void disconnection(String nickname, boolean isStarted);
+    void showDisconnection(String nickname, boolean isStarted);
 }
