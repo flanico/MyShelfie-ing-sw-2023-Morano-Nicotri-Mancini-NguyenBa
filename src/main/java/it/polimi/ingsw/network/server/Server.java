@@ -16,12 +16,10 @@ public class Server {
     public static final Logger LOGGER =  Logger.getLogger(Server.class.getName());
     private final Map<String, ClientHandler> clientHandlerMap;
     private final GameController gameController;
-    private final Object lock;
 
     public Server(GameController gameController) {
         this.gameController = gameController;
         this.clientHandlerMap = Collections.synchronizedMap(new HashMap<>());
-        this.lock = new Object();
     }
 
     /**
@@ -98,22 +96,20 @@ public class Server {
      * @param clientHandler the client handler to be disconnected
      */
     public void onDisconnect(ClientHandler clientHandler) {
-        synchronized (lock) {
-            String nickname = getNicknameFromClientHandler(clientHandler);
-            if(nickname != null) {
-                //if is login phase ends the game
-                if(!gameController.isGameStarted()) {
-                    removeClient(nickname, false);
-                    gameController.broadcastingDisconnection(nickname, false);
-                    gameController.endGame();
-                    LOGGER.warning(() -> "Game finishes in Login phase");
-                }
-                //if is in game phase continue for the disconnection resilience
-                else {
-                    removeClient(nickname, true);
-                    clientHandlerMap.remove(nickname);
-                    LOGGER.info(() -> "Game continue for resilience");
-                }
+        String nickname = getNicknameFromClientHandler(clientHandler);
+        if(nickname != null) {
+            //if is login phase ends the game
+            if(!gameController.isGameStarted()) {
+                removeClient(nickname, false);
+                gameController.broadcastingDisconnection(nickname, false);
+                gameController.endGame();
+                LOGGER.warning(() -> "Game finishes in Login phase");
+            }
+            //if is in game phase continue for the disconnection resilience
+            else {
+                removeClient(nickname, true);
+                clientHandlerMap.remove(nickname);
+                LOGGER.info(() -> "Game continue for resilience");
             }
         }
     }

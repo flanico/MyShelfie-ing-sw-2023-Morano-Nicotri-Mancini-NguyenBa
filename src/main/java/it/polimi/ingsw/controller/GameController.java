@@ -31,6 +31,7 @@ public class GameController implements Serializable {
     private TurnController turnController;
     private transient Timer timer;
     private boolean isNumPlayersSet;
+    private boolean isDisconnected;
     private static final String INVALID_STATE = "Invalid game state";
     private static final String INPUT_ERR = ColorCli.RED + "Invalid Input! Please retry." + ColorCli.RESET;
     private static final String ERR_CLIENT = ColorCli.RED + "Client invalid message" + ColorCli.RESET;
@@ -281,7 +282,7 @@ public class GameController implements Serializable {
         if (virtualViewMap.size() == 1) {
             VirtualView vv = virtualViewMap.entrySet().iterator().next().getValue();
             vv.showGenericMessage("\nYou're the only player connected... If no one try to reconnect, game will finish. " +
-                    "\nTimer of tot seconds starts now! If the timer expires you're are the winner of the game!");
+                    "\nTimer of 50 seconds starts! If the timer expires you're are the winner of the game!");
             onDisconnectGame(false, nickname);
         }
         //If there are two or three players connected continue the game
@@ -317,7 +318,11 @@ public class GameController implements Serializable {
     private void onDisconnectGame(boolean isReconnected, String nickname) {
         //If in the game there is only one player, a timer is setting
         if (!isReconnected) {
-            turnController.setDisconnected(true);
+            if(turnController.getCurrentPlayer().equals(nickname)) {
+                turnController.setDisconnected(true);
+            } else {
+                isDisconnected = true;
+            }
             timer = new Timer();
             //If the timer expires, it ends the game with current player victory
             timer.schedule(new TimerTask() {
@@ -328,7 +333,7 @@ public class GameController implements Serializable {
                         endGame();
                         System.exit(0);
                     }
-            }, 30000); //30 seconds timer
+            }, 50000); //50 seconds timer
         }
         //If someone reconnects to the game, the timer is cancelled
         if (isReconnected && timer != null) {
@@ -337,7 +342,8 @@ public class GameController implements Serializable {
             broadcastingMessage("\nThe game round is: " + nicknames);
             //it is the turn of the player connected
             if(gameState == GameState.DISCONNECTED) {
-//                System.out.println("Caso del player che sta giocando");
+                isDisconnected = false;
+                //System.out.println("Caso del player che sta giocando");
                 Thread threadTurnManager = new Thread(() -> turnController.turnManager());
                 threadTurnManager.start();
                 gameState = GameState.IN_GAME;
@@ -353,7 +359,7 @@ public class GameController implements Serializable {
     }
 
     /**
-     * delete the file game of the finished current game at the end
+     * delete the file game of the finished current game at the end or at login phase if is failed
      */
     public void endGame() {
         if(isGameStarted()) {
@@ -463,5 +469,9 @@ public class GameController implements Serializable {
 
     public List<String> getNicknames() {
         return nicknames;
+    }
+
+    public boolean isDisconnected() {
+        return isDisconnected;
     }
 }

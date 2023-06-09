@@ -23,7 +23,7 @@ public class SocketClient extends Client {
     private final ObjectOutputStream outputStream;
     private final ObjectInputStream inputStream;
     private final ExecutorService executorService;
-    private  final ScheduledExecutorService pinger;
+    private final ScheduledExecutorService pinger;
     private static final int SOCKET_TIMEOUT = 10000;
 
     public SocketClient(String ipAddress, int port) throws IOException {

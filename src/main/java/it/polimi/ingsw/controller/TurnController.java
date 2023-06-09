@@ -150,9 +150,9 @@ public class TurnController implements Serializable {
                 scoresAdjacentCells();
                 endGame();
             }
-            if (isDisconnected) {
+            if (gameController.isDisconnected()) {
                 gameController.setGameState(GameState.DISCONNECTED);
-//                System.out.println("Break caso giocatore che gioca");
+                System.out.println("Break caso giocatore che gioca");
                 break;
             }
             //At the end of each turn save the new info in the file disk
@@ -418,10 +418,6 @@ public class TurnController implements Serializable {
         return nicknames;
     }
 
-    protected Map<String, VirtualView> getVirtualViewMap() {
-        return virtualViewMap;
-    }
-
     public void setDisconnected(boolean disconnected) {
         isDisconnected = disconnected;
     }
@@ -430,14 +426,19 @@ public class TurnController implements Serializable {
      * waits the player's answer before going on with the game
      */
     private void waitAnswer() {
-        while (!hasReplied) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            while (!hasReplied && !isDisconnected) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            hasReplied = false;
+        if (isDisconnected) {
+            while (true) {
+
             }
         }
-        hasReplied = false;
     }
 
     /**
@@ -451,5 +452,9 @@ public class TurnController implements Serializable {
                 virtualViewMap.get(nickname).showGenericMessage(message);
             }
         }
+    }
+
+    public String getCurrentPlayer() {
+        return currentPlayer;
     }
 }
