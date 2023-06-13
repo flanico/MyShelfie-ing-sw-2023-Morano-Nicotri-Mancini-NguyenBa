@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PSP23" />
+        <module name="ProgettoIS" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="PSP23" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>

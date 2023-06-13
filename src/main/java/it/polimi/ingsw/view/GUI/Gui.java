@@ -14,8 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static it.polimi.ingsw.view.GUI.ErrorType.NOT_REMOVABLE_TILES;
-import static it.polimi.ingsw.view.GUI.ErrorType.WRONG_NICKNAME;
+import static it.polimi.ingsw.view.GUI.ErrorType.*;
 
 /**
  * Override of the View class for the GUI
@@ -24,7 +23,6 @@ import static it.polimi.ingsw.view.GUI.ErrorType.WRONG_NICKNAME;
  */
 
 public class Gui extends ViewObservable implements View {
-
     private int players_number;
     private List<Player> players_in_game;
     private Player owner;
@@ -32,6 +30,7 @@ public class Gui extends ViewObservable implements View {
     private Map<String, Integer> score;
     private SimpleDateFormat sdf;
     private String formattedTime;
+    private boolean gameActive=false;
 
     @Override
     public void askNickname(){
@@ -46,6 +45,10 @@ public class Gui extends ViewObservable implements View {
     //TODO: add the isConnectionSuccessful parameter
     @Override
     public void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname){
+        if (!isConnectionSuccessful){
+            Platform.runLater(() -> SceneController.popUp(WRONG_SERVER));
+            return;
+        }
         if(!isNicknameAccepted) {
             Platform.runLater(() -> SceneController.popUp(WRONG_NICKNAME));
             askNickname();
@@ -97,6 +100,11 @@ public class Gui extends ViewObservable implements View {
         if (genericMessage.equals("Sorry, tiles selected are NOT removable from the board! Retry.")){
             Platform.runLater(() -> SceneController.popUp(NOT_REMOVABLE_TILES));
         }
+        if (gameActive) {
+
+        } else {
+           // Platform.runLater(() -> SceneController.popUpString(genericMessage));
+        }
     }
 
     /**
@@ -139,8 +147,7 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void showPersonalCard(Player player){
         GameControllerScene game_ctrl = getGameControllerScene();
-        game_ctrl.setPersonalCard(player.getPersonalGoalCard());
-        Platform.runLater(game_ctrl::updatePersonalCard);
+        Platform.runLater(() -> game_ctrl.updatePersonalCard(player.getPersonalGoalCard()));
     }
 
     /**
@@ -237,7 +244,11 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showDisconnection(String nickname, boolean isStarted){
+        if (gameActive){
 
+        } else {
+            Platform.runLater(() -> SceneController.popUpString(nickname + "has disconnected"));
+        }
     }
 
     private GameControllerScene getGameControllerScene(){
@@ -245,6 +256,7 @@ public class Gui extends ViewObservable implements View {
         try {
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
         } catch (ClassCastException e) {
+            gameActive=true;
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1500d);
             stage.setHeight(800d);

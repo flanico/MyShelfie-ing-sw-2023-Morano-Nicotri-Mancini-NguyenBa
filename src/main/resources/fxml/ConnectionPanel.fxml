@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -21,10 +20,6 @@
          <font>
             <Font name="Times New Roman" size="12.0" />
          </font></TextField>
-      <ChoiceBox fx:id="serverType" layoutX="278.0" layoutY="270.0" prefHeight="22.0" prefWidth="245.0" style="-fx-font-family: 'Times New Roman'; -fx-background-color: white;">
-         <String fx:value="Socket" />
-         <String fx:value="RMI" />
-      </ChoiceBox>
       <ImageView fitHeight="97.0" fitWidth="338.0" layoutX="231.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/connectionText.png" />
@@ -49,5 +44,6 @@
             <Image url="@/Graphics/IP address.png" />
          </image>
       </ImageView>
+      <ComboBox fx:id="serverType" layoutX="300.0" layoutY="274.0" prefHeight="22.0" prefWidth="200.0" style="-fx-font-family: 'Times New Roman'; -fx-background-color: white;" />
    </children>
 </Pane>

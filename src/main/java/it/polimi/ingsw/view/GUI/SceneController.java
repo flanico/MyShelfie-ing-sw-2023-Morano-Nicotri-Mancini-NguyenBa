@@ -4,12 +4,14 @@ import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.observer.ViewObserver;
 import it.polimi.ingsw.view.GUI.Scene.Controller;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -67,49 +69,53 @@ public class SceneController extends ViewObservable {
         popupContent.setPrefSize(400, 300);
         switch (errorType){
             case WRONG_NICKNAME -> {
-                path = "Graphics/nicknameTaken.png";
+                path = "/Graphics/nicknameTaken.png";
                 popupStage.setTitle("Nickname already taken!");
                 popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case WRONG_ADDRESS -> {
-                path = "Graphics/wrongServerAddress.png";
+                path = "/Graphics/wrongServerAddress.png";              //TODO MODIFICA LA GRAFICA
                 popupStage.setTitle("Wrong server address!");
                 popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case EMPTY_NICKNAME -> {
-                path = "Graphics/nicknameEmpty.png";
+                path = "/Graphics/nicknameEmpty.png";
                 popupStage.setTitle("Empty nickname!");
                 popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case WRONG_PORT -> {
-                path = "Graphics/WrongIPPort.png";
+                path = "/Graphics/WrongIPPort.png";
                 popupStage.setTitle("Wrong IP port!");
                 popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case WRONG_PORT_ADDRESS -> {
-                path = "Graphics/twoWrong.png";
+                path = "/Graphics/twoWrong.png";
                 popupStage.setTitle("Wrong IP port and Server address!");
                 popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
-            case WRONG_TYPE -> {
-                path = "Graphics/selectServerType.png";
-                popupStage.setTitle("Select server type!");
-                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
-            }
             case EASTER_EGG -> {
-                path = "Graphics/easter.png";
+                path = "/Graphics/easter.png";
                 popupStage.setTitle("Forza Napoli!");
                 popupStage.getIcons().add(new Image("/Graphics/Napoli-Logo.png"));
             }
             case NOT_REMOVABLE_TILES -> {
-                path = "Graphics/tilesWrong.png";
+                path = "/Graphics/tilesWrong.png";
                 popupStage.setTitle("Not removable tiles!");
                 popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case NOT_SPACE -> {
-                path = "Graphics/spaceBookshelf.png";
+                path = "/Graphics/spaceBookshelf.png";
                 popupStage.setTitle("Not enough space!");
                 popupStage.getIcons().add(new Image("/Graphics/alert.png"));
+            }
+            case WRONG_SERVER -> {
+                path = "/Graphics/serverImpossible.png";
+                popupStage.setTitle("Server not reachable!");
+                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
+                popupStage.setOnCloseRequest(event -> {
+                    Platform.exit();
+                    System.exit(1);
+                });
             }
         }
         ImageView imageView = new ImageView(path);
@@ -117,6 +123,27 @@ public class SceneController extends ViewObservable {
         imageView.setFitWidth(400);
         imageView.setFitHeight(300);
         popupContent.getChildren().add(imageView);
+        Scene popupScene = new Scene(popupContent);
+        popupStage.setScene(popupScene);
+        popupStage.showAndWait();
+    }
+
+    public static void popUpString(String message){
+        String path = "";
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.initOwner(activeScene.getWindow());
+        Pane popupContent = new Pane();
+        popupContent.setPrefSize(400, 300);
+        ImageView imageView = new ImageView("/Publisher Material/Display_5.jpg");
+        Text text = new Text();
+        text.setText(message);
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(400);
+        imageView.setFitHeight(300);
+        imageView.setOpacity(0.6);
+        popupContent.getChildren().add(imageView);
+        popupContent.getChildren().add(text);
         Scene popupScene = new Scene(popupContent);
         popupStage.setScene(popupScene);
         popupStage.showAndWait();

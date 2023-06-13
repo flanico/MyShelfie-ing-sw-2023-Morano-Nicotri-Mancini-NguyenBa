@@ -76,13 +76,12 @@ public class GameControllerScene extends ViewObservable implements Controller {
     List<Tile> finalTiles = new ArrayList<>();      //the list of the tiles that will be placed in the bookshelf
     private boolean select_card_phase;              //true if the player is in the select card phase
     private boolean shelf_phase;                    //true if the player is playing during the shelf phase
-    PersonalGoalCard personalCard;                  //the personal goal card of the player
     List<CommonGoalCard> commonGoalCards;           //the list of the common goal cards of the game
     public Bookshelf shelf;
     public boolean isFirst = false;                 //true if the player is the first player
     private int selected_column = -1;               //the column selected by the player
     List<CommonGoalCardScore> commonGoalCardScores = new ArrayList<>();         //the list of the common goal cards scores
-    public Player currentPlayer = null;
+    public Player currentPlayer = null;                                         //the player that plays in the current turn
     public Player owner;                                                        //the owner of the bookshelf
     public List<Player> playersList;                                            //the list of the players
     public int numberPlayers;                                                   //the number of the players in the game
@@ -115,9 +114,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
     }
     public void setCommonGoalCards(List<CommonGoalCard> commonGoalCard) {
         this.commonGoalCards = commonGoalCard;
-    }
-    public void setPersonalCard(PersonalGoalCard personalCard) {
-        this.personalCard = personalCard;
     }
     public void setShelf(Bookshelf shelf) {
         this.shelf = shelf;
@@ -330,7 +326,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             common_prize_1.setImage(new Image(path));
             won_frame1.setVisible(true);
             first_won.setVisible(true);
-        } else {
+        } else if (commonGoalCards.get(1).getNumber() == commonGoalCard.getNumber()){
             won_frame2.setVisible(true);
             second_won.setVisible(true);
             common_prize_2.setImage(new Image(path));
@@ -425,9 +421,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
     /**
      * This method is used to update the personal goal card image
      */
-    public void updatePersonalCard(){
+    public void updatePersonalCard(PersonalGoalCard personal){
         String path = null;
-        switch (personalCard.getType()){
+        switch (personal.getType()){
             case GOAL1 -> path = "/personal goal cards/Personal_Goals.png";
             case GOAL2 -> path = "/personal goal cards/Personal_Goals2.png";
             case GOAL3 -> path = "/personal goal cards/Personal_Goals3.png";

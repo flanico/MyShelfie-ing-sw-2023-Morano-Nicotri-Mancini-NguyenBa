@@ -14,10 +14,19 @@ public class NameController extends ViewObservable implements Controller {
     @FXML
     ImageView continueButton;
 
+    private boolean isActive;
+
+    public void initialize(){
+        isActive=true;
+    }
+
     public void continueButtonPressed(MouseEvent mouseEvent) {
-        String Nickname = usernameField.getText();
-        if (Nickname.compareTo("")==0)
-            SceneController.popUp(ErrorType.EMPTY_NICKNAME);
-        else new Thread(() -> notifyObserver(obs -> obs.sendNickname(Nickname))).start();
+        if (isActive) {
+            String Nickname = usernameField.getText();
+            if (Nickname.compareTo("") == 0)
+                SceneController.popUp(ErrorType.EMPTY_NICKNAME);
+            else new Thread(() -> notifyObserver(obs -> obs.sendNickname(Nickname))).start();
+            isActive = false;
+        }
     }
 }

@@ -13,7 +13,7 @@ public enum ErrorType {
     WRONG_TYPE,
     NOT_SPACE,
     NOT_REMOVABLE_TILES,
+    WRONG_SERVER,
     EASTER_EGG;
-
 
 }

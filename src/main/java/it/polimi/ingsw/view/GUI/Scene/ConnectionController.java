@@ -4,7 +4,10 @@ import it.polimi.ingsw.controller.ClientController;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.view.GUI.ErrorType;
 import it.polimi.ingsw.view.GUI.SceneController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
@@ -20,9 +23,17 @@ public class ConnectionController extends ViewObservable implements Controller {
     @FXML
     TextField serverPortField;
     @FXML
-    ChoiceBox<String> serverType;
+    ComboBox<String> serverType;
     private int type;
     int error;
+
+    public void initialize(){
+        ObservableList<String> parameters = FXCollections.observableArrayList();
+        parameters.add("Socket");
+        parameters.add("RMI");
+        serverType.setItems(parameters);
+        serverType.setValue("Socket");
+    }
 
     @SuppressWarnings("unused")
     public void continue_pressed(MouseEvent mouseEvent) {
@@ -35,7 +46,6 @@ public class ConnectionController extends ViewObservable implements Controller {
         final String correctAddress;
         final String correctPort;
 
-        if (serverType.getValue()!=null) {
             error = 0;
             if (port.compareTo("") == 0) {
                 if (serverType.getValue().equals("Socket")){
@@ -45,9 +55,10 @@ public class ConnectionController extends ViewObservable implements Controller {
                     correctPort = defaultPort_rmi;
                     type=2;
                 }
-            }
-            else if (ClientController.isValidPort(port)) {
+
+            } else if (ClientController.isValidPort(port)) {
                 correctPort = port;
+
             } else {
                 error = 1;
                 correctPort = null;
@@ -70,6 +81,5 @@ public class ConnectionController extends ViewObservable implements Controller {
                 case 2 -> SceneController.popUp(ErrorType.WRONG_ADDRESS);
                 case 3 -> SceneController.popUp(ErrorType.WRONG_PORT_ADDRESS);
             }
-        } else SceneController.popUp(ErrorType.WRONG_TYPE);
     }
 }
