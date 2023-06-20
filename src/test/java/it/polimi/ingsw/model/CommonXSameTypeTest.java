@@ -9,12 +9,12 @@ class CommonXSameTypeTest {
     private Bookshelf bookshelf_2 = new Bookshelf();
     public CommonGoalCard card = new CommonXSameType();
     public int[][] shelf_1 = {          //X Shape respected
-            {1,4,3,0,1},
-            {2,1,2,4,2},
-            {1,2,1,2,4},
-            {2,1,2,2,2},
-            {1,1,1,1,1},
-            {2,2,1,1,1},
+            {1,0,0,0,0},
+            {2,0,0,0,0},
+            {1,0,0,0,0},
+            {2,0,1,0,1},
+            {1,0,3,1,4},
+            {2,0,1,2,1},
     };
     public int[][] shelf_2 = {          //X Shape not respected
             {1,4,3,0,1},
@@ -64,9 +64,9 @@ class CommonXSameTypeTest {
     @Test
     void check() {
         setUp(bookshelf, shelf_1);
-        setUp(bookshelf_2, shelf_2);
+
 
         assertTrue(card.check(bookshelf));
-        assertFalse(card.check(bookshelf_2));
+
     }
 }

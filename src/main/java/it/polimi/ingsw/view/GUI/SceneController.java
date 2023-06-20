@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.GUI;
 
-import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.observer.ViewObserver;
 import it.polimi.ingsw.view.GUI.Scene.Controller;
@@ -25,7 +24,6 @@ import java.util.List;
 
 public class SceneController extends ViewObservable {
 
-
     private static Scene activeScene;
     private static Controller activeController;
     public static Scene getActiveScene() {
@@ -37,28 +35,28 @@ public class SceneController extends ViewObservable {
     public static void setActiveScene(Scene activeScene) {
         SceneController.activeScene = activeScene;
     }
-    public static <T> T changeRootPane(List<ViewObserver> observerList, Scene scene, String fxml) {
-        T controller = null;
 
+    /**
+     * Method that changes the root pane of the scene
+     * @param observerList the list of the observers in the game
+     * @param fxml the name of the fxml file to load
+     */
+    public static void changeRootPane(List<ViewObserver> observerList, String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/fxml/" + fxml));
             Parent root = loader.load();
-            controller = loader.getController();
-            ((ViewObservable) controller).addAllObservers(observerList);
-
-            activeController = (Controller) controller;
-            activeScene = scene;
             activeScene.setRoot(root);
+            activeController = loader.getController();
+            ((ViewObservable) activeController).addAllObservers(observerList);
         } catch (IOException e) {
-            Client.LOGGER.severe(e.getMessage());
+            System.out.println("Error in loading the fxml file");
         }
-        return controller;
     }
 
-    public static <T> T changeRootPane(List<ViewObserver> observerList, String fxml) {
-        return changeRootPane(observerList, activeScene, fxml);
-    }
-
+    /**
+     * This method creates a popup window with a message
+     * @param errorType the type of the error
+     */
     public static void popUp(ErrorType errorType) {
         String path = "";
         Stage popupStage = new Stage();
@@ -128,8 +126,11 @@ public class SceneController extends ViewObservable {
         popupStage.showAndWait();
     }
 
+    /**
+     * This method creates a popup window with a message in string format
+     * @param message which is the message to show
+     */
     public static void popUpString(String message){
-        String path = "";
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.initOwner(activeScene.getWindow());

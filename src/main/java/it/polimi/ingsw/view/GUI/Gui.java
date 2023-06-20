@@ -28,21 +28,33 @@ public class Gui extends ViewObservable implements View {
     private Player owner;
     private boolean isFirst = false;
     private Map<String, Integer> score;
-    private SimpleDateFormat sdf;
+    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     private String formattedTime;
     private boolean gameActive=false;
 
+    /**
+     * ask the nickname to the client
+     */
     @Override
     public void askNickname(){
         Platform.runLater(() -> SceneController.changeRootPane(observers, "NamePanel.fxml"));
     }
 
+    /**
+     * ask the number of players to the first player
+     */
     @Override
     public void askPlayersNumber(){
         this.isFirst = true;
         Platform.runLater(() -> SceneController.changeRootPane(observers, "SelectPlayersPanel.fxml"));
     }
-    //TODO: add the isConnectionSuccessful parameter
+
+    /**
+     * it controls if every parameter is compatible with the game and if the connection works
+     * @param isNicknameAccepted if the nickname selected is accepted or not
+     * @param isConnectionSuccessful if the connection is successful or not
+     * @param nickname of player
+     */
     @Override
     public void showLoginResult(boolean isNicknameAccepted, boolean isConnectionSuccessful, String nickname){
         if (!isConnectionSuccessful){
@@ -251,6 +263,11 @@ public class Gui extends ViewObservable implements View {
         }
     }
 
+    /**
+     * methods that returns the game controller scene
+     * @return the controller of the GameControllerScene
+     */
+
     private GameControllerScene getGameControllerScene(){
         GameControllerScene game_ctrl;
         try {
@@ -273,19 +290,25 @@ public class Gui extends ViewObservable implements View {
         return game_ctrl;
     }
 
+    /**
+     * add the message in the buffer
+     * @param sender sender of the message
+     * @param destination destination of the message
+     * @param message message to add
+     */
+
     @Override
     public void addChatMessage(String sender, String destination, String message) {
-        //the message is for me
         final String new_message;
-        if (destination.equals("all") || destination.equals(owner.getNickname()) || sender.equals(owner.getNickname())){
-            //Date now = new Date();
-            //formattedTime = sdf.format(now);
+        if (destination.equals("all") || destination.equals(owner.getNickname()) || sender.equals(owner.getNickname())){    //this "if" controls if the owner of the gui can visualize the message
+            Date now = new Date();
+            formattedTime = sdf.format(now);
             if (sender.equals(owner.getNickname()))
-                message = " - " + sender + ": " + message + " [to " + destination + "]";
+                message = " - [" + formattedTime + "] " + sender + ": " + message + " [to " + destination + "]";
             else if (destination.equals(owner.getNickname()))
-                message = " - " + sender + ": " + message + " [to you]";
+                message = " - [" + formattedTime + "] " + sender + ": " + message + " [to you]";
             else if (destination.equals("all"))
-                message = " - " + sender + ": " + message + " [all]";
+                message = " - [" + formattedTime + "] " + sender + ": " + message + " [all]";
             new_message=message;
             GameControllerScene game_ctrl = getGameControllerScene();
             Platform.runLater(() -> game_ctrl.addBuffer(new_message));

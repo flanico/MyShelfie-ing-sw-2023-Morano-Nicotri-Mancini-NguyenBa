@@ -13,7 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
 
 /**
- * class that controls the connectionPanel.fxml for the client connection
+ * controller of the connection panel for the client connection
  * @author Stefano Morano
  */
 public class ConnectionController extends ViewObservable implements Controller {
@@ -35,6 +35,10 @@ public class ConnectionController extends ViewObservable implements Controller {
         serverType.setValue("Socket");
     }
 
+    /**
+     * method called when the continue button is pressed: the client try to connect to the server
+     * @param mouseEvent
+     */
     @SuppressWarnings("unused")
     public void continue_pressed(MouseEvent mouseEvent) {
         String address;

@@ -8,6 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * controller of the name panel
+ * @Author: Stefano Morano
+ */
 public class NameController extends ViewObservable implements Controller {
     @FXML
     TextField usernameField;
@@ -20,6 +24,10 @@ public class NameController extends ViewObservable implements Controller {
         isActive=true;
     }
 
+    /**
+     * method called when the continue button is pressed: the name is sent to the server
+     * @param mouseEvent
+     */
     public void continueButtonPressed(MouseEvent mouseEvent) {
         if (isActive) {
             String Nickname = usernameField.getText();

@@ -7,7 +7,10 @@ import javafx.scene.text.Text;
 
 import java.util.Map;
 
-
+/**
+ * controller of the end panel, it shows the final score of the game and the winner
+ * @author Stefano Morano
+ */
 public class EndController extends ViewObservable implements Controller{
     @FXML
     Text place1_sentence, place2_sentence, place3_sentence, place4_sentence;
@@ -31,6 +34,13 @@ public class EndController extends ViewObservable implements Controller{
         frame.setVisible(false);
         won_card.setVisible(false);
     }
+
+    /**
+     * this method is called by the Gui to initialize the end panel
+     * @param winner true if the player is the winner, false otherwise
+     * @param playerScore the map of the players and their score
+     * @param numberOfPlayers the number of players in the game
+     */
     @SuppressWarnings("unused")
     public void init(boolean winner, Map<String, Integer> playerScore, int numberOfPlayers){
         switch (numberOfPlayers){

@@ -12,12 +12,24 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import it.polimi.ingsw.view.GUI.SceneController;
 
+/**
+ * controller of the menu panel
+ * @Author: Stefano Morano
+ */
 public class MenuController extends ViewObservable implements Controller {
 
+    /**
+     * method called when the play button is pressed: the game starts
+     * @param mouseEvent
+     */
     public void playButton_click(MouseEvent mouseEvent) {
         SceneController.changeRootPane(observers,"ConnectionPanel.fxml");
     }
 
+    /**
+     * method called when the credits button is pressed: it shows the credits
+     * @param mouseEvent
+     */
     public void goCredits(MouseEvent mouseEvent) {
         SceneController.changeRootPane(observers,"creditPanel.fxml");
     }

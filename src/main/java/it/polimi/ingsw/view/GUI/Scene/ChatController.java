@@ -13,10 +13,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller for the chat scene
+ * @author Stefano Morano
+ */
 public class ChatController extends ViewObservable implements Controller{
     @FXML
     TextArea text_area;
@@ -35,6 +38,12 @@ public class ChatController extends ViewObservable implements Controller{
         text_area.setEditable(false);
         text_area.setText("");
     }
+
+    /**
+     * method called when the chat button is pressed, and it is initially closed
+     * @param buffer the buffer of the chat
+     * @param players  the list of players
+     */
     @SuppressWarnings("unused")
     public void run(ArrayList<String> buffer, List<Player> players){
         ObservableList<String> parameters = FXCollections.observableArrayList();
@@ -50,11 +59,20 @@ public class ChatController extends ViewObservable implements Controller{
         text_area.setScrollTop(Double.MAX_VALUE);
     }
 
+    /**
+     * method that appends a message to the open chat
+     * @param message the message to append
+     */
     @SuppressWarnings("unused")
     public void append(String message){
         text_area.appendText(message + "\n");
         text_area.setScrollTop(Double.MAX_VALUE);
     }
+
+    /**
+     * method that sends a message to the server if the send button is pressed
+     * @param mouseEvent the mouse event
+     */
     @SuppressWarnings("unused")
     public void send(MouseEvent mouseEvent) {
         if (!text_field.getText().equals("")){
@@ -63,6 +81,9 @@ public class ChatController extends ViewObservable implements Controller{
         }
     }
 
+    /**
+     * method that sends a message to the server if the (enter) key is pressed
+     */
     public void send_enter() {
         if (!text_field.getText().equals("")){
             notifyObserver(obs -> obs.sendChatMessage(choiceBox.getValue(), text_field.getText()));
