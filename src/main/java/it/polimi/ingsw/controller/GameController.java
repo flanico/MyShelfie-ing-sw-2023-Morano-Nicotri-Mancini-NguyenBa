@@ -145,7 +145,7 @@ public class GameController implements Serializable {
      * @return true is the nickname is valid, false otherwise
      */
     public boolean checkLoginNickname(String nickname, View view) {
-        if(nickname.isEmpty() || game.isNicknameTaken(nickname)) {
+        if(nickname.isEmpty() || game.isNicknameTaken(nickname) || nickname.isBlank()) {
             view.showLoginResult(false, true, nickname);
             return false;
         }
@@ -343,7 +343,6 @@ public class GameController implements Serializable {
             //it is the turn of the player connected
             if(gameState == GameState.DISCONNECTED) {
                 isDisconnected = false;
-                //System.out.println("Caso del player che sta giocando");
                 Thread threadTurnManager = new Thread(() -> turnController.turnManager());
                 threadTurnManager.start();
                 gameState = GameState.IN_GAME;
