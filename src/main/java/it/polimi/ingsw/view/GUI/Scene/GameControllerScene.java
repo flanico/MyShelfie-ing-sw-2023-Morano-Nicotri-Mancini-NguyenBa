@@ -312,7 +312,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
                         setImage(ref_but, board.getMatrix()[x][y].getType(), board.getMatrix()[x][y].getColortype());
             }
     }
-    //TODO there's a problem with the second win
+
     public void winCard(CommonGoalCard commonGoalCard, int score){
         String path;
         switch (score){

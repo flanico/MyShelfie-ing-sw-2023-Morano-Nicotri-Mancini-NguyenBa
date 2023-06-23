@@ -8,7 +8,6 @@ import it.polimi.ingsw.view.GUI.Scene.LobbyController;
 import it.polimi.ingsw.view.View;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -28,8 +27,7 @@ public class Gui extends ViewObservable implements View {
     private Player owner;
     private boolean isFirst = false;
     private Map<String, Integer> score;
-    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-    private String formattedTime;
+
     private boolean gameActive=false;
 
     /**
@@ -37,7 +35,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void askNickname(){
-        Platform.runLater(() -> SceneController.changeRootPane(observers, "NamePanel.fxml"));
+        Platform.runLater(() -> SceneController.changeRootPane(observers, "namePanel.fxml"));
     }
 
     /**
@@ -109,14 +107,9 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void showGenericMessage(String genericMessage){
 
-        if (genericMessage.equals("Sorry, tiles selected are NOT removable from the board! Retry.")){
+        if (genericMessage.equals("Tiles selected are NOT removable from the board! Retry."))
             Platform.runLater(() -> SceneController.popUp(NOT_REMOVABLE_TILES));
-        }
-        if (gameActive) {
 
-        } else {
-           // Platform.runLater(() -> SceneController.popUpString(genericMessage));
-        }
     }
 
     /**
@@ -296,10 +289,11 @@ public class Gui extends ViewObservable implements View {
      * @param destination destination of the message
      * @param message message to add
      */
-
     @Override
     public void addChatMessage(String sender, String destination, String message) {
         final String new_message;
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String formattedTime;
         if (destination.equals("all") || destination.equals(owner.getNickname()) || sender.equals(owner.getNickname())){    //this "if" controls if the owner of the gui can visualize the message
             Date now = new Date();
             formattedTime = sdf.format(now);
