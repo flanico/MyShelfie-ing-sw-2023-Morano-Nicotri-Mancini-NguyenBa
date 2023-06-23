@@ -152,7 +152,6 @@ public class TurnController implements Serializable {
             }
             if (gameController.isDisconnected()) {
                 gameController.setGameState(GameState.DISCONNECTED);
-                System.out.println("Break caso giocatore che gioca");
                 break;
             }
             //At the end of each turn save the new info in the file disk
@@ -426,14 +425,14 @@ public class TurnController implements Serializable {
      * waits the player's answer before going on with the game
      */
     private void waitAnswer() {
-            while (!hasReplied && !isDisconnected) {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        while (!hasReplied && !isDisconnected) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            hasReplied = false;
+        }
+        hasReplied = false;
         if (isDisconnected) {
             while (true) {
 
