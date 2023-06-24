@@ -37,7 +37,8 @@ public class RMIClientHandler implements ClientHandler {
             Server.LOGGER.info(() -> "Message to " + message.getNickname() + ": " + message);
             this.skeleton.toClient(message);
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            Server.LOGGER.severe("RMI Client connection dropped");
+            disconnectClient();
         }
     }
 
@@ -51,7 +52,7 @@ public class RMIClientHandler implements ClientHandler {
             this.server.onDisconnect(this);
             this.skeleton.disconnect();
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            Server.LOGGER.severe("Client disconnected from RMI network");
         }
     }
 }
