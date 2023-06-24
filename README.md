@@ -1,5 +1,5 @@
 # My Shelfie - Progetto di Ingegneria del Software 2022/2023 [PSP23]
-![MyShelfie](./src/main/resources/Publisher Material/piccola.jpg)
+![MyShelfie](src/main/resources/Publisher Material/piccola.jpg)
 ### Componenti del gruppo
 * [Alessandro Mancini](https://github.com/alemancio5)
 * [Chiara Thien Thao Nguyen Ba](https://github.com/chiaranb)
