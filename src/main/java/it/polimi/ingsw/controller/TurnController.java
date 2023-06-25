@@ -295,7 +295,6 @@ public class TurnController implements Serializable {
             VirtualView virtualView = virtualViewMap.get(currentPlayer);
             virtualView.askOrderTiles(currentTiles);
             waitAnswer();
-//            virtualView.showGenericMessage("Tiles are inserting in the bookshelf in the column number " + currentPosition);
             game.getPlayerByNickname(currentPlayer).getBookshelf().insertTile(currentTiles, currentPosition);
         }
         turnState = TurnState.CHECK;
@@ -405,22 +404,6 @@ public class TurnController implements Serializable {
         notifyOtherPlayers(ColorCli.YELLOW_BOLD + currentPlayer+ "'s bookshelf is full!" + ColorCli.RESET, currentPlayer);
     }
 
-    protected void setVirtualViewMap(Map<String, VirtualView> virtualViewMap) {
-        this.virtualViewMap = virtualViewMap;
-    }
-
-    protected void setGame(Game game) {
-        this.game = game;
-    }
-
-    public List<String> getNicknames() {
-        return nicknames;
-    }
-
-    public void setDisconnected(boolean disconnected) {
-        isDisconnected = disconnected;
-    }
-
     /**
      * waits the player's answer before going on with the game
      */
@@ -451,6 +434,22 @@ public class TurnController implements Serializable {
                 virtualViewMap.get(nickname).showGenericMessage(message);
             }
         }
+    }
+
+    protected void setVirtualViewMap(Map<String, VirtualView> virtualViewMap) {
+        this.virtualViewMap = virtualViewMap;
+    }
+
+    protected void setGame(Game game) {
+        this.game = game;
+    }
+
+    public List<String> getNicknames() {
+        return nicknames;
+    }
+
+    public void setDisconnected(boolean disconnected) {
+        isDisconnected = disconnected;
     }
 
     public String getCurrentPlayer() {

@@ -100,7 +100,6 @@ public class GameController implements Serializable {
     private void inGameState(Message message) {
         switch (message.getMessageType()) {
             case CHAT_MESSAGE_REQ -> {
-                //TODO: check if the destination is valid
                 broadcastingChat(message);
             }
             case TILES_REPLY -> {
@@ -124,10 +123,6 @@ public class GameController implements Serializable {
             }
             default -> Server.LOGGER.warning(INVALID_STATE);
         }
-    }
-
-    public Game getGame() {
-        return game;
     }
 
     /**
@@ -281,14 +276,13 @@ public class GameController implements Serializable {
         //If there is only one player connected stops the game
         if (virtualViewMap.size() == 1) {
             VirtualView vv = virtualViewMap.entrySet().iterator().next().getValue();
-            vv.showGenericMessage("\nYou're the only player connected... If no one try to reconnect, game will finish. " +
-                    "\nTimer of 50 seconds starts! If the timer expires you're are the winner of the game!");
+            vv.showGenericMessage(ColorCli.CYAN_BOLD + "\nYou're the only player connected... If no one try to reconnect, game will finish. " +
+                    "\nTimer of 60 seconds starts! If the timer expires you're are the winner of the game!\n" + ColorCli.RESET);
             onDisconnectGame(false, nickname);
         }
         //If there are two or three players connected continue the game
         else {
             broadcastingMessage("\nThe game round is: " + turnController.getNicknames());
-//            turnController.setDisconnected(true);
             turnController.nextPlayer(index, true);
             Thread threadTurnManager = new Thread(() -> turnController.turnManager());
             threadTurnManager.start();
@@ -333,7 +327,7 @@ public class GameController implements Serializable {
                         endGame();
                         System.exit(0);
                     }
-            }, 50000); //50 seconds timer
+            }, 60000); //60 seconds timer
         }
         //If someone reconnects to the game, the timer is cancelled
         if (isReconnected && timer != null) {
@@ -448,6 +442,10 @@ public class GameController implements Serializable {
             Thread threadTurnManager = new Thread(() -> turnController.turnManager());
             threadTurnManager.start();
         }
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public TurnController getTurnController() {

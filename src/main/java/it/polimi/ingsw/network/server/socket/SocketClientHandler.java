@@ -105,15 +105,15 @@ public class SocketClientHandler implements ClientHandler, Runnable {
      */
     @Override
     public void sendMessageToClient(Message message) {
-            try {
-                synchronized (outputLock) {
-                    outputStream.writeObject(message);
-                    outputStream.reset();
-                    Server.LOGGER.info(() -> "SOCKET Message sent : " + message);
-                }
-            } catch (IOException e) {
-                Server.LOGGER.severe("SOCKET Client " + clientSocket.getInetAddress() + " connection dropped");
-                disconnectClient();
+        try {
+            synchronized (outputLock) {
+                outputStream.writeObject(message);
+                outputStream.reset();
+                Server.LOGGER.info(() -> "SOCKET Message sent : " + message);
             }
+        } catch (IOException e) {
+            Server.LOGGER.severe("SOCKET Client " + clientSocket.getInetAddress() + " connection dropped");
+            disconnectClient();
+        }
     }
 }

@@ -16,11 +16,12 @@ import java.util.Date;
 
 /**
  * class that represents the interface view via command line interface
+ * @author Chiara Nguyen Ba, Flavia Nicotri
  */
 public class Cli extends ViewObservable implements View {
     private final PrintStream out;
     private static final String STR_INPUT_ERR = ColorCli.RED + "Invalid Input! Please retry." + ColorCli.RESET;
-    public Scanner readLine = new Scanner(System.in);
+    private final Scanner readLine;
     private boolean gameRunning;
     private final Object lock;
     private boolean myTurn;
@@ -33,10 +34,10 @@ public class Cli extends ViewObservable implements View {
     public Cli() {
         out = System.out;
         this.lock = new Object();
+        this.readLine = new Scanner(System.in);
         this.buffer= new ArrayList<>();
         this.sdf = new SimpleDateFormat("HH:mm:ss");
     }
-
 
     /**
      * prints the welcome message of the game
@@ -83,9 +84,7 @@ public class Cli extends ViewObservable implements View {
                 }
 
                 //if it's my turn I have to give the lock to the other thread
-                //out.println("lock myturn:"+ myTurn);
                 if(myTurn){
-                    //out.println("aaaaaa");
                     try {
                         lock.wait();
                     } catch (InterruptedException e) {
