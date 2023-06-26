@@ -13,7 +13,6 @@ public enum MessageType {
     SHOW_BOARD,
     SELECT_TILE_REQ,
     INSERT_TILE_REQ,
-    END_TURN,
     COMMON_GOAL_COMPLETE,
     SHOW_BOOKSHELF,
     LOGIN_REPLY,
@@ -24,7 +23,6 @@ public enum MessageType {
     PING,
     SHOW_COMMON,
     SHOW_PERSONAL,
-    BOOKSHELF_FULL,
     ORDER_REQ,
 
     //Client side
@@ -34,5 +32,4 @@ public enum MessageType {
     TILES_REPLY,
     ORDER_REPLY,
     COMMON_SCORES,
-    CHAT
 }

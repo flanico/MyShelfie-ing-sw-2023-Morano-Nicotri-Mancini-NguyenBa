@@ -24,10 +24,7 @@ public class Game extends Observable implements Serializable {
     private Stack<Tile> bag;
     private Map<String, Integer> playerScore;
 
-    /**
-     * constructor of Game
-     * @author Alessandro Mancini
-     */
+
     public Game() {
         this.players = new ArrayList<>();
         this.commongoalcards = new ArrayList<>();
@@ -132,7 +129,7 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
-     * notify the observer with the connected players
+     * notify the disconnection of a player to the connected players
      */
     public void disconnectionOfPlayer() {
         List<Player> playersWithoutDisconnected = players.stream()
@@ -223,10 +220,6 @@ public class Game extends Observable implements Serializable {
         this.commongoalcardscores.add(new CommonGoalCardScore(this.num));
     }
 
-    /**
-     * getter of commongoalcardscores
-     * @author Alessandro Mancini
-     */
     public List<CommonGoalCardScore> getCommongoalcardscores() {
         return commongoalcardscores;
     }
@@ -239,10 +232,6 @@ public class Game extends Observable implements Serializable {
         this.board = new Board(this.num);
     }
 
-    /**
-     * getter of board
-     * @author Alessandro Mancini
-     */
     public Board getBoard() {
         return board;
     }
@@ -328,10 +317,6 @@ public class Game extends Observable implements Serializable {
         Collections.shuffle(this.bag);
     }
 
-    /**
-     * getter of bag
-     * @author Alessandro Mancini
-     */
     public Stack<Tile> getBag() {
         return bag;
     }
@@ -371,10 +356,6 @@ public class Game extends Observable implements Serializable {
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
     }
 
-    /**
-     * getter of ranking (Player, Score)
-     * @return playerScore the map of ranking scores
-     */
     public Map<String, Integer> getPlayerScore() {
         return playerScore;
     }
@@ -392,7 +373,7 @@ public class Game extends Observable implements Serializable {
     }
 
     /**
-     * replace the game for the implementation of the persistence
+     * replace the game for the implementation of persistence
      * @param players list of players
      * @param num number of players
      * @param board board
@@ -414,6 +395,7 @@ public class Game extends Observable implements Serializable {
             p.setPersonalGoalCard(getPlayerByNickname(p.getNickname()).getPersonalGoalCard());
             p.setDoneFirstCommon(getPlayerByNickname(p.getNickname()).isDoneFirstCommon());
             p.setDoneSecondCommon(getPlayerByNickname(p.getNickname()).isDoneSecondCommon());
+            p.setScore(getPlayerByNickname(p.getNickname()).getScore());
         }
     }
 }
