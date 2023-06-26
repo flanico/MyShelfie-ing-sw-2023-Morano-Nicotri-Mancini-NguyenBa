@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.GUI;
 import it.polimi.ingsw.observer.ViewObservable;
 import it.polimi.ingsw.observer.ViewObserver;
 import it.polimi.ingsw.view.GUI.Scene.Controller;
+import it.polimi.ingsw.view.GUI.Scene.popUpController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -115,6 +115,93 @@ public class SceneController extends ViewObservable {
                     System.exit(1);
                 });
             }
+            case EIGHT_SAME -> {
+                path = "/Graphics/eightSameType.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case FOUR_GROUPS -> {
+                path = "/Graphics/fourGroups.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case INCREASING_HEIGHT -> {
+                path = "/Graphics/increasingHeight.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case THREE_ROW -> {
+                path = "/Graphics/maxFourRows.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case THREE_COLUMNS -> {
+                path = "/Graphics/maxThreeColumn.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case TWO_COLUMN -> {
+                path = "/Graphics/maxTwoColumn.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case TWO_ROW -> {
+                path = "/Graphics/maxTwoRows.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case SAME_CORNER -> {
+                path = "/Graphics/sameCorner.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case SAME_DIAGONAL -> {
+                path = "/Graphics/sameDiagonal.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case SIX_GROUPS -> {
+                path = "/Graphics/sixGroups.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case TWO_SQUARES -> {
+                path = "/Graphics/twoSquares.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case X_SHAPE -> {
+                path = "/Graphics/xShape.png";
+                popupStage.setTitle("Common Goal Card");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
+
+            case ERROR_OCCURRED -> {
+                path = "/Graphics/errorOccurred.png";
+                popupStage.setTitle("Error");
+                popupStage.getIcons().add(new Image("/Graphics/alert.png"));
+                popupStage.setOnCloseRequest(event -> {
+                    Platform.exit();
+                    System.exit(1);
+                });
+            }
+
+            case ONLY_ONE -> {
+                path = "/Graphics/onlyOne.png";
+                popupStage.setTitle("You are the only player in the game!");
+                popupStage.getIcons().add(new Image("/Graphics/questionMark.png"));
+            }
         }
         ImageView imageView = new ImageView(path);
         imageView.setPreserveRatio(true);
@@ -130,24 +217,22 @@ public class SceneController extends ViewObservable {
      * This method creates a popup window with a message in string format
      * @param message which is the message to show
      */
-    public static void popUpString(String message){
-        Stage popupStage = new Stage();
-        popupStage.initModality(Modality.APPLICATION_MODAL);
-        popupStage.initOwner(activeScene.getWindow());
-        Pane popupContent = new Pane();
-        popupContent.setPrefSize(400, 300);
-        ImageView imageView = new ImageView("/Publisher Material/Display_5.jpg");
-        Text text = new Text();
-        text.setText(message);
-        imageView.setPreserveRatio(true);
-        imageView.setFitWidth(400);
-        imageView.setFitHeight(300);
-        imageView.setOpacity(0.6);
-        popupContent.getChildren().add(imageView);
-        popupContent.getChildren().add(text);
-        Scene popupScene = new Scene(popupContent);
-        popupStage.setScene(popupScene);
-        popupStage.showAndWait();
+    public static void popUpString(String message) {        try {
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.initOwner(activeScene.getWindow());
+            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/fxml/popUp.fxml"));
+            Parent rootLayout = loader.load();
+            Scene scene = new Scene(rootLayout);
+            popUpController controller = loader.getController();
+            Platform.runLater(() -> controller.init(message));
+            popupStage.setScene(scene);
+            popupStage.setResizable(false);
+            popupStage.setTitle("Disconnection");
+            popupStage.showAndWait();
+        } catch (IOException e) {
+            System.out.println(("Error"));
+        }
     }
 
 }

@@ -90,6 +90,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
     ChatController chatController;
     private boolean activeChat;
 
+    /**
+     * Method to initialize the game panel when it opens
+     */
     public void initialize(){
       KeyCombination keyCombination = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN);
        SceneController.getActiveScene().setOnKeyPressed((event -> {
@@ -210,6 +213,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             else if (direction.equals("up"))
                 Collections.swap(finalTiles, 1, 2);
     }
+
+    /**
+     * This method active or deactivate the bookshelf phase
+     * @param activate bool (true/false) to indicate if the bookshelf phase has to be activated or deactivated
+     */
     public void activeShelf(boolean activate){
         if (activate){
             shelf_phase=true;
@@ -240,6 +248,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
             swap_button.setVisible(false);
         }
     }
+
+    /**
+     * This method put the selected tiles from the board in the frames
+     * @param button the button of the board that has been clicked
+     * @param x the x coordinate of the button
+     * @param y the y coordinate of the button
+     */
     private void insertSelected(ImageView button, int x, int y) {
         Image img = button.getImage();
         ImageView sel = getButton(x, y);
@@ -313,6 +328,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
     }
 
+    /**
+     * This method is called when the owner wins a common goal card
+     * @param commonGoalCard the common goal card won
+     * @param score the score of the card
+     */
     public void winCard(CommonGoalCard commonGoalCard, int score){
         String path;
         switch (score){
@@ -332,6 +352,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
             common_prize_2.setImage(new Image(path));
         }
     }
+
+    /**
+     * This method updates the images of the common goal cards
+     */
     public void updateCommonGoalCards(){
         String path;
         for (int x=1; x<3; x++) {
@@ -498,6 +522,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             default -> null;
         };
     }
+
     /**
      * This method returns the ImageView of the tiles in the position (x,y) in the bookshelf called shelf_name
      * @param x row of the tile in the bookshelf
@@ -701,6 +726,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
             firstWon_text.setVisible(true);
         }
     }
+
     @SuppressWarnings("unused")
     public void cancelPressed(MouseEvent mouseEvent){
         if (select_card_phase) {
@@ -718,6 +744,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             }
         }
     }
+
+    /**
+     * This method add a received message to the buffer
+     * @param message the message to add to the buffer
+     */
     public void addBuffer(String message){
         buffer.add(message);
         if (this.activeChat){
@@ -725,6 +756,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
         } else chatButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/chatButtonNotify.png"))));
     }
 
+    /**
+     * All the following methods are called when the user click on a button
+     * @param mouseEvent the event of the click
+     */
     @SuppressWarnings("unused")
     public void button_03_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[0][3].isBlocked() && SelectedTiles.size()<3){
@@ -1003,6 +1038,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             tryInsert(0);
         }
     }
+
+    /**
+     * This methods are called when the player choose the column where to insert the tile
+     * @param mouseEvent
+     */
     @SuppressWarnings("unused")
     public void column1Pressed(MouseEvent mouseEvent) {
         if (shelf_phase && finalTiles.size()<=free_cells(1) && selected_column!=1) {
@@ -1035,6 +1075,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             tryInsert(4);
         }
     }
+
+    /**
+     * This method is called when the player press the ok button to end the shelf phase
+     * @param mouseEvent
+     */
     @SuppressWarnings("unused")
     public void okPressed(MouseEvent mouseEvent) {
         if (selected_column!=-1){
@@ -1047,6 +1092,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
         notifyObserver(obs -> obs.sendOrderTiles(finalTiles));
     }
 
+    /**
+     * This method is called when the player click the chatButton to open the chat
+     * @param mouseEvent
+     * @throws Exception if the fxml file is not found
+     */
     public void goChat(MouseEvent mouseEvent) throws Exception{
         this.activeChat=true;
         chatButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/chatButton.png"))));
@@ -1061,8 +1111,52 @@ public class GameControllerScene extends ViewObservable implements Controller {
         chat.setResizable(false);
         chat.setTitle("Chat");
         chat.setOnCloseRequest(event -> this.activeChat=false);
-        chat.getIcons().add(new Image("/item tiles/Gatti1.1.png"));
+        chat.getIcons().add(new Image("/Graphics/chatIco.png"));
         chat.show();
         Platform.runLater(() -> chatController.run(this.buffer, this.playersList));
+    }
+
+    /**
+     * This method is called when the player click the first common goal card to show its effect
+     * @param mouseEvent
+     */
+    @SuppressWarnings("unused")
+    public void common_one_pressed(MouseEvent mouseEvent) {
+        switch (commonGoalCards.get(0).getNumber()){
+            case 1 -> Platform.runLater(() -> SceneController.popUp(ErrorType.TWO_SQUARES));
+            case 2 -> Platform.runLater(() -> SceneController.popUp(ErrorType.TWO_COLUMN));
+            case 3 -> Platform.runLater(() -> SceneController.popUp(ErrorType.FOUR_GROUPS));
+            case 4 -> Platform.runLater(() -> SceneController.popUp(ErrorType.SIX_GROUPS));
+            case 5 -> Platform.runLater(() -> SceneController.popUp(ErrorType.THREE_COLUMNS));
+            case 6 -> Platform.runLater(() -> SceneController.popUp(ErrorType.TWO_ROW));
+            case 7 -> Platform.runLater(() -> SceneController.popUp(ErrorType.THREE_ROW));
+            case 8 -> Platform.runLater(() -> SceneController.popUp(ErrorType.SAME_CORNER));
+            case 9 -> Platform.runLater(() -> SceneController.popUp(ErrorType.EIGHT_SAME));
+            case 10 -> Platform.runLater(() -> SceneController.popUp(ErrorType.X_SHAPE));
+            case 11 -> Platform.runLater(() -> SceneController.popUp(ErrorType.SAME_DIAGONAL));
+            case 12 -> Platform.runLater(() -> SceneController.popUp(ErrorType.INCREASING_HEIGHT));
+        }
+    }
+
+    /**
+     * This method is called when the player click the second common goal card to show its effect
+     * @param mouseEvent
+     */
+    @SuppressWarnings("unused")
+    public void common_two_pressed(MouseEvent mouseEvent) {
+        switch (commonGoalCards.get(1).getNumber()){
+            case 1 -> Platform.runLater(() -> SceneController.popUp(ErrorType.TWO_SQUARES));
+            case 2 -> Platform.runLater(() -> SceneController.popUp(ErrorType.TWO_COLUMN));
+            case 3 -> Platform.runLater(() -> SceneController.popUp(ErrorType.FOUR_GROUPS));
+            case 4 -> Platform.runLater(() -> SceneController.popUp(ErrorType.SIX_GROUPS));
+            case 5 -> Platform.runLater(() -> SceneController.popUp(ErrorType.THREE_COLUMNS));
+            case 6 -> Platform.runLater(() -> SceneController.popUp(ErrorType.TWO_ROW));
+            case 7 -> Platform.runLater(() -> SceneController.popUp(ErrorType.THREE_ROW));
+            case 8 -> Platform.runLater(() -> SceneController.popUp(ErrorType.SAME_CORNER));
+            case 9 -> Platform.runLater(() -> SceneController.popUp(ErrorType.EIGHT_SAME));
+            case 10 -> Platform.runLater(() -> SceneController.popUp(ErrorType.X_SHAPE));
+            case 11 -> Platform.runLater(() -> SceneController.popUp(ErrorType.SAME_DIAGONAL));
+            case 12 -> Platform.runLater(() -> SceneController.popUp(ErrorType.INCREASING_HEIGHT));
+        }
     }
 }

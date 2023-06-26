@@ -42,6 +42,7 @@ public class MainGui extends Application {
         stage.getIcons().add(new Image("/item tiles/Gatti1.1.png"));
         //stage.centerOnScreen();
         stage.show();
+
     }
 
     @Override

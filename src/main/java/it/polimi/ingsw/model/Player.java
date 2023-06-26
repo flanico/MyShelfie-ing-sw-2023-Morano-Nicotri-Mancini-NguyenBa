@@ -17,6 +17,8 @@ public class Player implements Serializable {
     private boolean isDoneFirstCommon;
     private boolean isDoneSecondCommon;
     private boolean isDisconnected;
+    private boolean isBlockedFirstCommon;
+    private boolean isBlockedSecondCommon;
 
 
     public Player(String nickname) {
@@ -26,6 +28,8 @@ public class Player implements Serializable {
         this.isDoneFirstCommon = false;
         this.isDoneSecondCommon = false;
         this.isDisconnected = false;
+        this.isBlockedFirstCommon=false;
+        this.isBlockedSecondCommon=false;
     }
 
     public Bookshelf getBookshelf() {
@@ -42,6 +46,22 @@ public class Player implements Serializable {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void setBlockedFirstCommon(boolean blockedFirstCommon) {
+        isBlockedFirstCommon = blockedFirstCommon;
+    }
+
+    public void setBlockedSecondCommon(boolean blockedSecondCommon) {
+        isBlockedSecondCommon = blockedSecondCommon;
+    }
+
+    public boolean isBlockedFirstCommon() {
+        return isBlockedFirstCommon;
+    }
+
+    public boolean isBlockedSecondCommon() {
+        return isBlockedSecondCommon;
     }
 
     public String getNickname() {

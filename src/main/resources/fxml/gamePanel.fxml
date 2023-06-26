@@ -208,17 +208,17 @@
             <ImageView fx:id="shelf_54_d" fitHeight="53.0" fitWidth="59.0" layoutX="279.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Group>
-      <Text fx:id="sx_text" layoutX="1289.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" wrappingWidth="67.97509765625">
+      <Text fx:id="sx_text" layoutX="1283.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" wrappingWidth="188.99999999999994">
          <font>
             <Font name="Comic Sans MS Bold" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="central_text" layoutX="1289.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" wrappingWidth="67.97509765625">
+      <Text fx:id="central_text" layoutX="1283.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" wrappingWidth="188.99999999999994">
          <font>
             <Font name="Comic Sans MS Bold" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="dx_text" layoutX="1289.0" layoutY="524.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" wrappingWidth="67.97509765625">
+      <Text fx:id="dx_text" layoutX="1283.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 3" wrappingWidth="183.00653076171864">
          <font>
             <Font name="Comic Sans MS Bold" size="17.0" />
          </font>
@@ -264,23 +264,13 @@
       <ImageView fx:id="sel_tile_1" fitHeight="75.0" fitWidth="81.0" layoutX="841.0" layoutY="583.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="sel_tile_2" fitHeight="75.0" fitWidth="81.0" layoutX="974.0" layoutY="582.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="sel_tile_3" fitHeight="75.0" fitWidth="81.0" layoutX="1107.0" layoutY="582.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="125.0" fitWidth="184.0" layoutX="532.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@/Graphics/cornice_card.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cornice_common1" fitHeight="125.0" fitWidth="184.0" layoutX="533.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@/Graphics/cornice_card.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="cornice_personal" fitHeight="188.0" fitWidth="128.0" layoutX="560.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/cornice_personal.png" />
          </image>
       </ImageView>
       <ImageView fx:id="seat" fitHeight="75.0" fitWidth="79.0" layoutX="590.0" layoutY="623.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="owner_nickname_text" layoutX="583.0" layoutY="601.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Owner">
+      <Text fx:id="owner_nickname_text" layoutX="534.0" layoutY="593.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Owner" wrappingWidth="183.0065307617187">
          <font>
             <Font name="Comic Sans MS Bold" size="26.0" />
          </font>
@@ -366,6 +356,16 @@
       <ImageView fx:id="chatButton" fitHeight="46.0" fitWidth="108.0" layoutX="574.0" layoutY="714.0" onMouseClicked="#goChat" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/Graphics/chatButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cornice_common_2" fitHeight="125.0" fitWidth="184.0" layoutX="532.0" layoutY="435.0" onMouseClicked="#common_two_pressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/cornice_card.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cornice_common_1" fitHeight="125.0" fitWidth="184.0" layoutX="533.0" layoutY="265.0" onMouseClicked="#common_one_pressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Graphics/cornice_card.png" />
          </image>
       </ImageView>
    </children>

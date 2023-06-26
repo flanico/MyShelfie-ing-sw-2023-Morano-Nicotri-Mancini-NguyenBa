@@ -34,7 +34,6 @@ public class TurnController implements Serializable {
     private boolean isLast;
     private boolean isPlayerFinished;
     private boolean isDisconnected;
-
     /**
      * constructor of the turn controller
      * @param game the current game
@@ -308,24 +307,23 @@ public class TurnController implements Serializable {
         if(turnState == TurnState.CHECK) {
             VirtualView virtualView = virtualViewMap.get(currentPlayer);
             int score = game.checkCommonGoalCards(game.getPlayerByNickname(currentPlayer));
-            if(score!= 0)
+            if(score != 0)
             {
-                if(game.getPlayerByNickname(currentPlayer).isDoneFirstCommon()){
+                if(game.getPlayerByNickname(currentPlayer).isDoneFirstCommon() && !game.getPlayerByNickname(currentPlayer).isBlockedFirstCommon()){
                     virtualView.showCommonGoalComplete(commonGoalCards.get(0), score);
                     notifyOtherPlayers(ColorCli.YELLOW_BOLD + "\n" + currentPlayer+" has completed the common Goal Card 1!" + ColorCli.RESET, currentPlayer);
                     for (VirtualView v : virtualViewMap.values()) {
                         v.showCommonScores(game.getCommongoalcardscores());
                     }
+                    game.getPlayerByNickname(currentPlayer).setBlockedFirstCommon(true);
                 }
-                else if (game.getPlayerByNickname(currentPlayer).isDoneSecondCommon()){
+                if (game.getPlayerByNickname(currentPlayer).isDoneSecondCommon() && !game.getPlayerByNickname(currentPlayer).isBlockedSecondCommon()){
                     virtualView.showCommonGoalComplete(commonGoalCards.get(1), score);
                     notifyOtherPlayers(ColorCli.YELLOW_BOLD + "\n" + currentPlayer+" has completed the common Goal Card 2!" +ColorCli.RESET, currentPlayer);
                     for (VirtualView v : virtualViewMap.values()) {
                         v.showCommonScores(game.getCommongoalcardscores());
                     }
-                }
-                else {
-                    virtualView.showError("Error checking common goal cards");
+                    game.getPlayerByNickname(currentPlayer).setBlockedSecondCommon(true);
                 }
             }
         }

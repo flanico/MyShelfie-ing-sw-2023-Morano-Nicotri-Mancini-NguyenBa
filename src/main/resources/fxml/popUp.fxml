@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.Scene.popUpController">
+   <children>
+      <ImageView fitHeight="352.0" fitWidth="516.0" layoutX="-39.0" layoutY="-17.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/Publisher Material/Display_5.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="textField" layoutX="14.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STE DISCONNECTED FROM THE GAME" wrappingWidth="382.13672256469727">
+         <font>
+            <Font name="Comic Sans MS" size="16.0" />
+         </font></Text>
+   </children>
+</Pane>

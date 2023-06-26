@@ -7,7 +7,7 @@ import java.io.Serializable;
  * abstract class that defines a common goal card
  * @author Alessandro Mancini
  */
-//TODO aggiornare UML con l'attributo number
+
 public abstract class CommonGoalCard implements Serializable {
     private int number;
     @Serial

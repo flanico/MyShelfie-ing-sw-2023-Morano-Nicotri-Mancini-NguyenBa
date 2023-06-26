@@ -17,7 +17,7 @@ public class CommonXSameType extends CommonGoalCard {   //the algorithm works, t
         for (int y=0; y<3; y++){        //scanning from the first to the third column
             for (int x=0; x<4; x++){    //scanning from the first to the fourth row
                 if (                                                                                 //this if case finds the X pattern
-                        !bookshelf.getMatrix()[0][0].getType().equals(TileType.NULL)
+                        !bookshelf.getMatrix()[x][y].getType().equals(TileType.NULL)
                                 && bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x][y+2].getType())
                                 && bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+2][y].getType())
                                 && bookshelf.getMatrix()[x][y].getType().equals(bookshelf.getMatrix()[x+2][y+2].getType())

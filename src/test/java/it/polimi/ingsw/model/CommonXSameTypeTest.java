@@ -9,7 +9,7 @@ class CommonXSameTypeTest {
     private Bookshelf bookshelf_2 = new Bookshelf();
     public CommonGoalCard card = new CommonXSameType();
     public int[][] shelf_1 = {          //X Shape respected
-            {1,0,0,0,0},
+            {0,0,0,0,0},
             {2,0,0,0,0},
             {1,0,0,0,0},
             {2,0,1,0,1},

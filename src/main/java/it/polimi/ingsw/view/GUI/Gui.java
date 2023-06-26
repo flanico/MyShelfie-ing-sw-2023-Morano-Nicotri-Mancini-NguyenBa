@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.GUI;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.observer.ViewObservable;
+import it.polimi.ingsw.view.CLI.ColorCli;
 import it.polimi.ingsw.view.GUI.Scene.EndController;
 import it.polimi.ingsw.view.GUI.Scene.GameControllerScene;
 import it.polimi.ingsw.view.GUI.Scene.LobbyController;
@@ -27,8 +28,9 @@ public class Gui extends ViewObservable implements View {
     private Player owner;
     private boolean isFirst = false;
     private Map<String, Integer> score;
-
     private boolean gameActive=false;
+
+    private static final String INPUT_ERR = ColorCli.RED + "Invalid Input! Please retry." + ColorCli.RESET;
 
     /**
      * ask the nickname to the client
@@ -85,6 +87,10 @@ public class Gui extends ViewObservable implements View {
             this.players_number=numberPlayers;
             this.owner=players.get(players.size()-1);
             SceneController.changeRootPane(observers,"lobbyPanel.fxml");
+            Stage stage = (Stage) SceneController.getActiveScene().getWindow();
+            stage.setWidth(814d);
+            stage.setHeight(637d);
+            //stage.centerOnScreen();
             lobby_ctrl = (LobbyController) SceneController.getActiveController();
             new_ctrl = lobby_ctrl;
             Platform.runLater(() -> new_ctrl.init(players, numberPlayers));
@@ -97,7 +103,7 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showError(String errorMessage){
-        //Platform.runLater(() -> SceneController.showAlert("Error", errorMessage));
+        Platform.runLater(() -> SceneController.popUp(ERROR_OCCURRED));
     }
 
     /**
@@ -106,10 +112,11 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showGenericMessage(String genericMessage){
-
-        if (genericMessage.equals("Tiles selected are NOT removable from the board! Retry."))
+        if (genericMessage.equals(INPUT_ERR + ColorCli.RED + "Tiles selected are NOT removable from the board!" + ColorCli.RESET))
             Platform.runLater(() -> SceneController.popUp(NOT_REMOVABLE_TILES));
-
+        if (genericMessage.equals("\nYou're the only player connected... If no one try to reconnect, game will finish. " +
+                "\nTimer of 50 seconds starts! If the timer expires you're are the winner of the game!"))
+            Platform.runLater(() -> SceneController.popUp(ONLY_ONE));
     }
 
     /**
@@ -127,8 +134,9 @@ public class Gui extends ViewObservable implements View {
         EndController end_ctrl;
         Stage stage = (Stage) SceneController.getActiveScene().getWindow();
         stage.setWidth(800d);
-        stage.setHeight(630d);
+        stage.setHeight(637d);
         SceneController.changeRootPane(observers,"endPanel.fxml");
+        //stage.centerOnScreen();
         end_ctrl = (EndController) SceneController.getActiveController();
         Platform.runLater(() -> end_ctrl.init(win2, score, players_number));
     }
@@ -148,7 +156,6 @@ public class Gui extends ViewObservable implements View {
      * shows to the client his personal goal card
      * @param player of the game
      */
-    //TODO : SIMPLIFY THIS METHOD
     @Override
     public void showPersonalCard(Player player){
         GameControllerScene game_ctrl = getGameControllerScene();
@@ -249,10 +256,9 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showDisconnection(String nickname, boolean isStarted){
-        if (gameActive){
-
-        } else {
-            Platform.runLater(() -> SceneController.popUpString(nickname + "has disconnected"));
+       Platform.runLater(() -> SceneController.popUpString(nickname + " disconnected from the game!"));
+        if (!isStarted) {
+            Platform.runLater(() -> SceneController.popUp(ERROR_OCCURRED));
         }
     }
 
@@ -269,7 +275,7 @@ public class Gui extends ViewObservable implements View {
             gameActive=true;
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1500d);
-            stage.setHeight(800d);
+            stage.setHeight(807d);
             //stage.centerOnScreen();
             SceneController.changeRootPane(observers,"gamePanel.fxml");
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
