@@ -280,6 +280,11 @@ public class GameController implements Serializable {
                     "\nTimer of 60 seconds starts! If the timer expires you're are the winner of the game!\n" + ColorCli.RESET);
             onDisconnectGame(false, nickname);
         }
+        //If there is no player connected stops the game
+        else if (virtualViewMap.size() == 0) {
+            endGame();
+            System.exit(0);
+        }
         //If there are two or three players connected continue the game
         else {
             broadcastingMessage("\nThe game round is: " + turnController.getNicknames());
