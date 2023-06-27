@@ -6,6 +6,15 @@
 * [Flavia Nicotri](https://github.com/flanico)
 * [Stefano Morano](https://github.com/stefano-morano)
 
+## Introduzione
+MyShelfie è un gioco da tavolo di tipo strategico, in cui i giocatori si sfidano per arredare nel miglior modo possibile la propria libreria.
+
+Il progetto consiste nell'implementazione di un videogioco basato sul gioco da tavolo, il cui server deve essere in grado di gestire partite in connessione Socket e partite in connessione RMI.
+
+MyShelfie può essere giocato in due modalità: da terminale con interfaccia CLI o con interfaccia grafica GUI.
+
+Le regole del gioco si possono trovare in questa [pagina](https://www.craniocreations.it/prodotto/my-shelfie). 
+
 ## Funzionalità implementate
 | Funzionalità        | Stato |
 |:--------------------|:-----:|
@@ -26,7 +35,7 @@ Assicurarsi di avere installato Java 19 o superiore nel proprio sistema operativ
 ### Aprire il server
 Per aprire il server, eseguire il seguente comando da terminale aperto nella cartella del Jar:
 
-```java -jar serverApp.jar```
+```java -jar ServerApp.jar```
 
 Successivamente indicare il numero delle due porte da utilizzare per la comunicazione Socket e RMI ( se si vogliono utilizzare le porte di default premere invio ). 
 Quando appare la scritta "server is running", il server è pronto per accettare connessioni.
