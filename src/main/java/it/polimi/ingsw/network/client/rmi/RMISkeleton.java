@@ -1,6 +1,8 @@
 package it.polimi.ingsw.network.client.rmi;
 
 import it.polimi.ingsw.network.message.Message;
+import it.polimi.ingsw.network.message.MessageType;
+import it.polimi.ingsw.network.server.Server;
 import it.polimi.ingsw.network.server.rmi.RMIInterface;
 
 import java.rmi.RemoteException;
@@ -46,6 +48,5 @@ public class RMISkeleton extends UnicastRemoteObject implements RMIInterface {
      */
     @Override
     public void disconnect() {
-        this.client.disconnect();
     }
 }

@@ -321,7 +321,7 @@ public class Cli extends ViewObservable implements View {
 
     @Override
     public void showError(String errorMessage) {
-        out.println(ColorCli.RED + errorMessage + " EXIT FROM THE GAME" + ColorCli.RESET);
+        out.println(ColorCli.RED + errorMessage + " \nEXIT FROM THE GAME" + ColorCli.RESET);
         System.exit(1);
     }
 

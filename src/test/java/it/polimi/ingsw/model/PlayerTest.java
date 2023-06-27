@@ -50,4 +50,53 @@ class PlayerTest {
     void getNicknameTest() {
         assertEquals("Gino", player.getNickname());
     }
+
+    @Test
+    void setBookshelfTest() {
+        Bookshelf bookshelf = new Bookshelf();
+        player.setBookshelf(bookshelf);
+        assertEquals(bookshelf, player.getBookshelf());
+    }
+
+    @Test
+    void isDoneFirstCommon_TrueTest() {
+        player.setDoneFirstCommon(true);
+
+        assertTrue(player.isDoneFirstCommon());
+    }
+
+    @Test
+    void isDoneFirstCommon_FalseTest() {
+        player.setDoneFirstCommon(false);
+
+        assertFalse(player.isDoneFirstCommon());
+    }
+
+    @Test
+    void isDoneSecondCommon_TrueTest() {
+        player.setDoneSecondCommon(true);
+
+        assertTrue(player.isDoneSecondCommon());
+    }
+
+    @Test
+    void isDoneSecondCommon_FalseTest() {
+        player.setDoneSecondCommon(false);
+
+        assertFalse(player.isDoneSecondCommon());
+    }
+
+    @Test
+    void isDisconected_TrueTest() {
+        player.setDisconnected(true);
+
+        assertTrue(player.isDisconnected());
+    }
+
+    @Test
+    void isDisconected_FalseTest() {
+        player.setDisconnected(false);
+
+        assertFalse(player.isDisconnected());
+    }
 }

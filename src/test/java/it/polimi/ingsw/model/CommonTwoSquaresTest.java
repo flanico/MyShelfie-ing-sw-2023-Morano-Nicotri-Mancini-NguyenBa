@@ -69,4 +69,13 @@ class CommonTwoSquaresTest {
         assertTrue(card.check(bookshelf));
         assertFalse(card.check(bookshelf_2));
     }
+
+    /**
+     * Test if the number of the common goal is correct
+     * @author Flavia Nicotri
+     */
+    @Test
+    void getNumberTest() {
+        assertEquals(1, card.getNumber());
+    }
 }

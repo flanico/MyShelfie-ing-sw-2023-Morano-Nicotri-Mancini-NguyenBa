@@ -70,4 +70,12 @@ public class CommonFourGroupsTest {
         assertFalse(card.check(bookshelf)) ;
     }
 
+    /**
+     * Test if the number of the common goal is correct
+     * @author Flavia Nicotri
+     */
+    @Test
+    void getNumberTest() {
+        assertEquals(3, card.getNumber());
+    }
 }

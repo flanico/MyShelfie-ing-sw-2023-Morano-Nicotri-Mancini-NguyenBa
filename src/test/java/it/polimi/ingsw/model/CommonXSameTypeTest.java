@@ -69,4 +69,13 @@ class CommonXSameTypeTest {
         assertTrue(card.check(bookshelf));
 
     }
+    /**
+     * Test if the number of the common goal is correct
+     * @author Flavia Nicotri
+     */
+    @Test
+    void getNumberTest() {
+        assertEquals(10, card.getNumber());
+    }
+
 }
