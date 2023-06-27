@@ -100,6 +100,9 @@ public class GameControllerScene extends ViewObservable implements Controller {
                Platform.runLater(() -> SceneController.popUp(ErrorType.EASTER_EGG));
 
        }));
+       sx_text.setText("");
+       dx_text.setText("");
+       central_text.setText("");
        activeSelection(false);
        activeShelf(false);
        won_frame1.setVisible(false);
@@ -395,15 +398,13 @@ public class GameControllerScene extends ViewObservable implements Controller {
             case 2 ->{
                 bookshelf_c.setImage(new Image("/boards/bookshelf.png"));
                 central_text.setText(playersList.get(1).getNickname());
-                sx_text.setText("");
-                dx_text.setText("");
+
             }
             case 3 -> {
                 bookshelf_s.setImage(new Image("/boards/bookshelf.png"));
                 bookshelf_d.setImage(new Image("/boards/bookshelf.png"));
                 sx_text.setText(playersList.get(1).getNickname());
                 dx_text.setText(playersList.get(2).getNickname());
-                central_text.setText("");
             }
             case 4 -> {
                 bookshelf_s.setImage(new Image("/boards/bookshelf.png"));
@@ -899,106 +900,127 @@ public class GameControllerScene extends ViewObservable implements Controller {
             insertSelected(getButton(4,3), 4 , 3);
         }
     }
+    @SuppressWarnings("unused")
     public void button_44_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,4), 4 , 4);
         }
     }
+    @SuppressWarnings("unused")
     public void button_45_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,5), 4 , 5);
         }
     }
+    @SuppressWarnings("unused")
     public void button_46_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][6].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,6), 4 , 6);
         }
     }
+    @SuppressWarnings("unused")
     public void button_47_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][7].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,7), 4, 7);
         }
     }
+    @SuppressWarnings("unused")
     public void button_48_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[4][8].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(4,8), 4 , 8);
         }
     }
+    @SuppressWarnings("unused")
     public void button_50_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][0].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,0), 5 , 0);
         }
     }
+    @SuppressWarnings("unused")
     public void button_51_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][1].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,1), 5 , 1);
         }
     }
+    @SuppressWarnings("unused")
     public void button_52_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][2].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,2), 5 , 2);
         }
     }
+    @SuppressWarnings("unused")
     public void button_53_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,3), 5 , 3);
         }
     }
+    @SuppressWarnings("unused")
     public void button_54_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,4), 5 , 4);
         }
     }
+    @SuppressWarnings("unused")
     public void button_55_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,5), 5 , 5);
         }
     }
+    @SuppressWarnings("unused")
     public void button_56_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][6].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,6), 5 , 6);
         }
     }
+    @SuppressWarnings("unused")
     public void button_57_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[5][7].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(5,7), 5 , 7);
         }
     }
+    @SuppressWarnings("unused")
     public void button_62_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[6][2].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(6,2), 6 , 2);
         }
     }
+    @SuppressWarnings("unused")
     public void button_63_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[6][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(6,3), 6 , 3);
         }
     }
+    @SuppressWarnings("unused")
     public void button_64_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[6][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(6,4), 6 , 4);
         }
     }
+    @SuppressWarnings("unused")
     public void button_65_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[6][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(6,5), 6 , 5);
         }
     }
+    @SuppressWarnings("unused")
     public void button_66_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[6][6].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(6,6), 6 , 6);
         }
     }
+    @SuppressWarnings("unused")
     public void button_73_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[7][3].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(7,3), 7 , 3);
         }
     }
+    @SuppressWarnings("unused")
     public void button_74_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[7][4].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(7,4), 7 , 4);
         }
     }
+    @SuppressWarnings("unused")
     public void button_75_click(MouseEvent mouseEvent) {
         if (select_card_phase && !board.getMatrix()[7][5].isBlocked() && SelectedTiles.size()<3){
             insertSelected(getButton(7,5), 7 , 5);
@@ -1041,7 +1063,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
 
     /**
      * This methods are called when the player choose the column where to insert the tile
-     * @param mouseEvent
+     * @param mouseEvent is the event of the mouse click
      */
     @SuppressWarnings("unused")
     public void column1Pressed(MouseEvent mouseEvent) {
@@ -1078,7 +1100,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
 
     /**
      * This method is called when the player press the ok button to end the shelf phase
-     * @param mouseEvent
+     * @param mouseEvent is the event of the mouse click
      */
     @SuppressWarnings("unused")
     public void okPressed(MouseEvent mouseEvent) {
@@ -1094,9 +1116,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
 
     /**
      * This method is called when the player click the chatButton to open the chat
-     * @param mouseEvent
+     * @param mouseEvent is the event of the mouse click
      * @throws Exception if the fxml file is not found
      */
+    @SuppressWarnings("unused")
     public void goChat(MouseEvent mouseEvent) throws Exception{
         this.activeChat=true;
         chatButton.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/chatButton.png"))));
@@ -1118,7 +1141,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
 
     /**
      * This method is called when the player click the first common goal card to show its effect
-     * @param mouseEvent
+     * @param mouseEvent is the event of the mouse click
      */
     @SuppressWarnings("unused")
     public void common_one_pressed(MouseEvent mouseEvent) {
@@ -1140,7 +1163,7 @@ public class GameControllerScene extends ViewObservable implements Controller {
 
     /**
      * This method is called when the player click the second common goal card to show its effect
-     * @param mouseEvent
+     * @param mouseEvent is the event of the mouse click
      */
     @SuppressWarnings("unused")
     public void common_two_pressed(MouseEvent mouseEvent) {
