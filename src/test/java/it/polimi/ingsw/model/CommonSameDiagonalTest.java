@@ -114,4 +114,13 @@ class CommonSameDiagonalTest {
         assertTrue(card.check(bookshelf_4));
         assertFalse(card.check(bookshelf_5));
     }
+
+    /**
+     * Test if the number of the common goal is correct
+     * @author Flavia Nicotri
+     */
+    @Test
+    void getNumberTest() {
+        assertEquals(11, card.getNumber());
+    }
 }

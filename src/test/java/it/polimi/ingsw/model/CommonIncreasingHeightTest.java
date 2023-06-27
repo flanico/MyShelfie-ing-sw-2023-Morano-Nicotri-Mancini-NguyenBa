@@ -107,4 +107,12 @@ class CommonIncreasingHeightTest {
         assertTrue(card.check(bookshelf_4));
         assertFalse(card.check(bookshelf_5));
     }
+    /**
+     * Test if the number of the common goal is correct
+     * @author Flavia Nicotri
+     */
+    @Test
+    void getNumberTest() {
+        assertEquals(12, card.getNumber());
+    }
 }
