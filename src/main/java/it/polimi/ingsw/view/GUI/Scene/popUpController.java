@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
 /**
- * Controller for the pop up window
+ * Controller for the pop-up window
  * @author Stefano Morano
  */
 public class popUpController extends ViewObservable implements Controller {
@@ -13,7 +13,7 @@ public class popUpController extends ViewObservable implements Controller {
     Text textField;
 
     /**
-     * method that initialize the pop up window
+     * method that initialize the pop-up window
      * @param message the message to print
      */
     public void init(String message){

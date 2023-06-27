@@ -700,6 +700,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             ref_button.setOpacity(1.0);
         }
     }
+
+    /**
+     * This method is called when the player click th confirm button during the select card phase
+     * @param mouseEvent the event of the click
+     */
     @SuppressWarnings("unused")
     public void confirmPressed(MouseEvent mouseEvent) {
         if (select_card_phase) {
@@ -728,6 +733,10 @@ public class GameControllerScene extends ViewObservable implements Controller {
         }
     }
 
+    /**
+     * This method is called when the player click the cancel button during the select card phase and it remove the last tile selected
+     * @param mouseEvent the event of the click
+     */
     @SuppressWarnings("unused")
     public void cancelPressed(MouseEvent mouseEvent){
         if (select_card_phase) {
@@ -1038,6 +1047,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             insertSelected(getButton(8,5), 8 , 5);
         }
     }
+
+    /**
+     * This method is invoked when the player click the down button to swap the second and the third tile
+     * @param mouseEvent is the event of the mouse click
+     */
     @SuppressWarnings("unused")
     public void downPressed(MouseEvent mouseEvent) {
         if (shelf_phase) {
@@ -1045,6 +1059,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             tryInsert(selected_column);
         }
     }
+
+    /**
+     * This method is invoked when the player click the up button to swap the first and the second tile
+     * @param mouseEvent is the event of the mouse click
+     */
     @SuppressWarnings("unused")
     public void upPressed(MouseEvent mouseEvent) {
         if (shelf_phase) {
@@ -1052,6 +1071,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             tryInsert(selected_column);
         }
     }
+
+    /**
+     * Those methods are called when the player choose the column where to insert the tile
+     * @param mouseEvent is the event of the mouse click
+     */
     @SuppressWarnings("unused")
     public void column0Pressed(MouseEvent mouseEvent) {
         if (shelf_phase && finalTiles.size()<=free_cells(0) && selected_column!=0) {
@@ -1061,10 +1085,6 @@ public class GameControllerScene extends ViewObservable implements Controller {
         }
     }
 
-    /**
-     * This methods are called when the player choose the column where to insert the tile
-     * @param mouseEvent is the event of the mouse click
-     */
     @SuppressWarnings("unused")
     public void column1Pressed(MouseEvent mouseEvent) {
         if (shelf_phase && finalTiles.size()<=free_cells(1) && selected_column!=1) {
@@ -1110,6 +1130,11 @@ public class GameControllerScene extends ViewObservable implements Controller {
             selected_column=-1;
         }
     }
+
+    /**
+     * This method is called when the player clicks the conferm button to end the select phase
+     * The selected tiles are sent to the server
+     */
     public void sendFinalTiles() {
         notifyObserver(obs -> obs.sendOrderTiles(finalTiles));
     }

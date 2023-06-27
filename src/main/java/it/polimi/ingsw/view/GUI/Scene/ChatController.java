@@ -2,16 +2,12 @@ package it.polimi.ingsw.view.GUI.Scene;
 
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.observer.ViewObservable;
-import it.polimi.ingsw.view.GUI.SceneController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +26,11 @@ public class ChatController extends ViewObservable implements Controller{
 
     @SuppressWarnings("unused")
     public void initialize(){
-        KeyCombination keyCombination = new KeyCodeCombination(KeyCode.ENTER);
-        SceneController.getActiveScene().setOnKeyPressed((event -> {
-            if (keyCombination.match(event))
+        text_field.setOnKeyPressed(event -> {
+            if (event.getCode().getName().equals("Enter")) {
                 send_enter();
-        }));
+            }
+        });
         text_area.setEditable(false);
         text_area.setText("");
     }

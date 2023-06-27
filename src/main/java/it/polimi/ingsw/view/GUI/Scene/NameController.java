@@ -10,7 +10,7 @@ import javafx.scene.input.MouseEvent;
 
 /**
  * controller of the name panel
- * @Author: Stefano Morano
+ * @author Stefano Morano
  */
 public class NameController extends ViewObservable implements Controller {
     @FXML
@@ -26,8 +26,9 @@ public class NameController extends ViewObservable implements Controller {
 
     /**
      * method called when the continue button is pressed: the name is sent to the server
-     * @param mouseEvent
+     * @param mouseEvent the mouse event
      */
+    @SuppressWarnings("unused")
     public void continueButtonPressed(MouseEvent mouseEvent) {
         if (isActive) {
             String Nickname = usernameField.getText();

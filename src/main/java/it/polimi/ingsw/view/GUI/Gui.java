@@ -28,8 +28,6 @@ public class Gui extends ViewObservable implements View {
     private Player owner;
     private boolean isFirst = false;
     private Map<String, Integer> score;
-    private boolean gameActive=false;
-
     private static final String INPUT_ERR = ColorCli.RED + "Invalid Input! Please retry." + ColorCli.RESET;
 
     /**
@@ -147,7 +145,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showCommonCards(List<CommonGoalCard> commonGoalCards){
-        System.out.println("showCommonCards");
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setCommonGoalCards(commonGoalCards);
         Platform.runLater(game_ctrl::updateCommonGoalCards);
@@ -159,7 +156,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showPersonalCard(Player player){
-        System.out.println("showPersonalCards");
         GameControllerScene game_ctrl = getGameControllerScene();
         Platform.runLater(() -> game_ctrl.updatePersonalCard(player.getPersonalGoalCard()));
     }
@@ -170,7 +166,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showBoard(Board board){
-        System.out.println("showCommonBoards");
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setBoard(board);
         Platform.runLater(game_ctrl::updateBoard);
@@ -182,7 +177,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void askSelectTiles(Board board, Bookshelf bookshelf) {
-        System.out.println("askSelectTiles");
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setBoard(board);
         game_ctrl.setShelf(bookshelf);
@@ -196,7 +190,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void askInsertTiles(Bookshelf bookshelf, List<Tile> tiles){
-        System.out.println("askInsertTiles");
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setShelf(bookshelf);
         game_ctrl.setFinalTiles(tiles);
@@ -209,7 +202,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showBookshelf(Player player){
-        System.out.println("showBookshelf");
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setShelf(player.getBookshelf());
         game_ctrl.setCurrentPlayer(player);
@@ -222,7 +214,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void askOrderTiles(List<Tile> tiles){
-        System.out.println("askOrderTiles");
         GameControllerScene game_ctrl = getGameControllerScene();
         Platform.runLater(game_ctrl::sendFinalTiles);
     }
@@ -233,7 +224,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showCommonScores(List<CommonGoalCardScore> commonGoalCardScores){
-        System.out.println("showCommonScores");
         GameControllerScene game_ctrl = getGameControllerScene();
         game_ctrl.setCommonGoalCardScores(commonGoalCardScores);
         Platform.runLater(game_ctrl::updateScores);
@@ -246,7 +236,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void showCommonGoalComplete(CommonGoalCard commonGoalCard, int score){
-        System.out.println("showCommonGoalComplete");
         GameControllerScene game_ctrl = getGameControllerScene();
         Platform.runLater(() -> game_ctrl.winCard(commonGoalCard, score));
     }
@@ -281,7 +270,6 @@ public class Gui extends ViewObservable implements View {
         try {
             game_ctrl = (GameControllerScene) SceneController.getActiveController();
         } catch (ClassCastException e) {
-            gameActive=true;
             Stage stage = (Stage) SceneController.getActiveScene().getWindow();
             stage.setWidth(1500d);
             stage.setHeight(807d);
@@ -306,7 +294,6 @@ public class Gui extends ViewObservable implements View {
      */
     @Override
     public void addChatMessage(String sender, String destination, String message) {
-        System.out.println("addChatMessage");
         final String new_message;
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         String formattedTime;

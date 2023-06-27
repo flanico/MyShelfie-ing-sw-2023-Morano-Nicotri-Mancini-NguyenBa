@@ -20,6 +20,11 @@ public class MainGui extends Application {
         launch(args);
     }
 
+    /**
+     * method that starts the gui
+     * @param stage the stage of the gui
+     * @throws Exception if the panel cannot be loaded
+     */
     @Override
     public void start(Stage stage) throws Exception {
 

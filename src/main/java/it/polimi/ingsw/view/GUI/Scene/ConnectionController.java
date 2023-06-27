@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -37,7 +36,7 @@ public class ConnectionController extends ViewObservable implements Controller {
 
     /**
      * method called when the continue button is pressed: the client try to connect to the server
-     * @param mouseEvent
+     * @param mouseEvent when the mouse is clicked
      */
     @SuppressWarnings("unused")
     public void continue_pressed(MouseEvent mouseEvent) {

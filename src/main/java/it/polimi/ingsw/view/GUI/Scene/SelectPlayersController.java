@@ -26,9 +26,9 @@ public class SelectPlayersController extends ViewObservable implements Controlle
 
     /**
      * method called when the ok button is pressed: the number of players is sent to the server
-     * @param actionEvent
+     * @param actionEvent the mouse event
      */
-
+    @SuppressWarnings("unused")
     public void okPressed(MouseEvent actionEvent) {
         if (num!=0)
             notifyObserver(obs -> obs.sendNumPlayers(num));
@@ -36,8 +36,9 @@ public class SelectPlayersController extends ViewObservable implements Controlle
 
     /**
      * method called when the two button is pressed: the number of players is set to 2
-     * @param actionEvent
+     * @param actionEvent  the mouse event
      */
+    @SuppressWarnings("unused")
     public void twoPressed(ActionEvent actionEvent) {
       threeCheck.setSelected(false);
       fourCheck.setSelected(false);
@@ -46,8 +47,9 @@ public class SelectPlayersController extends ViewObservable implements Controlle
 
     /**
      * method called when the three button is pressed: the number of players is set to 3
-     * @param actionEvent
+     * @param actionEvent the mouse event
      */
+    @SuppressWarnings("unused")
     public void threePressed(ActionEvent actionEvent) {
         twoCheck.setSelected(false);
         fourCheck.setSelected(false);
@@ -56,8 +58,9 @@ public class SelectPlayersController extends ViewObservable implements Controlle
 
     /**
      * method called when the four button is pressed: the number of players is set to 4
-     * @param actionEvent
+     * @param actionEvent the mouse event
      */
+    @SuppressWarnings("unused")
     public void fourPressed(ActionEvent actionEvent) {
         threeCheck.setSelected(false);
         twoCheck.setSelected(false);

@@ -217,7 +217,8 @@ public class SceneController extends ViewObservable {
      * This method creates a popup window with a message in string format
      * @param message which is the message to show
      */
-    public static void popUpString(String message) {        try {
+    public static void popUpString(String message) {
+        try {
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.initOwner(activeScene.getWindow());

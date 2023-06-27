@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 public class CreditsController extends ViewObservable implements Controller{
     /**
      * method called when the back button is pressed: it returns the menu
-     * @param mouseEvent
+     * @param mouseEvent when the mouse is clicked
      */
     @SuppressWarnings("unused")
     public void backPressed(MouseEvent mouseEvent) {
