@@ -3,6 +3,7 @@ package it.polimi.ingsw.network.client.rmi;
 import it.polimi.ingsw.network.client.Client;
 import it.polimi.ingsw.network.message.Message;
 import it.polimi.ingsw.network.message.serverSide.ErrorMessage;
+import it.polimi.ingsw.network.message.serverSide.PingMessage;
 import it.polimi.ingsw.network.server.rmi.RMIInterface;
 
 import java.rmi.ConnectException;
@@ -10,6 +11,9 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * class that represents an RMI client implementation
@@ -20,7 +24,7 @@ public class RMIClient extends Client {
     private Registry registry;
     private final RMIInterface stub;
     private final RMIInterface skeleton;
-    private boolean connected;
+    private final ScheduledExecutorService pinger;
 
     /**
      * constructor for the RMIClient
@@ -34,20 +38,8 @@ public class RMIClient extends Client {
         this.registry = LocateRegistry.getRegistry(ip, port);
         this.stub = (RMIInterface) registry.lookup("SERVER");
         this.skeleton = new RMISkeleton(this);
-        this.connected = true;
-    }
-
-    /**
-     * check if the RMIServer is online
-     * @author Alessandro Mancini
-     */
-    private boolean checkConnection() throws RemoteException {
-        try {
-            this.registry = LocateRegistry.getRegistry(this.ip, this.port);
-            return true;
-        } catch (ConnectException e) {
-            return false;
-        }
+        this.pinger = Executors.newSingleThreadScheduledExecutor();
+        this.sendPingMessage(true);
     }
 
     /**
@@ -58,18 +50,12 @@ public class RMIClient extends Client {
     @Override
     public void sendMessage(Message message) {
         try {
-            if (connected && this.checkConnection()) {
-                try {
-                    stub.toServer(message, this.skeleton);
-                } catch (RemoteException e) {
-                    Message message1 = new ErrorMessage("Connection lost with the server");
-                    notifyObserver(message1);
-                    disconnect();
-                    Client.LOGGER.severe("Error in sending message to the RMI Server");
-                }
-            }
+            stub.toServer(message, this.skeleton);
         } catch (RemoteException e) {
-            Client.LOGGER.severe("Server is offline");
+            Message error = new ErrorMessage("Connection lost with the RMI Server");
+            notifyObserver(error);
+            this.disconnect();
+            Client.LOGGER.severe("Error in sending message to the RMI Server");
         }
     }
 
@@ -86,12 +72,7 @@ public class RMIClient extends Client {
      * @author Alessandro Mancini
      */
     public void readMessage(Message message) {
-        try {
-            if (this.connected && this.checkConnection())
-                notifyObserver(message);
-        } catch (RemoteException e) {
-            Client.LOGGER.severe("Server is offline");
-        }
+        notifyObserver(message);
     }
 
     /**
@@ -100,13 +81,19 @@ public class RMIClient extends Client {
      */
     @Override
     public void disconnect() {
-        this.connected = false;
+        this.sendPingMessage(false);
     }
 
     /**
-     * function implemented because of the Client inherit, but not used in an RMI connection
+     * ping method to check if RMI Server is alive
      * @author Alessandro Mancini
      */
     @Override
-    public void sendPingMessage(boolean isActive) {}
+    public void sendPingMessage(boolean isActive) {
+        if (isActive) {
+            pinger.scheduleAtFixedRate(() -> sendMessage(new PingMessage()), 0, 1000, TimeUnit.MILLISECONDS);
+        } else {
+            pinger.shutdownNow();
+        }
+    }
 }
