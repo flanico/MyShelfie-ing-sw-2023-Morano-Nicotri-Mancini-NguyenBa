@@ -24,9 +24,9 @@ Le regole del gioco si possono trovare in questa [pagina](https://www.craniocrea
 | RMI                 |   ✅   |
 | CLI                 |   ✅   |
 | GUI                 |   ✅   |
-| Resilienza          |   ✅   |
-| Persistenza         |   ✅   |
 | Chat                |   ✅   |
+| Persistenza         |   ✅   |
+| Resilienza          |   ❌   |
 | Partite Multiple    |   ❌   |
 
 ## Come eseguire il programma

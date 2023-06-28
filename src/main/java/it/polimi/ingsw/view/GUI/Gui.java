@@ -255,9 +255,6 @@ public class Gui extends ViewObservable implements View {
     @Override
     public void showDisconnection(String nickname, boolean isStarted){
        Platform.runLater(() -> SceneController.popUpString(nickname + " disconnected from the game!"));
-        if (!isStarted) {
-            Platform.runLater(() -> SceneController.popUp(ERROR_OCCURRED));
-        }
     }
 
     /**

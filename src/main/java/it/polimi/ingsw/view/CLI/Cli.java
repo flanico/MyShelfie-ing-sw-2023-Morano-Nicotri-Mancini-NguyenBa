@@ -591,11 +591,9 @@ public class Cli extends ViewObservable implements View {
     public void showDisconnection(String nickname, boolean isStarted) {
         out.print(ColorCli.CYAN_BOLD + "\n" + nickname + " has been disconnecting from the game!" + ColorCli.RESET);
         out.println();
-        if (!isStarted) {
-            out.println("\nGame ended...");
-            System.exit(1);
-            gameRunning = false;
-        }
+        out.println("\nGame ended...");
+        System.exit(1);
+        gameRunning = false;
     }
 
     @Override
