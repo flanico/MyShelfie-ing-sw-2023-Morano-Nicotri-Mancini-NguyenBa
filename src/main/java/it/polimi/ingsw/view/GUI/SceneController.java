@@ -72,7 +72,7 @@ public class SceneController extends ViewObservable {
                 popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
             case WRONG_ADDRESS -> {
-                path = "/Graphics/wrongServerAddress.png";              //TODO MODIFICA LA GRAFICA
+                path = "/Graphics/wrongServerAddress.png";
                 popupStage.setTitle("Wrong server address!");
                 popupStage.getIcons().add(new Image("/Graphics/alert.png"));
             }
@@ -230,6 +230,10 @@ public class SceneController extends ViewObservable {
             popupStage.setScene(scene);
             popupStage.setResizable(false);
             popupStage.setTitle("Disconnection");
+            popupStage.setOnCloseRequest(event -> {
+                Platform.exit();
+                System.exit(1);
+            });
             popupStage.showAndWait();
         } catch (IOException e) {
             System.out.println(("Error"));
