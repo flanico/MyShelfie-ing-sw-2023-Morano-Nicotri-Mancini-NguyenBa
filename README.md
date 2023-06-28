@@ -66,3 +66,13 @@ Per la realizzazione del progetto sono stati utilizzati i seguenti tools:
 * [Scene Builder](https://gluonhq.com/products/scene-builder/) - GUI 
 * [draw.io](https://app.diagrams.net/) - Diagrammi UML e Sequence Diagram
 
+## FAQ
+### Come posso capire qual è l'effetto delle common goal cards sulla GUI?
+Per capire l'effetto delle common goal cards sulla GUI, basta cliccare con il mouse sopra la carta.
+### Cosa fare se la CLI non stampa i colori correttamente?
+Se la CLI non stampa i colori correttamente, è necessario aprire il CMD con amministratore e digitare il seguente comando:
+
+```REG ADD HKCU\CONSOLE /f /v VirtualTerminalLevel /t REG_DWORD /d 1```
+### Cosa fare se la versione di java del mio sistema operativo non è compatibile con quella utilizzata per il progetto?
+Per far funzionare correttamente il programma è necessario installare la versione di java 19 o superiore.
+Il download si può trovare a questo [link](https://www.java.com/it/download/manual.jsp).
