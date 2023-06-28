@@ -67,4 +67,9 @@ class CommonFourCornersTest {
         assertEquals(8, card.getNumber());
     }
 
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card:  Four tiles of the same type in the four corners of the bookshelf.", card.toString());
+    }
+
 }

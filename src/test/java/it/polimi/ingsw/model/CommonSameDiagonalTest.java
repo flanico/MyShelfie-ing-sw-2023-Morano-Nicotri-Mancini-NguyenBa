@@ -123,4 +123,9 @@ class CommonSameDiagonalTest {
     void getNumberTest() {
         assertEquals(11, card.getNumber());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Five tiles of the same type forming a diagonal", card.toString());
+    }
 }

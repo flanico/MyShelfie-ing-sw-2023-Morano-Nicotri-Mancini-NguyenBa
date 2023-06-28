@@ -80,4 +80,9 @@ class TileTest {
         tile.setCounted(true);
         assertTrue(tile.isCounted());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("\u001B[48;5;230m B \u001B[0m", tile.toString());
+    }
 }

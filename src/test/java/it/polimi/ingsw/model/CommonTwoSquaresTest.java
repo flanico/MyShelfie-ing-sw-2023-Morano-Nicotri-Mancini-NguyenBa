@@ -78,4 +78,9 @@ class CommonTwoSquaresTest {
     void getNumberTest() {
         assertEquals(1, card.getNumber());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Two groups each containing 4 tiles of the same type in a 2x2 square. \nThe tiles of one square can be different from those of the other square.", card.toString());
+    }
 }

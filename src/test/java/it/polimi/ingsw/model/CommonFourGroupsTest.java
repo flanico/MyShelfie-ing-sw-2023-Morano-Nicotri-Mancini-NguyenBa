@@ -78,4 +78,9 @@ public class CommonFourGroupsTest {
     void getNumberTest() {
         assertEquals(3, card.getNumber());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Four groups each containing at least 4 tiles of the same type.\nThe tiles of one group can be different from those of another group", card.toString());
+    }
 }

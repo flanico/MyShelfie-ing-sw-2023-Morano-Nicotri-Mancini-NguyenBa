@@ -68,4 +68,9 @@ class CommonMaxThreeRowsTest {
     void getNumberTest() {
         assertEquals(7, card.getNumber());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Four lines each formed by 5 tiles of maximum three different types. \nOne line can show the same or a different combination of another line.", card.toString());
+    }
 }

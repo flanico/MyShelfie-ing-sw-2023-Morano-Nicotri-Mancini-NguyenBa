@@ -78,4 +78,8 @@ class CommonXSameTypeTest {
         assertEquals(10, card.getNumber());
     }
 
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Five tiles of the same type forming an X.", card.toString());
+    }
 }

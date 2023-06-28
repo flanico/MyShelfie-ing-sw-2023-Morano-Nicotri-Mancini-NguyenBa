@@ -70,4 +70,9 @@ class CommonSixGroupsTest {
     void getNumberTest() {
         assertEquals(4, card.getNumber());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Six groups each containing at least 2 tiles of the same type.\nThe tiles of one group can be different from those of another group", card.toString());
+    }
 }

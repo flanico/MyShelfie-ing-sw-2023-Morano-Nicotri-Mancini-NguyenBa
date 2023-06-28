@@ -66,4 +66,9 @@ class CommonDifferentColumnsTest {
     void getNumberTest() {
         assertEquals(2, card.getNumber());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Two columns each formed by 6 different types of tiles.", card.toString());
+    }
 }

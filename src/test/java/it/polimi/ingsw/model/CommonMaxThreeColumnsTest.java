@@ -66,4 +66,10 @@ class CommonMaxThreeColumnsTest {
     void getNumberTest() {
         assertEquals(5, card.getNumber());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Three columns each formed by 6 tiles " +
+                "of maximum three different types. \nOne column can show the same or a different combination of another column.", card.toString());
+    }
 }

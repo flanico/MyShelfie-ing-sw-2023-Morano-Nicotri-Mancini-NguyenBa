@@ -65,4 +65,9 @@ class CommonDifferentRowsTest {
     void getNumberTest() {
         assertEquals(6, card.getNumber());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Two lines each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.", card.toString());
+    }
 }

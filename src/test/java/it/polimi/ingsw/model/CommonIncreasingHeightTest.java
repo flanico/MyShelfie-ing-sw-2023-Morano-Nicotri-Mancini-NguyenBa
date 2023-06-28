@@ -115,4 +115,9 @@ class CommonIncreasingHeightTest {
     void getNumberTest() {
         assertEquals(12, card.getNumber());
     }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Five columns of increasing or decreasing height. \nStarting from the first column on the left or on the right, each next column must be made of exactly one more tile. \nTiles can be of any type.", card.toString());
+    }
 }

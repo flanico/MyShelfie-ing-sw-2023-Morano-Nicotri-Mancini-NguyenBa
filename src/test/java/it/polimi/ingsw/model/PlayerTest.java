@@ -99,4 +99,28 @@ class PlayerTest {
 
         assertFalse(player.isDisconnected());
     }
+
+    @Test
+    void setBlockedFirstCommonTest() {
+        player.setBlockedFirstCommon(true);
+        assertTrue(player.isBlockedFirstCommon());
+    }
+
+    @Test
+    void setBlockedSecondCommonTest() {
+        player.setBlockedSecondCommon(true);
+        assertTrue(player.isBlockedSecondCommon());
+    }
+
+    @Test
+    void isBlockedFirstCommonTest() {
+        player.setBlockedFirstCommon(true);
+        assertTrue(player.isBlockedFirstCommon());
+    }
+
+    @Test
+    void isBlockedSecondCommonTest() {
+        player.setBlockedFirstCommon(true);
+        assertTrue(player.isBlockedFirstCommon());
+    }
 }

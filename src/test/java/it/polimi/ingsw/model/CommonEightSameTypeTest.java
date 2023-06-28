@@ -55,7 +55,7 @@ class CommonEightSameTypeTest {
      * @author Stefano Morano
      */
     @Test
-    void check() {
+    void check_TrueTest() {
       assertTrue(card.check(bookshelf));
     }
 
@@ -66,5 +66,16 @@ class CommonEightSameTypeTest {
     @Test
     void getNumberTest() {
         assertEquals(9, card.getNumber());
+    }
+
+    @Test
+    void check_FalseTest() {
+        bookshelf.getMatrix()[1][0].setType(TileType.NULL);
+        assertFalse(card.check(bookshelf));
+    }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Common Goal Card: Eight tiles of the same type. \nThere’s no restriction about the position of these tiles.", card.toString());
     }
 }
