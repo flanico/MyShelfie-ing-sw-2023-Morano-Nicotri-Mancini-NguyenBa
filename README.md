@@ -37,7 +37,7 @@ Per aprire il server, eseguire il seguente comando da terminale aperto nella car
 
 ```java -jar ServerApp.jar```
 
-Successivamente indicare il numero delle due porte da utilizzare per la comunicazione Socket e RMI ( se si vogliono utilizzare le porte di default premere invio ). 
+Successivamente indicare il numero delle due porte da utilizzare per la comunicazione Socket e RMI (se si vogliono utilizzare le porte di default premere invio). 
 Quando appare la scritta "server is running", il server è pronto per accettare connessioni.
 
 ### Aprire il client (Tutti i sistemi operativi sono supportati) 
@@ -52,7 +52,7 @@ Inizialmente inserire s/r per scegliere se utilizzare la connessione Socket [s] 
 Successivamente inserire l'indirizzo IP del server e la porta del server (premere invio per utilizzare i valori delle porte di default).
 
 #### Gui
-Nella pagina della connessione, se si preme il tasto "continue" senza modificare nessun valore, il gioco si connetterà al server Socket/RMI con i vaori delle porte di default.
+Nella pagina della connessione, se si preme il tasto "continue" senza modificare nessun valore, il gioco si connetterà al server Socket/RMI con i valori delle porte di default.
 
 ## Tools
 Per la realizzazione del progetto sono stati utilizzati i seguenti tools:
