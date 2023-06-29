@@ -40,7 +40,7 @@ Per aprire il server, eseguire il seguente comando da terminale aperto nella car
 Successivamente indicare il numero delle due porte da utilizzare per la comunicazione Socket e RMI (se si vogliono utilizzare le porte di default premere invio). 
 Quando appare la scritta "server is running", il server è pronto per accettare connessioni.
 
-### Aprire il client (Tutti i sistemi operativi sono supportati) 
+### Aprire il client
 Per aprire il client, eseguire il seguente comando da terminale aperto nella cartella del Jar:
 
 ```java -jar ClientApp.jar```
