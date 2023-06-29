@@ -40,23 +40,19 @@ Per aprire il server, eseguire il seguente comando da terminale aperto nella car
 Successivamente indicare il numero delle due porte da utilizzare per la comunicazione Socket e RMI ( se si vogliono utilizzare le porte di default premere invio ). 
 Quando appare la scritta "server is running", il server è pronto per accettare connessioni.
 
-### Aprire il client per MacOS
-Per aprire il client da un computer con sistema operativo MacOS, eseguire il seguente comando da terminale aperto nella cartella del Jar:
+### Aprire il client (Tutti i sistemi operativi sono supportati) 
+Per aprire il client, eseguire il seguente comando da terminale aperto nella cartella del Jar:
 
-```java -jar ClientAppMacOS.jar```
+```java -jar ClientApp.jar```
 
-Inizialmente inserire s/r per scegliere se utilizzare la connessione Socket o RMI.
+Inizialmente inserire c/g per eseguire il gioco con l'interfaccia a linea di comando [c] o con l'interfaccia grafica [g] (tutti i sistemi operativi sono supportati).
 
-Successivamente inserire l'indirizzo IP del server e la porta scelta lato server, utilizzata per la comunicazione scelta ( premere invio per utilizzare la porta di default).
+#### Cli
+Inizialmente inserire s/r per scegliere se utilizzare la connessione Socket [s] o RMI [r].
+Successivamente inserire l'indirizzo IP del server e la porta del server (premere invio per utilizzare i valori delle porte di default).
 
-### Aprire il client per Windows
-Per aprire il client da un computer con sistema operativo Windows, eseguire il seguente comando da terminale aperto nella cartella del Jar:
-
-```java -jar ClientAppWindows.jar```
-
-Inizialmente inserire s/r per scegliere se utilizzare la connessione Socket o RMI.
-
-Successivamente inserire l'indirizzo IP del server e la porta scelta lato server, utilizzata per la comunicazione scelta ( premere invio per utilizzare la porta di default).
+#### Gui
+Nella pagina della connessione, se si preme il tasto "continue" senza modificare nessun valore, il gioco si connetterà al server Socket/RMI con i vaori delle porte di default.
 
 ## Tools
 Per la realizzazione del progetto sono stati utilizzati i seguenti tools:
@@ -66,7 +62,7 @@ Per la realizzazione del progetto sono stati utilizzati i seguenti tools:
 * [Scene Builder](https://gluonhq.com/products/scene-builder/) - GUI 
 * [draw.io](https://app.diagrams.net/) - Diagrammi UML e Sequence Diagram
 
-## FAQ
+## Q&A
 ### Come posso capire qual è l'effetto delle common goal cards sulla GUI?
 Per capire l'effetto delle common goal cards sulla GUI, basta cliccare con il mouse sopra la carta.
 ### Cosa fare se la CLI non stampa i colori correttamente?
@@ -75,4 +71,4 @@ Se la CLI non stampa i colori correttamente, è necessario aprire il CMD con amm
 ```REG ADD HKCU\CONSOLE /f /v VirtualTerminalLevel /t REG_DWORD /d 1```
 ### Cosa fare se la versione di java del mio sistema operativo non è compatibile con quella utilizzata per il progetto?
 Per far funzionare correttamente il programma è necessario installare la versione di java 19 o superiore.
-Il download si può trovare a questo [link](https://www.java.com/it/download/manual.jsp).
+Il download si può trovare a questo [link](https://www.oracle.com/it/java/technologies/downloads/).
