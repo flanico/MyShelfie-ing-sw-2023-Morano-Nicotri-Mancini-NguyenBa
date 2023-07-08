@@ -414,11 +414,6 @@ public class TurnController implements Serializable {
             }
         }
         hasReplied = false;
-        if (isDisconnected) {
-            while (true) {
-
-            }
-        }
     }
 
     /**
